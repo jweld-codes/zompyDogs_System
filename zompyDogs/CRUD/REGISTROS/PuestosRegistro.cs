@@ -238,6 +238,20 @@ namespace zompyDogs.CRUD.REGISTROS
                     txtDescripcion.Text = string.Empty;
                     txtSalario.Text = string.Empty;
                     txtDiasLaborales.Text = string.Empty;
+
+                    chbxLunes.Checked = false;
+                    chbxMartes.Checked = false;
+                    chbxMiercoles.Checked = false;
+                    chbxJueves.Checked = false;
+                    chbxViernes.Checked = false;
+                    chbxSabado.Checked = false;
+                    chbxDomingo.Checked = false;
+
+                    cbxRoles.Text = "Elegir...";
+                    cbxEstado.Text = "Elegir...";
+                    txtDescripcion.Text = string.Empty;
+                    txtSalario.Text = string.Empty;
+                    txtDiasLaborales.Text = string.Empty;
                 }
                 else
                 {

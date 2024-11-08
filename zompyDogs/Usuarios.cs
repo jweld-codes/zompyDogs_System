@@ -348,6 +348,8 @@ namespace zompyDogs
                 var frmProveedorRegistro = new ProveedorRegistro();
                 frmProveedorRegistro.lblTituloRegistro.Text = "Editar Proveedor";
                 frmProveedorRegistro.btnGuardarProv.Text = "EDITAR";
+                frmProveedorRegistro.cbxEstado.Enabled = true;
+                frmProveedorRegistro.txtNombreProv.Enabled = false;
 
                 frmProveedorRegistro.Show();
 
@@ -551,7 +553,7 @@ namespace zompyDogs
             lblBreadCrumbUser.Text = "USUARIOS";
             dgvEmpleados.Hide();
             dgvAdminis.Hide();
-            cbxFiltro.Hide();
+           // cbxFiltro.Hide();
 
             txtBuscarUsuario.TextChanged += (s, args) =>
             {
@@ -571,7 +573,7 @@ namespace zompyDogs
             dgvEmpleados.Hide();
             dgvProveedor.Hide();
             dgvAdminis.Show();
-            cbxFiltro.Hide();
+            //cbxFiltro.Hide();
             lblBreadCrumbUser.Text = "ADMINISTRADORES";
 
             txtBuscarUsuario.TextChanged += (s, args) =>
@@ -593,7 +595,7 @@ namespace zompyDogs
             dgvEmpleados.Show();
             lblBreadCrumbUser.Text = "EMPLEADOS";
             dgvAdminis.Hide();
-            cbxFiltro.Hide();
+            //cbxFiltro.Hide();
 
             txtBuscarUsuario.TextChanged += (s, args) =>
             {
@@ -613,7 +615,7 @@ namespace zompyDogs
             dgvEmpleados.Hide();
             dgvAdminis.Hide();
             dgvProveedor.Show();
-            cbxFiltro.Show();
+            btnEditarUsuario.Show();
 
             btnRefreshDG.Show();
 

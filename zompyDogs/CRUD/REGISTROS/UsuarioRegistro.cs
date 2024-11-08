@@ -20,6 +20,7 @@ namespace zompyDogs
 
         private string nuevoCodigoUsuario;
         private bool isTheUsername = false;
+        private int contUser;
 
         public UsuarioRegistro()
         {
@@ -32,7 +33,8 @@ namespace zompyDogs
 
             int siguienteID = UsuarioDAO.ObtenerSiguienteID();
             lblidDetalleUsuario.Text = siguienteID.ToString();
-
+            txtUsername.Enabled = false;
+            txtPassword.Enabled = false;
             cbxRol.SelectedIndexChanged += cbxRol_SelectedIndexChanged;
 
         }
@@ -51,9 +53,11 @@ namespace zompyDogs
                 {
                     CargarPuestosEmpleadosComboBox();
                 }
-                else if (codigoRolSeleccionado == 4) // 2 para Usuario
+                else if (codigoRolSeleccionado == 4) // 4 para Usuario
                 {
                     CargarPuestosUsuariosComboBox();
+
+
                 }
             }
             else if (cbxRol.SelectedValue != null)
@@ -93,6 +97,8 @@ namespace zompyDogs
         }
         public void CargarPuestosUsuariosComboBox()
         {
+            txtUsername.Text = "------";
+            txtPassword.Text = "---" + contUser + "---";
             DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeUsuariosParaComboBox();
 
             cbPuesto.DataSource = dtPuestos;
@@ -157,6 +163,10 @@ namespace zompyDogs
             PuestosRegistro frmPuestoRegistro = new PuestosRegistro();
             frmPuestoRegistro.Show();
             this.Close();
+        }
+
+        private void btnGuardarUser_Click(object sender, EventArgs e)
+        {
         }
     }
 }

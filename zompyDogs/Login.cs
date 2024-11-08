@@ -34,18 +34,31 @@ namespace zompyDogs
 
             string validUser = txtUser.Text;
             string validpassword = txtPassword.Text;
+            UsuarioIdActual = idEmpleado;
+            RolIdActual = idRol;
+            UsuarioName = $"{nombreUser} {apeUser}";
+
+           // MessageBox.Show("RolIdActual: " + RolIdActual);
+           // MessageBox.Show("UsuarioIdActual: " + UsuarioIdActual);
+           // MessageBox.Show("UsuarioName: " + UsuarioName);
 
             if (!isValid)
             {
                 MessageBox.Show("Usuario o Clave Incorrecto. Intentar Nuevamente");
+                txtUser.Focus();
+                txtPassword.Text = "";
+                txtUser.Text = "";
+            }
+            else if(RolIdActual == 4)
+            {
+                MessageBox.Show("Como Usuario Básico, no tiene acceso a este sistema.");
+                txtUser.Focus();
                 txtPassword.Text = "";
                 txtUser.Text = "";
             }
             else
             {
-                UsuarioIdActual = idEmpleado;
-                RolIdActual = idRol;
-                UsuarioName = $"{nombreUser} {apeUser}";
+                
                 //MessageBox.Show("idEmpleado: "+ UsuarioIdActual + "RolIdActual: "+ RolIdActual);
 
                 if (isAdmin)

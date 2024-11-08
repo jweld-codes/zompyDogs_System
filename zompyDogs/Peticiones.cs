@@ -115,7 +115,7 @@ namespace zompyDogs
 
                     MessageBox.Show("Petición Registrada con Éxito.");
                     CargarPeticiones();
-                    this.Close();
+                    //this.Close();
                 }
                 catch
                 {

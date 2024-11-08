@@ -51,6 +51,10 @@ namespace zompyDogs
                 {
                     CargarPuestosEmpleadosComboBox();
                 }
+                else if (codigoRolSeleccionado == 4) // 2 para Usuario
+                {
+                    CargarPuestosUsuariosComboBox();
+                }
             }
             else if (cbxRol.SelectedValue != null)
             {
@@ -63,6 +67,10 @@ namespace zompyDogs
                 else if (codigoRolSeleccionado == 2)
                 {
                     CargarPuestosEmpleadosComboBox();
+                }
+                else if (codigoRolSeleccionado == 4)
+                {
+                    CargarPuestosUsuariosComboBox();
                 }
             }
         }
@@ -78,6 +86,14 @@ namespace zompyDogs
         public void CargarPuestosAdminsComboBox()
         {
             DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeAdminsParaComboBox();
+
+            cbPuesto.DataSource = dtPuestos;
+            cbPuesto.DisplayMember = "puesto";
+            cbPuesto.ValueMember = "IdPuesto";
+        }
+        public void CargarPuestosUsuariosComboBox()
+        {
+            DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeUsuariosParaComboBox();
 
             cbPuesto.DataSource = dtPuestos;
             cbPuesto.DisplayMember = "puesto";
@@ -140,6 +156,7 @@ namespace zompyDogs
         {
             PuestosRegistro frmPuestoRegistro = new PuestosRegistro();
             frmPuestoRegistro.Show();
+            this.Close();
         }
     }
 }

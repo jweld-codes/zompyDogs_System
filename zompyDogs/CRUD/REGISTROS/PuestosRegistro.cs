@@ -189,11 +189,7 @@ namespace zompyDogs.CRUD.REGISTROS
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            UsuarioRegistro frmUsuarioRegisro = new UsuarioRegistro();
             this.Close();
-            frmUsuarioRegisro.Close();
-
-
         }
 
         private void dgvPuestos_CellClick(object sender, DataGridViewCellEventArgs e)

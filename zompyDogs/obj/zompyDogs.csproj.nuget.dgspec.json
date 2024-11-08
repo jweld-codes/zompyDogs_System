@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\zompyDogs\\zompyDogs.csproj": {}
+    "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\zompyDogs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj": {
+    "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj",
+        "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj",
         "projectName": "ZompyDogsDAO",
-        "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj",
+        "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj",
         "packagesPath": "C:\\Users\\jenni\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\obj\\",
+        "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jenni\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,14 +82,14 @@
         }
       }
     },
-    "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\ZompyDogsLib.csproj": {
+    "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\ZompyDogsLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\ZompyDogsLib.csproj",
+        "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\ZompyDogsLib.csproj",
         "projectName": "ZompyDogsLib",
-        "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\ZompyDogsLib.csproj",
+        "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\ZompyDogsLib.csproj",
         "packagesPath": "C:\\Users\\jenni\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\obj\\",
+        "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jenni\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -142,14 +142,14 @@
         }
       }
     },
-    "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\zompyDogs\\zompyDogs.csproj": {
+    "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\zompyDogs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\zompyDogs\\zompyDogs.csproj",
+        "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\zompyDogs.csproj",
         "projectName": "zompyDogs",
-        "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\zompyDogs\\zompyDogs.csproj",
+        "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\zompyDogs.csproj",
         "packagesPath": "C:\\Users\\jenni\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\zompyDogs\\obj\\",
+        "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jenni\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -166,11 +166,11 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj": {
-                "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj"
+              "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj": {
+                "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj"
               },
-              "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\ZompyDogsLib.csproj": {
-                "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\ZompyDogsLib.csproj"
+              "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\ZompyDogsLib.csproj": {
+                "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\ZompyDogsLib.csproj"
               }
             }
           }

@@ -883,13 +883,28 @@ namespace ZompyDogsDAO
             }
             return dtPuestos;
         }
+        public static DataTable ObtenerPuestosDeUsuariosParaComboBox()
+        {
+            DataTable dtPuestos = new DataTable();
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                conn.Open();
+                string query = "SELECT IdPuesto, puesto FROM Puestos Where codigoRol = 4 AND estado = 'ACTIVO'";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dtPuestos);
+                }
+            }
+            return dtPuestos;
+        }
         public static DataTable ObtenerRolesParaComboBox()
         {
             DataTable dtRoles = new DataTable();
             using (SqlConnection conn = new SqlConnection(con_string))
             {
                 conn.Open();
-                string query = "SELECT Id_Rol, Rol FROM Rol WHERE Id_Rol = 1 OR Id_Rol = 2;";
+                string query = "SELECT Id_Rol, Rol FROM Rol WHERE Id_Rol = 1 OR Id_Rol = 2 OR Id_Rol = 4;";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);

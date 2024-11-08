@@ -46,8 +46,6 @@
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            btnNext = new Button();
-            btnAtras = new Button();
             dgvUsuarios = new DataGridView();
             colCedula = new DataGridViewTextBoxColumn();
             colNombre = new DataGridViewTextBoxColumn();
@@ -55,9 +53,10 @@
             label1 = new Label();
             btnAgregarNuevoUsuario = new Button();
             lblTituloRegistroPanel = new Label();
-            pictureBox1 = new PictureBox();
-            txtBuscarUsuario = new TextBox();
             btnVisualizarRegistro = new Button();
+            btnRefreshDG = new Button();
+            button1 = new Button();
+            txtBuscarUsuario = new TextBox();
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             groupBox1.SuspendLayout();
@@ -65,7 +64,6 @@
             ((System.ComponentModel.ISupportInitialize)dgvEmpleados).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvAdminis).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnEditarUsuario
@@ -77,6 +75,7 @@
             btnEditarUsuario.Size = new Size(72, 72);
             btnEditarUsuario.TabIndex = 120;
             btnEditarUsuario.UseVisualStyleBackColor = true;
+            btnEditarUsuario.Click += btnEditarUsuario_Click;
             // 
             // btnEliminarUsuario
             // 
@@ -87,6 +86,7 @@
             btnEliminarUsuario.Size = new Size(72, 72);
             btnEliminarUsuario.TabIndex = 119;
             btnEliminarUsuario.UseVisualStyleBackColor = true;
+            btnEliminarUsuario.Click += btnEliminarUsuario_Click;
             // 
             // topBarMenu
             // 
@@ -167,8 +167,6 @@
             groupBox1.Controls.Add(dgvMenu);
             groupBox1.Controls.Add(dgvEmpleados);
             groupBox1.Controls.Add(dgvAdminis);
-            groupBox1.Controls.Add(btnNext);
-            groupBox1.Controls.Add(btnAtras);
             groupBox1.Controls.Add(dgvUsuarios);
             groupBox1.Location = new Point(21, 309);
             groupBox1.Name = "groupBox1";
@@ -184,6 +182,7 @@
             dgvMenu.AllowUserToOrderColumns = true;
             dgvMenu.AllowUserToResizeColumns = false;
             dgvMenu.AllowUserToResizeRows = false;
+            dgvMenu.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMenu.BackgroundColor = SystemColors.Window;
             dgvMenu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMenu.Location = new Point(15, 26);
@@ -192,6 +191,7 @@
             dgvMenu.RowHeadersWidth = 51;
             dgvMenu.Size = new Size(800, 338);
             dgvMenu.TabIndex = 74;
+            dgvMenu.CellClick += dgvMenu_CellClick;
             // 
             // dgvEmpleados
             // 
@@ -275,24 +275,6 @@
             dataGridViewTextBoxColumn3.ReadOnly = true;
             dataGridViewTextBoxColumn3.Width = 125;
             // 
-            // btnNext
-            // 
-            btnNext.Image = Properties.Resources.arrow;
-            btnNext.Location = new Point(51, 370);
-            btnNext.Name = "btnNext";
-            btnNext.Size = new Size(36, 29);
-            btnNext.TabIndex = 71;
-            btnNext.UseVisualStyleBackColor = true;
-            // 
-            // btnAtras
-            // 
-            btnAtras.Image = Properties.Resources.left_arrow;
-            btnAtras.Location = new Point(15, 370);
-            btnAtras.Name = "btnAtras";
-            btnAtras.Size = new Size(36, 29);
-            btnAtras.TabIndex = 70;
-            btnAtras.UseVisualStyleBackColor = true;
-            // 
             // dgvUsuarios
             // 
             dgvUsuarios.AllowUserToAddRows = false;
@@ -364,26 +346,6 @@
             lblTituloRegistroPanel.TabIndex = 115;
             lblTituloRegistroPanel.Text = "Registros del Menú";
             // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.White;
-            pictureBox1.Image = Properties.Resources.lupa;
-            pictureBox1.Location = new Point(343, 110);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(41, 27);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 112;
-            pictureBox1.TabStop = false;
-            // 
-            // txtBuscarUsuario
-            // 
-            txtBuscarUsuario.Location = new Point(383, 110);
-            txtBuscarUsuario.Multiline = true;
-            txtBuscarUsuario.Name = "txtBuscarUsuario";
-            txtBuscarUsuario.PlaceholderText = "Buscar Por Platillo";
-            txtBuscarUsuario.Size = new Size(479, 27);
-            txtBuscarUsuario.TabIndex = 111;
-            // 
             // btnVisualizarRegistro
             // 
             btnVisualizarRegistro.Image = Properties.Resources.file__1_;
@@ -392,6 +354,39 @@
             btnVisualizarRegistro.Size = new Size(72, 72);
             btnVisualizarRegistro.TabIndex = 121;
             btnVisualizarRegistro.UseVisualStyleBackColor = true;
+            btnVisualizarRegistro.Click += btnVisualizarRegistro_Click;
+            // 
+            // btnRefreshDG
+            // 
+            btnRefreshDG.FlatAppearance.BorderSize = 0;
+            btnRefreshDG.FlatStyle = FlatStyle.Flat;
+            btnRefreshDG.Image = Properties.Resources.refresh;
+            btnRefreshDG.Location = new Point(807, 284);
+            btnRefreshDG.Name = "btnRefreshDG";
+            btnRefreshDG.Size = new Size(29, 29);
+            btnRefreshDG.TabIndex = 122;
+            btnRefreshDG.UseVisualStyleBackColor = true;
+            btnRefreshDG.Click += btnRefreshDG_Click;
+            // 
+            // button1
+            // 
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Image = Properties.Resources.search;
+            button1.Location = new Point(348, 101);
+            button1.Name = "button1";
+            button1.Size = new Size(30, 27);
+            button1.TabIndex = 124;
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // txtBuscarUsuario
+            // 
+            txtBuscarUsuario.Location = new Point(379, 101);
+            txtBuscarUsuario.Multiline = true;
+            txtBuscarUsuario.Name = "txtBuscarUsuario";
+            txtBuscarUsuario.PlaceholderText = "Buscar Platillo";
+            txtBuscarUsuario.Size = new Size(479, 27);
+            txtBuscarUsuario.TabIndex = 123;
+            txtBuscarUsuario.TextChanged += txtBuscarUsuario_TextChanged;
             // 
             // Menu
             // 
@@ -399,6 +394,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(901, 725);
+            Controls.Add(button1);
+            Controls.Add(txtBuscarUsuario);
+            Controls.Add(btnRefreshDG);
             Controls.Add(btnVisualizarRegistro);
             Controls.Add(btnEditarUsuario);
             Controls.Add(btnEliminarUsuario);
@@ -408,8 +406,6 @@
             Controls.Add(label1);
             Controls.Add(btnAgregarNuevoUsuario);
             Controls.Add(lblTituloRegistroPanel);
-            Controls.Add(pictureBox1);
-            Controls.Add(txtBuscarUsuario);
             Name = "Menu";
             Text = "Menu";
             topBarMenu.ResumeLayout(false);
@@ -420,7 +416,6 @@
             ((System.ComponentModel.ISupportInitialize)dgvEmpleados).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvAdminis).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -436,7 +431,6 @@
         private Label lblTITULO;
         private Label lblBreadCrumbUser;
         private GroupBox groupBox1;
-        private DataGridView dgvMenu;
         private DataGridView dgvEmpleados;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
@@ -445,8 +439,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private Button btnNext;
-        private Button btnAtras;
         private DataGridView dgvUsuarios;
         private DataGridViewTextBoxColumn colCedula;
         private DataGridViewTextBoxColumn colNombre;
@@ -454,8 +446,10 @@
         private Label label1;
         private Button btnAgregarNuevoUsuario;
         private Label lblTituloRegistroPanel;
-        private PictureBox pictureBox1;
-        private TextBox txtBuscarUsuario;
         private Button btnVisualizarRegistro;
+        public DataGridView dgvMenu;
+        public Button btnRefreshDG;
+        private Button button1;
+        private TextBox txtBuscarUsuario;
     }
 }

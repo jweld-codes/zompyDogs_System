@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E3I/WdtkRNI=",
+  "dgSpecHash": "Hy6cHkUzOeY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\zompyDogs\\zompyDogs.csproj",
+  "projectFilePath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\zompyDogs.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jenni\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\jenni\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

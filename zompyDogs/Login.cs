@@ -19,6 +19,7 @@ namespace zompyDogs
         private Peticiones frmPeticionesAdmin;
         public static int UsuarioIdActual { get; private set; }
         public static int RolIdActual { get; private set; }
+        public static string UsuarioName { get; private set; }
 
         public Login()
         {
@@ -44,24 +45,28 @@ namespace zompyDogs
             {
                 UsuarioIdActual = idEmpleado;
                 RolIdActual = idRol;
-
-                MessageBox.Show("idEmpleado: "+ UsuarioIdActual + "RolIdActual: "+ RolIdActual);
+                UsuarioName = $"{nombreUser} {apeUser}";
+                //MessageBox.Show("idEmpleado: "+ UsuarioIdActual + "RolIdActual: "+ RolIdActual);
 
                 if (isAdmin)
                 {
                     BienvenidaAdmin frmBienvenidaAdmin = new BienvenidaAdmin();
                     frmBienvenidaAdmin.IdEmpleado = idEmpleado;
                     frmBienvenidaAdmin.RolID = idRol;
-                    frmBienvenidaAdmin.lblNombreSideBar.Text = $"{nombreUser} {apeUser}";
+                    frmBienvenidaAdmin.UsuarioNombreAdmin = UsuarioName;
+                    frmBienvenidaAdmin.lblNombreSideBar.Text = $"{UsuarioName}";
 
                     PanelAdmin frmPanelAdmin = new PanelAdmin();
-                    frmPanelAdmin.NombreUsuario = $"{nombreUser} {apeUser}";
+                    frmPanelAdmin.NombreUsuario = $"{UsuarioName}";
 
                     PeticionesRegisro frmPeticionesRegistro = new PeticionesRegisro(idEmpleado);
                     frmPeticionesRegistro.IdEmpleado = idEmpleado;
 
                     Peticiones frmPeticiones = new Peticiones(idEmpleado);
                     frmPeticiones.IdEmpleado = idEmpleado;
+
+                    AjustesCuenta frmAjustesCuenta = new AjustesCuenta(idEmpleado, UsuarioName);
+                    frmAjustesCuenta.IdEmpleado = idEmpleado;
 
                     frmBienvenidaAdmin.AbrirFormsHija(frmPanelAdmin);
                     frmBienvenidaAdmin.Show();

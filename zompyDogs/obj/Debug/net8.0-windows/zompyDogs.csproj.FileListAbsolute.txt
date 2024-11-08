@@ -169,6 +169,100 @@ C:\Users\oscar\Documents\GitHub\zompydogs\zompyDogs\obj\Debug\net8.0-windows\ref
 C:\Users\oscar\Documents\GitHub\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.pdb
 C:\Users\oscar\Documents\GitHub\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.genruntimeconfig.cache
 C:\Users\oscar\Documents\GitHub\zompydogs\zompyDogs\obj\Debug\net8.0-windows\ref\zompyDogs.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.exe
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.deps.json
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.runtimeconfig.json
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.pdb
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Azure.Core.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Azure.Identity.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Data.SqlClient.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Identity.Client.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\Microsoft.SqlServer.Server.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\System.ClientModel.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\System.Memory.Data.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\System.Runtime.Caching.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsDAO.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsLib.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsDAO.pdb
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsLib.pdb
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.AssemblyReference.cache
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.AjustesCuenta.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.BienvenidaAdmin.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.ClaveOlvidada.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.FacturaView.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.MenuRegistro.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PeticionActualizarDatosPersonales.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PeticionesRegisro.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PeticionRecuperacionDeContraseña.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.ProductoRegistro.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.AGREGAR.ProveedorRegistro.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PuestosRegistro.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.UsuarioRegistro.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.EmpleadoBienvenida.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Facturas.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.frmPOS.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Inventario.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.LibretaMenu.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Login.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Menu.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PanelAdmin.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PanelEmpleado.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Peticiones.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Properties.Resources.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Usuarios.resources
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.GenerateResource.cache
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.AssemblyInfoInputs.cache
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.AssemblyInfo.cs
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.CoreCompileInputs.cache
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.sourcelink.json
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.Up2Date
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\refint\zompyDogs.dll
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.pdb
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.genruntimeconfig.cache
+C:\Users\krish\Downloads\ZOE CAMA\zompyDogs\obj\Debug\net8.0-windows\ref\zompyDogs.dll
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.exe
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.deps.json
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.runtimeconfig.json
@@ -230,6 +324,7 @@ C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-wind
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.AjustesCuenta.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.BienvenidaAdmin.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.ClaveOlvidada.resources
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.FacturaView.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.MenuRegistro.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PeticionActualizarDatosPersonales.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PeticionesRegisro.resources
@@ -239,6 +334,7 @@ C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-wind
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PuestosRegistro.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.UsuarioRegistro.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.EmpleadoBienvenida.resources
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Facturas.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.frmPOS.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Inventario.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.LibretaMenu.resources
@@ -247,6 +343,7 @@ C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-wind
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PanelAdmin.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PanelEmpleado.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Peticiones.resources
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PeticionUsuario.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Properties.Resources.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Usuarios.resources
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.GenerateResource.cache
@@ -261,5 +358,98 @@ C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-wind
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.pdb
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.genruntimeconfig.cache
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\ref\zompyDogs.dll
-C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Facturas.resources
-C:\Users\jenni\Documents\GitHub\unirec\zompydogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.FacturaView.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.exe
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.deps.json
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.runtimeconfig.json
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\zompyDogs.pdb
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Azure.Core.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Azure.Identity.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Data.SqlClient.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Identity.Client.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\Microsoft.SqlServer.Server.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\System.ClientModel.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\System.Memory.Data.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\System.Runtime.Caching.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsLib.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsDAO.pdb
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsLib.pdb
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.AssemblyReference.cache
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.AjustesCuenta.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.BienvenidaAdmin.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.ClaveOlvidada.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.FacturaView.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.MenuRegistro.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PeticionActualizarDatosPersonales.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PeticionesRegisro.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PeticionRecuperacionDeContraseña.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.ProductoRegistro.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.AGREGAR.ProveedorRegistro.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REGISTROS.PuestosRegistro.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.UsuarioRegistro.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.EmpleadoBienvenida.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Facturas.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.frmPOS.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Inventario.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.LibretaMenu.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Login.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Menu.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PanelAdmin.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PanelEmpleado.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Peticiones.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PeticionUsuario.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Properties.Resources.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Usuarios.resources
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.GenerateResource.cache
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.AssemblyInfoInputs.cache
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.AssemblyInfo.cs
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.CoreCompileInputs.cache
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.sourcelink.json
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.Up2Date
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\refint\zompyDogs.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.pdb
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.genruntimeconfig.cache
+C:\Users\jenni\Documents\GitHub\zompyDogs\zompyDogs\obj\Debug\net8.0-windows\ref\zompyDogs.dll

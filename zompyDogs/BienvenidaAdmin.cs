@@ -16,6 +16,7 @@ namespace zompyDogs
     {
         public int IdEmpleado { get; set; }
         public int RolID { get; set; }
+        public string UsuarioNombreAdmin { get; set; }
         public BienvenidaAdmin()
         {
             InitializeComponent();
@@ -61,7 +62,7 @@ namespace zompyDogs
 
         private void btnAjustesCuenta_Click(object sender, EventArgs e)
         {
-            AbrirFormsHija(new AjustesCuenta());
+            AbrirFormsHija(new AjustesCuenta(IdEmpleado, UsuarioNombreAdmin));
             CambiarColorBoton((Button)sender);
         }
 
@@ -74,8 +75,6 @@ namespace zompyDogs
                 FormPrincipal = this
             };
             AbrirFormsHija(PeticionesForm);
-
-            AbrirFormsHija(new Peticiones(IdEmpleado));
 
         }
 

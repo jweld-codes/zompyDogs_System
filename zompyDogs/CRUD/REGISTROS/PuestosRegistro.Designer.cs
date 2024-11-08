@@ -382,7 +382,7 @@
             // btnEditarPuesto
             // 
             btnEditarPuesto.Image = Properties.Resources.pen__1_;
-            btnEditarPuesto.Location = new Point(555, 268);
+            btnEditarPuesto.Location = new Point(555, 255);
             btnEditarPuesto.Name = "btnEditarPuesto";
             btnEditarPuesto.Size = new Size(72, 72);
             btnEditarPuesto.TabIndex = 138;
@@ -392,7 +392,7 @@
             // btnEliminarUsuario
             // 
             btnEliminarUsuario.Image = Properties.Resources.bin;
-            btnEliminarUsuario.Location = new Point(633, 268);
+            btnEliminarUsuario.Location = new Point(633, 255);
             btnEliminarUsuario.Name = "btnEliminarUsuario";
             btnEliminarUsuario.Size = new Size(72, 72);
             btnEliminarUsuario.TabIndex = 137;
@@ -402,7 +402,7 @@
             // btnAgregarNuevoPuesto
             // 
             btnAgregarNuevoPuesto.Image = Properties.Resources.plus;
-            btnAgregarNuevoPuesto.Location = new Point(477, 268);
+            btnAgregarNuevoPuesto.Location = new Point(477, 255);
             btnAgregarNuevoPuesto.Name = "btnAgregarNuevoPuesto";
             btnAgregarNuevoPuesto.Size = new Size(72, 72);
             btnAgregarNuevoPuesto.TabIndex = 136;

@@ -30,24 +30,18 @@ namespace zompyDogs
             FormPrincipal = new BienvenidaAdmin();
             InitializeComponent();
             lblNombreUsuario_Panel.Text = $"{NombreUsuario}";
-            
+
             CargarGananciaSemanal();
-            
-            CargarGastoSemanal();
-            
             CargarPedidosSemanal();
-            
-            CargarProductosRecientes();
-
+            CargarPedidosRecientes();
             CargarPeticionesEnDataGrid();
-            
 
+            // CargarGastoSemanal();
         }
         public void InicializarAdmin()
         {
             BienvenidaAdmin frmBienvenidaForm = new BienvenidaAdmin();
             string userLabel = frmBienvenidaForm.lblNombreSideBar.Text;
-            
         }
         private void btnLogOutPanel_Click(object sender, EventArgs e)
         {
@@ -59,7 +53,6 @@ namespace zompyDogs
                 frmLogin.Show();
             }
         }
-
         private void CargarGananciaSemanal()
         {
             using (SqlConnection conn = new SqlConnection(con_string))
@@ -93,8 +86,7 @@ namespace zompyDogs
 
 
         }
-
-        private void CargarGastoSemanal()
+      /*  private void CargarGastoSemanal()
         {
             using (SqlConnection conn = new SqlConnection(con_string))
             {
@@ -124,8 +116,7 @@ namespace zompyDogs
                     MessageBox.Show($"Error al cargar el gasto semanal: {ex.Message}");
                 }
             }
-        }
-
+        }*/
         private void CargarPedidosSemanal()
         {
             using (SqlConnection conn = new SqlConnection(con_string))
@@ -158,16 +149,15 @@ namespace zompyDogs
             }
         }
 
-        private void CargarProductosRecientes()
+        private void CargarPedidosRecientes()
         {
-            DataTable productos = ProductosDAO.ObtenerProductosRecientes();
-            dgvProductosPanel.DataSource = productos;
+            DataTable pedidos = PedidosDAO.ObtenerPedidosRecientes();
+            dgvPedidosPanel.DataSource = pedidos;
         }
 
         public void CargarPeticionesEnDataGrid()
         {
-            dgvPeticiones.DataSource = PeticionesValidaciones.ObtenerPeticionesParaPanel();
-            dgvPeticiones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPeticionesPendientes.DataSource = PeticionesValidaciones.ObtenerPeticionesParaPanel();
         }
     }
 }

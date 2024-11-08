@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\ZompyDogsLib.csproj",
+      "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\ZompyDogsLib.csproj",
       "projectName": "ZompyDogsLib",
-      "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\ZompyDogsLib.csproj",
+      "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\ZompyDogsLib.csproj",
       "packagesPath": "C:\\Users\\jenni\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsLib\\obj\\",
+      "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsLib\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jenni\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -2525,11 +2525,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj",
+      "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj",
       "projectName": "ZompyDogsDAO",
-      "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj",
+      "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\ZompyDogsDAO.csproj",
       "packagesPath": "C:\\Users\\jenni\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\unirec\\zompydogs\\ZompyDogsDAO\\obj\\",
+      "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\ZompyDogsDAO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jenni\\AppData\\Roaming\\NuGet\\NuGet.Config",

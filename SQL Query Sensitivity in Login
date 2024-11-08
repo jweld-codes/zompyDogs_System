@@ -1,0 +1,7 @@
+use DB_ZompyDogs
+
+ALTER TABLE Usuario
+ALTER COLUMN Username VARCHAR(50) COLLATE Latin1_General_BIN;
+
+ALTER TABLE Usuario
+ALTER COLUMN Password VARCHAR(50) COLLATE Latin1_General_BIN;

@@ -18,6 +18,7 @@ namespace ZompyDogsDAO
             using (SqlConnection conn = new SqlConnection(con_string))
             {
                 string query = "SELECT Codigo_Pedido, Empleado, Total_De_Productos FROM v_DetallesPedidos ORDER BY Fecha_Del_Pedido DESC";
+                //string query = "SELECT * FROM v_DetallesPedidosConPlatillo ORDER BY Fecha_Del_Pedido DESC";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dtProductos = new DataTable();
                 da.Fill(dtProductos);
@@ -25,6 +26,18 @@ namespace ZompyDogsDAO
             }
         }
 
+        public static DataTable ObtenerPedidosRecientes()
+        {
+            //USO EN: PanelAdmin
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                string query = "SELECT Codigo_Pedido, Empleado, Total_a_Pagar FROM v_DetallesPedidos ORDER BY Fecha_Del_Pedido DESC";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dtProductos = new DataTable();
+                da.Fill(dtProductos);
+                return dtProductos;
+            }
+        }
         public static DataTable ObtenerDetallesdePedidoPorEmpleado(int ID_Empleado)
         {
             DataTable dtpFacturaPedido = new DataTable();
@@ -59,6 +72,22 @@ namespace ZompyDogsDAO
             public string EmpleadoNombre { get; set; }
             public DateTime FechaDelPedido { get; set; }
             public string Estado { get; set; }
+        }
+        public static DataTable BuscarPeticionesPorID(int valorBusqueda)
+        {
+            string query = "SELECT  * FROM v_DetallesPedidosConPlatillo WHERE Num_Factura = @valorBusqueda;";
+
+            using (SqlConnection connection = new SqlConnection(con_string))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@valorBusqueda", valorBusqueda);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable resultados = new DataTable();
+                    adapter.Fill(resultados);
+                    return resultados;
+                }
+            }
         }
         public class DetalleDePedido
         {

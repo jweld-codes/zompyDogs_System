@@ -53,5 +53,14 @@ namespace ZompyDogsLib.Controladores
             return codigoGeneradoPedidos;
         }
 
+        public string GeneradordeCodigoMenu()
+        {
+            string fechaRegistro = DateTime.Now.ToString("yyyyMMdd");
+            string numeroAleatorio = new Random().Next(1000, 9999).ToString();
+            string codigoGeneradoMenu = $"MNU-{fechaRegistro}-{numeroAleatorio}";
+
+            return codigoGeneradoMenu;
+        }
+
     }
 }

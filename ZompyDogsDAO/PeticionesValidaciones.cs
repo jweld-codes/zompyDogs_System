@@ -16,7 +16,7 @@ namespace ZompyDogsDAO
         public static SqlConnection conn = new SqlConnection(con_string);
         //Metodo para obtener datos de la peticiones
 
-        public static string ObtenerUsuarioPeticion(string nombreCompleto)
+      /*  public static string ObtenerUsuarioPeticion(string nombreCompleto)
         {
             string usuario = string.Empty;
             string query = "SELECT Usuario FROM v_PeticionesxUsuarios WHERE Nombre_Completo = @nombreCompleto";
@@ -45,12 +45,12 @@ namespace ZompyDogsDAO
             }
 
             return usuario;
-        }
+        }*/
 
-        public static List<string> ObtenerPeticionesActivas()
+       /* public static List<string> ObtenerPeticionesActivas()
         {
             List<string> peticiones = new List<string>();
-            string query = "SELECT descripcionPeticion FROM Peticiones WHERE estado = 'AC'"; // Verifica que 'AC' sea el valor correcto para el estado activo.
+            string query = "SELECT descripcionPeticion FROM Peticiones WHERE estado = 'Complteado'"; 
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
@@ -71,11 +71,11 @@ namespace ZompyDogsDAO
                 }
             }
             return peticiones;
-        }
+        }*/
 
-        public class Peticion
+        public class PeticionRegistro
         {
-            public int Id { get; set; } // Si usas un ID autoincremental
+            public int Id { get; set; }
             public string CodigPeticion { get; set; }
             public string AccionPeticion { get; set; }
             public string Descripcion { get; set; }
@@ -86,7 +86,7 @@ namespace ZompyDogsDAO
             public string UserNombre { get; set; }
         }
         
-        public static void GuardarPeticion(Peticion peticion)
+        public static void GuardarPeticion(PeticionRegistro peticion)
         {
             string query = "INSERT INTO Peticiones (codigoPeticion, accionPeticion, descripcionPeticion, fechaEnviada, fechaRealizada, codigousuario, estado) VALUES (@codigopeticion, @accionpeticion, @descripcion, @fechaenviada, @fecharealizada, @codigousuario, @estado)";
 
@@ -119,8 +119,7 @@ namespace ZompyDogsDAO
                 }
             }
         }
-
-        public static bool ActualizarPeticion(Peticion peticion)
+        public static bool ActualizarPeticion(PeticionRegistro peticion)
         {
             string query = "UPDATE Peticiones SET accionPeticion = @nuevaAccionPeticion, " +
                            "descripcionPeticion = @nuevaDescripcionPeticion, fechaRealizada = @nuevaFechaRealizada, " +
@@ -171,11 +170,14 @@ namespace ZompyDogsDAO
                 }
             }
         }
-
+        
+        
+        
         public static DataTable ObtenerPeticionesParaPanel()
         {
+            // USO EN: PanelAdmin
             DataTable dtPeticiones = new DataTable();
-            string query = "SELECT Peticion, Usuario FROM v_PeticionesxUsuarios WHERE estado = 'Activo' OR estado = 'Pendiente' ORDER BY Fecha_De_Envio DESC";
+            string query = "SELECT Peticion, Usuario, Fecha_De_Envio FROM v_PeticionesxUsuarios WHERE estado = 'Pendiente' ORDER BY Fecha_De_Envio DESC";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
@@ -195,9 +197,57 @@ namespace ZompyDogsDAO
 
             return dtPeticiones;
         }
+        public static DataTable ObtenerPeticionesPendientes()
+        {
+            // USO EN: Peticiones
+            DataTable dtPeticiones = new DataTable();
+            string query = "SELECT Codigo, Accion, Peticion, Usuario, Fecha_De_Envio, Estado FROM v_PeticionesxUsuarios WHERE Estado = 'Pendiente' ORDER BY Fecha_De_Envio DESC";
 
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                try
+                {
+                    conn.Open();
+                    da.Fill(dtPeticiones);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al obtener las descripciones de peticiones: " + ex.Message);
+                }
+            }
+
+            return dtPeticiones;
+        }
+        public static DataTable ObtenerPeticionesCompletadas()
+        {
+            // USO EN: Peticiones
+            DataTable dtPeticiones = new DataTable();
+            string query = "SELECT Codigo, Accion, Peticion, Usuario, Fecha_De_Envio, Estado FROM v_PeticionesxUsuarios WHERE Estado = 'Completado' ORDER BY Fecha_De_Envio DESC";
+
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                try
+                {
+                    conn.Open();
+                    da.Fill(dtPeticiones);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al obtener las descripciones de peticiones: " + ex.Message);
+                }
+            }
+
+            return dtPeticiones;
+        }
         public static DataTable ObtenerPeticionesCompletasAdmin()
         {
+            //EN USO: Peticiones
             DataTable dtPeticionesCompletas = new DataTable();
             string query = "SELECT Codigo, Accion, Peticion, Nombre_Completo, IDUsuario, Usuario,Fecha_De_Envio,Estado FROM v_PeticionesxUsuarios ORDER BY Fecha_De_Envio DESC";
 
@@ -219,15 +269,17 @@ namespace ZompyDogsDAO
 
             return dtPeticionesCompletas;
         }
-
-        public static DataTable ObtenerPeticionesCompletasEmpl(int idUsuario)
+        public static DataTable ObtenerPeticionesCompletasAjustes(int idUsuario)
         {
+            //EN USO: AjustesCuenta
             DataTable dtPeticionesCompletasEmp = new DataTable();
             string query = "SELECT Codigo, Accion, Peticion, Fecha_De_Envio, Estado FROM v_PeticionesxUsuarios WHERE IDUsuario = @idUsuario ORDER BY Fecha_De_Envio DESC";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
 
                 try
@@ -240,12 +292,36 @@ namespace ZompyDogsDAO
                     Console.WriteLine("Error al obtener las descripciones de peticiones: " + ex.Message);
                 }
             }
-
             return dtPeticionesCompletasEmp;
         }
+        public static DataTable ObtenerPeticionesUsuarioParaEditar(string codigoPeticion)
+        {
+            //EN USO: AjustesCuenta, Peticiones
+            DataTable dtPeticionesCompletasEmp = new DataTable();
+            string query = "SELECT * FROM v_PeticionesxUsuarios WHERE Codigo = @codiPeticion ORDER BY Fecha_De_Envio DESC";
 
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@codiPeticion", codigoPeticion);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                try
+                {
+                    conn.Open();
+                    da.Fill(dtPeticionesCompletasEmp);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al obtener las descripciones de peticiones: " + ex.Message);
+                }
+            }
+            return dtPeticionesCompletasEmp;
+        }
         public static DataTable BuscarPeticionesPorUsuario(string valorBusqueda)
         {
+            //EN USO: Peticiones
             string query = "SELECT Codigo, Accion, Peticion, Nombre_Completo, IDUsuario, Usuario,Fecha_De_Envio,Estado FROM v_PeticionesxUsuarios WHERE Usuario LIKE @valorBusqueda OR Nombre_Completo LIKE @valorBusqueda OR Codigo LIKE @valorBusqueda";
 
             using (SqlConnection connection = new SqlConnection(con_string))
@@ -260,9 +336,38 @@ namespace ZompyDogsDAO
                 }
             }
         }
+        public static DataTable BuscarPeticionesPorIDUsuario(int idUsuario)
+        {
+            //EN USO: Peticiones
+            DataTable dtPeticionesCompletasEmp = new DataTable();
+            string query = "SELECT Usuario FROM v_PeticionesxUsuarios WHERE IDUsuario = @idUsuario";
 
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                try
+                {
+                    conn.Open();
+                    da.Fill(dtPeticionesCompletasEmp);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al obtener las descripciones de peticiones: " + ex.Message);
+                }
+            }
+            return dtPeticionesCompletasEmp;
+        }
+        
+        
+        
+        
         public static DataTable FiltroPendienteCompletado(string estadoDT)
         {
+            //EN USO: N/A
             DataTable dtEstados = new DataTable();
             string query = "SELECT Codigo, Accion, Peticion, Nombre_Completo, Usuario, Fecha_De_Envio, Estado FROM v_PeticionesxUsuarios WHERE estado = @estadoDT";
 

@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AjustesCuenta));
             topBarMenu = new Panel();
-            btnPeticiones = new Button();
-            btnEmpleadoPanel = new Button();
             pictureBox2 = new PictureBox();
             btnUsuarioPanel = new Button();
             lblTITULO = new Label();
@@ -60,6 +58,13 @@
             label5 = new Label();
             textBox1 = new TextBox();
             panel1 = new Panel();
+            gbxPeticionesBtn = new GroupBox();
+            btnVisualizarRegistro = new Button();
+            btnAgregarRegistro = new Button();
+            btnEliminarUsuario = new Button();
+            btnActualizar = new Button();
+            gbxPeticiones = new GroupBox();
+            dgvPeticiones = new DataGridView();
             gbxDatosUsuarios = new GroupBox();
             button2 = new Button();
             groupBox3 = new GroupBox();
@@ -87,10 +92,15 @@
             btnDatosUsuarios = new Button();
             rectanglePanel1 = new Panel();
             rectanglePanel2 = new Panel();
+            rectanglePanel3 = new Panel();
+            btnPeticionesUser = new Button();
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             gbxDatosPersonales.SuspendLayout();
             panel1.SuspendLayout();
+            gbxPeticionesBtn.SuspendLayout();
+            gbxPeticiones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPeticiones).BeginInit();
             gbxDatosUsuarios.SuspendLayout();
             groupBox3.SuspendLayout();
             SuspendLayout();
@@ -98,8 +108,6 @@
             // topBarMenu
             // 
             topBarMenu.BackColor = Color.FromArgb(31, 19, 10);
-            topBarMenu.Controls.Add(btnPeticiones);
-            topBarMenu.Controls.Add(btnEmpleadoPanel);
             topBarMenu.Controls.Add(pictureBox2);
             topBarMenu.Controls.Add(btnUsuarioPanel);
             topBarMenu.Controls.Add(lblTITULO);
@@ -108,32 +116,6 @@
             topBarMenu.Name = "topBarMenu";
             topBarMenu.Size = new Size(901, 81);
             topBarMenu.TabIndex = 106;
-            // 
-            // btnPeticiones
-            // 
-            btnPeticiones.FlatAppearance.BorderSize = 0;
-            btnPeticiones.FlatStyle = FlatStyle.Flat;
-            btnPeticiones.ForeColor = SystemColors.ControlLightLight;
-            btnPeticiones.Location = new Point(741, 45);
-            btnPeticiones.Name = "btnPeticiones";
-            btnPeticiones.Size = new Size(123, 36);
-            btnPeticiones.TabIndex = 101;
-            btnPeticiones.Text = "Peticiones";
-            btnPeticiones.UseVisualStyleBackColor = true;
-            btnPeticiones.Click += btnPeticiones_Click;
-            // 
-            // btnEmpleadoPanel
-            // 
-            btnEmpleadoPanel.FlatAppearance.BorderSize = 0;
-            btnEmpleadoPanel.FlatStyle = FlatStyle.Flat;
-            btnEmpleadoPanel.ForeColor = SystemColors.ControlLightLight;
-            btnEmpleadoPanel.Location = new Point(607, 45);
-            btnEmpleadoPanel.Name = "btnEmpleadoPanel";
-            btnEmpleadoPanel.Size = new Size(123, 36);
-            btnEmpleadoPanel.TabIndex = 100;
-            btnEmpleadoPanel.Text = "Actividades";
-            btnEmpleadoPanel.UseVisualStyleBackColor = true;
-            btnEmpleadoPanel.Click += btnEmpleadoPanel_Click;
             // 
             // pictureBox2
             // 
@@ -151,7 +133,7 @@
             btnUsuarioPanel.FlatAppearance.BorderSize = 0;
             btnUsuarioPanel.FlatStyle = FlatStyle.Flat;
             btnUsuarioPanel.ForeColor = SystemColors.ActiveCaptionText;
-            btnUsuarioPanel.Location = new Point(449, 45);
+            btnUsuarioPanel.Location = new Point(725, 45);
             btnUsuarioPanel.Name = "btnUsuarioPanel";
             btnUsuarioPanel.Size = new Size(152, 36);
             btnUsuarioPanel.TabIndex = 98;
@@ -176,7 +158,7 @@
             // 
             lblTituloRegistroPanel.AutoSize = true;
             lblTituloRegistroPanel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloRegistroPanel.Location = new Point(36, 129);
+            lblTituloRegistroPanel.Location = new Point(36, 136);
             lblTituloRegistroPanel.Name = "lblTituloRegistroPanel";
             lblTituloRegistroPanel.Size = new Size(42, 41);
             lblTituloRegistroPanel.TabIndex = 105;
@@ -185,7 +167,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(32, 83);
+            label1.Location = new Point(32, 87);
             label1.Name = "label1";
             label1.Size = new Size(77, 20);
             label1.TabIndex = 107;
@@ -197,7 +179,7 @@
             lblBreadCrumbUser.BackColor = Color.Transparent;
             lblBreadCrumbUser.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblBreadCrumbUser.ForeColor = Color.LimeGreen;
-            lblBreadCrumbUser.Location = new Point(109, 84);
+            lblBreadCrumbUser.Location = new Point(109, 88);
             lblBreadCrumbUser.Name = "lblBreadCrumbUser";
             lblBreadCrumbUser.Size = new Size(56, 20);
             lblBreadCrumbUser.TabIndex = 108;
@@ -225,6 +207,7 @@
             gbxDatosPersonales.Controls.Add(textBox5);
             gbxDatosPersonales.Controls.Add(comboBox1);
             gbxDatosPersonales.Controls.Add(textBox4);
+            gbxDatosPersonales.Controls.Add(gbxDatosUsuarios);
             gbxDatosPersonales.Controls.Add(textBox3);
             gbxDatosPersonales.Controls.Add(label9);
             gbxDatosPersonales.Controls.Add(label8);
@@ -234,7 +217,7 @@
             gbxDatosPersonales.Controls.Add(label5);
             gbxDatosPersonales.Controls.Add(textBox1);
             gbxDatosPersonales.Controls.Add(label2);
-            gbxDatosPersonales.Location = new Point(23, 38);
+            gbxDatosPersonales.Location = new Point(34, 56);
             gbxDatosPersonales.Name = "gbxDatosPersonales";
             gbxDatosPersonales.Size = new Size(866, 416);
             gbxDatosPersonales.TabIndex = 112;
@@ -399,12 +382,94 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(gbxDatosUsuarios);
+            panel1.Controls.Add(gbxPeticionesBtn);
+            panel1.Controls.Add(gbxPeticiones);
             panel1.Controls.Add(gbxDatosPersonales);
             panel1.Location = new Point(-12, 236);
             panel1.Name = "panel1";
             panel1.Size = new Size(933, 511);
             panel1.TabIndex = 113;
+            // 
+            // gbxPeticionesBtn
+            // 
+            gbxPeticionesBtn.Controls.Add(btnVisualizarRegistro);
+            gbxPeticionesBtn.Controls.Add(btnAgregarRegistro);
+            gbxPeticionesBtn.Controls.Add(btnEliminarUsuario);
+            gbxPeticionesBtn.Controls.Add(btnActualizar);
+            gbxPeticionesBtn.Location = new Point(39, -4);
+            gbxPeticionesBtn.Name = "gbxPeticionesBtn";
+            gbxPeticionesBtn.Size = new Size(307, 92);
+            gbxPeticionesBtn.TabIndex = 120;
+            gbxPeticionesBtn.TabStop = false;
+            // 
+            // btnVisualizarRegistro
+            // 
+            btnVisualizarRegistro.Image = Properties.Resources.file__1_;
+            btnVisualizarRegistro.Location = new Point(75, 17);
+            btnVisualizarRegistro.Name = "btnVisualizarRegistro";
+            btnVisualizarRegistro.Size = new Size(72, 72);
+            btnVisualizarRegistro.TabIndex = 131;
+            btnVisualizarRegistro.UseVisualStyleBackColor = true;
+            btnVisualizarRegistro.Click += btnVisualizarRegistro_Click;
+            // 
+            // btnAgregarRegistro
+            // 
+            btnAgregarRegistro.Image = Properties.Resources.plus;
+            btnAgregarRegistro.Location = new Point(1, 15);
+            btnAgregarRegistro.Name = "btnAgregarRegistro";
+            btnAgregarRegistro.Size = new Size(72, 72);
+            btnAgregarRegistro.TabIndex = 128;
+            btnAgregarRegistro.UseVisualStyleBackColor = true;
+            btnAgregarRegistro.Click += btnAgregarRegistro_Click;
+            // 
+            // btnEliminarUsuario
+            // 
+            btnEliminarUsuario.Image = Properties.Resources.bin;
+            btnEliminarUsuario.Location = new Point(150, 16);
+            btnEliminarUsuario.Name = "btnEliminarUsuario";
+            btnEliminarUsuario.Size = new Size(72, 72);
+            btnEliminarUsuario.TabIndex = 129;
+            btnEliminarUsuario.UseVisualStyleBackColor = true;
+            btnEliminarUsuario.Click += btnEliminarUsuario_Click;
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.Image = Properties.Resources.pen__1_;
+            btnActualizar.Location = new Point(226, 16);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(72, 72);
+            btnActualizar.TabIndex = 130;
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
+            // 
+            // gbxPeticiones
+            // 
+            gbxPeticiones.Controls.Add(dgvPeticiones);
+            gbxPeticiones.Location = new Point(35, 101);
+            gbxPeticiones.Name = "gbxPeticiones";
+            gbxPeticiones.Size = new Size(865, 372);
+            gbxPeticiones.TabIndex = 119;
+            gbxPeticiones.TabStop = false;
+            gbxPeticiones.Text = "Peticiones";
+            // 
+            // dgvPeticiones
+            // 
+            dgvPeticiones.AllowUserToAddRows = false;
+            dgvPeticiones.AllowUserToDeleteRows = false;
+            dgvPeticiones.AllowUserToOrderColumns = true;
+            dgvPeticiones.AllowUserToResizeColumns = false;
+            dgvPeticiones.AllowUserToResizeRows = false;
+            dgvPeticiones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPeticiones.BackgroundColor = SystemColors.Window;
+            dgvPeticiones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPeticiones.Location = new Point(16, 35);
+            dgvPeticiones.Name = "dgvPeticiones";
+            dgvPeticiones.ReadOnly = true;
+            dgvPeticiones.RowHeadersWidth = 51;
+            dgvPeticiones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPeticiones.Size = new Size(836, 316);
+            dgvPeticiones.TabIndex = 69;
+            dgvPeticiones.CellClick += dgvPeticiones_CellClick;
             // 
             // gbxDatosUsuarios
             // 
@@ -423,7 +488,7 @@
             gbxDatosUsuarios.Controls.Add(label3);
             gbxDatosUsuarios.Controls.Add(label4);
             gbxDatosUsuarios.Controls.Add(textBox7);
-            gbxDatosUsuarios.Location = new Point(23, 38);
+            gbxDatosUsuarios.Location = new Point(1, 4);
             gbxDatosUsuarios.Name = "gbxDatosUsuarios";
             gbxDatosUsuarios.Size = new Size(865, 416);
             gbxDatosUsuarios.TabIndex = 113;
@@ -434,11 +499,11 @@
             // 
             button2.Image = Properties.Resources.pen;
             button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(663, 368);
+            button2.Location = new Point(637, 354);
             button2.Name = "button2";
-            button2.Size = new Size(189, 42);
+            button2.Size = new Size(216, 42);
             button2.TabIndex = 135;
-            button2.Text = "Editar Datos Usuarios";
+            button2.Text = "Editar Datos de Usuario";
             button2.UseVisualStyleBackColor = true;
             // 
             // groupBox3
@@ -640,7 +705,7 @@
             btnDatosPersonales.BackColor = Color.White;
             btnDatosPersonales.FlatStyle = FlatStyle.Flat;
             btnDatosPersonales.ForeColor = SystemColors.ActiveCaptionText;
-            btnDatosPersonales.Location = new Point(568, 201);
+            btnDatosPersonales.Location = new Point(411, 201);
             btnDatosPersonales.Name = "btnDatosPersonales";
             btnDatosPersonales.Size = new Size(152, 36);
             btnDatosPersonales.TabIndex = 101;
@@ -653,7 +718,7 @@
             btnDatosUsuarios.BackColor = Color.White;
             btnDatosUsuarios.FlatStyle = FlatStyle.Flat;
             btnDatosUsuarios.ForeColor = SystemColors.ActiveCaptionText;
-            btnDatosUsuarios.Location = new Point(726, 203);
+            btnDatosUsuarios.Location = new Point(569, 201);
             btnDatosUsuarios.Name = "btnDatosUsuarios";
             btnDatosUsuarios.Size = new Size(152, 36);
             btnDatosUsuarios.TabIndex = 114;
@@ -663,17 +728,37 @@
             // 
             // rectanglePanel1
             // 
-            rectanglePanel1.Location = new Point(569, 230);
+            rectanglePanel1.Location = new Point(412, 230);
             rectanglePanel1.Name = "rectanglePanel1";
             rectanglePanel1.Size = new Size(150, 29);
             rectanglePanel1.TabIndex = 115;
             // 
             // rectanglePanel2
             // 
-            rectanglePanel2.Location = new Point(727, 231);
+            rectanglePanel2.Location = new Point(570, 231);
             rectanglePanel2.Name = "rectanglePanel2";
             rectanglePanel2.Size = new Size(150, 29);
             rectanglePanel2.TabIndex = 116;
+            // 
+            // rectanglePanel3
+            // 
+            rectanglePanel3.Location = new Point(252, 163);
+            rectanglePanel3.Name = "rectanglePanel3";
+            rectanglePanel3.Size = new Size(150, 29);
+            rectanglePanel3.TabIndex = 118;
+            // 
+            // btnPeticionesUser
+            // 
+            btnPeticionesUser.BackColor = Color.White;
+            btnPeticionesUser.FlatStyle = FlatStyle.Flat;
+            btnPeticionesUser.ForeColor = SystemColors.ActiveCaptionText;
+            btnPeticionesUser.Location = new Point(726, 200);
+            btnPeticionesUser.Name = "btnPeticionesUser";
+            btnPeticionesUser.Size = new Size(152, 36);
+            btnPeticionesUser.TabIndex = 117;
+            btnPeticionesUser.Text = "Peticiones";
+            btnPeticionesUser.UseVisualStyleBackColor = false;
+            btnPeticionesUser.Click += btnPeticionesUser_Click;
             // 
             // AjustesCuenta
             // 
@@ -681,23 +766,28 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(901, 725);
+            Controls.Add(rectanglePanel3);
+            Controls.Add(btnPeticionesUser);
             Controls.Add(rectanglePanel2);
             Controls.Add(rectanglePanel1);
             Controls.Add(btnDatosUsuarios);
             Controls.Add(btnDatosPersonales);
-            Controls.Add(panel1);
             Controls.Add(topBarMenu);
             Controls.Add(lblBreadCrumbUser);
             Controls.Add(label1);
             Controls.Add(lblTituloRegistroPanel);
+            Controls.Add(panel1);
             Name = "AjustesCuenta";
-            Text = "AjustesCuenta";
+            Load += AjustesCuenta_Load;
             topBarMenu.ResumeLayout(false);
             topBarMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             gbxDatosPersonales.ResumeLayout(false);
             gbxDatosPersonales.PerformLayout();
             panel1.ResumeLayout(false);
+            gbxPeticionesBtn.ResumeLayout(false);
+            gbxPeticiones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvPeticiones).EndInit();
             gbxDatosUsuarios.ResumeLayout(false);
             gbxDatosUsuarios.PerformLayout();
             groupBox3.ResumeLayout(false);
@@ -709,7 +799,6 @@
         #endregion
 
         private Panel topBarMenu;
-        private Button btnEmpleadoPanel;
         private PictureBox pictureBox2;
         private Button btnUsuarioPanel;
         private Label lblTITULO;
@@ -746,7 +835,6 @@
         private TextBox textBox7;
         private TextBox textBox12;
         private Label label13;
-        private Button button2;
         public GroupBox groupBox3;
         public CheckBox chbxDomingo;
         public CheckBox chbxSabado;
@@ -765,6 +853,15 @@
         private Label label15;
         private TextBox textBox13;
         private Label label14;
-        private Button btnPeticiones;
+        private Panel rectanglePanel3;
+        private Button btnPeticionesUser;
+        private GroupBox gbxPeticiones;
+        public DataGridView dgvPeticiones;
+        private Button btnVisualizarRegistro;
+        public Button btnAgregarRegistro;
+        public Button btnActualizar;
+        public Button btnEliminarUsuario;
+        private GroupBox gbxPeticionesBtn;
+        private Button button2;
     }
 }

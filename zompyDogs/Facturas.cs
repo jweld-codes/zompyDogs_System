@@ -150,5 +150,6 @@ namespace zompyDogs
             DataTable resultados = PedidosDAO.BuscadorDeFacturas(valorBusqueda);
             dgvHistorialPedidos.DataSource = resultados;
         }
+        
     }
 }

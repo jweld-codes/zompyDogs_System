@@ -67,6 +67,9 @@
     <Compile Update="Peticiones.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="PeticionUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Usuarios.cs">
       <SubType>Form</SubType>
     </Compile>

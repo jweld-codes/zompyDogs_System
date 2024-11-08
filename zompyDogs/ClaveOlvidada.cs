@@ -68,7 +68,7 @@ namespace zompyDogs
             }
 
             // Crear la petición
-            Peticion nuevaPeticion = new Peticion
+            PeticionRegistro nuevaPeticion = new PeticionRegistro
             {
                 CodigPeticion = userForgetCodigo,
                 AccionPeticion = "Recuperación de contraseña",

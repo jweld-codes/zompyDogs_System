@@ -400,6 +400,7 @@
             // 
             // flpPOSPanel
             // 
+            flpPOSPanel.AutoScroll = true;
             flpPOSPanel.Dock = DockStyle.Left;
             flpPOSPanel.Location = new Point(153, 0);
             flpPOSPanel.Name = "flpPOSPanel";

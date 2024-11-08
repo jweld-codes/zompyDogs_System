@@ -34,21 +34,24 @@
             lblTITULO = new Label();
             lblBreadCrumbUser = new Label();
             groupBox1 = new GroupBox();
-            dgvPeticiones = new DataGridView();
+            dgvPeticionesCompletadas = new DataGridView();
             label1 = new Label();
             btnAgregarRegistro = new Button();
             lblTituloRegistroPanel = new Label();
             txtBuscarUsuario = new TextBox();
-            btnEliminarUsuario = new Button();
-            cbxFiltro = new ComboBox();
             btnActualizar = new Button();
             btnRefreshDG = new Button();
             btnVisualizarRegistro = new Button();
             button1 = new Button();
+            groupBox2 = new GroupBox();
+            dgvPeticionesPendientes = new DataGridView();
+            btnEliminarUsuario = new Button();
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvPeticiones).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPeticionesCompletadas).BeginInit();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPeticionesPendientes).BeginInit();
             SuspendLayout();
             // 
             // topBarMenu
@@ -113,31 +116,32 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(dgvPeticiones);
+            groupBox1.Controls.Add(dgvPeticionesCompletadas);
             groupBox1.Location = new Point(21, 279);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(837, 405);
+            groupBox1.Size = new Size(445, 405);
             groupBox1.TabIndex = 103;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Peticiones";
+            groupBox1.Text = "Peticiones Completadas";
             // 
-            // dgvPeticiones
+            // dgvPeticionesCompletadas
             // 
-            dgvPeticiones.AllowUserToAddRows = false;
-            dgvPeticiones.AllowUserToDeleteRows = false;
-            dgvPeticiones.AllowUserToOrderColumns = true;
-            dgvPeticiones.AllowUserToResizeColumns = false;
-            dgvPeticiones.AllowUserToResizeRows = false;
-            dgvPeticiones.BackgroundColor = SystemColors.Window;
-            dgvPeticiones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPeticiones.Location = new Point(15, 26);
-            dgvPeticiones.Name = "dgvPeticiones";
-            dgvPeticiones.ReadOnly = true;
-            dgvPeticiones.RowHeadersWidth = 51;
-            dgvPeticiones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPeticiones.Size = new Size(800, 338);
-            dgvPeticiones.TabIndex = 69;
-            dgvPeticiones.CellClick += dgvPeticiones_CellClick;
+            dgvPeticionesCompletadas.AllowUserToAddRows = false;
+            dgvPeticionesCompletadas.AllowUserToDeleteRows = false;
+            dgvPeticionesCompletadas.AllowUserToOrderColumns = true;
+            dgvPeticionesCompletadas.AllowUserToResizeColumns = false;
+            dgvPeticionesCompletadas.AllowUserToResizeRows = false;
+            dgvPeticionesCompletadas.BackgroundColor = SystemColors.Window;
+            dgvPeticionesCompletadas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPeticionesCompletadas.Enabled = false;
+            dgvPeticionesCompletadas.Location = new Point(6, 26);
+            dgvPeticionesCompletadas.Name = "dgvPeticionesCompletadas";
+            dgvPeticionesCompletadas.ReadOnly = true;
+            dgvPeticionesCompletadas.RowHeadersWidth = 51;
+            dgvPeticionesCompletadas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPeticionesCompletadas.Size = new Size(424, 353);
+            dgvPeticionesCompletadas.TabIndex = 69;
+            dgvPeticionesCompletadas.CellClick += dgvPeticiones_CellClick;
             // 
             // label1
             // 
@@ -178,44 +182,22 @@
             txtBuscarUsuario.TabIndex = 101;
             txtBuscarUsuario.TextChanged += txtBuscarUsuario_TextChanged;
             // 
-            // btnEliminarUsuario
-            // 
-            btnEliminarUsuario.Image = Properties.Resources.bin;
-            btnEliminarUsuario.Location = new Point(192, 189);
-            btnEliminarUsuario.Name = "btnEliminarUsuario";
-            btnEliminarUsuario.Size = new Size(72, 72);
-            btnEliminarUsuario.TabIndex = 109;
-            btnEliminarUsuario.UseVisualStyleBackColor = true;
-            btnEliminarUsuario.Click += btnEliminarUsuario_Click;
-            // 
-            // cbxFiltro
-            // 
-            cbxFiltro.FormattingEnabled = true;
-            cbxFiltro.Location = new Point(698, 256);
-            cbxFiltro.Margin = new Padding(3, 3, 6, 3);
-            cbxFiltro.Name = "cbxFiltro";
-            cbxFiltro.RightToLeft = RightToLeft.Yes;
-            cbxFiltro.Size = new Size(138, 28);
-            cbxFiltro.Sorted = true;
-            cbxFiltro.TabIndex = 110;
-            cbxFiltro.Text = "Filtro";
-            cbxFiltro.SelectedIndexChanged += cbxFiltro_SelectedIndexChanged;
-            // 
             // btnActualizar
             // 
             btnActualizar.Image = Properties.Resources.pen__1_;
-            btnActualizar.Location = new Point(270, 189);
+            btnActualizar.Location = new Point(192, 189);
             btnActualizar.Name = "btnActualizar";
             btnActualizar.Size = new Size(72, 72);
             btnActualizar.TabIndex = 111;
             btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
             // 
             // btnRefreshDG
             // 
             btnRefreshDG.FlatAppearance.BorderSize = 0;
             btnRefreshDG.FlatStyle = FlatStyle.Flat;
             btnRefreshDG.Image = Properties.Resources.refresh;
-            btnRefreshDG.Location = new Point(661, 257);
+            btnRefreshDG.Location = new Point(374, 151);
             btnRefreshDG.Name = "btnRefreshDG";
             btnRefreshDG.Size = new Size(29, 29);
             btnRefreshDG.TabIndex = 112;
@@ -242,18 +224,55 @@
             button1.TabIndex = 115;
             button1.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(dgvPeticionesPendientes);
+            groupBox2.Location = new Point(472, 279);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(408, 405);
+            groupBox2.TabIndex = 104;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Peticiones Pendientes";
+            // 
+            // dgvPeticionesPendientes
+            // 
+            dgvPeticionesPendientes.AllowUserToAddRows = false;
+            dgvPeticionesPendientes.AllowUserToDeleteRows = false;
+            dgvPeticionesPendientes.AllowUserToOrderColumns = true;
+            dgvPeticionesPendientes.AllowUserToResizeColumns = false;
+            dgvPeticionesPendientes.AllowUserToResizeRows = false;
+            dgvPeticionesPendientes.BackgroundColor = SystemColors.Window;
+            dgvPeticionesPendientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPeticionesPendientes.Location = new Point(15, 26);
+            dgvPeticionesPendientes.Name = "dgvPeticionesPendientes";
+            dgvPeticionesPendientes.ReadOnly = true;
+            dgvPeticionesPendientes.RowHeadersWidth = 51;
+            dgvPeticionesPendientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPeticionesPendientes.Size = new Size(387, 353);
+            dgvPeticionesPendientes.TabIndex = 69;
+            // 
+            // btnEliminarUsuario
+            // 
+            btnEliminarUsuario.Image = Properties.Resources.bin;
+            btnEliminarUsuario.Location = new Point(270, 189);
+            btnEliminarUsuario.Name = "btnEliminarUsuario";
+            btnEliminarUsuario.Size = new Size(72, 72);
+            btnEliminarUsuario.TabIndex = 130;
+            btnEliminarUsuario.UseVisualStyleBackColor = true;
+            btnEliminarUsuario.Click += btnEliminarUsuario_Click_1;
+            // 
             // Peticiones
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(901, 725);
+            Controls.Add(btnEliminarUsuario);
+            Controls.Add(groupBox2);
             Controls.Add(button1);
             Controls.Add(btnVisualizarRegistro);
             Controls.Add(btnRefreshDG);
             Controls.Add(btnActualizar);
-            Controls.Add(cbxFiltro);
-            Controls.Add(btnEliminarUsuario);
             Controls.Add(topBarMenu);
             Controls.Add(lblBreadCrumbUser);
             Controls.Add(groupBox1);
@@ -263,13 +282,14 @@
             Controls.Add(txtBuscarUsuario);
             Name = "Peticiones";
             Text = "Peticiones";
-            Load += Peticiones_Load;
             KeyDown += Peticiones_KeyDown;
             topBarMenu.ResumeLayout(false);
             topBarMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvPeticiones).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPeticionesCompletadas).EndInit();
+            groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvPeticionesPendientes).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -282,16 +302,17 @@
         private Label lblTITULO;
         public Label lblBreadCrumbUser;
         private GroupBox groupBox1;
-        public DataGridView dgvPeticiones;
+        public DataGridView dgvPeticionesCompletadas;
         private Label label1;
         public Button btnAgregarRegistro;
         private Label lblTituloRegistroPanel;
         private TextBox txtBuscarUsuario;
-        public Button btnEliminarUsuario;
         public Button btnActualizar;
         public Button btnRefreshDG;
-        public ComboBox cbxFiltro;
         private Button btnVisualizarRegistro;
         private Button button1;
+        private GroupBox groupBox2;
+        public DataGridView dgvPeticionesPendientes;
+        public Button btnEliminarUsuario;
     }
 }

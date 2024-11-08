@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="CRUD\REGISTROS\FacturaView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REGISTROS\MenuRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REGISTROS\PeticionActualizarDatosPersonales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REGISTROS\PeticionesRegisro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REGISTROS\PeticionRecuperacionDeContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REGISTROS\ProductoRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REGISTROS\PuestosRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REGISTROS\UsuarioRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AjustesCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="BienvenidaAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ClaveOlvidada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REGISTROS\ProveedorRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EmpleadoBienvenida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Facturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmPOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Inventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="LibretaMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PanelAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PanelEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Peticiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Usuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

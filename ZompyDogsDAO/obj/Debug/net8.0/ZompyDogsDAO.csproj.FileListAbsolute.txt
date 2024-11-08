@@ -1,0 +1,39 @@
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.deps.json
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.pdb
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.AssemblyReference.cache
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfoInputs.cache
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfo.cs
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.CoreCompileInputs.cache
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.sourcelink.json
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\refint\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.pdb
+C:\Users\jenni\Documents\TRABAJOS - UNICAH\DESSOFT\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ref\ZompyDogsDAO.dll
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.deps.json
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.dll
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.pdb
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.AssemblyReference.cache
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfoInputs.cache
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfo.cs
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.CoreCompileInputs.cache
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.sourcelink.json
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.dll
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\refint\ZompyDogsDAO.dll
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.pdb
+C:\Users\oscar\Documents\GitHub\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ref\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.deps.json
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.pdb
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.AssemblyReference.cache
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfoInputs.cache
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfo.cs
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.CoreCompileInputs.cache
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.sourcelink.json
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\refint\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.pdb
+C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ref\ZompyDogsDAO.dll

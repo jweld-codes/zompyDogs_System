@@ -53,7 +53,7 @@ namespace zompyDogs
         private void btnInicio_Click(object sender, EventArgs e)
         {
             CambiarColorBoton((Button)sender);
-            PanelEmpleado frmPanelEmpleado = new PanelEmpleado();
+            PanelEmpleado frmPanelEmpleado = new PanelEmpleado(IdEmpleado);
             frmPanelEmpleado.lblNombreUser.Text = lblNombreSideBar.Text;
             AbrirFormsHijaEmpleado(frmPanelEmpleado);
         }

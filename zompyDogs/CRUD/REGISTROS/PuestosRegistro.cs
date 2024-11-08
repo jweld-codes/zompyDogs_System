@@ -30,6 +30,7 @@ namespace zompyDogs.CRUD.REGISTROS
 
             cbxEstado.Text = "Elegir...";
             cbxRoles.Text = "Elegir...";
+            txtDiasLaborales.Hide();
 
             isEdition = false;
 
@@ -121,8 +122,17 @@ namespace zompyDogs.CRUD.REGISTROS
                     {
                         MessageBox.Show("Puesto actualizado con éxito.");
                         CargarPuestos();
-                        txtCodigoGeneradoPuesto.Text = string.Empty;
-                        txtNombrePuesto.Text = string.Empty;
+
+                        chbxLunes.Checked = false;
+                        chbxMartes.Checked = false;
+                        chbxMiercoles.Checked = false;
+                        chbxJueves.Checked = false;
+                        chbxViernes.Checked = false;
+                        chbxSabado.Checked = false;
+                        chbxDomingo.Checked = false;
+
+                        cbxRoles.Text = "Elegir...";
+                        cbxEstado.Text = "Elegir...";
                         txtDescripcion.Text = string.Empty;
                         txtSalario.Text = string.Empty;
                         txtDiasLaborales.Text = string.Empty;
@@ -173,6 +183,15 @@ namespace zompyDogs.CRUD.REGISTROS
                     MessageBox.Show("Puesto Registrado con Éxito.");
                     CargarPuestos();
                     GeneradordeCodigoPuestoFromForm();
+
+                    chbxLunes.Checked = false;
+                    chbxMartes.Checked = false;
+                    chbxMiercoles.Checked = false;
+                    chbxJueves.Checked = false;
+                    chbxViernes.Checked = false;
+                    chbxSabado.Checked = false;
+                    chbxDomingo.Checked = false;
+
                     txtNombrePuesto.Text = string.Empty;
                     txtDescripcion.Text = string.Empty;
                     txtSalario.Text = string.Empty;
@@ -257,6 +276,7 @@ namespace zompyDogs.CRUD.REGISTROS
         {
             isEdition = true;
             btnGuardarPuesto.Text = "Editar";
+            cbxEstado.Enabled = true;
 
             DataTable puestosEditar = UsuarioDAO.ObtenerDetalllesPuestosParaEditar(puestCodigoVal);
 

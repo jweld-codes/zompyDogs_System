@@ -80,9 +80,8 @@ namespace zompyDogs
                     frmBienvenidaUsuario.RolID = idRol;
                     frmBienvenidaUsuario.lblNombreSideBar.Text = $"{nombreUser} {apeUser}";
 
-                    PanelEmpleado frmPanelEmpleado = new PanelEmpleado();
+                    PanelEmpleado frmPanelEmpleado = new PanelEmpleado(idEmpleado);
                     frmPanelEmpleado.NombreUsuarioEmpleado = $"{nombreUser} {apeUser}";
-                    frmPanelEmpleado.InicializarEmpleado(idEmpleado);
 
                     frmBienvenidaUsuario.AbrirFormsHijaEmpleado(frmPanelEmpleado);
                     frmBienvenidaUsuario.Show();

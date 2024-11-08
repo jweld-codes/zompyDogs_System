@@ -38,15 +38,15 @@ namespace ZompyDogsDAO
                 return dtProductos;
             }
         }
-        public static DataTable ObtenerDetallesdePedidoPorEmpleado(int ID_Empleado)
+        public static DataTable ObtenerDetallesdePedidoPorEmpleado(int idEmpleado)
         {
             DataTable dtpFacturaPedido = new DataTable();
-            string query = "SELECT Codigo_Pedido, Total_De_Productos, Subtotal, Total_a_Pagar FROM v_DetallesPedidos WHERE Fk_Usuario = @idEmpleado ORDER BY Fecha_Del_Pedido DESC";
+            string query = "SELECT Codigo_Pedido, Total_De_Productos, Subtotal, Total_a_Pagar FROM v_DetallesPedidos WHERE ID_Usuario = @idEmpleado ORDER BY Fecha_Del_Pedido DESC";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@idEmpleado", ID_Empleado);
+                cmd.Parameters.AddWithValue("@idEmpleado", idEmpleado);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
 

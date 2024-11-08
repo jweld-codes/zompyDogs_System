@@ -46,11 +46,11 @@
             label6 = new Label();
             label7 = new Label();
             groupBox1 = new GroupBox();
+            radioButton3 = new RadioButton();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
             textBox6 = new TextBox();
             label9 = new Label();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton3 = new RadioButton();
             label8 = new Label();
             label11 = new Label();
             label10 = new Label();
@@ -216,6 +216,39 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Por Unidad Medida";
             // 
+            // radioButton3
+            // 
+            radioButton3.AutoSize = true;
+            radioButton3.Location = new Point(6, 153);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(99, 24);
+            radioButton3.TabIndex = 129;
+            radioButton3.TabStop = true;
+            radioButton3.Text = "Lb (Libras)";
+            radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(6, 125);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(122, 24);
+            radioButton2.TabIndex = 128;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "Grm (gramos)";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(6, 95);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(100, 24);
+            radioButton1.TabIndex = 127;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Oz (onzas)";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
             // textBox6
             // 
             textBox6.Location = new Point(6, 51);
@@ -231,39 +264,6 @@
             label9.Size = new Size(69, 20);
             label9.TabIndex = 125;
             label9.Text = "Cantidad";
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(6, 95);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(100, 24);
-            radioButton1.TabIndex = 127;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Oz (onzas)";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(6, 125);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(122, 24);
-            radioButton2.TabIndex = 128;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Grm (gramos)";
-            radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new Point(6, 153);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(99, 24);
-            radioButton3.TabIndex = 129;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "Lb (Libras)";
-            radioButton3.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -316,6 +316,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(575, 618);
             Controls.Add(button3);
             Controls.Add(button2);

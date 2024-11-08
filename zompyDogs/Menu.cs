@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZompyDogsDAO;
 using zompyDogs.CRUD.REGISTROS;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace zompyDogs
 {
@@ -29,6 +30,11 @@ namespace zompyDogs
         {
             DataTable menu = MenuDAO.ObtenerDetallesdeMenu();
             dgvMenu.DataSource = menu;
+
+            dgvMenu.EnableHeadersVisualStyles = false;
+            dgvMenu.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dgvMenu.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvMenu.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);
         }
 
         private void btnLibretaMenu_Click(object sender, EventArgs e)
@@ -94,8 +100,8 @@ namespace zompyDogs
                 if (fila["Imagen"] != DBNull.Value)
                 {
                     string imageFileName = fila["Imagen"].ToString();
-                    string projectPath = Directory.GetParent(Application.StartupPath).Parent.Parent.Parent.FullName;
-                    string imagePath = Path.Combine(projectPath, "Imagenes", imageFileName);
+                    string projectPath = "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\Imagenes";
+                    string imagePath = Path.Combine(projectPath, "Platillos", imageFileName);
 
                     if (File.Exists(imagePath))
                     {
@@ -130,9 +136,7 @@ namespace zompyDogs
         {
             string valorBusqueda = txtBuscarUsuario.Text;
             DataTable resultados = MenuDAO.BuscadorDePlatillos(valorBusqueda);
-            dgvUsuarios.DataSource = resultados;
-            dgvEmpleados.DataSource = resultados;
-            dgvAdminis.DataSource = resultados;
+            dgvMenu.DataSource = resultados;
         }
 
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
@@ -192,8 +196,8 @@ namespace zompyDogs
                 if (fila["Imagen"] != DBNull.Value)
                 {
                     string imageFileName = fila["Imagen"].ToString();
-                    string projectPath = Directory.GetParent(Application.StartupPath).Parent.Parent.Parent.FullName;
-                    string imagePath = Path.Combine(projectPath, "Imagenes", imageFileName);
+                    string projectPath = "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\Imagenes";
+                    string imagePath = Path.Combine(projectPath, "Platillos", imageFileName);
 
                     if (File.Exists(imagePath))
                     {

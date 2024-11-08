@@ -38,25 +38,55 @@
             lblBreadCrumbUser = new Label();
             label2 = new Label();
             gbxDatosPersonales = new GroupBox();
-            textBox15 = new TextBox();
+            btnCancelarPer = new Button();
+            btnConfirmarPer = new Button();
+            txtSegApe = new TextBox();
             label16 = new Label();
-            textBox14 = new TextBox();
+            txtPrimApe = new TextBox();
             label15 = new Label();
-            textBox13 = new TextBox();
+            txtSegNombre = new TextBox();
             label14 = new Label();
-            button1 = new Button();
-            dateTimePicker2 = new DateTimePicker();
-            textBox5 = new TextBox();
-            comboBox1 = new ComboBox();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
+            btnEditarDatosPersonales = new Button();
+            dtpFechaNacimiento = new DateTimePicker();
+            txtDireccion = new TextBox();
+            cbxEstadoCivil = new ComboBox();
+            txtTelefono = new TextBox();
+            txtCodigoGenerado = new TextBox();
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
-            textBox2 = new TextBox();
+            txtPrimerNombre = new TextBox();
             label5 = new Label();
-            textBox1 = new TextBox();
+            txtCedula = new TextBox();
+            gbxDatosUsuarios = new GroupBox();
+            btnCancelarUs = new Button();
+            btnConfirmarUs = new Button();
+            btnEditarUsuario = new Button();
+            gbxDias = new GroupBox();
+            txtDiasLaborales = new TextBox();
+            chbxDomingo = new CheckBox();
+            chbxSabado = new CheckBox();
+            chbxViernes = new CheckBox();
+            chbxJueves = new CheckBox();
+            chbxMiercoles = new CheckBox();
+            chbxMartes = new CheckBox();
+            chbxLunes = new CheckBox();
+            txtHoras = new TextBox();
+            label13 = new Label();
+            txtSalario = new TextBox();
+            label12 = new Label();
+            txtPuesto = new TextBox();
+            label11 = new Label();
+            txtCodigoGeneradoUser = new TextBox();
+            label10 = new Label();
+            txtClave = new TextBox();
+            txtRol = new TextBox();
+            label3 = new Label();
+            label4 = new Label();
+            txtUser = new TextBox();
+            seeCloseIcon = new PictureBox();
+            seeIcon = new PictureBox();
             panel1 = new Panel();
             gbxPeticionesBtn = new GroupBox();
             btnVisualizarRegistro = new Button();
@@ -65,29 +95,6 @@
             btnActualizar = new Button();
             gbxPeticiones = new GroupBox();
             dgvPeticiones = new DataGridView();
-            gbxDatosUsuarios = new GroupBox();
-            button2 = new Button();
-            groupBox3 = new GroupBox();
-            chbxDomingo = new CheckBox();
-            chbxSabado = new CheckBox();
-            chbxViernes = new CheckBox();
-            chbxJueves = new CheckBox();
-            chbxMiercoles = new CheckBox();
-            chbxMartes = new CheckBox();
-            chbxLunes = new CheckBox();
-            textBox12 = new TextBox();
-            label13 = new Label();
-            textBox11 = new TextBox();
-            label12 = new Label();
-            textBox10 = new TextBox();
-            label11 = new Label();
-            textBox9 = new TextBox();
-            label10 = new Label();
-            textBox8 = new TextBox();
-            textBox6 = new TextBox();
-            label3 = new Label();
-            label4 = new Label();
-            textBox7 = new TextBox();
             btnDatosPersonales = new Button();
             btnDatosUsuarios = new Button();
             rectanglePanel1 = new Panel();
@@ -97,12 +104,14 @@
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             gbxDatosPersonales.SuspendLayout();
+            gbxDatosUsuarios.SuspendLayout();
+            gbxDias.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)seeIcon).BeginInit();
             panel1.SuspendLayout();
             gbxPeticionesBtn.SuspendLayout();
             gbxPeticiones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPeticiones).BeginInit();
-            gbxDatosUsuarios.SuspendLayout();
-            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // topBarMenu
@@ -196,26 +205,27 @@
             // 
             // gbxDatosPersonales
             // 
-            gbxDatosPersonales.Controls.Add(textBox15);
+            gbxDatosPersonales.Controls.Add(btnCancelarPer);
+            gbxDatosPersonales.Controls.Add(btnConfirmarPer);
+            gbxDatosPersonales.Controls.Add(txtSegApe);
             gbxDatosPersonales.Controls.Add(label16);
-            gbxDatosPersonales.Controls.Add(textBox14);
+            gbxDatosPersonales.Controls.Add(txtPrimApe);
             gbxDatosPersonales.Controls.Add(label15);
-            gbxDatosPersonales.Controls.Add(textBox13);
+            gbxDatosPersonales.Controls.Add(txtSegNombre);
             gbxDatosPersonales.Controls.Add(label14);
-            gbxDatosPersonales.Controls.Add(button1);
-            gbxDatosPersonales.Controls.Add(dateTimePicker2);
-            gbxDatosPersonales.Controls.Add(textBox5);
-            gbxDatosPersonales.Controls.Add(comboBox1);
-            gbxDatosPersonales.Controls.Add(textBox4);
-            gbxDatosPersonales.Controls.Add(gbxDatosUsuarios);
-            gbxDatosPersonales.Controls.Add(textBox3);
+            gbxDatosPersonales.Controls.Add(btnEditarDatosPersonales);
+            gbxDatosPersonales.Controls.Add(dtpFechaNacimiento);
+            gbxDatosPersonales.Controls.Add(txtDireccion);
+            gbxDatosPersonales.Controls.Add(cbxEstadoCivil);
+            gbxDatosPersonales.Controls.Add(txtTelefono);
+            gbxDatosPersonales.Controls.Add(txtCodigoGenerado);
             gbxDatosPersonales.Controls.Add(label9);
             gbxDatosPersonales.Controls.Add(label8);
             gbxDatosPersonales.Controls.Add(label7);
             gbxDatosPersonales.Controls.Add(label6);
-            gbxDatosPersonales.Controls.Add(textBox2);
+            gbxDatosPersonales.Controls.Add(txtPrimerNombre);
             gbxDatosPersonales.Controls.Add(label5);
-            gbxDatosPersonales.Controls.Add(textBox1);
+            gbxDatosPersonales.Controls.Add(txtCedula);
             gbxDatosPersonales.Controls.Add(label2);
             gbxDatosPersonales.Location = new Point(34, 56);
             gbxDatosPersonales.Name = "gbxDatosPersonales";
@@ -224,12 +234,36 @@
             gbxDatosPersonales.TabStop = false;
             gbxDatosPersonales.Text = "Datos Personales";
             // 
-            // textBox15
+            // btnCancelarPer
             // 
-            textBox15.Location = new Point(437, 159);
-            textBox15.Name = "textBox15";
-            textBox15.Size = new Size(184, 27);
-            textBox15.TabIndex = 128;
+            btnCancelarPer.Image = Properties.Resources.delete3;
+            btnCancelarPer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelarPer.Location = new Point(459, 368);
+            btnCancelarPer.Name = "btnCancelarPer";
+            btnCancelarPer.Size = new Size(149, 37);
+            btnCancelarPer.TabIndex = 130;
+            btnCancelarPer.Text = "Cancelar";
+            btnCancelarPer.UseVisualStyleBackColor = true;
+            // 
+            // btnConfirmarPer
+            // 
+            btnConfirmarPer.Image = Properties.Resources.pen;
+            btnConfirmarPer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnConfirmarPer.Location = new Point(304, 368);
+            btnConfirmarPer.Name = "btnConfirmarPer";
+            btnConfirmarPer.Size = new Size(149, 37);
+            btnConfirmarPer.TabIndex = 129;
+            btnConfirmarPer.Text = "Confirmar";
+            btnConfirmarPer.UseVisualStyleBackColor = true;
+            btnConfirmarPer.Click += btnConfirmarPer_Click;
+            // 
+            // txtSegApe
+            // 
+            txtSegApe.Enabled = false;
+            txtSegApe.Location = new Point(437, 159);
+            txtSegApe.Name = "txtSegApe";
+            txtSegApe.Size = new Size(184, 27);
+            txtSegApe.TabIndex = 128;
             // 
             // label16
             // 
@@ -240,12 +274,13 @@
             label16.TabIndex = 127;
             label16.Text = "Segundo Apellido";
             // 
-            // textBox14
+            // txtPrimApe
             // 
-            textBox14.Location = new Point(232, 163);
-            textBox14.Name = "textBox14";
-            textBox14.Size = new Size(184, 27);
-            textBox14.TabIndex = 126;
+            txtPrimApe.Enabled = false;
+            txtPrimApe.Location = new Point(232, 163);
+            txtPrimApe.Name = "txtPrimApe";
+            txtPrimApe.Size = new Size(184, 27);
+            txtPrimApe.TabIndex = 126;
             // 
             // label15
             // 
@@ -256,12 +291,13 @@
             label15.TabIndex = 125;
             label15.Text = "Primer Apellido";
             // 
-            // textBox13
+            // txtSegNombre
             // 
-            textBox13.Location = new Point(437, 84);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(184, 27);
-            textBox13.TabIndex = 124;
+            txtSegNombre.Enabled = false;
+            txtSegNombre.Location = new Point(437, 84);
+            txtSegNombre.Name = "txtSegNombre";
+            txtSegNombre.Size = new Size(184, 27);
+            txtSegNombre.TabIndex = 124;
             // 
             // label14
             // 
@@ -272,53 +308,61 @@
             label14.TabIndex = 123;
             label14.Text = "Segundo Nombre";
             // 
-            // button1
+            // btnEditarDatosPersonales
             // 
-            button1.Image = Properties.Resources.pen;
-            button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(636, 368);
-            button1.Name = "button1";
-            button1.Size = new Size(216, 42);
-            button1.TabIndex = 122;
-            button1.Text = "Editar Datos Personales";
-            button1.UseVisualStyleBackColor = true;
+            btnEditarDatosPersonales.Image = Properties.Resources.pen;
+            btnEditarDatosPersonales.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEditarDatosPersonales.Location = new Point(636, 368);
+            btnEditarDatosPersonales.Name = "btnEditarDatosPersonales";
+            btnEditarDatosPersonales.Size = new Size(216, 42);
+            btnEditarDatosPersonales.TabIndex = 122;
+            btnEditarDatosPersonales.Text = "Editar Datos Personales";
+            btnEditarDatosPersonales.UseVisualStyleBackColor = true;
+            btnEditarDatosPersonales.Click += btnEditarDatosPersonales_Click;
             // 
-            // dateTimePicker2
+            // dtpFechaNacimiento
             // 
-            dateTimePicker2.Location = new Point(437, 243);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(192, 27);
-            dateTimePicker2.TabIndex = 121;
+            dtpFechaNacimiento.Enabled = false;
+            dtpFechaNacimiento.Format = DateTimePickerFormat.Short;
+            dtpFechaNacimiento.Location = new Point(437, 243);
+            dtpFechaNacimiento.Name = "dtpFechaNacimiento";
+            dtpFechaNacimiento.Size = new Size(192, 27);
+            dtpFechaNacimiento.TabIndex = 121;
             // 
-            // textBox5
+            // txtDireccion
             // 
-            textBox5.Location = new Point(21, 154);
-            textBox5.Multiline = true;
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(184, 196);
-            textBox5.TabIndex = 120;
+            txtDireccion.Enabled = false;
+            txtDireccion.Location = new Point(21, 154);
+            txtDireccion.Multiline = true;
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(184, 196);
+            txtDireccion.TabIndex = 120;
             // 
-            // comboBox1
+            // cbxEstadoCivil
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(232, 322);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(126, 28);
-            comboBox1.TabIndex = 119;
+            cbxEstadoCivil.Enabled = false;
+            cbxEstadoCivil.FormattingEnabled = true;
+            cbxEstadoCivil.Items.AddRange(new object[] { "SOLTERO", "CASADO", "DIVORCIADO", "VIUDO" });
+            cbxEstadoCivil.Location = new Point(232, 322);
+            cbxEstadoCivil.Name = "cbxEstadoCivil";
+            cbxEstadoCivil.Size = new Size(184, 28);
+            cbxEstadoCivil.TabIndex = 119;
             // 
-            // textBox4
+            // txtTelefono
             // 
-            textBox4.Location = new Point(232, 243);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(185, 27);
-            textBox4.TabIndex = 118;
+            txtTelefono.Enabled = false;
+            txtTelefono.Location = new Point(232, 243);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(185, 27);
+            txtTelefono.TabIndex = 118;
             // 
-            // textBox3
+            // txtCodigoGenerado
             // 
-            textBox3.Location = new Point(400, 0);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(244, 27);
-            textBox3.TabIndex = 117;
+            txtCodigoGenerado.Enabled = false;
+            txtCodigoGenerado.Location = new Point(599, 0);
+            txtCodigoGenerado.Name = "txtCodigoGenerado";
+            txtCodigoGenerado.Size = new Size(244, 27);
+            txtCodigoGenerado.TabIndex = 117;
             // 
             // label9
             // 
@@ -356,12 +400,13 @@
             label6.TabIndex = 113;
             label6.Text = "Teléfono";
             // 
-            // textBox2
+            // txtPrimerNombre
             // 
-            textBox2.Location = new Point(232, 84);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(184, 27);
-            textBox2.TabIndex = 112;
+            txtPrimerNombre.Enabled = false;
+            txtPrimerNombre.Location = new Point(232, 84);
+            txtPrimerNombre.Name = "txtPrimerNombre";
+            txtPrimerNombre.Size = new Size(184, 27);
+            txtPrimerNombre.TabIndex = 112;
             // 
             // label5
             // 
@@ -372,155 +417,104 @@
             label5.TabIndex = 111;
             label5.Text = "Estado Civil";
             // 
-            // textBox1
+            // txtCedula
             // 
-            textBox1.Location = new Point(21, 84);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(184, 27);
-            textBox1.TabIndex = 110;
-            // 
-            // panel1
-            // 
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(gbxPeticionesBtn);
-            panel1.Controls.Add(gbxPeticiones);
-            panel1.Controls.Add(gbxDatosPersonales);
-            panel1.Location = new Point(-12, 236);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(933, 511);
-            panel1.TabIndex = 113;
-            // 
-            // gbxPeticionesBtn
-            // 
-            gbxPeticionesBtn.Controls.Add(btnVisualizarRegistro);
-            gbxPeticionesBtn.Controls.Add(btnAgregarRegistro);
-            gbxPeticionesBtn.Controls.Add(btnEliminarUsuario);
-            gbxPeticionesBtn.Controls.Add(btnActualizar);
-            gbxPeticionesBtn.Location = new Point(39, -4);
-            gbxPeticionesBtn.Name = "gbxPeticionesBtn";
-            gbxPeticionesBtn.Size = new Size(307, 92);
-            gbxPeticionesBtn.TabIndex = 120;
-            gbxPeticionesBtn.TabStop = false;
-            // 
-            // btnVisualizarRegistro
-            // 
-            btnVisualizarRegistro.Image = Properties.Resources.file__1_;
-            btnVisualizarRegistro.Location = new Point(75, 17);
-            btnVisualizarRegistro.Name = "btnVisualizarRegistro";
-            btnVisualizarRegistro.Size = new Size(72, 72);
-            btnVisualizarRegistro.TabIndex = 131;
-            btnVisualizarRegistro.UseVisualStyleBackColor = true;
-            btnVisualizarRegistro.Click += btnVisualizarRegistro_Click;
-            // 
-            // btnAgregarRegistro
-            // 
-            btnAgregarRegistro.Image = Properties.Resources.plus;
-            btnAgregarRegistro.Location = new Point(1, 15);
-            btnAgregarRegistro.Name = "btnAgregarRegistro";
-            btnAgregarRegistro.Size = new Size(72, 72);
-            btnAgregarRegistro.TabIndex = 128;
-            btnAgregarRegistro.UseVisualStyleBackColor = true;
-            btnAgregarRegistro.Click += btnAgregarRegistro_Click;
-            // 
-            // btnEliminarUsuario
-            // 
-            btnEliminarUsuario.Image = Properties.Resources.bin;
-            btnEliminarUsuario.Location = new Point(150, 16);
-            btnEliminarUsuario.Name = "btnEliminarUsuario";
-            btnEliminarUsuario.Size = new Size(72, 72);
-            btnEliminarUsuario.TabIndex = 129;
-            btnEliminarUsuario.UseVisualStyleBackColor = true;
-            btnEliminarUsuario.Click += btnEliminarUsuario_Click;
-            // 
-            // btnActualizar
-            // 
-            btnActualizar.Image = Properties.Resources.pen__1_;
-            btnActualizar.Location = new Point(226, 16);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(72, 72);
-            btnActualizar.TabIndex = 130;
-            btnActualizar.UseVisualStyleBackColor = true;
-            btnActualizar.Click += btnActualizar_Click;
-            // 
-            // gbxPeticiones
-            // 
-            gbxPeticiones.Controls.Add(dgvPeticiones);
-            gbxPeticiones.Location = new Point(35, 101);
-            gbxPeticiones.Name = "gbxPeticiones";
-            gbxPeticiones.Size = new Size(865, 372);
-            gbxPeticiones.TabIndex = 119;
-            gbxPeticiones.TabStop = false;
-            gbxPeticiones.Text = "Peticiones";
-            // 
-            // dgvPeticiones
-            // 
-            dgvPeticiones.AllowUserToAddRows = false;
-            dgvPeticiones.AllowUserToDeleteRows = false;
-            dgvPeticiones.AllowUserToOrderColumns = true;
-            dgvPeticiones.AllowUserToResizeColumns = false;
-            dgvPeticiones.AllowUserToResizeRows = false;
-            dgvPeticiones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPeticiones.BackgroundColor = SystemColors.Window;
-            dgvPeticiones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPeticiones.Location = new Point(16, 35);
-            dgvPeticiones.Name = "dgvPeticiones";
-            dgvPeticiones.ReadOnly = true;
-            dgvPeticiones.RowHeadersWidth = 51;
-            dgvPeticiones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPeticiones.Size = new Size(836, 316);
-            dgvPeticiones.TabIndex = 69;
-            dgvPeticiones.CellClick += dgvPeticiones_CellClick;
+            txtCedula.Enabled = false;
+            txtCedula.Location = new Point(21, 84);
+            txtCedula.Name = "txtCedula";
+            txtCedula.Size = new Size(184, 27);
+            txtCedula.TabIndex = 110;
             // 
             // gbxDatosUsuarios
             // 
-            gbxDatosUsuarios.Controls.Add(button2);
-            gbxDatosUsuarios.Controls.Add(groupBox3);
-            gbxDatosUsuarios.Controls.Add(textBox12);
+            gbxDatosUsuarios.Controls.Add(btnCancelarUs);
+            gbxDatosUsuarios.Controls.Add(btnConfirmarUs);
+            gbxDatosUsuarios.Controls.Add(btnEditarUsuario);
+            gbxDatosUsuarios.Controls.Add(gbxDias);
+            gbxDatosUsuarios.Controls.Add(txtHoras);
             gbxDatosUsuarios.Controls.Add(label13);
-            gbxDatosUsuarios.Controls.Add(textBox11);
+            gbxDatosUsuarios.Controls.Add(txtSalario);
             gbxDatosUsuarios.Controls.Add(label12);
-            gbxDatosUsuarios.Controls.Add(textBox10);
+            gbxDatosUsuarios.Controls.Add(txtPuesto);
             gbxDatosUsuarios.Controls.Add(label11);
-            gbxDatosUsuarios.Controls.Add(textBox9);
+            gbxDatosUsuarios.Controls.Add(txtCodigoGeneradoUser);
             gbxDatosUsuarios.Controls.Add(label10);
-            gbxDatosUsuarios.Controls.Add(textBox8);
-            gbxDatosUsuarios.Controls.Add(textBox6);
+            gbxDatosUsuarios.Controls.Add(txtClave);
+            gbxDatosUsuarios.Controls.Add(txtRol);
             gbxDatosUsuarios.Controls.Add(label3);
             gbxDatosUsuarios.Controls.Add(label4);
-            gbxDatosUsuarios.Controls.Add(textBox7);
-            gbxDatosUsuarios.Location = new Point(1, 4);
+            gbxDatosUsuarios.Controls.Add(txtUser);
+            gbxDatosUsuarios.Controls.Add(seeIcon);
+            gbxDatosUsuarios.Controls.Add(seeCloseIcon);
+            gbxDatosUsuarios.Location = new Point(35, 56);
             gbxDatosUsuarios.Name = "gbxDatosUsuarios";
             gbxDatosUsuarios.Size = new Size(865, 416);
             gbxDatosUsuarios.TabIndex = 113;
             gbxDatosUsuarios.TabStop = false;
             gbxDatosUsuarios.Text = "Datos de Usuario";
             // 
-            // button2
+            // btnCancelarUs
             // 
-            button2.Image = Properties.Resources.pen;
-            button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(637, 354);
-            button2.Name = "button2";
-            button2.Size = new Size(216, 42);
-            button2.TabIndex = 135;
-            button2.Text = "Editar Datos de Usuario";
-            button2.UseVisualStyleBackColor = true;
+            btnCancelarUs.Image = Properties.Resources.delete3;
+            btnCancelarUs.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelarUs.Location = new Point(223, 359);
+            btnCancelarUs.Name = "btnCancelarUs";
+            btnCancelarUs.Size = new Size(149, 37);
+            btnCancelarUs.TabIndex = 137;
+            btnCancelarUs.Text = "Cancelar";
+            btnCancelarUs.UseVisualStyleBackColor = true;
+            btnCancelarUs.Click += btnCancelarUs_Click;
             // 
-            // groupBox3
+            // btnConfirmarUs
             // 
-            groupBox3.Controls.Add(chbxDomingo);
-            groupBox3.Controls.Add(chbxSabado);
-            groupBox3.Controls.Add(chbxViernes);
-            groupBox3.Controls.Add(chbxJueves);
-            groupBox3.Controls.Add(chbxMiercoles);
-            groupBox3.Controls.Add(chbxMartes);
-            groupBox3.Controls.Add(chbxLunes);
-            groupBox3.Location = new Point(223, 181);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(229, 161);
-            groupBox3.TabIndex = 134;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Horario";
+            btnConfirmarUs.Image = Properties.Resources.pen;
+            btnConfirmarUs.ImageAlign = ContentAlignment.MiddleLeft;
+            btnConfirmarUs.Location = new Point(68, 359);
+            btnConfirmarUs.Name = "btnConfirmarUs";
+            btnConfirmarUs.Size = new Size(149, 37);
+            btnConfirmarUs.TabIndex = 136;
+            btnConfirmarUs.Text = "Confirmar";
+            btnConfirmarUs.UseVisualStyleBackColor = true;
+            btnConfirmarUs.Click += btnConfirmarUs_Click;
+            // 
+            // btnEditarUsuario
+            // 
+            btnEditarUsuario.Image = Properties.Resources.pen;
+            btnEditarUsuario.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEditarUsuario.Location = new Point(637, 354);
+            btnEditarUsuario.Name = "btnEditarUsuario";
+            btnEditarUsuario.Size = new Size(216, 42);
+            btnEditarUsuario.TabIndex = 135;
+            btnEditarUsuario.Text = "Editar Datos de Usuario";
+            btnEditarUsuario.UseVisualStyleBackColor = true;
+            btnEditarUsuario.Click += btnEditarUsuario_Click_1;
+            // 
+            // gbxDias
+            // 
+            gbxDias.Controls.Add(txtDiasLaborales);
+            gbxDias.Controls.Add(chbxDomingo);
+            gbxDias.Controls.Add(chbxSabado);
+            gbxDias.Controls.Add(chbxViernes);
+            gbxDias.Controls.Add(chbxJueves);
+            gbxDias.Controls.Add(chbxMiercoles);
+            gbxDias.Controls.Add(chbxMartes);
+            gbxDias.Controls.Add(chbxLunes);
+            gbxDias.Enabled = false;
+            gbxDias.Location = new Point(223, 181);
+            gbxDias.Name = "gbxDias";
+            gbxDias.Size = new Size(229, 161);
+            gbxDias.TabIndex = 134;
+            gbxDias.TabStop = false;
+            gbxDias.Text = "Horario";
+            // 
+            // txtDiasLaborales
+            // 
+            txtDiasLaborales.Enabled = false;
+            txtDiasLaborales.Location = new Point(80, -7);
+            txtDiasLaborales.Multiline = true;
+            txtDiasLaborales.Name = "txtDiasLaborales";
+            txtDiasLaborales.Size = new Size(140, 27);
+            txtDiasLaborales.TabIndex = 138;
             // 
             // chbxDomingo
             // 
@@ -592,13 +586,13 @@
             chbxLunes.Text = "Lunes";
             chbxLunes.UseVisualStyleBackColor = true;
             // 
-            // textBox12
+            // txtHoras
             // 
-            textBox12.Location = new Point(16, 274);
-            textBox12.Multiline = true;
-            textBox12.Name = "textBox12";
-            textBox12.Size = new Size(184, 27);
-            textBox12.TabIndex = 133;
+            txtHoras.Enabled = false;
+            txtHoras.Location = new Point(16, 274);
+            txtHoras.Name = "txtHoras";
+            txtHoras.Size = new Size(184, 27);
+            txtHoras.TabIndex = 133;
             // 
             // label13
             // 
@@ -609,13 +603,13 @@
             label13.TabIndex = 132;
             label13.Text = "Horas Laborales";
             // 
-            // textBox11
+            // txtSalario
             // 
-            textBox11.Location = new Point(16, 204);
-            textBox11.Multiline = true;
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(184, 27);
-            textBox11.TabIndex = 131;
+            txtSalario.Enabled = false;
+            txtSalario.Location = new Point(16, 204);
+            txtSalario.Name = "txtSalario";
+            txtSalario.Size = new Size(184, 27);
+            txtSalario.TabIndex = 131;
             // 
             // label12
             // 
@@ -626,13 +620,14 @@
             label12.TabIndex = 130;
             label12.Text = "Salario";
             // 
-            // textBox10
+            // txtPuesto
             // 
-            textBox10.Location = new Point(223, 132);
-            textBox10.Multiline = true;
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(184, 27);
-            textBox10.TabIndex = 129;
+            txtPuesto.Enabled = false;
+            txtPuesto.Location = new Point(223, 132);
+            txtPuesto.Multiline = true;
+            txtPuesto.Name = "txtPuesto";
+            txtPuesto.Size = new Size(184, 27);
+            txtPuesto.TabIndex = 129;
             // 
             // label11
             // 
@@ -643,13 +638,14 @@
             label11.TabIndex = 128;
             label11.Text = "Puesto";
             // 
-            // textBox9
+            // txtCodigoGeneradoUser
             // 
-            textBox9.Location = new Point(502, 0);
-            textBox9.Multiline = true;
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(294, 27);
-            textBox9.TabIndex = 127;
+            txtCodigoGeneradoUser.Enabled = false;
+            txtCodigoGeneradoUser.Location = new Point(502, 0);
+            txtCodigoGeneradoUser.Multiline = true;
+            txtCodigoGeneradoUser.Name = "txtCodigoGeneradoUser";
+            txtCodigoGeneradoUser.Size = new Size(294, 27);
+            txtCodigoGeneradoUser.TabIndex = 127;
             // 
             // label10
             // 
@@ -660,20 +656,22 @@
             label10.TabIndex = 126;
             label10.Text = "Clave de Usuario";
             // 
-            // textBox8
+            // txtClave
             // 
-            textBox8.Location = new Point(223, 62);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(184, 27);
-            textBox8.TabIndex = 125;
+            txtClave.Enabled = false;
+            txtClave.Location = new Point(223, 62);
+            txtClave.Name = "txtClave";
+            txtClave.PasswordChar = '*';
+            txtClave.Size = new Size(184, 27);
+            txtClave.TabIndex = 125;
             // 
-            // textBox6
+            // txtRol
             // 
-            textBox6.Location = new Point(16, 132);
-            textBox6.Multiline = true;
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(184, 27);
-            textBox6.TabIndex = 124;
+            txtRol.Enabled = false;
+            txtRol.Location = new Point(16, 132);
+            txtRol.Name = "txtRol";
+            txtRol.Size = new Size(184, 27);
+            txtRol.TabIndex = 124;
             // 
             // label3
             // 
@@ -693,12 +691,130 @@
             label4.TabIndex = 122;
             label4.Text = "Rol";
             // 
-            // textBox7
+            // txtUser
             // 
-            textBox7.Location = new Point(16, 62);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(184, 27);
-            textBox7.TabIndex = 121;
+            txtUser.Enabled = false;
+            txtUser.Location = new Point(16, 62);
+            txtUser.Name = "txtUser";
+            txtUser.Size = new Size(184, 27);
+            txtUser.TabIndex = 121;
+            // 
+            // seeCloseIcon
+            // 
+            seeCloseIcon.BackColor = Color.White;
+            seeCloseIcon.Image = Properties.Resources.view_see_hide_eye_close_search_look_icon_232697;
+            seeCloseIcon.Location = new Point(413, 62);
+            seeCloseIcon.Name = "seeCloseIcon";
+            seeCloseIcon.Size = new Size(30, 27);
+            seeCloseIcon.SizeMode = PictureBoxSizeMode.Zoom;
+            seeCloseIcon.TabIndex = 138;
+            seeCloseIcon.TabStop = false;
+            seeCloseIcon.Click += seeCloseIcon_Click;
+            // 
+            // seeIcon
+            // 
+            seeIcon.BackColor = Color.White;
+            seeIcon.Image = Properties.Resources._5050_512;
+            seeIcon.Location = new Point(413, 61);
+            seeIcon.Name = "seeIcon";
+            seeIcon.Size = new Size(29, 28);
+            seeIcon.SizeMode = PictureBoxSizeMode.Zoom;
+            seeIcon.TabIndex = 139;
+            seeIcon.TabStop = false;
+            seeIcon.Click += seeIcon_Click;
+            // 
+            // panel1
+            // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(gbxPeticionesBtn);
+            panel1.Controls.Add(gbxDatosUsuarios);
+            panel1.Controls.Add(gbxDatosPersonales);
+            panel1.Controls.Add(gbxPeticiones);
+            panel1.Location = new Point(-12, 236);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(933, 511);
+            panel1.TabIndex = 113;
+            // 
+            // gbxPeticionesBtn
+            // 
+            gbxPeticionesBtn.Controls.Add(btnVisualizarRegistro);
+            gbxPeticionesBtn.Controls.Add(btnAgregarRegistro);
+            gbxPeticionesBtn.Controls.Add(btnEliminarUsuario);
+            gbxPeticionesBtn.Controls.Add(btnActualizar);
+            gbxPeticionesBtn.Location = new Point(39, -4);
+            gbxPeticionesBtn.Name = "gbxPeticionesBtn";
+            gbxPeticionesBtn.Size = new Size(307, 92);
+            gbxPeticionesBtn.TabIndex = 120;
+            gbxPeticionesBtn.TabStop = false;
+            // 
+            // btnVisualizarRegistro
+            // 
+            btnVisualizarRegistro.Image = Properties.Resources.file__1_;
+            btnVisualizarRegistro.Location = new Point(75, 17);
+            btnVisualizarRegistro.Name = "btnVisualizarRegistro";
+            btnVisualizarRegistro.Size = new Size(72, 72);
+            btnVisualizarRegistro.TabIndex = 131;
+            btnVisualizarRegistro.UseVisualStyleBackColor = true;
+            btnVisualizarRegistro.Click += btnVisualizarRegistro_Click;
+            // 
+            // btnAgregarRegistro
+            // 
+            btnAgregarRegistro.Image = Properties.Resources.plus;
+            btnAgregarRegistro.Location = new Point(1, 15);
+            btnAgregarRegistro.Name = "btnAgregarRegistro";
+            btnAgregarRegistro.Size = new Size(72, 72);
+            btnAgregarRegistro.TabIndex = 128;
+            btnAgregarRegistro.UseVisualStyleBackColor = true;
+            btnAgregarRegistro.Click += btnAgregarRegistro_Click;
+            // 
+            // btnEliminarUsuario
+            // 
+            btnEliminarUsuario.Image = Properties.Resources.bin;
+            btnEliminarUsuario.Location = new Point(150, 16);
+            btnEliminarUsuario.Name = "btnEliminarUsuario";
+            btnEliminarUsuario.Size = new Size(72, 72);
+            btnEliminarUsuario.TabIndex = 129;
+            btnEliminarUsuario.UseVisualStyleBackColor = true;
+            btnEliminarUsuario.Click += btnEliminarUsuario_Click;
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.Image = Properties.Resources.pen__1_;
+            btnActualizar.Location = new Point(226, 16);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(72, 72);
+            btnActualizar.TabIndex = 130;
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
+            // 
+            // gbxPeticiones
+            // 
+            gbxPeticiones.Controls.Add(dgvPeticiones);
+            gbxPeticiones.Location = new Point(35, 95);
+            gbxPeticiones.Name = "gbxPeticiones";
+            gbxPeticiones.Size = new Size(865, 372);
+            gbxPeticiones.TabIndex = 119;
+            gbxPeticiones.TabStop = false;
+            gbxPeticiones.Text = "Peticiones";
+            // 
+            // dgvPeticiones
+            // 
+            dgvPeticiones.AllowUserToAddRows = false;
+            dgvPeticiones.AllowUserToDeleteRows = false;
+            dgvPeticiones.AllowUserToOrderColumns = true;
+            dgvPeticiones.AllowUserToResizeColumns = false;
+            dgvPeticiones.AllowUserToResizeRows = false;
+            dgvPeticiones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPeticiones.BackgroundColor = SystemColors.Window;
+            dgvPeticiones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPeticiones.Location = new Point(16, 35);
+            dgvPeticiones.Name = "dgvPeticiones";
+            dgvPeticiones.ReadOnly = true;
+            dgvPeticiones.RowHeadersWidth = 51;
+            dgvPeticiones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPeticiones.Size = new Size(836, 316);
+            dgvPeticiones.TabIndex = 69;
+            dgvPeticiones.CellClick += dgvPeticiones_CellClick;
             // 
             // btnDatosPersonales
             // 
@@ -742,7 +858,7 @@
             // 
             // rectanglePanel3
             // 
-            rectanglePanel3.Location = new Point(252, 163);
+            rectanglePanel3.Location = new Point(727, 228);
             rectanglePanel3.Name = "rectanglePanel3";
             rectanglePanel3.Size = new Size(150, 29);
             rectanglePanel3.TabIndex = 118;
@@ -784,14 +900,16 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             gbxDatosPersonales.ResumeLayout(false);
             gbxDatosPersonales.PerformLayout();
+            gbxDatosUsuarios.ResumeLayout(false);
+            gbxDatosUsuarios.PerformLayout();
+            gbxDias.ResumeLayout(false);
+            gbxDias.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)seeIcon).EndInit();
             panel1.ResumeLayout(false);
             gbxPeticionesBtn.ResumeLayout(false);
             gbxPeticiones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvPeticiones).EndInit();
-            gbxDatosUsuarios.ResumeLayout(false);
-            gbxDatosUsuarios.PerformLayout();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -807,35 +925,35 @@
         private Label lblBreadCrumbUser;
         private Label label2;
         private GroupBox gbxDatosPersonales;
-        private TextBox textBox1;
+        private TextBox txtCedula;
         private Label label9;
         private Label label8;
         private Label label7;
         private Label label6;
-        private TextBox textBox2;
+        private TextBox txtPrimerNombre;
         private Label label5;
-        private DateTimePicker dateTimePicker2;
-        private TextBox textBox5;
-        private ComboBox comboBox1;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private Button button1;
+        private DateTimePicker dtpFechaNacimiento;
+        private TextBox txtDireccion;
+        private ComboBox cbxEstadoCivil;
+        private TextBox txtTelefono;
+        private TextBox txtCodigoGenerado;
+        private Button btnEditarDatosPersonales;
         private Panel panel1;
         private GroupBox gbxDatosUsuarios;
-        private TextBox textBox11;
+        private TextBox txtSalario;
         private Label label12;
-        private TextBox textBox10;
+        private TextBox txtPuesto;
         private Label label11;
-        private TextBox textBox9;
+        private TextBox txtCodigoGeneradoUser;
         private Label label10;
-        private TextBox textBox8;
-        private TextBox textBox6;
+        private TextBox txtClave;
+        private TextBox txtRol;
         private Label label3;
         private Label label4;
-        private TextBox textBox7;
-        private TextBox textBox12;
+        private TextBox txtUser;
+        private TextBox txtHoras;
         private Label label13;
-        public GroupBox groupBox3;
+        public GroupBox gbxDias;
         public CheckBox chbxDomingo;
         public CheckBox chbxSabado;
         public CheckBox chbxViernes;
@@ -847,11 +965,11 @@
         private Button btnDatosUsuarios;
         private Panel rectanglePanel1;
         private Panel rectanglePanel2;
-        private TextBox textBox15;
+        private TextBox txtSegApe;
         private Label label16;
-        private TextBox textBox14;
+        private TextBox txtPrimApe;
         private Label label15;
-        private TextBox textBox13;
+        private TextBox txtSegNombre;
         private Label label14;
         private Panel rectanglePanel3;
         private Button btnPeticionesUser;
@@ -862,6 +980,13 @@
         public Button btnActualizar;
         public Button btnEliminarUsuario;
         private GroupBox gbxPeticionesBtn;
-        private Button button2;
+        private Button btnEditarUsuario;
+        private Button btnCancelarPer;
+        private Button btnConfirmarPer;
+        private Button btnCancelarUs;
+        private Button btnConfirmarUs;
+        private TextBox txtDiasLaborales;
+        private PictureBox seeCloseIcon;
+        private PictureBox seeIcon;
     }
 }

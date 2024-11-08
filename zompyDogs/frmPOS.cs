@@ -47,7 +47,8 @@ namespace zompyDogs
             InitializeComponent();
             this.usuarioIDActual = usuarioIDActual;
             this.rolIDActual = rolIDActual;
-            MessageBox.Show("idEmpleado: " + usuarioIDActual + "RolIdActual: " + rolIDActual);
+           // MessageBox.Show("idEmpleado: " + usuarioIDActual + "RolIdActual: " + rolIDActual);
+            
             if (rolIDActual > 1)
             {
                 btnHistorial.Enabled = false;
@@ -193,8 +194,8 @@ namespace zompyDogs
                     if (reader["Imagen"] != DBNull.Value)
                     {
                         string imageFileName = reader["Imagen"].ToString();
-                        string projectPath = Directory.GetParent(Application.StartupPath).Parent.Parent.Parent.FullName;
-                        string imagePath = Path.Combine(projectPath, "Imagenes", imageFileName);
+                        string projectPath = "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\Imagenes";
+                        string imagePath = Path.Combine(projectPath, "Platillos", imageFileName);
 
                         if (File.Exists(imagePath))
                         {
@@ -408,7 +409,7 @@ namespace zompyDogs
 
                     transaction.Commit();
                     VerFacturaFinalizada();
-                    MessageBox.Show($"Pedido: {codigoPedido} guardado exitosamente.");
+                    //MessageBox.Show($"Pedido: {codigoPedido} guardado exitosamente.");
 
                     CargarMenu("Entrada");
                     _pedidosDAO.platillosLista.Clear();

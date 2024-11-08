@@ -33,17 +33,14 @@
             btnAjustesCuenta = new Button();
             lblCerrarSession = new Label();
             lblNombreSideBar = new Label();
-            pictureBox3 = new PictureBox();
             btnMenu = new Button();
             btnPOS = new Button();
             btnStaff = new Button();
-            btnProductos = new Button();
             btnPeticiones = new Button();
             pictureBox2 = new PictureBox();
             btnInicio = new Button();
             panelContenedor = new Panel();
             sidebarMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
@@ -53,11 +50,9 @@
             sidebarMenu.Controls.Add(btnAjustesCuenta);
             sidebarMenu.Controls.Add(lblCerrarSession);
             sidebarMenu.Controls.Add(lblNombreSideBar);
-            sidebarMenu.Controls.Add(pictureBox3);
             sidebarMenu.Controls.Add(btnMenu);
             sidebarMenu.Controls.Add(btnPOS);
             sidebarMenu.Controls.Add(btnStaff);
-            sidebarMenu.Controls.Add(btnProductos);
             sidebarMenu.Controls.Add(btnPeticiones);
             sidebarMenu.Controls.Add(pictureBox2);
             sidebarMenu.Controls.Add(btnInicio);
@@ -89,7 +84,7 @@
             lblCerrarSession.Cursor = Cursors.Hand;
             lblCerrarSession.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCerrarSession.ForeColor = SystemColors.ButtonFace;
-            lblCerrarSession.Location = new Point(79, 726);
+            lblCerrarSession.Location = new Point(33, 731);
             lblCerrarSession.Name = "lblCerrarSession";
             lblCerrarSession.Size = new Size(93, 17);
             lblCerrarSession.TabIndex = 13;
@@ -103,21 +98,11 @@
             lblNombreSideBar.AutoSize = true;
             lblNombreSideBar.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNombreSideBar.ForeColor = SystemColors.ButtonFace;
-            lblNombreSideBar.Location = new Point(78, 705);
+            lblNombreSideBar.Location = new Point(32, 710);
             lblNombreSideBar.Name = "lblNombreSideBar";
             lblNombreSideBar.Size = new Size(25, 23);
             lblNombreSideBar.TabIndex = 9;
             lblNombreSideBar.Text = "...";
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(27, 705);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(39, 37);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 9;
-            pictureBox3.TabStop = false;
             // 
             // btnMenu
             // 
@@ -127,7 +112,7 @@
             btnMenu.ForeColor = SystemColors.ButtonFace;
             btnMenu.Image = (Image)resources.GetObject("btnMenu.Image");
             btnMenu.ImageAlign = ContentAlignment.MiddleLeft;
-            btnMenu.Location = new Point(48, 500);
+            btnMenu.Location = new Point(46, 443);
             btnMenu.Name = "btnMenu";
             btnMenu.Size = new Size(167, 51);
             btnMenu.TabIndex = 12;
@@ -143,7 +128,7 @@
             btnPOS.ForeColor = SystemColors.ButtonFace;
             btnPOS.Image = Properties.Resources.invoice;
             btnPOS.ImageAlign = ContentAlignment.MiddleLeft;
-            btnPOS.Location = new Point(48, 443);
+            btnPOS.Location = new Point(46, 386);
             btnPOS.Name = "btnPOS";
             btnPOS.Size = new Size(167, 51);
             btnPOS.TabIndex = 11;
@@ -159,29 +144,13 @@
             btnStaff.ForeColor = SystemColors.ButtonFace;
             btnStaff.Image = (Image)resources.GetObject("btnStaff.Image");
             btnStaff.ImageAlign = ContentAlignment.MiddleLeft;
-            btnStaff.Location = new Point(48, 386);
+            btnStaff.Location = new Point(46, 329);
             btnStaff.Name = "btnStaff";
             btnStaff.Size = new Size(167, 51);
             btnStaff.TabIndex = 10;
             btnStaff.Text = "Staff";
             btnStaff.UseVisualStyleBackColor = false;
             btnStaff.Click += btnStaff_Click;
-            // 
-            // btnProductos
-            // 
-            btnProductos.BackColor = Color.Transparent;
-            btnProductos.FlatAppearance.BorderSize = 0;
-            btnProductos.FlatStyle = FlatStyle.Flat;
-            btnProductos.ForeColor = SystemColors.ButtonFace;
-            btnProductos.Image = (Image)resources.GetObject("btnProductos.Image");
-            btnProductos.ImageAlign = ContentAlignment.MiddleLeft;
-            btnProductos.Location = new Point(48, 329);
-            btnProductos.Name = "btnProductos";
-            btnProductos.Size = new Size(167, 51);
-            btnProductos.TabIndex = 9;
-            btnProductos.Text = "Inventario";
-            btnProductos.UseVisualStyleBackColor = false;
-            btnProductos.Click += btnProductos_Click;
             // 
             // btnPeticiones
             // 
@@ -248,7 +217,6 @@
             Load += BienvenidaAdmin_Load;
             sidebarMenu.ResumeLayout(false);
             sidebarMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
@@ -261,7 +229,6 @@
         private Button btnMenu;
         private Button btnPOS;
         private Button btnStaff;
-        private Button btnProductos;
         private Button btnPeticiones;
         private Label lblCerrarSession;
         private PictureBox pictureBox3;

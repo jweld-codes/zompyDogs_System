@@ -42,7 +42,7 @@
             lblTotalPedidas = new Label();
             label6 = new Label();
             panel1 = new Panel();
-            label2 = new Label();
+            lblTotalPedidosSem = new Label();
             label3 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -109,12 +109,14 @@
             // 
             dtgHistorialPedidos.AllowUserToAddRows = false;
             dtgHistorialPedidos.AllowUserToDeleteRows = false;
+            dtgHistorialPedidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtgHistorialPedidos.BackgroundColor = Color.FromArgb(239, 239, 239);
             dtgHistorialPedidos.BorderStyle = BorderStyle.Fixed3D;
             dtgHistorialPedidos.ColumnHeadersHeight = 42;
             dtgHistorialPedidos.Location = new Point(33, 491);
             dtgHistorialPedidos.Name = "dtgHistorialPedidos";
             dtgHistorialPedidos.RowHeadersWidth = 51;
+            dtgHistorialPedidos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dtgHistorialPedidos.Size = new Size(625, 224);
             dtgHistorialPedidos.TabIndex = 33;
             // 
@@ -195,22 +197,22 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.Fixed3D;
-            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lblTotalPedidosSem);
             panel1.Controls.Add(label3);
             panel1.Location = new Point(324, 327);
             panel1.Name = "panel1";
             panel1.Size = new Size(285, 118);
             panel1.TabIndex = 119;
             // 
-            // label2
+            // lblTotalPedidosSem
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(28, 42);
-            label2.Name = "label2";
-            label2.Size = new Size(52, 41);
-            label2.TabIndex = 17;
-            label2.Text = "00";
+            lblTotalPedidosSem.AutoSize = true;
+            lblTotalPedidosSem.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalPedidosSem.Location = new Point(28, 42);
+            lblTotalPedidosSem.Name = "lblTotalPedidosSem";
+            lblTotalPedidosSem.Size = new Size(52, 41);
+            lblTotalPedidosSem.TabIndex = 17;
+            lblTotalPedidosSem.Text = "00";
             // 
             // label3
             // 
@@ -268,7 +270,7 @@
         private Label lblTotalPedidas;
         private Label label6;
         private Panel panel1;
-        private Label label2;
+        private Label lblTotalPedidosSem;
         private Label label3;
     }
 }

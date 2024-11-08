@@ -38,24 +38,41 @@ namespace zompyDogs
             InitializeComponent();
             IdEmpleado = idEmpledo;
 
+            dgvPeticionesCompletadas.CellClick += dgvPeticiones_CellClick;
+            dgvPeticionesPendientes.CellClick += dgvPeticionesPendientes_CellClick;
+
             CargarPeticiones();
-            CargarPeticionesPendientes();
-            CargarPeticionesCompletadas();
+            btnActualizar.Enabled = false;
+            btnEliminarUsuario.Enabled = false;
+
         }
         public void CargarPeticiones()
         {
             dgvPeticionesPendientes.DataSource = PeticionesValidaciones.ObtenerPeticionesPendientes();
             dgvPeticionesCompletadas.DataSource = PeticionesValidaciones.ObtenerPeticionesCompletadas();
 
+            dgvPeticionesPendientes.CurrentCell = null;
+            dgvPeticionesCompletadas.CurrentCell = null;
+
+            dgvPeticionesCompletadas.Columns["Codigo"].HeaderText = "Código";
+            dgvPeticionesCompletadas.Columns["Accion"].HeaderText = "Acción";
+            dgvPeticionesCompletadas.Columns["Fecha_De_Envio"].HeaderText = "Fecha de Envío";
+
+            dgvPeticionesPendientes.Columns["Codigo"].HeaderText = "Código";
+            dgvPeticionesPendientes.Columns["Accion"].HeaderText = "Acción";
+            dgvPeticionesPendientes.Columns["Fecha_De_Envio"].HeaderText = "Fecha de Envío";
+
+            dgvPeticionesPendientes.EnableHeadersVisualStyles = false;
+            dgvPeticionesPendientes.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dgvPeticionesPendientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvPeticionesPendientes.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+
+            dgvPeticionesCompletadas.EnableHeadersVisualStyles = false;
+            dgvPeticionesCompletadas.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dgvPeticionesCompletadas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvPeticionesCompletadas.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
         }
-        public void CargarPeticionesPendientes()
-        {
-            dgvPeticionesPendientes.DataSource = PeticionesValidaciones.ObtenerPeticionesPendientes();
-        }
-        public void CargarPeticionesCompletadas()
-        {
-            dgvPeticionesCompletadas.DataSource = PeticionesValidaciones.ObtenerPeticionesCompletadas();
-        }
+
 
         private void btnAgregarRegistro_Click(object sender, EventArgs e)
         {
@@ -69,7 +86,6 @@ namespace zompyDogs
                 DataRow fila = peticionGuardarUser.Rows[0];
 
                 PeticionUsuarioGuardar = fila["Usuario"].ToString();
-                MessageBox.Show("Se encontro el idEmpleado: " + IdEmpleado + " del usuario: " + PeticionUsuarioGuardar);
             }
 
             peticionesRegistro.txtUsuarioName.Text = PeticionUsuarioGuardar;
@@ -77,6 +93,7 @@ namespace zompyDogs
             peticionesRegistro.label3.Hide();
             peticionesRegistro.btnGuardarUser.Text = "GUARDAR";
             peticionesRegistro.btnCancelar.Text = "CANCELAR";
+            peticionesRegistro.txtUsuarioName.Enabled = false;
 
             //metodo para guardar
             peticionesRegistro.btnGuardarUser.Click += (s, args) =>
@@ -98,6 +115,7 @@ namespace zompyDogs
 
                     MessageBox.Show("Petición Registrada con Éxito.");
                     CargarPeticiones();
+                    this.Close();
                 }
                 catch
                 {
@@ -147,6 +165,7 @@ namespace zompyDogs
                 PeticionDescripcionVal = filaSeleccionada.Cells["Peticion"].Value.ToString();
                 PeticionUsuarioVal = filaSeleccionada.Cells["Usuario"].Value.ToString();
                 PeticionEstadoVal = filaSeleccionada.Cells["Estado"].Value.ToString();
+
             }
         }
 
@@ -220,21 +239,6 @@ namespace zompyDogs
 
             peticionView.Show();
         }
-
-
-
-        private void txtBuscarUsuario_TextChanged(object sender, EventArgs e)
-        {
-            string valorBusqueda = txtBuscarUsuario.Text;
-            DataTable resultados = PeticionesValidaciones.BuscarPeticionesPorUsuario(valorBusqueda);
-            dgvPeticionesCompletadas.DataSource = resultados;
-        }
-
-        private void Peticiones_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (PeticionEstadoVal == "Completado")
@@ -273,7 +277,7 @@ namespace zompyDogs
             }
             else
             {
-                var peticionEditar = new PeticionesRegisro(IdEmpleado);
+                /*var peticionEditar = new PeticionesRegisro(IdEmpleado);
                 peticionEditar.lblTituloRegistro.Text = "Editar Petición";
 
                 peticionEditar.txtCodigoGenerado.Text = PeticionCodigoVal;
@@ -316,7 +320,7 @@ namespace zompyDogs
                     {
                         MessageBox.Show("Error al actualizar la petición.");
                     }
-                };
+                };*/
             }
 
         }
@@ -344,6 +348,32 @@ namespace zompyDogs
                 else
                 {
                     MessageBox.Show("Error al eliminar la petición.");
+                }
+            }
+        }
+
+        private void dgvPeticionesPendientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow filaSeleccionada = dgvPeticionesPendientes.Rows[e.RowIndex];
+
+                // Asigna los valores de la petición pendiente
+                PeticionCodigoVal = filaSeleccionada.Cells["Codigo"].Value.ToString();
+                PeticionAccionVal = filaSeleccionada.Cells["Accion"].Value.ToString();
+                PeticionFecha_De_EnvioVal = Convert.ToDateTime(filaSeleccionada.Cells["Fecha_De_Envio"].Value);
+                PeticionDescripcionVal = filaSeleccionada.Cells["Peticion"].Value.ToString();
+                PeticionUsuarioVal = filaSeleccionada.Cells["Usuario"].Value.ToString();
+                PeticionEstadoVal = filaSeleccionada.Cells["Estado"].Value.ToString();
+
+
+                if (PeticionAccionVal == "Recuperación de contraseña")
+                {
+                    btnActualizar.Enabled = true;
+                }
+                else
+                {
+                    btnActualizar.Enabled = false;
                 }
             }
         }

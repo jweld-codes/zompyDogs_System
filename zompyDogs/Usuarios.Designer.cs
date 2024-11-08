@@ -50,7 +50,6 @@
             label1 = new Label();
             btnVisualizarRegistro = new Button();
             btnRefreshDG = new Button();
-            cbxFiltro = new ComboBox();
             button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             groupBox1.SuspendLayout();
@@ -328,20 +327,6 @@
             btnRefreshDG.UseVisualStyleBackColor = true;
             btnRefreshDG.Click += btnRefreshDG_Click;
             // 
-            // cbxFiltro
-            // 
-            cbxFiltro.FormattingEnabled = true;
-            cbxFiltro.Items.AddRange(new object[] { "Activo", "Inactivo" });
-            cbxFiltro.Location = new Point(653, 245);
-            cbxFiltro.Margin = new Padding(3, 3, 6, 3);
-            cbxFiltro.Name = "cbxFiltro";
-            cbxFiltro.RightToLeft = RightToLeft.Yes;
-            cbxFiltro.Size = new Size(138, 28);
-            cbxFiltro.Sorted = true;
-            cbxFiltro.TabIndex = 117;
-            cbxFiltro.Text = "Filtro";
-            cbxFiltro.SelectedIndexChanged += cbxFiltro_SelectedIndexChanged;
-            // 
             // button1
             // 
             button1.FlatStyle = FlatStyle.Flat;
@@ -360,7 +345,6 @@
             ClientSize = new Size(901, 725);
             Controls.Add(button1);
             Controls.Add(btnRefreshDG);
-            Controls.Add(cbxFiltro);
             Controls.Add(btnVisualizarRegistro);
             Controls.Add(btnEditarUsuario);
             Controls.Add(btnEliminarUsuario);

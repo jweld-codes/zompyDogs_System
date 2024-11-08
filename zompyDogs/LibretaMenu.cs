@@ -65,8 +65,8 @@ namespace zompyDogs
                     if (reader["Imagen"] != DBNull.Value)
                     {
                         string imageFileName = reader["Imagen"].ToString();
-                        string projectPath = Directory.GetParent(Application.StartupPath).Parent.Parent.Parent.FullName;
-                        string imagePath = Path.Combine(projectPath, "Imagenes", imageFileName);
+                        string projectPath = "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\Imagenes";
+                        string imagePath = Path.Combine(projectPath, "Platillos", imageFileName);
 
                         if (File.Exists(imagePath))
                         {

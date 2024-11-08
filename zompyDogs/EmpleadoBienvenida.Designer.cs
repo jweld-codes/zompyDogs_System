@@ -126,7 +126,7 @@
             btnPOS.Name = "btnPOS";
             btnPOS.Size = new Size(178, 51);
             btnPOS.TabIndex = 11;
-            btnPOS.Text = "      PUNTO DE VENTA";
+            btnPOS.Text = "      Punto De Venta";
             btnPOS.TextAlign = ContentAlignment.MiddleRight;
             btnPOS.UseVisualStyleBackColor = false;
             btnPOS.Click += btnPOS_Click;

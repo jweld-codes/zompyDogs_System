@@ -88,7 +88,6 @@ namespace zompyDogs
             AbrirFormsHija(fmInventario);
 
         }
-
         private void btnStaff_Click(object sender, EventArgs e)
         {
             CambiarColorBoton((Button)sender);

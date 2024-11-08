@@ -101,7 +101,6 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.diet1;
             pictureBox2.Location = new Point(36, 29);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(67, 40);
@@ -351,7 +350,6 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.White;
-            pictureBox1.Image = Properties.Resources.lupa;
             pictureBox1.Location = new Point(343, 100);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(41, 27);

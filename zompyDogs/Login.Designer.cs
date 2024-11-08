@@ -36,12 +36,12 @@
             btnIniciarSession = new Button();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
-            seeCloseIcon = new PictureBox();
             seeIcon = new PictureBox();
+            seeCloseIcon = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)seeIcon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -127,7 +127,6 @@
             // 
             panel1.BackColor = Color.FromArgb(31, 19, 10);
             panel1.BorderStyle = BorderStyle.Fixed3D;
-            panel1.Controls.Add(seeCloseIcon);
             panel1.Controls.Add(seeIcon);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(btnIniciarSession);
@@ -136,22 +135,11 @@
             panel1.Controls.Add(txtPassword);
             panel1.Controls.Add(txtUser);
             panel1.Controls.Add(label3);
+            panel1.Controls.Add(seeCloseIcon);
             panel1.Location = new Point(34, 31);
             panel1.Name = "panel1";
             panel1.Size = new Size(312, 510);
             panel1.TabIndex = 21;
-            // 
-            // seeCloseIcon
-            // 
-            seeCloseIcon.BackColor = Color.White;
-            seeCloseIcon.Image = Properties.Resources.view_see_hide_eye_close_search_look_icon_232697;
-            seeCloseIcon.Location = new Point(243, 315);
-            seeCloseIcon.Name = "seeCloseIcon";
-            seeCloseIcon.Size = new Size(38, 34);
-            seeCloseIcon.SizeMode = PictureBoxSizeMode.Zoom;
-            seeCloseIcon.TabIndex = 23;
-            seeCloseIcon.TabStop = false;
-            seeCloseIcon.Click += seeCloseIcon_Click;
             // 
             // seeIcon
             // 
@@ -164,6 +152,18 @@
             seeIcon.TabIndex = 22;
             seeIcon.TabStop = false;
             seeIcon.Click += seeIcon_Click;
+            // 
+            // seeCloseIcon
+            // 
+            seeCloseIcon.BackColor = Color.White;
+            seeCloseIcon.Image = Properties.Resources.view_see_hide_eye_close_search_look_icon_232697;
+            seeCloseIcon.Location = new Point(243, 315);
+            seeCloseIcon.Name = "seeCloseIcon";
+            seeCloseIcon.Size = new Size(38, 34);
+            seeCloseIcon.SizeMode = PictureBoxSizeMode.Zoom;
+            seeCloseIcon.TabIndex = 23;
+            seeCloseIcon.TabStop = false;
+            seeCloseIcon.Click += seeCloseIcon_Click;
             // 
             // Login
             // 
@@ -182,8 +182,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).EndInit();
             ((System.ComponentModel.ISupportInitialize)seeIcon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).EndInit();
             ResumeLayout(false);
         }
 

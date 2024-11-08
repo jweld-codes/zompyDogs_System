@@ -50,3 +50,16 @@ C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\Z
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\refint\ZompyDogsDAO.dll
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.pdb
 C:\Users\jenni\Documents\GitHub\unirec\zompydogs\ZompyDogsDAO\obj\Debug\net8.0\ref\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.deps.json
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.pdb
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.AssemblyReference.cache
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfoInputs.cache
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfo.cs
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.CoreCompileInputs.cache
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.sourcelink.json
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\refint\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.pdb
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ref\ZompyDogsDAO.dll

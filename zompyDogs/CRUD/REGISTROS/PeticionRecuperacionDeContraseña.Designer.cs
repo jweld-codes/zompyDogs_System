@@ -44,6 +44,7 @@
             btnCancelar = new Button();
             btnRecuperacion = new Button();
             groupBox2 = new GroupBox();
+            btnGeneradorPassword = new Button();
             txtCodigoRealizacion = new TextBox();
             cbPeticionRealizado = new ComboBox();
             label1 = new Label();
@@ -213,6 +214,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(btnGeneradorPassword);
             groupBox2.Controls.Add(txtCodigoRealizacion);
             groupBox2.Controls.Add(cbPeticionRealizado);
             groupBox2.Controls.Add(label1);
@@ -224,9 +226,19 @@
             groupBox2.Controls.Add(label8);
             groupBox2.Location = new Point(478, 58);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(439, 214);
+            groupBox2.Size = new Size(439, 224);
             groupBox2.TabIndex = 116;
             groupBox2.TabStop = false;
+            // 
+            // btnGeneradorPassword
+            // 
+            btnGeneradorPassword.Location = new Point(16, 173);
+            btnGeneradorPassword.Name = "btnGeneradorPassword";
+            btnGeneradorPassword.Size = new Size(111, 29);
+            btnGeneradorPassword.TabIndex = 130;
+            btnGeneradorPassword.Text = "Generar Clave";
+            btnGeneradorPassword.UseVisualStyleBackColor = true;
+            btnGeneradorPassword.Click += btnGeneradorPassword_Click;
             // 
             // txtCodigoRealizacion
             // 
@@ -301,10 +313,11 @@
             // txtNuevaClave
             // 
             txtNuevaClave.BorderStyle = BorderStyle.FixedSingle;
-            txtNuevaClave.Location = new Point(16, 139);
+            txtNuevaClave.Location = new Point(19, 139);
             txtNuevaClave.Multiline = true;
             txtNuevaClave.Name = "txtNuevaClave";
-            txtNuevaClave.Size = new Size(183, 37);
+            txtNuevaClave.PasswordChar = '*';
+            txtNuevaClave.Size = new Size(183, 28);
             txtNuevaClave.TabIndex = 98;
             // 
             // label8
@@ -320,6 +333,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(943, 398);
             Controls.Add(btnCancelar);
             Controls.Add(btnRecuperacion);
@@ -362,5 +376,6 @@
         public TextBox txtCodigoRealizacion;
         public TextBox txtAccionPeticion;
         public TextBox txtEstado;
+        public Button btnGeneradorPassword;
     }
 }

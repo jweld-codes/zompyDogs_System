@@ -34,7 +34,7 @@ namespace zompyDogs.CRUD.REGISTROS
             txtImagenName.Enabled = false;
 
             _menuRegistroFrm = new Menu();
-            MessageBox.Show("isEdition: " + isEdition);
+           // MessageBox.Show("isEdition: " + isEdition);
 
         }
 
@@ -52,16 +52,14 @@ namespace zompyDogs.CRUD.REGISTROS
             cbxCategorias.ValueMember = "IdCategoria";
         }
 
-
         private void btnSeleccionarImagen_Click(object sender, EventArgs e)
         {
             string projectPath = Directory.GetParent(Application.StartupPath).Parent.Parent.Parent.FullName;
 
             OpenFileDialog ofdSeleccionarImagen = new OpenFileDialog();
-            ofdSeleccionarImagen.Filter = "Imagenes|*.jpg; *.png";
-            ofdSeleccionarImagen.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            ofdSeleccionarImagen.Filter = "Imagenes|*.jpg; *.png; *.jpeg";
+            ofdSeleccionarImagen.InitialDirectory = "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\Imagenes\\Platillos";
             ofdSeleccionarImagen.Title = "Seleccionar Imagen";
-
 
             if (ofdSeleccionarImagen.ShowDialog() == DialogResult.OK)
             {
@@ -110,6 +108,7 @@ namespace zompyDogs.CRUD.REGISTROS
 
                     MessageBox.Show("Platillo actualizado con éxito.");
                     CargarPlatillosdeMenu();
+
                     this.Close();
                 }
                 catch (Exception ex)
@@ -158,8 +157,7 @@ namespace zompyDogs.CRUD.REGISTROS
 
         private void CargarPlatillosdeMenu()
         {
-            DataTable menu = MenuDAO.ObtenerDetallesdeMenu();
-            _menuRegistroFrm.dgvMenu.DataSource = menu;
+            _menuRegistroFrm.dgvMenu.DataSource = MenuDAO.ObtenerDetallesdeMenu(); ;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

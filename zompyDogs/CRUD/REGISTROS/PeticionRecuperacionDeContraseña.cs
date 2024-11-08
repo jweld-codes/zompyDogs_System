@@ -24,20 +24,29 @@ namespace zompyDogs.CRUD.REGISTROS
             InitializeComponent();
             _controladorGeneradorCodigo = new ControladorGeneradoresDeCodigo();
 
-           // GeneradordeCodigoPeticionFromForm();
+            // GeneradordeCodigoPeticionFromForm();
         }
-           /* private void GeneradordeCodigoPeticionFromForm()
-            {
-                nuevoCodigoPeticion = _controladorGeneradorCodigo.GeneradordeCodigoPeticion();
-                txtCodigoRealizacion.Text = nuevoCodigoPeticion;
-            } */
+        /* private void GeneradordeCodigoPeticionFromForm()
+         {
+             nuevoCodigoPeticion = _controladorGeneradorCodigo.GeneradordeCodigoPeticion();
+             txtCodigoRealizacion.Text = nuevoCodigoPeticion;
+         } */
 
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        public string GeneradordeClaveNueva()
+        {
+            string nombreUser = txtUsername.Text;
 
+            string numeroAleatorio = new Random().Next(1000, 9999).ToString();
+            string codigoGeneradoUsername = $"{nombreUser}-{numeroAleatorio}";
+
+            txtNuevaClave.Text = codigoGeneradoUsername;
+            return codigoGeneradoUsername;
+        }
         private void btnRecuperacion_Click(object sender, EventArgs e)
         {
             string nombreUsuario = txtUsername.Text;
@@ -64,9 +73,9 @@ namespace zompyDogs.CRUD.REGISTROS
 
         }
 
-
-
-
-
+        private void btnGeneradorPassword_Click(object sender, EventArgs e)
+        {
+            GeneradordeClaveNueva();
+        }
     }
 }

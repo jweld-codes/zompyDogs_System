@@ -76,12 +76,12 @@
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(txtCodigoGenerado);
             groupBox1.Controls.Add(dtpFechaEnviada);
+            groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(cbxEstadoCuenta);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(txtDescripcion);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(label3);
             groupBox1.Location = new Point(12, 86);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(439, 313);
@@ -91,7 +91,7 @@
             // 
             // txtUsuarioName
             // 
-            txtUsuarioName.Location = new Point(19, 259);
+            txtUsuarioName.Location = new Point(222, 263);
             txtUsuarioName.Name = "txtUsuarioName";
             txtUsuarioName.Size = new Size(180, 27);
             txtUsuarioName.TabIndex = 116;
@@ -100,7 +100,7 @@
             // 
             cbxPeticion.FormattingEnabled = true;
             cbxPeticion.ItemHeight = 20;
-            cbxPeticion.Items.AddRange(new object[] { "Actualizar", "Eliminar", "Recuperación de Cuenta" });
+            cbxPeticion.Items.AddRange(new object[] { "Guardar", "Actualizar", "Eliminar" });
             cbxPeticion.Location = new Point(19, 69);
             cbxPeticion.Name = "cbxPeticion";
             cbxPeticion.Size = new Size(180, 28);
@@ -140,17 +140,17 @@
             cbxEstadoCuenta.Enabled = false;
             cbxEstadoCuenta.FormattingEnabled = true;
             cbxEstadoCuenta.ItemHeight = 20;
-            cbxEstadoCuenta.Items.AddRange(new object[] { "Activo", "Inactivo", "Completado", "Pendiente" });
-            cbxEstadoCuenta.Location = new Point(222, 259);
+            cbxEstadoCuenta.Items.AddRange(new object[] { "Completado", "Pendiente" });
+            cbxEstadoCuenta.Location = new Point(19, 262);
             cbxEstadoCuenta.Name = "cbxEstadoCuenta";
             cbxEstadoCuenta.Size = new Size(180, 28);
             cbxEstadoCuenta.TabIndex = 112;
-            cbxEstadoCuenta.Text = "ACTIVO";
+            cbxEstadoCuenta.Text = "Pendiente";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(222, 234);
+            label9.Location = new Point(19, 237);
             label9.Name = "label9";
             label9.Size = new Size(54, 20);
             label9.TabIndex = 111;
@@ -186,7 +186,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(19, 234);
+            label3.Location = new Point(222, 238);
             label3.Name = "label3";
             label3.Size = new Size(143, 20);
             label3.TabIndex = 97;
@@ -206,6 +206,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(476, 490);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardarUser);

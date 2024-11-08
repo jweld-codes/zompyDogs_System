@@ -322,6 +322,31 @@ namespace ZompyDogsDAO
             return dtpPuestos;
         }
 
+        public static DataTable ObtenerDetalllesDeUsuariosParaEditarPorID(int codigoUsuario)
+        {
+            DataTable dtpDetallesUsuarios = new DataTable();
+            string query = "SELECT * FROM v_DetallesUsuarios WHERE IDUsuario = @codigoUsuario";
+
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@codigoUsuario", codigoUsuario);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                try
+                {
+                    conn.Open();
+                    da.Fill(dtpDetallesUsuarios);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al obtener las descripciones de usuarios: " + ex.Message);
+                }
+            }
+
+            return dtpDetallesUsuarios;
+        }
         /* --------------  BUSCADORES ------------------- */
         public static DataTable BuscadorDeUsuarios(string valorBusqueda)
         {
@@ -438,6 +463,7 @@ namespace ZompyDogsDAO
 
         public class UsuarioCrear
         {
+            public int IDUser { get; set; }
             public string UserName { get; set; }
             public string PassWord { get; set; }
             public DateTime FechaRegistro { get; set; }
@@ -594,6 +620,65 @@ namespace ZompyDogsDAO
                 cmd.Parameters.AddWithValue("@direccion", detalleUsuario.direccion);
                 cmd.Parameters.AddWithValue("@codigoPuesto", detalleUsuario.codigoPuesto);
                 cmd.Parameters.AddWithValue("@codigoUsuario", detalleUsuario.codigoUsuario);
+
+                try
+                {
+                    conn.Open();
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al actualizar el usuario: " + ex.Message);
+                    Console.WriteLine("Detalles de la excepción: " + ex.ToString());
+                    return false;
+                }
+            }
+        }
+        public static bool AjusteDetalleUsuario(DetalleUsuario detalleUsuario)
+        {
+            string query = "UPDATE DetalleUsuario SET primNombreUsuario = @primNombreUsuario, segNombreUsuario = @segNombreUsuario, primApellidoUsuario = @primApellidoUsuario, segApellido = @segApellido, " +
+                            "codigoCedula = @codigoCedula, fechaNacimiento = @fechaNacimiento, estadoCivil = @estadoCivil, telefono = @telefono, direccion = @direccion " +
+                             "WHERE codigoUsuario = @codigoUsuario";
+
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@primNombreUsuario", detalleUsuario.primerNombre);
+                cmd.Parameters.AddWithValue("@segNombreUsuario", detalleUsuario.segundoNombre);
+                cmd.Parameters.AddWithValue("@primApellidoUsuario", detalleUsuario.primerApellido);
+                cmd.Parameters.AddWithValue("@segApellido", detalleUsuario.segundoApellido);
+                cmd.Parameters.AddWithValue("@codigoCedula", detalleUsuario.codigoCedula);
+                cmd.Parameters.AddWithValue("@fechaNacimiento", detalleUsuario.fechaNacimiento);
+                cmd.Parameters.AddWithValue("@estadoCivil", detalleUsuario.estadoCivil);
+                cmd.Parameters.AddWithValue("@telefono", detalleUsuario.telefono);
+                cmd.Parameters.AddWithValue("@direccion", detalleUsuario.direccion);
+                cmd.Parameters.AddWithValue("@codigoUsuario", detalleUsuario.codigoUsuario);
+
+                try
+                {
+                    conn.Open();
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al actualizar el usuario: " + ex.Message);
+                    Console.WriteLine("Detalles de la excepción: " + ex.ToString());
+                    return false;
+                }
+            }
+        }
+        public static bool AjusteDatosDeUsuario(UsuarioCrear usuarioCrear)
+        {
+            string query = "UPDATE Usuario SET username = @usuarioName, password = @usuarioPass WHERE id_usuario = @codigoUsuario";
+
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@usuarioName", usuarioCrear.UserName);
+                cmd.Parameters.AddWithValue("@usuarioPass", usuarioCrear.PassWord);
+                cmd.Parameters.AddWithValue("@codigoUsuario", usuarioCrear.IDUser);
 
                 try
                 {

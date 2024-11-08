@@ -7,9 +7,6 @@
     <Compile Update="CRUD\REGISTROS\MenuRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="CRUD\REGISTROS\PeticionActualizarDatosPersonales.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="CRUD\REGISTROS\PeticionesRegisro.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -114,6 +114,7 @@
             // 
             // cbxEstado
             // 
+            cbxEstado.Enabled = false;
             cbxEstado.FormattingEnabled = true;
             cbxEstado.ItemHeight = 20;
             cbxEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
@@ -121,6 +122,7 @@
             cbxEstado.Name = "cbxEstado";
             cbxEstado.Size = new Size(180, 28);
             cbxEstado.TabIndex = 139;
+            cbxEstado.Text = "ACTIVO";
             // 
             // label5
             // 

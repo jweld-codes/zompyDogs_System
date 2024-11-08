@@ -33,7 +33,8 @@ namespace zompyDogs
             InitializeComponent();
             this.rolIDActual = rolIDActual;
             this.usuarioIDActual = usuarioIDActual;
-            MessageBox.Show("idEmpleado: " + usuarioIDActual + "RolIdActual: " + rolIDActual);
+            //MessageBox.Show("idEmpleado: " + usuarioIDActual + "RolIdActual: " + rolIDActual);
+            
             if (rolIDActual == 1)
             {
                 btnPuntoVenta.Enabled = false;
@@ -56,6 +57,11 @@ namespace zompyDogs
             dgvHistorialPedidos.Columns["Total_De_Productos"].HeaderText = "Total de Platillos en la Orden";
             dgvHistorialPedidos.Columns["Total_a_Pagar"].HeaderText = "Total a Pagar";
             dgvHistorialPedidos.Columns["Fecha_Del_Pedido"].HeaderText = "Fecha del Pédido";
+
+            dgvHistorialPedidos.EnableHeadersVisualStyles = false;
+            dgvHistorialPedidos.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dgvHistorialPedidos.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvHistorialPedidos.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);
         }
 
         private void CambiarColorBoton(Button botonActivo)

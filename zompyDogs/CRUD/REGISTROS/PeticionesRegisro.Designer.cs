@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnCancelar = new Button();
             btnGuardarUser = new Button();
             groupBox1 = new GroupBox();
@@ -36,14 +37,16 @@
             label10 = new Label();
             txtCodigoGenerado = new TextBox();
             dtpFechaEnviada = new DateTimePicker();
+            label3 = new Label();
             cbxEstadoCuenta = new ComboBox();
             label9 = new Label();
             label7 = new Label();
             txtDescripcion = new TextBox();
             label4 = new Label();
-            label3 = new Label();
             lblTituloRegistro = new Label();
+            errorProviderDescripcion = new ErrorProvider(components);
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProviderDescripcion).BeginInit();
             SuspendLayout();
             // 
             // btnCancelar
@@ -68,6 +71,7 @@
             btnGuardarUser.TabIndex = 109;
             btnGuardarUser.Text = "GUARDAR";
             btnGuardarUser.UseVisualStyleBackColor = false;
+            btnGuardarUser.Click += btnGuardarUser_Click;
             // 
             // groupBox1
             // 
@@ -114,7 +118,7 @@
             label10.Name = "label10";
             label10.Size = new Size(124, 20);
             label10.TabIndex = 114;
-            label10.Text = "Fecha de Peticion";
+            label10.Text = "Fecha de Petición";
             // 
             // txtCodigoGenerado
             // 
@@ -134,6 +138,15 @@
             dtpFechaEnviada.Name = "dtpFechaEnviada";
             dtpFechaEnviada.Size = new Size(180, 27);
             dtpFechaEnviada.TabIndex = 113;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(222, 238);
+            label3.Name = "label3";
+            label3.Size = new Size(143, 20);
+            label3.TabIndex = 97;
+            label3.Text = "Nombre del Usuario";
             // 
             // cbxEstadoCuenta
             // 
@@ -173,6 +186,7 @@
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(383, 86);
             txtDescripcion.TabIndex = 102;
+            txtDescripcion.TextChanged += txtDescripcion_TextChanged;
             // 
             // label4
             // 
@@ -183,15 +197,6 @@
             label4.TabIndex = 101;
             label4.Text = "Descripción de Petición";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(222, 238);
-            label3.Name = "label3";
-            label3.Size = new Size(143, 20);
-            label3.TabIndex = 97;
-            label3.Text = "Nombre del Usuario";
-            // 
             // lblTituloRegistro
             // 
             lblTituloRegistro.AutoSize = true;
@@ -201,6 +206,10 @@
             lblTituloRegistro.Size = new Size(42, 41);
             lblTituloRegistro.TabIndex = 107;
             lblTituloRegistro.Text = "...";
+            // 
+            // errorProviderDescripcion
+            // 
+            errorProviderDescripcion.ContainerControl = this;
             // 
             // PeticionesRegisro
             // 
@@ -216,6 +225,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProviderDescripcion).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -237,5 +247,6 @@
         public Label lblTituloRegistro;
         public ComboBox cbxPeticion;
         public TextBox txtUsuarioName;
+        private ErrorProvider errorProviderDescripcion;
     }
 }

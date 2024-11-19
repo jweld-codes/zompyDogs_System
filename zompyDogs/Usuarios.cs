@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -69,6 +70,9 @@ namespace zompyDogs
             DataTable usuarios = UsuarioDAO.ObtenerDetalllesDeUsuarios();
             dgvUsuarios.DataSource = usuarios;
 
+            dgvUsuarios.Columns["Codigo"].HeaderText = "Código";
+            dgvUsuarios.Columns["Telefono"].HeaderText = "Teléfono";
+
             dgvUsuarios.Columns["Nombre_Completo"].HeaderText = "Nombre del Empleado";
             dgvUsuarios.Columns["RolUsuario"].HeaderText = "Rol";
 
@@ -82,6 +86,10 @@ namespace zompyDogs
         {
             DataTable usuariosEmp = UsuarioDAO.ObtenerDetalllesDeUsuariosEmpleados();
             dgvEmpleados.DataSource = usuariosEmp;
+
+
+            dgvEmpleados.Columns["Codigo"].HeaderText = "Código";
+            dgvEmpleados.Columns["Telefono"].HeaderText = "Teléfono";
 
             dgvEmpleados.Columns["Nombre_Completo"].HeaderText = "Nombre del Empleado";
             dgvEmpleados.Columns["RolUsuario"].HeaderText = "Rol";
@@ -97,6 +105,9 @@ namespace zompyDogs
             DataTable usuariosAdmin = UsuarioDAO.ObtenerDetalllesDeUsuariosAdmin();
             dgvAdminis.DataSource = usuariosAdmin;
 
+            dgvAdminis.Columns["Codigo"].HeaderText = "Código";
+            dgvAdminis.Columns["Telefono"].HeaderText = "Teléfono";
+
             dgvAdminis.Columns["Nombre_Completo"].HeaderText = "Nombre del Empleado";
             dgvAdminis.Columns["RolUsuario"].HeaderText = "Rol";
 
@@ -110,6 +121,9 @@ namespace zompyDogs
             DataTable usuariosAdmin = UsuarioDAO.ObtenerDetalllesProveedores();
             dgvProveedor.DataSource = usuariosAdmin;
 
+            dgvProveedor.Columns["Codigo"].HeaderText = "Código";
+            dgvProveedor.Columns["Telefono"].HeaderText = "Teléfono";
+
             dgvProveedor.Columns["Nombre_Completo"].HeaderText = "Nombre del Empleado";
 
             dgvProveedor.EnableHeadersVisualStyles = false;
@@ -119,7 +133,17 @@ namespace zompyDogs
         }
 
         /********** CRUD Para Usuarios ********/
-        
+
+        public string CapitalizarPrimeraLetra(string texto)
+        {
+            if (string.IsNullOrWhiteSpace(texto))
+            {
+                return texto; 
+            }
+
+            return char.ToUpper(texto[0]) + texto.Substring(1).ToLower(); 
+        }
+
         //GUARDA NUEVO REGISTRO DE USUARIOS
         private void btnAgregarNuevoUsuario_Click(object sender, EventArgs e)
         {
@@ -135,53 +159,121 @@ namespace zompyDogs
                 //llamar el metodo guardar usuario
                 usuarioGuardar.btnGuardarUser.Click += (s, args) =>
                 {
-                    int siguienteID = UsuarioDAO.ObtenerSiguienteID();
+                    
+                    usuarioGuardar.ValidarCampos();
 
-                    DetalleUsuario nuevoDetalleUsuario = new DetalleUsuario
-                    {
-                        primerNombre = usuarioGuardar.txtPrimNombre.Text,
-                        segundoNombre = usuarioGuardar.txtSegNombre.Text,
-                        primerApellido = usuarioGuardar.txtPrimApellido.Text,
-                        segundoApellido = usuarioGuardar.txtSegApellido.Text,
-                        codigoCedula = usuarioGuardar.txtCedula.Text,
-                        fechaNacimiento = usuarioGuardar.dtpFechaNacimiento.Value,
-                        estadoCivil = usuarioGuardar.cbxEsatdoCivil.SelectedItem?.ToString() ?? string.Empty,
-                        telefono = usuarioGuardar.txtTelefono.Text,
-                        direccion = usuarioGuardar.txtDireccion.Text,
-                        codigoPuesto = usuarioGuardar.cbPuesto.SelectedValue != null ? Convert.ToInt32(usuarioGuardar.cbPuesto.SelectedValue) : 1,
-                        codigoUsuario = usuarioGuardar.txtCodigoGenerado.Text,
-                    };
-                    try
-                    {
-                        // Guardar DetalleUsuario
-                        UsuarioDAO.GuardarDetalleUsuario(nuevoDetalleUsuario);
+                    bool itsValid;
+                    itsValid = usuarioGuardar.okError;
 
-                        UsuarioCrear nuevoUsuarioRegistro = new UsuarioCrear
+                    if (itsValid == false)
+                    {
+                        usuarioGuardar.ValidarCampos();
+                    }
+                    else
+                    {
+                        int siguienteID = UsuarioDAO.ObtenerSiguienteID();
+
+                        string primerNombre = CapitalizarPrimeraLetra(usuarioGuardar.txtPrimNombre.Text);
+                        string segundoNombre = CapitalizarPrimeraLetra(usuarioGuardar.txtSegNombre.Text);
+                        string primerApellido = CapitalizarPrimeraLetra(usuarioGuardar.txtPrimApellido.Text);
+                        string segundoApellido = CapitalizarPrimeraLetra(usuarioGuardar.txtSegApellido.Text);
+
+
+                        DetalleUsuario nuevoDetalleUsuario = new DetalleUsuario
                         {
-                            UserName = usuarioGuardar.txtUsername.Text,
-                            PassWord = usuarioGuardar.txtPassword.Text,
-                            FechaRegistro = usuarioGuardar.dtpFechaRegistro.Value.Date,
-                            CodigoRol = usuarioGuardar.cbxRol.SelectedValue != null ? Convert.ToInt32(usuarioGuardar.cbxRol.SelectedValue) : 1,
-                            CodigoDetalleUsuario = siguienteID,
+                            primerNombre = primerNombre,
+                            segundoNombre = segundoNombre,
+                            primerApellido = primerApellido,
+                            segundoApellido = segundoApellido,
+                            codigoCedula = usuarioGuardar.txtCedula.Text,
+                            fechaNacimiento = usuarioGuardar.dtpFechaNacimiento.Value,
+                            estadoCivil = usuarioGuardar.cbxEsatdoCivil.SelectedItem?.ToString() ?? string.Empty,
+                            telefono = usuarioGuardar.txtTelefono.Text,
+                            direccion = usuarioGuardar.txtDireccion.Text,
+                            codigoPuesto = usuarioGuardar.cbPuesto.SelectedValue != null ? Convert.ToInt32(usuarioGuardar.cbPuesto.SelectedValue) : 1,
+                            codigoUsuario = usuarioGuardar.txtCodigoGenerado.Text,
+
                         };
+                        try
+                        {
+                            // Guardar DetalleUsuario
+                            UsuarioDAO.GuardarDetalleUsuario(nuevoDetalleUsuario);
 
-                        // Guardar UsuarioRegistro
-                        UsuarioDAO.GuardarUsuario(nuevoUsuarioRegistro);
+                            UsuarioCrear nuevoUsuarioRegistro = new UsuarioCrear
+                            {
+                                UserName = usuarioGuardar.txtUsername.Text,
+                                PassWord = usuarioGuardar.txtPassword.Text,
+                                FechaRegistro = usuarioGuardar.dtpFechaRegistro.Value.Date,
+                                CodigoRol = usuarioGuardar.cbxRol.SelectedValue != null ? Convert.ToInt32(usuarioGuardar.cbxRol.SelectedValue) : 1,
+                                CodigoDetalleUsuario = siguienteID,
+                                Email = usuarioGuardar.txtEmail.Text,
+                            };
 
-                        MessageBox.Show("Usuario Registrado con Éxito.");
-                        CargarUsuarios();
-                        CargarUsuariosAdministradores();
-                        CargarUsuariosEmpleados();
+                            // Guardar UsuarioRegistro
+                            UsuarioDAO.GuardarUsuario(nuevoUsuarioRegistro);
+
+                            string userNameName = usuarioGuardar.txtPrimNombre.Text + " " + usuarioGuardar.txtPrimApellido.Text;
+                            string newUsername = usuarioGuardar.txtUsername.Text;
+                            string newPassWord = usuarioGuardar.txtPassword.Text;
+                            string newEmail = usuarioGuardar.txtEmail.Text;
+
+                            if(usuarioGuardar.cbxRol.Text == "Usuario")
+                            {
+                                MessageBox.Show("Usuario Registrado con Éxito.");
+                                CargarUsuarios();
+                                CargarUsuariosAdministradores();
+                                CargarUsuariosEmpleados();
+                            }
+                            else
+                            {
+                                MessageBox.Show($"{newEmail} Registrado con Éxito.");
+                                CargarUsuarios();
+                                CargarUsuariosAdministradores();
+                                CargarUsuariosEmpleados();
+                                try
+                                {
+                                    MailMessage mail = new MailMessage();
+                                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+
+                                    mail.From = new MailAddress("zusiurec@gmail.com");
+                                    mail.To.Add($"{usuarioGuardar.txtEmail.Text}");
+
+                                    mail.Subject = "Creación de Nueva Cuenta.";
+                                    mail.Body = $"¡Bienvenido {primerNombre} {primerApellido} a la familia ZOMPYDOGS! \nTus credenciales para acceder al sistema son las siguientes.\n Usuario: {newUsername}\n Clave: {newPassWord}";
+
+                                    smtpClient.Port = 587;
+                                    smtpClient.Credentials = new System.Net.NetworkCredential("zusiurec@gmail.com", "cdkaqkabbrmbmdss");
+                                    smtpClient.EnableSsl = true;
+
+                                    smtpClient.Send(mail);
+                                }
+                                catch (SmtpException smtpEx)
+                                {
+                                    MessageBox.Show($"Error al enviar el correo: {smtpEx.Message}");
+                                    Console.WriteLine(smtpEx.ToString());
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show($"Ocurrió un error: {ex.Message}");
+                                    Console.WriteLine(ex.ToString());
+                                }
+                            }
+                            
+                            
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Error al actualizar el Usuario.");
+
+                        }
                     }
-                    catch
-                    {
-                        MessageBox.Show("Error al actualizar el Usuario.");
-
-                    }
+                   
                 };
             }
             else
             {
+                
+
                 var proveedorGuardar = new ProveedorRegistro();
                 proveedorGuardar.Show();
                 proveedorGuardar.lblTituloRegistro.Text = "Agregar Nuevo Proveedor";
@@ -191,28 +283,40 @@ namespace zompyDogs
 
                 proveedorGuardar.btnGuardarProv.Click += (s, args) =>
                 {
-                    ProveedorCrear nuevoProveedor = new ProveedorCrear
-                    {
-                        CodigoProv = proveedorGuardar.txtCodigoGenerado.Text,
-                        NombreProv = proveedorGuardar.txtNombreProv.Text,
-                        FechaRegistroProv = proveedorGuardar.dtpFechaRegistro.Value.Date,
-                        ContactoProv = proveedorGuardar.txtPrimNombre.Text,
-                        ApellidoContactoProv = proveedorGuardar.txtSegNombre.Text,
-                        TelefonoProv = proveedorGuardar.txtTelefono.Text,
-                        EmailProv = proveedorGuardar.txtEmail.Text,
-                        EstadoProv = proveedorGuardar.cbxEstado.Text
-                    };
+                    proveedorGuardar.ValidarCampos();
 
-                    try
-                    {
-                        UsuarioDAO.GuardarProveedor(nuevoProveedor);
+                    bool itsValid;
+                    itsValid = proveedorGuardar.okError;
 
-                        MessageBox.Show("Proveedor Registrado con Éxito.");
-                        CargarProveedores();
+                    if (itsValid == false)
+                    {
+                        proveedorGuardar.ValidarCampos();
                     }
-                    catch
+                    else
                     {
-                        MessageBox.Show("Error al actualizar el proveedor.");
+                        ProveedorCrear nuevoProveedor = new ProveedorCrear
+                        {
+                            CodigoProv = proveedorGuardar.txtCodigoGenerado.Text,
+                            NombreProv = proveedorGuardar.txtNombreProv.Text,
+                            FechaRegistroProv = proveedorGuardar.dtpFechaRegistro.Value.Date,
+                            ContactoProv = proveedorGuardar.txtPrimNombre.Text,
+                            ApellidoContactoProv = proveedorGuardar.txtSegNombre.Text,
+                            TelefonoProv = proveedorGuardar.txtTelefono.Text,
+                            EmailProv = proveedorGuardar.txtEmail.Text,
+                            EstadoProv = proveedorGuardar.cbxEstado.Text
+                        };
+
+                        try
+                        {
+                            UsuarioDAO.GuardarProveedor(nuevoProveedor);
+
+                            MessageBox.Show("Proveedor Registrado con Éxito.");
+                            CargarProveedores();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Error al actualizar el proveedor.");
+                        }
                     }
                 };
 
@@ -222,6 +326,7 @@ namespace zompyDogs
         //Edita los datos de los usuarios
         private void btnEditarUsuario_Click(object sender, EventArgs e)
         {
+            btnEditarUsuario.Hide();
             if (isUser)
             {
                 var usuarioEditar = new UsuarioRegistro();
@@ -265,6 +370,7 @@ namespace zompyDogs
                     usuarioEditar.txtPassword.Text = fila["Clave"].ToString();
                     usuarioEditar.txtUsername.Text = fila["Usuario"].ToString();
                     usuarioEditar.cbxRol.Text = fila["RolUsuario"].ToString();
+                    usuarioEditar.txtEmail.Text = fila["Correo"].ToString();
 
                     DateTime fechaNacimiento;
                     if (DateTime.TryParse(fila["Fecha_De_Nacimiento"].ToString(), out fechaNacimiento) &&
@@ -289,53 +395,66 @@ namespace zompyDogs
 
                     usuarioEditar.btnGuardarUser.Click += (s, args) =>
                     {
-                        try
+                        bool itsValid;
+                        itsValid = usuarioEditar.okError;
+
+                        MessageBox.Show("itsValid: "+ itsValid);
+
+                        if (itsValid == false)
                         {
-                            if (string.IsNullOrWhiteSpace(usuarioEditar.txtCodigoGenerado.Text))
+                            usuarioEditar.ValidarCampos();
+                        }
+                        else
+                        {
+                            try
                             {
-                                MessageBox.Show("Código de usuario no válido.");
-                                return;
+                                if (string.IsNullOrWhiteSpace(usuarioEditar.txtCodigoGenerado.Text))
+                                {
+                                    MessageBox.Show("Código de usuario no válido.");
+                                    return;
+                                }
+
+                                DetalleUsuario detalleUsuarioActualizado = new DetalleUsuario
+                                {
+                                    primerNombre = usuarioEditar.txtPrimNombre.Text,
+                                    segundoNombre = usuarioEditar.txtSegNombre.Text,
+                                    primerApellido = usuarioEditar.txtPrimApellido.Text,
+                                    segundoApellido = usuarioEditar.txtSegApellido.Text,
+                                    codigoCedula = usuarioEditar.txtCedula.Text,
+                                    fechaNacimiento = usuarioEditar.dtpFechaNacimiento.Value,
+                                    estadoCivil = usuarioEditar.cbxEsatdoCivil.Text,
+                                    telefono = usuarioEditar.txtTelefono.Text,
+                                    direccion = usuarioEditar.txtDireccion.Text,
+                                    codigoPuesto = usuarioEditar.cbPuesto.SelectedValue != null ? Convert.ToInt32(usuarioEditar.cbPuesto.SelectedValue) : 1,
+                                    codigoUsuario = detalleUsuariocodigoUsuarioVal
+                                };
+
+                                if (usuarioEditar.cbPuesto.SelectedValue == null)
+                                {
+                                    MessageBox.Show("Por favor selecciona un puesto válido.");
+                                    return;
+                                }
+
+                                bool resultadoDetalle = UsuarioDAO.ActualizarDetalleUsuario(detalleUsuarioActualizado);
+
+                                if (resultadoDetalle)
+                                {
+                                    MessageBox.Show("Usuario actualizado con éxito.");
+                                    CargarUsuarios();
+                                    //this.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No se pudo actualizar el usuario.");
+                                }
                             }
-
-                            DetalleUsuario detalleUsuarioActualizado = new DetalleUsuario
+                            catch (Exception ex)
                             {
-                                primerNombre = usuarioEditar.txtPrimNombre.Text,
-                                segundoNombre = usuarioEditar.txtSegNombre.Text,
-                                primerApellido = usuarioEditar.txtPrimApellido.Text,
-                                segundoApellido = usuarioEditar.txtSegApellido.Text,
-                                codigoCedula = usuarioEditar.txtCedula.Text,
-                                fechaNacimiento = usuarioEditar.dtpFechaNacimiento.Value,
-                                estadoCivil = usuarioEditar.cbxEsatdoCivil.Text,
-                                telefono = usuarioEditar.txtTelefono.Text,
-                                direccion = usuarioEditar.txtDireccion.Text,
-                                codigoPuesto = usuarioEditar.cbPuesto.SelectedValue != null ? Convert.ToInt32(usuarioEditar.cbPuesto.SelectedValue) : 1,
-                                codigoUsuario = detalleUsuariocodigoUsuarioVal
-                            };
-
-                            if (usuarioEditar.cbPuesto.SelectedValue == null)
-                            {
-                                MessageBox.Show("Por favor selecciona un puesto válido.");
-                                return;
-                            }
-
-                            bool resultadoDetalle = UsuarioDAO.ActualizarDetalleUsuario(detalleUsuarioActualizado);
-
-                            if (resultadoDetalle)
-                            {
-                                MessageBox.Show("Usuario actualizado con éxito.");
-                                CargarUsuarios();
-                                this.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No se pudo actualizar el usuario.");
+                                MessageBox.Show("Error al actualizar el usuario: " + ex.Message);
+                                Console.WriteLine("Detalles de la excepción: " + ex.ToString());
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error al actualizar el usuario: " + ex.Message);
-                            Console.WriteLine("Detalles de la excepción: " + ex.ToString());
-                        }
+                        
                     };
                 }
                 else
@@ -350,6 +469,7 @@ namespace zompyDogs
                 frmProveedorRegistro.btnGuardarProv.Text = "EDITAR";
                 frmProveedorRegistro.cbxEstado.Enabled = true;
                 frmProveedorRegistro.txtNombreProv.Enabled = false;
+                btnEditarUsuario.Enabled = true;
 
                 frmProveedorRegistro.Show();
 
@@ -357,6 +477,7 @@ namespace zompyDogs
 
                 if (proveedoresDatosEditar.Rows.Count > 0)
                 {
+
                     DataRow fila = proveedoresDatosEditar.Rows[0];
 
                     frmProveedorRegistro.txtCodigoGenerado.Text = fila["Codigo"].ToString();
@@ -369,8 +490,10 @@ namespace zompyDogs
                     frmProveedorRegistro.txtEmail.Text = fila["Correo"].ToString();
                     frmProveedorRegistro.cbxEstado.Text = fila["Estado"].ToString();
                     frmProveedorRegistro.dtpFechaRegistro.Enabled = false;
+                    
                     frmProveedorRegistro.btnGuardarProv.Click += (s, args) =>
                     {
+                       
                         try
                         {
                             if (string.IsNullOrWhiteSpace(frmProveedorRegistro.txtCodigoGenerado.Text))
@@ -396,6 +519,7 @@ namespace zompyDogs
                             {
                                 MessageBox.Show("Proveedor actualizado con éxito.");
                                 CargarProveedores();
+                                btnEditarUsuario.Enabled = true;
                             }
                             else
                             {
@@ -446,6 +570,7 @@ namespace zompyDogs
                     usuarioView.txtDireccion.Text = fila["Direccion"].ToString();
                     usuarioView.txtTelefono.Text = fila["Telefono"].ToString();
                     usuarioView.cbxEsatdoCivil.Text = fila["Estado_Civil"].ToString();
+                    usuarioView.txtEmail.Text = fila["Correo"].ToString();
 
                     usuarioView.cbPuesto.Text = fila["Puesto"].ToString();
                     usuarioView.txtPassword.Text = fila["Clave"].ToString();
@@ -463,8 +588,7 @@ namespace zompyDogs
                     }
 
                     usuarioView.txtUsername.Text = fila["Usuario"].ToString();
-                    usuarioView.cbxRol.Text = (fila["RolUsuario"].ToString() == "admin") ? "Administrador" : "Empleado";
-                    
+                    usuarioView.cbxRol.Text = fila["RolUsuario"].ToString();
                 }
             }
             else
@@ -553,7 +677,7 @@ namespace zompyDogs
             lblBreadCrumbUser.Text = "USUARIOS";
             dgvEmpleados.Hide();
             dgvAdminis.Hide();
-           // cbxFiltro.Hide();
+            btnEditarUsuario.Hide();
 
             txtBuscarUsuario.TextChanged += (s, args) =>
             {
@@ -573,7 +697,7 @@ namespace zompyDogs
             dgvEmpleados.Hide();
             dgvProveedor.Hide();
             dgvAdminis.Show();
-            //cbxFiltro.Hide();
+            btnEditarUsuario.Hide();
             lblBreadCrumbUser.Text = "ADMINISTRADORES";
 
             txtBuscarUsuario.TextChanged += (s, args) =>
@@ -595,6 +719,7 @@ namespace zompyDogs
             dgvEmpleados.Show();
             lblBreadCrumbUser.Text = "EMPLEADOS";
             dgvAdminis.Hide();
+            btnEditarUsuario.Hide();
             //cbxFiltro.Hide();
 
             txtBuscarUsuario.TextChanged += (s, args) =>

@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AjustesCuenta));
             topBarMenu = new Panel();
+            button1 = new Button();
             pictureBox2 = new PictureBox();
             btnUsuarioPanel = new Button();
             lblTITULO = new Label();
@@ -60,12 +62,13 @@
             label5 = new Label();
             txtCedula = new TextBox();
             gbxDatosUsuarios = new GroupBox();
+            txtDiasLaborales = new TextBox();
+            txtEmail = new TextBox();
+            label18 = new Label();
             btnCancelarUs = new Button();
             btnConfirmarUs = new Button();
             btnEditarUsuario = new Button();
             gbxDias = new GroupBox();
-            txtDiasLaborales = new TextBox();
-            chbxDomingo = new CheckBox();
             chbxSabado = new CheckBox();
             chbxViernes = new CheckBox();
             chbxJueves = new CheckBox();
@@ -85,8 +88,8 @@
             label3 = new Label();
             label4 = new Label();
             txtUser = new TextBox();
-            seeCloseIcon = new PictureBox();
             seeIcon = new PictureBox();
+            seeCloseIcon = new PictureBox();
             panel1 = new Panel();
             gbxPeticionesBtn = new GroupBox();
             btnVisualizarRegistro = new Button();
@@ -101,22 +104,25 @@
             rectanglePanel2 = new Panel();
             rectanglePanel3 = new Panel();
             btnPeticionesUser = new Button();
+            errorProviderPeticion = new ErrorProvider(components);
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             gbxDatosPersonales.SuspendLayout();
             gbxDatosUsuarios.SuspendLayout();
             gbxDias.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)seeIcon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).BeginInit();
             panel1.SuspendLayout();
             gbxPeticionesBtn.SuspendLayout();
             gbxPeticiones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPeticiones).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderPeticion).BeginInit();
             SuspendLayout();
             // 
             // topBarMenu
             // 
             topBarMenu.BackColor = Color.FromArgb(31, 19, 10);
+            topBarMenu.Controls.Add(button1);
             topBarMenu.Controls.Add(pictureBox2);
             topBarMenu.Controls.Add(btnUsuarioPanel);
             topBarMenu.Controls.Add(lblTITULO);
@@ -125,6 +131,20 @@
             topBarMenu.Name = "topBarMenu";
             topBarMenu.Size = new Size(901, 81);
             topBarMenu.TabIndex = 106;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = SystemColors.Control;
+            button1.Location = new Point(567, 45);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 36);
+            button1.TabIndex = 99;
+            button1.Text = "Peticiones";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // pictureBox2
             // 
@@ -146,7 +166,7 @@
             btnUsuarioPanel.Name = "btnUsuarioPanel";
             btnUsuarioPanel.Size = new Size(152, 36);
             btnUsuarioPanel.TabIndex = 98;
-            btnUsuarioPanel.Text = "Inicio";
+            btnUsuarioPanel.Text = "Mis Peticiones";
             btnUsuarioPanel.UseVisualStyleBackColor = false;
             btnUsuarioPanel.Click += btnUsuarioPanel_Click;
             // 
@@ -158,9 +178,9 @@
             lblTITULO.ForeColor = Color.Transparent;
             lblTITULO.Location = new Point(109, 34);
             lblTITULO.Name = "lblTITULO";
-            lblTITULO.Size = new Size(238, 31);
+            lblTITULO.Size = new Size(189, 31);
             lblTITULO.TabIndex = 3;
-            lblTITULO.Text = "AJUSTES DE CUENTA";
+            lblTITULO.Text = "MIS PETICIONES";
             lblTITULO.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTituloRegistroPanel
@@ -178,9 +198,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(32, 87);
             label1.Name = "label1";
-            label1.Size = new Size(77, 20);
+            label1.Size = new Size(98, 20);
             label1.TabIndex = 107;
-            label1.Text = "AJUSTES /";
+            label1.Text = "PETICIONES /";
             // 
             // lblBreadCrumbUser
             // 
@@ -188,11 +208,11 @@
             lblBreadCrumbUser.BackColor = Color.Transparent;
             lblBreadCrumbUser.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblBreadCrumbUser.ForeColor = Color.LimeGreen;
-            lblBreadCrumbUser.Location = new Point(109, 88);
+            lblBreadCrumbUser.Location = new Point(131, 88);
             lblBreadCrumbUser.Name = "lblBreadCrumbUser";
-            lblBreadCrumbUser.Size = new Size(56, 20);
+            lblBreadCrumbUser.Size = new Size(124, 20);
             lblBreadCrumbUser.TabIndex = 108;
-            lblBreadCrumbUser.Text = "INICIO";
+            lblBreadCrumbUser.Text = "MIS PETICIONES";
             // 
             // label2
             // 
@@ -244,6 +264,7 @@
             btnCancelarPer.TabIndex = 130;
             btnCancelarPer.Text = "Cancelar";
             btnCancelarPer.UseVisualStyleBackColor = true;
+            btnCancelarPer.Click += btnCancelarPer_Click;
             // 
             // btnConfirmarPer
             // 
@@ -262,8 +283,9 @@
             txtSegApe.Enabled = false;
             txtSegApe.Location = new Point(437, 159);
             txtSegApe.Name = "txtSegApe";
-            txtSegApe.Size = new Size(184, 27);
+            txtSegApe.Size = new Size(192, 27);
             txtSegApe.TabIndex = 128;
+            txtSegApe.KeyPress += txtSegApe_KeyPress;
             // 
             // label16
             // 
@@ -281,6 +303,7 @@
             txtPrimApe.Name = "txtPrimApe";
             txtPrimApe.Size = new Size(184, 27);
             txtPrimApe.TabIndex = 126;
+            txtPrimApe.KeyPress += txtPrimApe_KeyPress;
             // 
             // label15
             // 
@@ -296,8 +319,9 @@
             txtSegNombre.Enabled = false;
             txtSegNombre.Location = new Point(437, 84);
             txtSegNombre.Name = "txtSegNombre";
-            txtSegNombre.Size = new Size(184, 27);
+            txtSegNombre.Size = new Size(192, 27);
             txtSegNombre.TabIndex = 124;
+            txtSegNombre.KeyPress += txtSegNombre_KeyPress;
             // 
             // label14
             // 
@@ -335,17 +359,19 @@
             txtDireccion.Location = new Point(21, 154);
             txtDireccion.Multiline = true;
             txtDireccion.Name = "txtDireccion";
-            txtDireccion.Size = new Size(184, 196);
+            txtDireccion.Size = new Size(184, 188);
             txtDireccion.TabIndex = 120;
+            txtDireccion.TextChanged += txtDireccion_TextChanged;
+            txtDireccion.KeyPress += txtDireccion_KeyPress;
             // 
             // cbxEstadoCivil
             // 
             cbxEstadoCivil.Enabled = false;
             cbxEstadoCivil.FormattingEnabled = true;
             cbxEstadoCivil.Items.AddRange(new object[] { "SOLTERO", "CASADO", "DIVORCIADO", "VIUDO" });
-            cbxEstadoCivil.Location = new Point(232, 322);
+            cbxEstadoCivil.Location = new Point(232, 314);
             cbxEstadoCivil.Name = "cbxEstadoCivil";
-            cbxEstadoCivil.Size = new Size(184, 28);
+            cbxEstadoCivil.Size = new Size(192, 28);
             cbxEstadoCivil.TabIndex = 119;
             // 
             // txtTelefono
@@ -355,6 +381,8 @@
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(185, 27);
             txtTelefono.TabIndex = 118;
+            txtTelefono.TextChanged += txtTelefono_TextChanged;
+            txtTelefono.KeyPress += txtTelefono_KeyPress;
             // 
             // txtCodigoGenerado
             // 
@@ -407,11 +435,12 @@
             txtPrimerNombre.Name = "txtPrimerNombre";
             txtPrimerNombre.Size = new Size(184, 27);
             txtPrimerNombre.TabIndex = 112;
+            txtPrimerNombre.KeyPress += txtPrimerNombre_KeyPress;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(232, 300);
+            label5.Location = new Point(232, 292);
             label5.Name = "label5";
             label5.Size = new Size(86, 20);
             label5.TabIndex = 111;
@@ -424,9 +453,13 @@
             txtCedula.Name = "txtCedula";
             txtCedula.Size = new Size(184, 27);
             txtCedula.TabIndex = 110;
+            txtCedula.KeyPress += txtCedula_KeyPress;
             // 
             // gbxDatosUsuarios
             // 
+            gbxDatosUsuarios.Controls.Add(txtDiasLaborales);
+            gbxDatosUsuarios.Controls.Add(txtEmail);
+            gbxDatosUsuarios.Controls.Add(label18);
             gbxDatosUsuarios.Controls.Add(btnCancelarUs);
             gbxDatosUsuarios.Controls.Add(btnConfirmarUs);
             gbxDatosUsuarios.Controls.Add(btnEditarUsuario);
@@ -452,6 +485,33 @@
             gbxDatosUsuarios.TabIndex = 113;
             gbxDatosUsuarios.TabStop = false;
             gbxDatosUsuarios.Text = "Datos de Usuario";
+            gbxDatosUsuarios.Enter += gbxDatosUsuarios_Enter;
+            // 
+            // txtDiasLaborales
+            // 
+            txtDiasLaborales.Enabled = false;
+            txtDiasLaborales.Location = new Point(425, 274);
+            txtDiasLaborales.Multiline = true;
+            txtDiasLaborales.Name = "txtDiasLaborales";
+            txtDiasLaborales.Size = new Size(229, 27);
+            txtDiasLaborales.TabIndex = 138;
+            // 
+            // txtEmail
+            // 
+            txtEmail.Enabled = false;
+            txtEmail.Location = new Point(16, 128);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(391, 27);
+            txtEmail.TabIndex = 141;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(16, 105);
+            label18.Name = "label18";
+            label18.Size = new Size(132, 20);
+            label18.TabIndex = 140;
+            label18.Text = "Correo Electrónico";
             // 
             // btnCancelarUs
             // 
@@ -491,8 +551,6 @@
             // 
             // gbxDias
             // 
-            gbxDias.Controls.Add(txtDiasLaborales);
-            gbxDias.Controls.Add(chbxDomingo);
             gbxDias.Controls.Add(chbxSabado);
             gbxDias.Controls.Add(chbxViernes);
             gbxDias.Controls.Add(chbxJueves);
@@ -500,31 +558,12 @@
             gbxDias.Controls.Add(chbxMartes);
             gbxDias.Controls.Add(chbxLunes);
             gbxDias.Enabled = false;
-            gbxDias.Location = new Point(223, 181);
+            gbxDias.Location = new Point(425, 105);
             gbxDias.Name = "gbxDias";
-            gbxDias.Size = new Size(229, 161);
+            gbxDias.Size = new Size(229, 163);
             gbxDias.TabIndex = 134;
             gbxDias.TabStop = false;
             gbxDias.Text = "Horario";
-            // 
-            // txtDiasLaborales
-            // 
-            txtDiasLaborales.Enabled = false;
-            txtDiasLaborales.Location = new Point(80, -7);
-            txtDiasLaborales.Multiline = true;
-            txtDiasLaborales.Name = "txtDiasLaborales";
-            txtDiasLaborales.Size = new Size(140, 27);
-            txtDiasLaborales.TabIndex = 138;
-            // 
-            // chbxDomingo
-            // 
-            chbxDomingo.AutoSize = true;
-            chbxDomingo.Location = new Point(126, 94);
-            chbxDomingo.Name = "chbxDomingo";
-            chbxDomingo.Size = new Size(94, 24);
-            chbxDomingo.TabIndex = 6;
-            chbxDomingo.Text = "Domingo";
-            chbxDomingo.UseVisualStyleBackColor = true;
             // 
             // chbxSabado
             // 
@@ -589,7 +628,7 @@
             // txtHoras
             // 
             txtHoras.Enabled = false;
-            txtHoras.Location = new Point(16, 274);
+            txtHoras.Location = new Point(227, 274);
             txtHoras.Name = "txtHoras";
             txtHoras.Size = new Size(184, 27);
             txtHoras.TabIndex = 133;
@@ -597,7 +636,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(16, 251);
+            label13.Location = new Point(227, 251);
             label13.Name = "label13";
             label13.Size = new Size(116, 20);
             label13.TabIndex = 132;
@@ -606,7 +645,7 @@
             // txtSalario
             // 
             txtSalario.Enabled = false;
-            txtSalario.Location = new Point(16, 204);
+            txtSalario.Location = new Point(20, 274);
             txtSalario.Name = "txtSalario";
             txtSalario.Size = new Size(184, 27);
             txtSalario.TabIndex = 131;
@@ -614,7 +653,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(16, 181);
+            label12.Location = new Point(20, 251);
             label12.Name = "label12";
             label12.Size = new Size(55, 20);
             label12.TabIndex = 130;
@@ -623,7 +662,7 @@
             // txtPuesto
             // 
             txtPuesto.Enabled = false;
-            txtPuesto.Location = new Point(223, 132);
+            txtPuesto.Location = new Point(227, 202);
             txtPuesto.Multiline = true;
             txtPuesto.Name = "txtPuesto";
             txtPuesto.Size = new Size(184, 27);
@@ -632,7 +671,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(223, 109);
+            label11.Location = new Point(227, 179);
             label11.Name = "label11";
             label11.Size = new Size(53, 20);
             label11.TabIndex = 128;
@@ -664,11 +703,12 @@
             txtClave.PasswordChar = '*';
             txtClave.Size = new Size(184, 27);
             txtClave.TabIndex = 125;
+            txtClave.KeyPress += txtClave_KeyPress;
             // 
             // txtRol
             // 
             txtRol.Enabled = false;
-            txtRol.Location = new Point(16, 132);
+            txtRol.Location = new Point(20, 202);
             txtRol.Name = "txtRol";
             txtRol.Size = new Size(184, 27);
             txtRol.TabIndex = 124;
@@ -685,7 +725,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(16, 109);
+            label4.Location = new Point(20, 179);
             label4.Name = "label4";
             label4.Size = new Size(31, 20);
             label4.TabIndex = 122;
@@ -698,18 +738,7 @@
             txtUser.Name = "txtUser";
             txtUser.Size = new Size(184, 27);
             txtUser.TabIndex = 121;
-            // 
-            // seeCloseIcon
-            // 
-            seeCloseIcon.BackColor = Color.White;
-            seeCloseIcon.Image = Properties.Resources.view_see_hide_eye_close_search_look_icon_232697;
-            seeCloseIcon.Location = new Point(413, 62);
-            seeCloseIcon.Name = "seeCloseIcon";
-            seeCloseIcon.Size = new Size(30, 27);
-            seeCloseIcon.SizeMode = PictureBoxSizeMode.Zoom;
-            seeCloseIcon.TabIndex = 138;
-            seeCloseIcon.TabStop = false;
-            seeCloseIcon.Click += seeCloseIcon_Click;
+            txtUser.KeyPress += txtUser_KeyPress;
             // 
             // seeIcon
             // 
@@ -723,13 +752,25 @@
             seeIcon.TabStop = false;
             seeIcon.Click += seeIcon_Click;
             // 
+            // seeCloseIcon
+            // 
+            seeCloseIcon.BackColor = Color.White;
+            seeCloseIcon.Image = Properties.Resources.view_see_hide_eye_close_search_look_icon_232697;
+            seeCloseIcon.Location = new Point(413, 62);
+            seeCloseIcon.Name = "seeCloseIcon";
+            seeCloseIcon.Size = new Size(30, 27);
+            seeCloseIcon.SizeMode = PictureBoxSizeMode.Zoom;
+            seeCloseIcon.TabIndex = 138;
+            seeCloseIcon.TabStop = false;
+            seeCloseIcon.Click += seeCloseIcon_Click;
+            // 
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(gbxPeticionesBtn);
-            panel1.Controls.Add(gbxDatosUsuarios);
             panel1.Controls.Add(gbxDatosPersonales);
             panel1.Controls.Add(gbxPeticiones);
+            panel1.Controls.Add(gbxDatosUsuarios);
             panel1.Location = new Point(-12, 236);
             panel1.Name = "panel1";
             panel1.Size = new Size(933, 511);
@@ -876,6 +917,10 @@
             btnPeticionesUser.UseVisualStyleBackColor = false;
             btnPeticionesUser.Click += btnPeticionesUser_Click;
             // 
+            // errorProviderPeticion
+            // 
+            errorProviderPeticion.ContainerControl = this;
+            // 
             // AjustesCuenta
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -904,12 +949,13 @@
             gbxDatosUsuarios.PerformLayout();
             gbxDias.ResumeLayout(false);
             gbxDias.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).EndInit();
             ((System.ComponentModel.ISupportInitialize)seeIcon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)seeCloseIcon).EndInit();
             panel1.ResumeLayout(false);
             gbxPeticionesBtn.ResumeLayout(false);
             gbxPeticiones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvPeticiones).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderPeticion).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -954,7 +1000,6 @@
         private TextBox txtHoras;
         private Label label13;
         public GroupBox gbxDias;
-        public CheckBox chbxDomingo;
         public CheckBox chbxSabado;
         public CheckBox chbxViernes;
         public CheckBox chbxJueves;
@@ -988,5 +1033,10 @@
         private TextBox txtDiasLaborales;
         private PictureBox seeCloseIcon;
         private PictureBox seeIcon;
+        private ErrorProvider errorProviderPeticion;
+        private Label label17;
+        private TextBox txtEmail;
+        private Label label18;
+        private Button button1;
     }
 }

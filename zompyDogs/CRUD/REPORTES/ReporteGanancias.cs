@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace zompyDogs.CRUD.REGISTROS
+namespace zompyDogs.CRUD.REPORTES
 {
-    public partial class ProductoRegistro : Form
+    public partial class ReporteGanancias : Form
     {
-        public ProductoRegistro()
+        public ReporteGanancias()
         {
             InitializeComponent();
         }

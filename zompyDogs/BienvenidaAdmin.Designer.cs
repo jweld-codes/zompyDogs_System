@@ -40,6 +40,7 @@
             pictureBox2 = new PictureBox();
             btnInicio = new Button();
             panelContenedor = new Panel();
+            btnReportes = new Button();
             sidebarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -47,6 +48,7 @@
             // sidebarMenu
             // 
             sidebarMenu.BackColor = Color.FromArgb(31, 19, 10);
+            sidebarMenu.Controls.Add(btnReportes);
             sidebarMenu.Controls.Add(btnAjustesCuenta);
             sidebarMenu.Controls.Add(lblCerrarSession);
             sidebarMenu.Controls.Add(lblNombreSideBar);
@@ -204,6 +206,22 @@
             panelContenedor.Size = new Size(919, 772);
             panelContenedor.TabIndex = 4;
             // 
+            // btnReportes
+            // 
+            btnReportes.BackColor = Color.Transparent;
+            btnReportes.FlatAppearance.BorderSize = 0;
+            btnReportes.FlatStyle = FlatStyle.Flat;
+            btnReportes.ForeColor = SystemColors.ButtonFace;
+            btnReportes.Image = Properties.Resources.petition2;
+            btnReportes.ImageAlign = ContentAlignment.MiddleLeft;
+            btnReportes.Location = new Point(45, 500);
+            btnReportes.Name = "btnReportes";
+            btnReportes.Size = new Size(167, 51);
+            btnReportes.TabIndex = 17;
+            btnReportes.Text = "Reportes";
+            btnReportes.UseVisualStyleBackColor = false;
+            btnReportes.Click += btnReportes_Click;
+            // 
             // BienvenidaAdmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -234,5 +252,6 @@
         private PictureBox pictureBox3;
         private Button btnAjustesCuenta;
         private Panel panelContenedor;
+        private Button btnReportes;
     }
 }

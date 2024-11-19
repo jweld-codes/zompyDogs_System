@@ -22,7 +22,7 @@ namespace zompyDogs
         public LibretaMenu()
         {
             InitializeComponent();
-            CargarMenu("Entrada");
+            CargarMenu("Almuerzos");
             AddCategoria();
         }
 
@@ -30,7 +30,7 @@ namespace zompyDogs
         {
             using (SqlConnection conn = new SqlConnection(con_string))
             {
-                string query = "SELECT Codigo, Platillo, Descripcion, Precio, Imagen FROM v_DetallesMenu WHERE Categoria = @Categoria";
+                string query = "SELECT Codigo, Platillo, Descripcion, Precio, Imagen FROM v_DetallesMenu WHERE Categoria = @Categoria AND Estado = 'Activo'";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Categoria", categoria);

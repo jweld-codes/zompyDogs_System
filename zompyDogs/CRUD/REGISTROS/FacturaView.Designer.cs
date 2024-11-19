@@ -44,12 +44,10 @@
             lblSubtotal = new Label();
             label4 = new Label();
             lblCodigoEmpleado = new Label();
-            lblTotalProductos = new Label();
             dgvTotalPedido = new DataGridView();
             dtpFechaRegistro = new DateTimePicker();
             txtEmpleado = new TextBox();
             label7 = new Label();
-            label6 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
             groupBox1.SuspendLayout();
@@ -93,12 +91,10 @@
             groupBox1.Controls.Add(lblSubtotal);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(lblCodigoEmpleado);
-            groupBox1.Controls.Add(lblTotalProductos);
             groupBox1.Controls.Add(dgvTotalPedido);
             groupBox1.Controls.Add(dtpFechaRegistro);
             groupBox1.Controls.Add(txtEmpleado);
             groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(label6);
             groupBox1.Location = new Point(15, 145);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(560, 370);
@@ -186,7 +182,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(332, 128);
+            label9.Location = new Point(314, 128);
             label9.Name = "label9";
             label9.Size = new Size(54, 20);
             label9.TabIndex = 111;
@@ -214,21 +210,11 @@
             // lblCodigoEmpleado
             // 
             lblCodigoEmpleado.AutoSize = true;
-            lblCodigoEmpleado.Location = new Point(415, 59);
+            lblCodigoEmpleado.Location = new Point(397, 59);
             lblCodigoEmpleado.Name = "lblCodigoEmpleado";
             lblCodigoEmpleado.Size = new Size(25, 20);
             lblCodigoEmpleado.TabIndex = 116;
             lblCodigoEmpleado.Text = "00";
-            // 
-            // lblTotalProductos
-            // 
-            lblTotalProductos.AutoSize = true;
-            lblTotalProductos.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotalProductos.Location = new Point(125, 313);
-            lblTotalProductos.Name = "lblTotalProductos";
-            lblTotalProductos.Size = new Size(36, 28);
-            lblTotalProductos.TabIndex = 115;
-            lblTotalProductos.Text = "00";
             // 
             // dgvTotalPedido
             // 
@@ -277,20 +263,11 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(332, 59);
+            label7.Location = new Point(314, 59);
             label7.Name = "label7";
             label7.Size = new Size(77, 20);
             label7.TabIndex = 107;
             label7.Text = "Empleado";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(8, 318);
-            label6.Name = "label6";
-            label6.Size = new Size(122, 20);
-            label6.TabIndex = 105;
-            label6.Text = "Total de Platillos:";
             // 
             // pictureBox1
             // 
@@ -344,7 +321,6 @@
         private Label label9;
         public TextBox txtEmpleado;
         private Label label7;
-        private Label label6;
         private PictureBox pictureBox1;
         public DataGridView dgvTotalPedido;
         private Label label13;
@@ -352,7 +328,6 @@
         private Label label4;
         public TextBox txtEstado;
         private Label label2;
-        public Label lblTotalProductos;
         public Label lblCodigoEmpleado;
         public Label lblTotal;
         public Label lblISV;

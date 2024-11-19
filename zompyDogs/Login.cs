@@ -75,7 +75,7 @@ namespace zompyDogs
                     PeticionesRegisro frmPeticionesRegistro = new PeticionesRegisro(idEmpleado);
                     frmPeticionesRegistro.IdEmpleado = idEmpleado;
 
-                    Peticiones frmPeticiones = new Peticiones(idEmpleado);
+                    Peticiones frmPeticiones = new Peticiones(idEmpleado, UsuarioName);
                     frmPeticiones.IdEmpleado = idEmpleado;
 
                     AjustesCuenta frmAjustesCuenta = new AjustesCuenta(idEmpleado, UsuarioName);

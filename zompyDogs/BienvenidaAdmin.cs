@@ -20,6 +20,9 @@ namespace zompyDogs
         public BienvenidaAdmin()
         {
             InitializeComponent();
+
+            btnReportes.Hide();
+            btnAjustesCuenta.Hide();
         }
 
         public void AbrirFormsHija(Form formHija)
@@ -70,7 +73,7 @@ namespace zompyDogs
         {
             CambiarColorBoton((Button)sender);
 
-            Peticiones PeticionesForm = new Peticiones(IdEmpleado)
+            Peticiones PeticionesForm = new Peticiones(IdEmpleado, UsuarioNombreAdmin)
             {
                 FormPrincipal = this
             };
@@ -141,7 +144,7 @@ namespace zompyDogs
                 if (ctrl is Button)
                 {
                     Button boton = (Button)ctrl;
-                    boton.BackColor = Color.Transparent;  
+                    boton.BackColor = Color.Transparent;
                     boton.ForeColor = Color.White;
                 }
             }
@@ -152,8 +155,17 @@ namespace zompyDogs
 
         private void BienvenidaAdmin_Load(object sender, EventArgs e)
         {
-            
+
         }
 
+        private void btnReportes_Click(object sender, EventArgs e)
+        {
+            CambiarColorBoton((Button)sender);
+            PanelReportes frmReporte = new PanelReportes
+            {
+                FormPrincipal = this
+            };
+            AbrirFormsHija(frmReporte);
+        }
     }
 }

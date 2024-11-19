@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             topBarMenu = new Panel();
             pictureBox2 = new PictureBox();
             btnUsuarioPanel = new Button();
@@ -44,17 +45,21 @@
             groupBox2 = new GroupBox();
             dgvPeticionesPendientes = new DataGridView();
             btnEliminarUsuario = new Button();
+            errorProviderEmptyStrings = new ErrorProvider(components);
+            button1 = new Button();
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPeticionesCompletadas).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPeticionesPendientes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderEmptyStrings).BeginInit();
             SuspendLayout();
             // 
             // topBarMenu
             // 
             topBarMenu.BackColor = Color.FromArgb(31, 19, 10);
+            topBarMenu.Controls.Add(button1);
             topBarMenu.Controls.Add(pictureBox2);
             topBarMenu.Controls.Add(btnUsuarioPanel);
             topBarMenu.Controls.Add(lblTITULO);
@@ -76,16 +81,17 @@
             // 
             // btnUsuarioPanel
             // 
-            btnUsuarioPanel.BackColor = Color.White;
+            btnUsuarioPanel.BackColor = Color.Transparent;
             btnUsuarioPanel.FlatAppearance.BorderSize = 0;
             btnUsuarioPanel.FlatStyle = FlatStyle.Flat;
-            btnUsuarioPanel.ForeColor = SystemColors.ActiveCaptionText;
+            btnUsuarioPanel.ForeColor = SystemColors.Control;
             btnUsuarioPanel.Location = new Point(728, 45);
             btnUsuarioPanel.Name = "btnUsuarioPanel";
             btnUsuarioPanel.Size = new Size(152, 36);
             btnUsuarioPanel.TabIndex = 98;
-            btnUsuarioPanel.Text = "Inicio";
+            btnUsuarioPanel.Text = "Mis Peticiones";
             btnUsuarioPanel.UseVisualStyleBackColor = false;
+            btnUsuarioPanel.Click += btnUsuarioPanel_Click;
             // 
             // lblTITULO
             // 
@@ -108,9 +114,9 @@
             lblBreadCrumbUser.ForeColor = Color.LimeGreen;
             lblBreadCrumbUser.Location = new Point(141, 99);
             lblBreadCrumbUser.Name = "lblBreadCrumbUser";
-            lblBreadCrumbUser.Size = new Size(56, 20);
+            lblBreadCrumbUser.Size = new Size(93, 20);
             lblBreadCrumbUser.TabIndex = 108;
-            lblBreadCrumbUser.Text = "INICIO";
+            lblBreadCrumbUser.Text = "PETICIONES";
             // 
             // groupBox1
             // 
@@ -239,6 +245,23 @@
             btnEliminarUsuario.UseVisualStyleBackColor = true;
             btnEliminarUsuario.Click += btnEliminarUsuario_Click_1;
             // 
+            // errorProviderEmptyStrings
+            // 
+            errorProviderEmptyStrings.ContainerControl = this;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.White;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = SystemColors.ActiveCaptionText;
+            button1.Location = new Point(570, 45);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 36);
+            button1.TabIndex = 99;
+            button1.Text = "Peticiones";
+            button1.UseVisualStyleBackColor = false;
+            // 
             // Peticiones
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -258,7 +281,6 @@
             Controls.Add(lblTituloRegistroPanel);
             Name = "Peticiones";
             Text = "Peticiones";
-           // KeyDown += Peticiones_KeyDown;
             topBarMenu.ResumeLayout(false);
             topBarMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -266,6 +288,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvPeticionesCompletadas).EndInit();
             groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvPeticionesPendientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderEmptyStrings).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -288,5 +311,7 @@
         private GroupBox groupBox2;
         public DataGridView dgvPeticionesPendientes;
         public Button btnEliminarUsuario;
+        private ErrorProvider errorProviderEmptyStrings;
+        private Button button1;
     }
 }

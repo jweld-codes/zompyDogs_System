@@ -17,6 +17,7 @@ namespace zompyDogs
     {
         public EmpleadoBienvenida EmpleadoFormPrincipal { get; set; }
         public BienvenidaAdmin FormPrincipal { get; set; }
+        public string NombreUsuarioAjuste { get; set; }
 
         PeticionRecuperacionDeContraseña frmSolicitudDeRecuperacionCuenta;
         public PeticionesRegisro frmPeticionesRegisro;
@@ -31,21 +32,25 @@ namespace zompyDogs
         public string PeticionEstadoVal;
         public string PeticionUsuarioVal;
         public string PeticionUsuarioGuardar;
+        public string PeticionEmailVal;
         public int PeticionUsuarioID;
 
-        public Peticiones(int idEmpledo)
+        public Peticiones(int idEmpledo, string usuarioNombre)
         {
+
             InitializeComponent();
             IdEmpleado = idEmpledo;
+            NombreUsuarioAjuste = usuarioNombre;
 
             dgvPeticionesCompletadas.CellClick += dgvPeticiones_CellClick;
             dgvPeticionesPendientes.CellClick += dgvPeticionesPendientes_CellClick;
 
             CargarPeticiones();
-            btnActualizar.Enabled = false;
-            btnEliminarUsuario.Enabled = false;
+            btnActualizar.Hide();
+            btnEliminarUsuario.Hide();
 
         }
+
         public void CargarPeticiones()
         {
             dgvPeticionesPendientes.DataSource = PeticionesValidaciones.ObtenerPeticionesPendientes();
@@ -54,12 +59,16 @@ namespace zompyDogs
             dgvPeticionesPendientes.CurrentCell = null;
             dgvPeticionesCompletadas.CurrentCell = null;
 
+            dgvPeticionesPendientes.Columns["Correo"].Visible = false;
+
             dgvPeticionesCompletadas.Columns["Codigo"].HeaderText = "Código";
             dgvPeticionesCompletadas.Columns["Accion"].HeaderText = "Acción";
+            dgvPeticionesCompletadas.Columns["Peticion"].HeaderText = "Petición";
             dgvPeticionesCompletadas.Columns["Fecha_De_Envio"].HeaderText = "Fecha de Envío";
 
             dgvPeticionesPendientes.Columns["Codigo"].HeaderText = "Código";
             dgvPeticionesPendientes.Columns["Accion"].HeaderText = "Acción";
+            dgvPeticionesPendientes.Columns["Peticion"].HeaderText = "Petición";
             dgvPeticionesPendientes.Columns["Fecha_De_Envio"].HeaderText = "Fecha de Envío";
 
             dgvPeticionesPendientes.EnableHeadersVisualStyles = false;
@@ -72,7 +81,6 @@ namespace zompyDogs
             dgvPeticionesCompletadas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dgvPeticionesCompletadas.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
         }
-
 
         private void btnAgregarRegistro_Click(object sender, EventArgs e)
         {
@@ -98,33 +106,42 @@ namespace zompyDogs
             //metodo para guardar
             peticionesRegistro.btnGuardarUser.Click += (s, args) =>
             {
+                peticionesRegistro.ValidarCampos();
 
-                PeticionRegistro nuevaPeticion = new PeticionRegistro
-                {
-                    CodigPeticion = peticionesRegistro.txtCodigoGenerado.Text,
-                    AccionPeticion = peticionesRegistro.cbxPeticion.SelectedItem?.ToString() ?? string.Empty,
-                    Descripcion = peticionesRegistro.txtDescripcion.Text,
-                    FechaEnviada = peticionesRegistro.dtpFechaEnviada.Value,
-                    FechaRealizada = DateTime.Now,
-                    CodigoUsuario = peticionesRegistro.IdEmpleado,
-                    Estado = peticionesRegistro.cbxEstadoCuenta.SelectedItem?.ToString() ?? "Activo"
-                };
-                try
-                {
-                    PeticionesValidaciones.GuardarPeticion(nuevaPeticion);
+                bool itsValid;
+                itsValid = peticionesRegistro.okError;
 
-                    MessageBox.Show("Petición Registrada con Éxito.");
-                    CargarPeticiones();
-                    //this.Close();
+                if (itsValid == false)
+                {
+                    peticionesRegistro.ValidarCampos();
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Error al actualizar la petición.");
+                    PeticionRegistro nuevaPeticion = new PeticionRegistro
+                    {
+                        CodigPeticion = peticionesRegistro.txtCodigoGenerado.Text,
+                        AccionPeticion = peticionesRegistro.cbxPeticion.SelectedItem?.ToString() ?? string.Empty,
+                        Descripcion = peticionesRegistro.txtDescripcion.Text,
+                        FechaEnviada = peticionesRegistro.dtpFechaEnviada.Value,
+                        FechaRealizada = DateTime.Now,
+                        CodigoUsuario = peticionesRegistro.IdEmpleado,
+                        Estado = peticionesRegistro.cbxEstadoCuenta.SelectedItem?.ToString() ?? "Activo"
+                    };
+                    try
+                    {
+                        PeticionesValidaciones.GuardarPeticion(nuevaPeticion);
 
+                        MessageBox.Show("Petición Registrada con Éxito.");
+                        CargarPeticiones();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error al actualizar la petición.");
+
+                    }
                 }
             };
         }
-
 
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
         {
@@ -239,6 +256,7 @@ namespace zompyDogs
 
             peticionView.Show();
         }
+
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (PeticionEstadoVal == "Completado")
@@ -252,6 +270,9 @@ namespace zompyDogs
 
                 peticionesRecuperacion.txtCodigoGenerado.Text = PeticionCodigoVal;
                 peticionesRecuperacion.txtCodigoGenerado.Enabled = false;
+
+                peticionesRecuperacion.txtEmail.Text = PeticionEmailVal;
+                peticionesRecuperacion.txtEmail.Enabled = false;
 
                 peticionesRecuperacion.txtAccionPeticion.Text = PeticionAccionVal;
                 peticionesRecuperacion.txtAccionPeticion.Enabled = false;
@@ -268,6 +289,8 @@ namespace zompyDogs
                 peticionesRecuperacion.txtEstado.Text = PeticionEstadoVal;
                 peticionesRecuperacion.txtEstado.Enabled = false;
 
+                peticionesRecuperacion.txtNuevaClave.Enabled = false;
+
                 peticionesRecuperacion.btnRecuperacion.Text = "CONFIRMAR";
                 peticionesRecuperacion.btnCancelar.Text = "CANCELAR";
 
@@ -277,50 +300,57 @@ namespace zompyDogs
             }
             else
             {
-                /*var peticionEditar = new PeticionesRegisro(IdEmpleado);
-                peticionEditar.lblTituloRegistro.Text = "Editar Petición";
+                /*  var peticionEditar = new PeticionesRegisro(IdEmpleado);
+                  peticionEditar.lblTituloRegistro.Text = "Editar Petición";
 
-                peticionEditar.txtCodigoGenerado.Text = PeticionCodigoVal;
-                peticionEditar.txtCodigoGenerado.Enabled = false;
+                  peticionEditar.txtCodigoGenerado.Text = PeticionCodigoVal;
+                  peticionEditar.txtCodigoGenerado.Enabled = false;
 
-                peticionEditar.cbxPeticion.Text = PeticionAccionVal;
-                peticionEditar.txtDescripcion.Text = PeticionDescripcionVal;
-                peticionEditar.txtUsuarioName.Text = PeticionUsuarioVal;
-                peticionEditar.txtUsuarioName.Enabled = false;
-                peticionEditar.dtpFechaEnviada.Value = PeticionFecha_De_EnvioVal;
-                peticionEditar.cbxEstadoCuenta.Text = PeticionEstadoVal;
-                peticionEditar.cbxEstadoCuenta.Enabled = true;
+                  peticionEditar.cbxPeticion.Text = PeticionAccionVal;
+                  peticionEditar.cbxPeticion.Enabled = false;
 
-                peticionEditar.btnGuardarUser.Text = "CONFIRMAR";
-                peticionEditar.btnCancelar.Text = "CANCELAR";
-                peticionEditar.btnCancelar.Hide();
+                  peticionEditar.txtDescripcion.Text = PeticionDescripcionVal;
+                  peticionEditar.txtDescripcion.Enabled = false;
 
-                peticionEditar.Show();
+                  peticionEditar.txtUsuarioName.Text = PeticionUsuarioVal;
+                  peticionEditar.txtUsuarioName.Enabled = false;
 
-                peticionEditar.btnGuardarUser.Click += (s, args) =>
-                {
-                    PeticionRegistro peticionActualizada = new PeticionRegistro
-                    {
-                        CodigPeticion = peticionEditar.txtCodigoGenerado.Text,
-                        AccionPeticion = peticionEditar.cbxPeticion.Text,
-                        Descripcion = peticionEditar.txtDescripcion.Text,
-                        FechaEnviada = peticionEditar.dtpFechaEnviada.Value,
-                        FechaRealizada = DateTime.Now,
-                        CodigoUsuario = IdEmpleado,
-                        Estado = peticionEditar.cbxEstadoCuenta.Text
-                    };
+                  peticionEditar.dtpFechaEnviada.Value = PeticionFecha_De_EnvioVal;
+                  peticionEditar.dtpFechaEnviada.Enabled = false;
 
-                    bool resultado = PeticionesValidaciones.ActualizarPeticion(peticionActualizada);
+                  peticionEditar.cbxEstadoCuenta.Text = PeticionEstadoVal;
+                  peticionEditar.cbxEstadoCuenta.Enabled = true;
 
-                    if (resultado)
-                    {
-                        CargarPeticiones();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al actualizar la petición.");
-                    }
-                };*/
+                  peticionEditar.btnGuardarUser.Text = "CONFIRMAR";
+                  peticionEditar.btnCancelar.Text = "CANCELAR";
+                  peticionEditar.btnCancelar.Hide();
+
+                  peticionEditar.Show();
+
+                  peticionEditar.btnGuardarUser.Click += (s, args) =>
+                  {
+                      PeticionRegistro peticionActualizada = new PeticionRegistro
+                      {
+                          CodigPeticion = peticionEditar.txtCodigoGenerado.Text,
+                          AccionPeticion = peticionEditar.cbxPeticion.Text,
+                          Descripcion = peticionEditar.txtDescripcion.Text,
+                          FechaEnviada = peticionEditar.dtpFechaEnviada.Value,
+                          FechaRealizada = DateTime.Now,
+                          CodigoUsuario = IdEmpleado,
+                          Estado = peticionEditar.cbxEstadoCuenta.Text
+                      };
+
+                      bool resultado = PeticionesValidaciones.ActualizarPeticion(peticionActualizada);
+
+                      if (resultado)
+                      {
+                          CargarPeticiones();
+                      }
+                      else
+                      {
+                          MessageBox.Show("Error al actualizar la petición.");
+                      }
+                  };*/
             }
 
         }
@@ -364,17 +394,32 @@ namespace zompyDogs
                 PeticionFecha_De_EnvioVal = Convert.ToDateTime(filaSeleccionada.Cells["Fecha_De_Envio"].Value);
                 PeticionDescripcionVal = filaSeleccionada.Cells["Peticion"].Value.ToString();
                 PeticionUsuarioVal = filaSeleccionada.Cells["Usuario"].Value.ToString();
+                PeticionEmailVal = filaSeleccionada.Cells["Correo"].Value.ToString();
                 PeticionEstadoVal = filaSeleccionada.Cells["Estado"].Value.ToString();
 
 
                 if (PeticionAccionVal == "Recuperación de contraseña")
                 {
+                    btnActualizar.Show();
                     btnActualizar.Enabled = true;
                 }
                 else
                 {
+                    btnActualizar.Hide();
                     btnActualizar.Enabled = false;
                 }
+            }
+        }
+
+        private void btnUsuarioPanel_Click(object sender, EventArgs e)
+        {
+            if (FormPrincipal != null)
+            {
+                FormPrincipal.AbrirFormsHija(new AjustesCuenta(IdEmpleado, NombreUsuarioAjuste) { FormPrincipal = FormPrincipal });
+            }
+            else
+            {
+                MessageBox.Show("FormPrincipal es nulo");
             }
         }
     }

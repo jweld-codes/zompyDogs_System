@@ -6,11 +6,15 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using zompyDogs.CRUD.REGISTROS;
 using ZompyDogsDAO;
 using ZompyDogsLib.Controladores;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace zompyDogs
 {
@@ -21,6 +25,7 @@ namespace zompyDogs
         private string nuevoCodigoUsuario;
         private bool isTheUsername = false;
         private int contUser;
+        public bool okError = true;
 
         public UsuarioRegistro()
         {
@@ -31,12 +36,129 @@ namespace zompyDogs
             GeneradordeCodigoUsuarioFromForm();
             CargarRolesComboBox();
 
+            errorProviderUsuario.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+
+            txtCedula.MaxLength = 13;
+            txtTelefono.MaxLength = 8;
+
+            txtCedula.KeyPress += new KeyPressEventHandler(txtCedulae_KeyPress);
+            txtTelefono.KeyPress += new KeyPressEventHandler(txtTelefono_KeyPress);
+
             int siguienteID = UsuarioDAO.ObtenerSiguienteID();
             lblidDetalleUsuario.Text = siguienteID.ToString();
             txtUsername.Enabled = false;
             txtPassword.Enabled = false;
             cbxRol.SelectedIndexChanged += cbxRol_SelectedIndexChanged;
 
+        }
+        private void txtCedulae_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        public bool ValidarCampos()
+        {
+            okError = true;
+
+            List<System.Windows.Forms.TextBox> textBoxes = new List<System.Windows.Forms.TextBox> { txtPrimNombre, txtPrimApellido, txtPassword, txtUsername, txtDireccion, txtTelefono, txtCedula };
+
+            List<System.Windows.Forms.ComboBox> comboBoxList = new List<System.Windows.Forms.ComboBox> { cbxEsatdoCivil, cbxRol };
+
+            foreach (System.Windows.Forms.TextBox textBox in textBoxes)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(textBox, $"Ingrese un valor en el campo.");
+                    textBox.BackColor = Color.OldLace;
+                }
+                else
+                {
+                    errorProviderUsuario.SetError(textBox, "");
+                    textBox.BackColor = SystemColors.Window;
+                }
+            }
+
+            foreach (System.Windows.Forms.ComboBox comboBoxListValid in comboBoxList)
+            {
+                if (comboBoxListValid.SelectedIndex == -1)
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(comboBoxListValid, "Seleccione una opción.");
+                    comboBoxListValid.BackColor = Color.OldLace;
+                }
+                else
+                {
+                    errorProviderUsuario.SetError(comboBoxListValid, "");
+                    comboBoxListValid.BackColor = SystemColors.Window;
+                }
+            }
+            string correoIngresado = txtEmail.Text;
+            if (!ValidarCorreo(correoIngresado))
+            {
+                okError = false;
+                errorProviderUsuario.SetError(txtEmail, "Ingrese un correo válido.");
+                txtEmail.BackColor = Color.OldLace;
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtEmail, "");
+                txtEmail.BackColor = SystemColors.Window;
+            }
+
+            if (txtCedula.Text.Length != 13 || !txtCedula.Text.All(char.IsDigit))
+            {
+                okError = false;
+                errorProviderUsuario.SetError(txtCedula, "La cédula debe tener 13 dígitos.");
+                txtCedula.BackColor = Color.OldLace;
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtCedula, "");
+                txtCedula.BackColor = SystemColors.Window;
+            }
+
+            if (txtTelefono.Text.Length != 8 || !txtTelefono.Text.All(char.IsDigit))
+            {
+                okError = false;
+                errorProviderUsuario.SetError(txtTelefono, "El teléfono debe tener 8 dígitos.");
+                txtTelefono.BackColor = Color.OldLace;
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtTelefono, "");
+                txtTelefono.BackColor = SystemColors.Window;
+            }
+
+            if ( txtPrimNombre.Text.Length < 3)
+            {
+                okError = false;
+                errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe tener al menos 3 caracteres.");
+                txtPrimNombre.BackColor = Color.OldLace;
+            }
+
+            if (txtPrimApellido.Text.Length < 3)
+            {
+                okError = false;
+                errorProviderUsuario.SetError(txtPrimApellido, "El primer apellido debe tener al menos 3 caracteres.");
+                txtPrimApellido.BackColor = Color.OldLace;
+            }
+
+            return okError;
+        }
+        public bool ValidarCorreo(string correo)
+        {
+            string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(correo, patronCorreo);
         }
 
         private void cbxRol_SelectedIndexChanged(object sender, EventArgs e)
@@ -83,6 +205,17 @@ namespace zompyDogs
         {
             DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeEmpleadosParaComboBox();
 
+            lblUser.Show();
+            lblClave.Show();
+
+            txtUsername.Show();
+            txtPassword.Show();
+            btnGeneradorUsername.Show();
+            btnGeneradorPassword.Show();
+
+            btnGeneradorPassword.Enabled = true;
+            btnGeneradorUsername.Enabled = true;
+
             cbPuesto.DataSource = dtPuestos;
             cbPuesto.DisplayMember = "puesto";
             cbPuesto.ValueMember = "IdPuesto";
@@ -90,6 +223,16 @@ namespace zompyDogs
         public void CargarPuestosAdminsComboBox()
         {
             DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeAdminsParaComboBox();
+            lblUser.Show();
+            lblClave.Show();
+
+            txtUsername.Show();
+            txtPassword.Show();
+            btnGeneradorUsername.Show();
+            btnGeneradorPassword.Show();
+
+            btnGeneradorPassword.Enabled = true;
+            btnGeneradorUsername.Enabled = true;
 
             cbPuesto.DataSource = dtPuestos;
             cbPuesto.DisplayMember = "puesto";
@@ -99,6 +242,17 @@ namespace zompyDogs
         {
             txtUsername.Text = "------";
             txtPassword.Text = "---" + contUser + "---";
+
+            lblUser.Hide();
+            lblClave.Hide();
+
+            txtUsername.Hide();
+            txtPassword.Hide();
+            btnGeneradorUsername.Hide();
+            btnGeneradorPassword.Hide();
+
+            btnGeneradorPassword.Enabled = false;
+            btnGeneradorUsername.Enabled = false;
             DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeUsuariosParaComboBox();
 
             cbPuesto.DataSource = dtPuestos;
@@ -167,6 +321,254 @@ namespace zompyDogs
 
         private void btnGuardarUser_Click(object sender, EventArgs e)
         {
+        }
+
+        private void btnGuardarUser_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCedula_TextChanged(object sender, EventArgs e)
+        {
+            txtCedula.BackColor = Color.White;
+            if (!string.IsNullOrWhiteSpace(txtCedula.Text))
+            {
+                if (txtCedula.Text.Length == 13)
+                {
+                    errorProviderUsuario.SetError(txtCedula, string.Empty);
+                    txtCedula.BackColor = Color.White;
+                }
+                else
+                {
+                    errorProviderUsuario.SetError(txtCedula, "La cédula debe contener exactamente 13 dígitos.");
+                    txtCedula.BackColor = Color.LightYellow;
+                }
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtCedula, "La cédula no puede estar vacía.");
+                txtCedula.BackColor = Color.LightPink;
+            }
+        }
+
+        private void txtPrimNombre_TextChanged(object sender, EventArgs e)
+        {
+            txtPrimNombre.BackColor = Color.White;
+
+            if (!string.IsNullOrWhiteSpace(txtPrimNombre.Text) && txtPrimNombre.Text.All(char.IsLetter))
+            {
+                if (txtPrimNombre.Text.Length > 2)
+                {
+                    errorProviderUsuario.SetError(txtPrimNombre, string.Empty);
+                }
+                else
+                {
+                    errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe tener al menos 3 caracteres.");
+                    txtPrimNombre.BackColor = Color.LightYellow;
+                }
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe contener solo letras y no puede estar vacío.");
+                txtPrimNombre.BackColor = Color.LightPink;
+            }
+        }
+
+        private void txtSegNombre_TextChanged(object sender, EventArgs e)
+        {
+          /*  txtSegNombre.BackColor = Color.White;
+
+            if (!string.IsNullOrWhiteSpace(txtSegNombre.Text) && txtSegNombre.Text.All(char.IsLetter))
+            {
+                if (txtSegNombre.Text.Length >= 15)
+                {
+                    errorProviderUsuario.SetError(txtSegNombre, string.Empty);
+                }
+                else
+                {
+                    errorProviderUsuario.SetError(txtSegNombre, "El segundo nombre debe tener al menos 15 caracteres.");
+                    txtSegNombre.BackColor = Color.LightYellow;
+                }
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtSegNombre, "El segundo nombre debe contener solo letras y no puede estar vacío.");
+                txtSegNombre.BackColor = Color.LightPink;
+            }*/
+        }
+
+        private void txtPrimApellido_TextChanged(object sender, EventArgs e)
+        {
+            txtPrimApellido.BackColor = Color.White;
+
+            if (!string.IsNullOrWhiteSpace(txtPrimApellido.Text) && txtPrimApellido.Text.All(char.IsLetter))
+            {
+                if (txtPrimApellido.Text.Length > 2)
+                {
+                    errorProviderUsuario.SetError(txtPrimApellido, string.Empty);
+                }
+                else
+                {
+                    errorProviderUsuario.SetError(txtPrimApellido, "El primer apellido debe tener al menos 3 caracteres.");
+                    txtPrimApellido.BackColor = Color.LightYellow;
+                }
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtPrimApellido, "El primer apellido debe contener solo letras y no puede estar vacío.");
+                txtPrimApellido.BackColor = Color.LightPink;
+            }
+        }
+
+        private void txtSegApellido_TextChanged(object sender, EventArgs e)
+        {
+          /*  txtSegApellido.BackColor = Color.White;
+
+            if (!string.IsNullOrWhiteSpace(txtSegApellido.Text) && txtSegApellido.Text.All(char.IsLetter))
+            {
+                if (txtSegApellido.Text.Length >= 15)
+                {
+                    errorProviderUsuario.SetError(txtSegApellido, string.Empty);
+                }
+                else
+                {
+                    errorProviderUsuario.SetError(txtSegApellido, "El segundo apellido debe tener al menos 15 caracteres.");
+                    txtSegApellido.BackColor = Color.LightYellow;
+                }
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtSegApellido, "El segundo apellido debe contener solo letras y no puede estar vacío.");
+                txtSegApellido.BackColor = Color.LightPink;
+            } */
+        }
+
+        private void txtDireccion_TextChanged(object sender, EventArgs e)
+        {
+            txtDireccion.BackColor = Color.White;
+            if (!string.IsNullOrWhiteSpace(txtDireccion.Text))
+            {
+                errorProviderUsuario.SetError(txtDireccion, string.Empty);
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtDireccion, "La dirección no puede estar vacía.");
+                txtDireccion.BackColor = Color.LightPink;
+            }
+        }
+
+        private void txtTelefono_TextChanged(object sender, EventArgs e)
+        {
+            txtTelefono.BackColor = Color.White;
+
+            if (!string.IsNullOrWhiteSpace(txtTelefono.Text) && txtTelefono.Text.All(char.IsDigit))
+            {
+                if (txtTelefono.Text.Length == 8)
+                {
+                    errorProviderUsuario.SetError(txtTelefono, string.Empty);
+                }
+                else
+                {
+                    errorProviderUsuario.SetError(txtTelefono, "El teléfono debe contener exactamente 8 dígitos.");
+                    txtTelefono.BackColor = Color.LightYellow;
+                }
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtTelefono, "El teléfono debe contener solo números y no puede estar vacío.");
+                txtTelefono.BackColor = Color.LightPink;
+            }
+        }
+
+        private void cbxEsatdoCivil_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbxEsatdoCivil.BackColor = Color.White;
+            if (cbxEsatdoCivil.SelectedItem != null)
+            {
+                errorProviderUsuario.SetError(cbxEsatdoCivil, string.Empty);
+            }
+            else
+            {
+                errorProviderUsuario.SetError(cbxEsatdoCivil, "Debe seleccionar un estado civil.");
+                cbxEsatdoCivil.BackColor = Color.LightPink;
+            }
+        }
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+            txtEmail.BackColor = Color.White;
+            
+        }
+
+        private void txtPrimNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtSegNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrimApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+
+        }
+        private void txtSegApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+            txtUsername.BackColor = Color.White;
+            if (!string.IsNullOrWhiteSpace(txtUsername.Text) && txtUsername.Text.All(c => char.IsLetterOrDigit(c) || c == '.'))
+            {
+                errorProviderUsuario.SetError(txtUsername, string.Empty);
+            }
+        }
+
+        private void txtUsername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '.' && e.KeyChar != '-')
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '-' && e.KeyChar != '_')
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            txtPassword.BackColor = Color.White;
+            if (!string.IsNullOrWhiteSpace(txtPassword.Text) && txtPassword.Text.Length >= 8)
+            {
+                errorProviderUsuario.SetError(txtPassword, string.Empty);
+            }
+            else
+            {
+                errorProviderUsuario.SetError(txtPassword, "La contraseña debe tener al menos 8 caracteres.");
+            }
+
         }
     }
 }

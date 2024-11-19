@@ -41,6 +41,8 @@ namespace zompyDogs
         public int cantidadPedido;
         public int cantidadPlatillo = 1;
         public int menuID;
+        public bool itsInvoice = false;
+        public string pedidioInvoice;
 
         public frmPOS(int usuarioIDActual, int rolIDActual)
         {
@@ -56,7 +58,7 @@ namespace zompyDogs
                 btnHistorial.Hide();
             }
 
-            CargarMenu("Entrada");
+            CargarMenu("Almuerzos");
             AddCategoria();
 
             _controladorGeneradorCodigoPedido = new ControladorGeneradoresDeCodigo();
@@ -86,6 +88,8 @@ namespace zompyDogs
             dgvPedido.Columns["id_pedido"].Visible = false;
             dgvPedido.Columns["Descripcion"].Visible = false;
             dgvPedido.Columns["ImagenPlatillo"].Visible = false;
+
+            itsInvoice = false;
         }
         private void GeneradordeCodigoPedidoFromForm()
         {
@@ -160,7 +164,7 @@ namespace zompyDogs
         {
             using (SqlConnection conn = new SqlConnection(con_string))
             {
-                string query = "SELECT ID_Menu, Codigo, Platillo, Descripcion, Precio, Imagen FROM v_DetallesMenu WHERE Categoria = @Categoria";
+                string query = "SELECT ID_Menu, Codigo, Platillo, Descripcion, Precio, Imagen FROM v_DetallesMenu WHERE Categoria = @Categoria AND Estado = 'Activo'";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Categoria", categoria);
@@ -260,11 +264,13 @@ namespace zompyDogs
                             PlatilloNombre = lblPlatillo.Text,
                             Precio_Unitario = decimal.Parse(lblPrecio.Text.Replace("L.", "").Trim()),
                             Cantidad = cantidadPlatillo,
+                            id_Menu = Convert.ToInt32(lblId_Menu.Text),
                         };
                         cantidadPedido++;
 
                         _pedidosDAO.platillosLista.Add(nuevoPlatillo);
                         menuID = Convert.ToInt32(lblId_Menu.Text);
+
                         pedidoPrecioUnitario = decimal.Parse(lblPrecio.Text.Replace("L.", "").Trim());
 
                         _bndsrcPedido.ResetBindings(false);
@@ -332,7 +338,7 @@ namespace zompyDogs
                     cantidadPedido--;
                     _bndsrcPedido.ResetBindings(false);
 
-                    MessageBox.Show("Platillo eliminado de la orden. Cantidad Reducida: " + cantidadPedido);
+                   // MessageBox.Show("Platillo eliminado de la orden. Cantidad Reducida: " + cantidadPedido);
                     CalcularTotal();
                 }
                 else
@@ -380,28 +386,29 @@ namespace zompyDogs
                     conn.Open();
                     SqlTransaction transaction = conn.BeginTransaction();
 
-                    string queryPedido = @"INSERT INTO Pedido(codigoPedido, Fk_Usuario, FechaPedido, estado)
-                                   VALUES (@CodigoPedido, @CodigoEmpleado, GETDATE(), 'COMPLETADO');
+                    string queryPedido = @"INSERT INTO Pedido(codigoPedido, Fk_Usuario, FechaPedido, estado, TotalPedido)
+                                   VALUES (@CodigoPedido, @CodigoEmpleado, GETDATE(), 'PAGADO', @totalPedido);
                                    SELECT SCOPE_IDENTITY();";
 
                     SqlCommand cmdPedido = new SqlCommand(queryPedido, conn, transaction);
                     cmdPedido.Parameters.AddWithValue("@CodigoPedido", codigoPedido);
                     cmdPedido.Parameters.AddWithValue("@CodigoEmpleado", usuarioIDActual);
+                    cmdPedido.Parameters.AddWithValue("@totalPedido", totalaPago);
+
 
                     int pedidoID = Convert.ToInt32(cmdPedido.ExecuteScalar());
 
                     foreach (var platillo in _pedidosDAO.platillosLista)
                     {
-                        string queryDetalle = @"INSERT INTO Detalle_Pedido(idPedido, Fk_Menu, Cantidad, precioUnitario, subtotal,total)
-                                        VALUES (@CodigoPedido, @CodigoPlatillo, @Cantidad, @PrecioUnitario, @subTotal, @TotalAPagar)";
+                        string queryDetalle = @"INSERT INTO Detalle_Pedido(idPedido, Fk_Menu, Cantidad, precioUnitario, subtotal)
+                                        VALUES (@CodigoPedido, @CodigoPlatillo, @Cantidad, @PrecioUnitario, @subTotal)";
 
                         SqlCommand cmdDetalle = new SqlCommand(queryDetalle, conn, transaction);
                         cmdDetalle.Parameters.AddWithValue("@CodigoPedido", pedidoID);
-                        cmdDetalle.Parameters.AddWithValue("@CodigoPlatillo", menuID);
+                        cmdDetalle.Parameters.AddWithValue("@CodigoPlatillo", platillo.id_Menu);
                         cmdDetalle.Parameters.AddWithValue("@Cantidad", cantidadPlatillo);
                         cmdDetalle.Parameters.AddWithValue("@PrecioUnitario", pedidoPrecioUnitario);
                         cmdDetalle.Parameters.AddWithValue("@subTotal", subtotalPago);
-                        cmdDetalle.Parameters.AddWithValue("@TotalAPagar", totalaPago);
 
 
                         cmdDetalle.ExecuteNonQuery();
@@ -426,52 +433,99 @@ namespace zompyDogs
             }
         }
 
-        private void VerFacturaFinalizada()
+        public void VerFacturaFinalizada()
         {
-            var facturaView = new FacturaView();
-
-            // Deshabilitar todos los elementos del formulario
-            foreach (Control control in facturaView.Controls)
+            if (itsInvoice == false)
             {
-                control.Enabled = false;
-            }
-            facturaView.btnCancelar.Enabled = true;
-            facturaView.dgvTotalPedido.Enabled = true;
-            facturaView.btnCancelar.Text = "ACEPTAR";
-            facturaView.btnCancelar.BackColor = Color.Blue;
-            facturaView.Show();
+                var facturaView = new FacturaView();
 
-            DataTable facturaDatosView = PedidosDAO.ObtenerDetalllesDeFacturaFinalizada(nuevoCodigoPedido);
-
-            if (facturaDatosView.Rows.Count > 0)
-            {
-                DataRow fila = facturaDatosView.Rows[0];
-
-                facturaView.txtCodigoGenerado.Text = fila["Codigo_Pedido"].ToString();
-                facturaView.lblCodigoEmpleado.Text = fila["Codigo_Empleado"].ToString();
-                facturaView.txtEmpleado.Text = fila["Empleado"].ToString();
-                facturaView.dtpFechaRegistro.Text = fila["Fecha_Del_Pedido"].ToString();
-                facturaView.lblTotal.Text = fila["Total_a_Pagar"].ToString();
-                facturaView.lblSubtotal.Text = fila["Subtotal"].ToString();
-                facturaView.lblISV.Text = fila["ISV"].ToString();
-                facturaView.lblTotalProductos.Text = fila["Total_De_Productos"].ToString();
-                facturaView.txtEstado.Text = fila["Estado"].ToString();
-
-                DataTable detalleProductosTable = new DataTable();
-                detalleProductosTable.Columns.Add("Platillo", typeof(string));
-                detalleProductosTable.Columns.Add("Cantidad", typeof(int));
-                detalleProductosTable.Columns.Add("Precio Unitario", typeof(decimal));
-
-                foreach (var platillo in _pedidosDAO.platillosLista)
+                foreach (Control control in facturaView.Controls)
                 {
-                    detalleProductosTable.Rows.Add(
-                        platillo.PlatilloNombre,
-                        platillo.Cantidad,  
-                        platillo.Precio_Unitario
-                    );
+                    control.Enabled = false;
                 }
-                facturaView.dgvTotalPedido.DataSource = detalleProductosTable;
+                facturaView.btnCancelar.Enabled = true;
+                facturaView.dgvTotalPedido.Enabled = true;
+                facturaView.btnCancelar.Text = "ACEPTAR";
+                facturaView.btnCancelar.BackColor = Color.Blue;
+                facturaView.Show();
+
+                DataTable facturaDatosView = PedidosDAO.ObtenerDetalllesDeFacturaFinalizada(nuevoCodigoPedido);
+
+                if (facturaDatosView.Rows.Count > 0)
+                {
+                    DataRow fila = facturaDatosView.Rows[0];
+
+                    facturaView.txtCodigoGenerado.Text = fila["Codigo_Pedido"].ToString();
+                    facturaView.lblCodigoEmpleado.Text = fila["Codigo_Empleado"].ToString();
+                    facturaView.txtEmpleado.Text = fila["Empleado"].ToString();
+                    facturaView.dtpFechaRegistro.Text = fila["Fecha_Del_Pedido"].ToString();
+                    facturaView.lblTotal.Text = fila["Total_a_Pagar"].ToString();
+                    facturaView.lblSubtotal.Text = fila["Subtotal"].ToString();
+                    facturaView.lblISV.Text = fila["ISV"].ToString();
+                    facturaView.txtEstado.Text = fila["Estado"].ToString();
+
+                    DataTable detalleProductosTable = new DataTable();
+                    detalleProductosTable.Columns.Add("Platillo", typeof(string));
+                    detalleProductosTable.Columns.Add("Cantidad", typeof(int));
+                    detalleProductosTable.Columns.Add("Precio Unitario", typeof(decimal));
+
+                    foreach (var platillo in _pedidosDAO.platillosLista)
+                    {
+                        detalleProductosTable.Rows.Add(
+                            platillo.PlatilloNombre,
+                            platillo.Cantidad,
+                            platillo.Precio_Unitario
+                        );
+                    }
+                    facturaView.dgvTotalPedido.DataSource = detalleProductosTable;
+                }
             }
+            else
+            {
+                var facturaView = new FacturaView();
+
+                foreach (Control control in facturaView.Controls)
+                {
+                    control.Enabled = false;
+                }
+                facturaView.btnCancelar.Enabled = true;
+                facturaView.dgvTotalPedido.Enabled = true;
+                facturaView.btnCancelar.Text = "ACEPTAR";
+                facturaView.btnCancelar.BackColor = Color.Blue;
+                facturaView.Show();
+
+                DataTable facturaDatosView = PedidosDAO.ObtenerDetalllesDeFacturaFinalizada(pedidioInvoice);
+
+                if (facturaDatosView.Rows.Count > 0)
+                {
+                    DataRow fila = facturaDatosView.Rows[0];
+
+                    facturaView.txtCodigoGenerado.Text = fila["Codigo_Pedido"].ToString();
+                    facturaView.lblCodigoEmpleado.Text = fila["Codigo_Empleado"].ToString();
+                    facturaView.txtEmpleado.Text = fila["Empleado"].ToString();
+                    facturaView.dtpFechaRegistro.Text = fila["Fecha_Del_Pedido"].ToString();
+                    facturaView.lblTotal.Text = fila["Total_a_Pagar"].ToString();
+                    facturaView.lblSubtotal.Text = fila["Subtotal"].ToString();
+                    facturaView.lblISV.Text = fila["ISV"].ToString();
+                    facturaView.txtEstado.Text = fila["Estado"].ToString();
+
+                    DataTable detalleProductosTable = new DataTable();
+                    detalleProductosTable.Columns.Add("Platillo", typeof(string));
+                    detalleProductosTable.Columns.Add("Cantidad", typeof(int));
+                    detalleProductosTable.Columns.Add("Precio Unitario", typeof(decimal));
+
+                    foreach (var platillo in _pedidosDAO.platillosLista)
+                    {
+                        detalleProductosTable.Rows.Add(
+                            platillo.PlatilloNombre,
+                            platillo.Cantidad,
+                            platillo.Precio_Unitario
+                        );
+                    }
+                    facturaView.dgvTotalPedido.DataSource = detalleProductosTable;
+                }
+            }
+            
         }
 
         private void btnHistorial_Click(object sender, EventArgs e)
@@ -481,7 +535,7 @@ namespace zompyDogs
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            CargarMenu("Entrada");
+            CargarMenu("Almuerzos");
             lblSubtotal.Text = "00";
             lblTotalAPagar.Text = "00";
             txtPlatilloOrden.Text = "";

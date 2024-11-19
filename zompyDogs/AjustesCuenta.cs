@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using zompyDogs.CRUD.REGISTROS;
@@ -32,7 +33,7 @@ namespace zompyDogs
         public string PeticionUsuarioVal;
         public string PeticionUsuarioGuardar;
         public int PeticionUsuarioID;
-
+        public bool isError;
         public AjustesCuenta(int usuarioID, string usuarioNombre)
         {
             InitializeComponent();
@@ -42,19 +43,25 @@ namespace zompyDogs
 
             CargarPeticiones();
 
-            gbxDatosPersonales.Show();
+            errorProviderPeticion.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            txtTelefono.MaxLength = 8;
+
+            gbxDatosPersonales.Hide();
             gbxDatosUsuarios.Hide();
-            gbxPeticionesBtn.Hide();
-            gbxPeticiones.Hide();
+            gbxPeticionesBtn.Show();
+            gbxPeticiones.Show();
 
             btnConfirmarPer.Hide();
             btnCancelarPer.Hide();
             btnConfirmarUs.Hide();
             btnCancelarUs.Hide();
 
-            rectanglePanel1.Show();
+            btnDatosPersonales.Hide();
+            btnDatosUsuarios.Hide();
+
+            rectanglePanel1.Hide();
             rectanglePanel2.Hide();
-            rectanglePanel3.Hide();
+            rectanglePanel3.Show();
 
             //CheckBox Changed
             chbxLunes.CheckedChanged += (s, e) => ActualizarDiasLaborales();
@@ -63,7 +70,7 @@ namespace zompyDogs
             chbxJueves.CheckedChanged += (s, e) => ActualizarDiasLaborales();
             chbxViernes.CheckedChanged += (s, e) => ActualizarDiasLaborales();
             chbxSabado.CheckedChanged += (s, e) => ActualizarDiasLaborales();
-            chbxDomingo.CheckedChanged += (s, e) => ActualizarDiasLaborales();
+            // chbxDomingo.CheckedChanged += (s, e) => ActualizarDiasLaborales();
 
             DatosUsuario();
             DatosDelUsuario();
@@ -77,6 +84,11 @@ namespace zompyDogs
         {
             DataTable peticiones = PeticionesValidaciones.ObtenerPeticionesCompletasAjustes(IdEmpleado);
             dgvPeticiones.DataSource = peticiones;
+
+            dgvPeticiones.Columns["Codigo"].HeaderText = "Código";
+            dgvPeticiones.Columns["Accion"].HeaderText = "Acción";
+            dgvPeticiones.Columns["Peticion"].HeaderText = "Petición";
+            dgvPeticiones.Columns["Fecha_De_Envio"].HeaderText = "Fecha de Envío";
         }
 
         private void btnEditarUsuario_Click(object sender, EventArgs e)
@@ -164,14 +176,13 @@ namespace zompyDogs
             if (chbxJueves.Checked) diasSeleccionados.Add("Jueves");
             if (chbxViernes.Checked) diasSeleccionados.Add("Viernes");
             if (chbxSabado.Checked) diasSeleccionados.Add("Sábado");
-            if (chbxDomingo.Checked) diasSeleccionados.Add("Domingo");
+            // if (//chbxDomingo.Checked) diasSeleccionados.Add("Domingo");
 
             txtDiasLaborales.Text = string.Join(",", diasSeleccionados);
         }
 
         public void DatosUsuario()
         {
-
             txtPrimerNombre.Enabled = false;
             txtSegNombre.Enabled = false;
             txtPrimApe.Enabled = false;
@@ -209,8 +220,8 @@ namespace zompyDogs
         }
         public void DatosDelUsuario()
         {
-            seeIcon.Enabled=false;
-            seeCloseIcon.Enabled=false;
+            seeIcon.Enabled = false;
+            seeCloseIcon.Enabled = false;
             txtRol.Enabled = false;
             txtSalario.Enabled = false;
             txtPuesto.Enabled = false;
@@ -221,18 +232,22 @@ namespace zompyDogs
             DataTable ajusteCuentaView = UsuarioDAO.ObtenerDetalllesDeUsuariosParaEditarPorID(IdEmpleado);
             string diasLaboralesSeleccionadas = txtDiasLaborales.Text;
 
-            if (ajusteCuentaView.Rows.Count > 0)
+            if (ajusteCuentaView != null && ajusteCuentaView.Rows.Count > 0)
             {
                 DataRow fila = ajusteCuentaView.Rows[0];
 
                 txtCodigoGeneradoUser.Text = fila["Codigo"].ToString();
                 txtUser.Text = fila["Usuario"].ToString();
+                txtEmail.Text = fila["Correo"].ToString();
                 txtClave.Text = fila["Clave"].ToString();
+
                 txtRol.Text = fila["RolUsuario"].ToString();
 
                 txtPuesto.Text = fila["Puesto"].ToString();
                 txtSalario.Text = fila["Salario"].ToString();
                 txtHoras.Text = fila["HorasLaborales"].ToString();
+
+
 
                 string diasLaborales = fila["DiasLaborales"].ToString();
                 chbxLunes.Checked = diasLaborales.Contains("Lunes");
@@ -241,7 +256,7 @@ namespace zompyDogs
                 chbxJueves.Checked = diasLaborales.Contains("Jueves");
                 chbxViernes.Checked = diasLaborales.Contains("Viernes");
                 chbxSabado.Checked = diasLaborales.Contains("Sábado");
-                chbxDomingo.Checked = diasLaborales.Contains("Domingo");
+                //chbxDomingo.Checked = diasLaborales.Contains("Domingo");
             }
             else
             {
@@ -264,6 +279,7 @@ namespace zompyDogs
 
         private void btnAgregarRegistro_Click(object sender, EventArgs e)
         {
+
             var peticionesRegistro = new PeticionesRegisro(IdEmpleado);
             peticionesRegistro.lblTituloRegistro.Text = "Guardar Nueva Petición";
             peticionesRegistro.Show();
@@ -275,28 +291,39 @@ namespace zompyDogs
             //metodo para guardar
             peticionesRegistro.btnGuardarUser.Click += (s, args) =>
             {
+                peticionesRegistro.ValidarCampos();
 
-                PeticionRegistro nuevaPeticion = new PeticionRegistro
-                {
-                    CodigPeticion = peticionesRegistro.txtCodigoGenerado.Text,
-                    AccionPeticion = peticionesRegistro.cbxPeticion.SelectedItem?.ToString() ?? string.Empty,
-                    Descripcion = peticionesRegistro.txtDescripcion.Text,
-                    FechaEnviada = DateTime.Now,
-                    FechaRealizada = DateTime.Now,
-                    CodigoUsuario = peticionesRegistro.IdEmpleado,
-                    Estado = peticionesRegistro.cbxEstadoCuenta.SelectedItem?.ToString() ?? "Activo"
-                };
-                try
-                {
-                    PeticionesValidaciones.GuardarPeticion(nuevaPeticion);
+                bool itsValid;
+                itsValid = peticionesRegistro.okError;
 
-                    MessageBox.Show("Petición Registrada con Éxito.");
-                    CargarPeticiones();
+                if (itsValid == false)
+                {
+                    peticionesRegistro.ValidarCampos();
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Error al actualizar la petición.");
+                    PeticionRegistro nuevaPeticion = new PeticionRegistro
+                    {
+                        CodigPeticion = peticionesRegistro.txtCodigoGenerado.Text,
+                        AccionPeticion = peticionesRegistro.cbxPeticion.SelectedItem?.ToString() ?? string.Empty,
+                        Descripcion = peticionesRegistro.txtDescripcion.Text,
+                        FechaEnviada = DateTime.Now,
+                        FechaRealizada = DateTime.Now,
+                        CodigoUsuario = peticionesRegistro.IdEmpleado,
+                        Estado = peticionesRegistro.cbxEstadoCuenta.SelectedItem?.ToString() ?? "Activo"
+                    };
+                    try
+                    {
+                        PeticionesValidaciones.GuardarPeticion(nuevaPeticion);
 
+                        MessageBox.Show("Petición Registrada con Éxito.");
+                        CargarPeticiones();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error al actualizar la petición.");
+
+                    }
                 }
 
             };
@@ -313,6 +340,7 @@ namespace zompyDogs
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
+
             PeticionesRegisro frmpeticionesRegistro = new PeticionesRegisro(2);
             frmpeticionesRegistro.btnGuardarUser.Text = "CONFIRMAR";
             frmpeticionesRegistro.btnCancelar.Text = "CANCELAR";
@@ -345,26 +373,40 @@ namespace zompyDogs
 
             frmpeticionesRegistro.btnGuardarUser.Click += (s, args) =>
             {
-                PeticionRegistro peticionActualizada = new PeticionRegistro
-                {
-                    CodigPeticion = frmpeticionesRegistro.txtCodigoGenerado.Text,
-                    AccionPeticion = frmpeticionesRegistro.cbxPeticion.Text,
-                    Descripcion = frmpeticionesRegistro.txtDescripcion.Text,
-                    FechaEnviada = frmpeticionesRegistro.dtpFechaEnviada.Value,
-                    FechaRealizada = DateTime.Now,
-                    CodigoUsuario = IdEmpleado,
-                    Estado = frmpeticionesRegistro.cbxEstadoCuenta.Text
-                };
-                bool resultado = PeticionesValidaciones.ActualizarPeticion(peticionActualizada);
+                frmpeticionesRegistro.ValidarCampos();
 
-                if (resultado)
+                bool itsValid;
+                itsValid = frmpeticionesRegistro.okError;
+
+                if (itsValid == false)
                 {
-                    CargarPeticiones();
+                    frmpeticionesRegistro.ValidarCampos();
                 }
                 else
                 {
-                    MessageBox.Show("Error al actualizar la petición.");
+                    PeticionRegistro peticionActualizada = new PeticionRegistro
+                    {
+                        CodigPeticion = frmpeticionesRegistro.txtCodigoGenerado.Text,
+                        AccionPeticion = frmpeticionesRegistro.cbxPeticion.Text,
+                        Descripcion = frmpeticionesRegistro.txtDescripcion.Text,
+                        FechaEnviada = frmpeticionesRegistro.dtpFechaEnviada.Value,
+                        FechaRealizada = DateTime.Now,
+                        CodigoUsuario = IdEmpleado,
+                        Estado = frmpeticionesRegistro.cbxEstadoCuenta.Text
+                    };
+                    bool resultado = PeticionesValidaciones.ActualizarPeticion(peticionActualizada);
+
+                    if (resultado)
+                    {
+                        CargarPeticiones();
+                        frmpeticionesRegistro.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al actualizar la petición.");
+                    }
                 }
+
             };
 
         }
@@ -435,72 +477,177 @@ namespace zompyDogs
 
         private void btnEditarDatosPersonales_Click(object sender, EventArgs e)
         {
-            txtPrimerNombre.Enabled = true;
-            txtSegNombre.Enabled = true;
-            txtPrimApe.Enabled = true;
-            txtSegApe.Enabled = true;
+            txtPrimerNombre.Enabled = false;
+            txtSegNombre.Enabled = false;
+            txtPrimApe.Enabled = false;
+            txtSegApe.Enabled = false;
 
             txtDireccion.Enabled = true;
             txtTelefono.Enabled = true;
             cbxEstadoCivil.Enabled = true;
-            dtpFechaNacimiento.Enabled = true;
+            dtpFechaNacimiento.Enabled = false;
 
             btnEditarDatosPersonales.Hide();
             btnConfirmarPer.Show();
             btnCancelarPer.Show();
         }
 
-        private void btnConfirmarPer_Click(object sender, EventArgs e)
+        public bool ValidarCorreo(string correo)
         {
-            try
+            string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(correo, patronCorreo);
+        }
+        public bool ValidarCamposUsuarios()
+        {
+            bool okError = true;
+
+            List<TextBox> textBoxes = new List<TextBox> { txtTelefono, txtDireccion };
+            List<System.Windows.Forms.ComboBox> comboBoxList = new List<System.Windows.Forms.ComboBox> { cbxEstadoCivil };
+
+            foreach (TextBox textBox in textBoxes)
             {
-                if (string.IsNullOrWhiteSpace(txtCodigoGenerado.Text))
+                if (string.IsNullOrWhiteSpace(textBox.Text))
                 {
-                    MessageBox.Show("Código de usuario no válido.");
-                    return;
-                }
-
-                DetalleUsuario detalleUsuarioActualizado = new DetalleUsuario
-                {
-                    primerNombre = txtPrimerNombre.Text,
-                    segundoNombre = txtSegNombre.Text,
-                    primerApellido = txtPrimApe.Text,
-                    segundoApellido = txtSegApe.Text,
-                    codigoCedula = txtCedula.Text,
-                    fechaNacimiento = dtpFechaNacimiento.Value,
-                    estadoCivil = cbxEstadoCivil.Text,
-                    telefono = txtTelefono.Text,
-                    direccion = txtDireccion.Text,
-                    //codigoPuesto = cbPuesto.SelectedValue != null ? Convert.ToInt32(cbPuesto.SelectedValue) : 1,
-                    codigoUsuario = txtCodigoGenerado.Text
-                };
-
-                /*if (cbPuesto.SelectedValue == null)
-                {
-                    MessageBox.Show("Por favor selecciona un puesto válido.");
-                    return;
-                }*/
-
-                bool resultadoDetalle = UsuarioDAO.AjusteDetalleUsuario(detalleUsuarioActualizado);
-
-                if (resultadoDetalle)
-                {
-                    MessageBox.Show("Usuario actualizado con éxito.");
-                    DatosUsuario();
-                    btnConfirmarPer.Hide();
-                    btnCancelarPer.Hide();
-                    btnEditarDatosPersonales.Show();
+                    okError = false;
+                    errorProviderPeticion.SetError(textBox, $"Ingrese un valor en el campo.");
+                    textBox.BackColor = Color.OldLace;
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo actualizar el usuario.");
+                    errorProviderPeticion.SetError(textBox, "");
+                    textBox.BackColor = SystemColors.Window;
                 }
             }
-            catch (Exception ex)
+            foreach (System.Windows.Forms.ComboBox comboBoxListValid in comboBoxList)
             {
-                MessageBox.Show("Error al actualizar el usuario: " + ex.Message);
-                Console.WriteLine("Detalles de la excepción: " + ex.ToString());
+                if (comboBoxListValid.SelectedIndex == -1)
+                {
+                    okError = false;
+                    errorProviderPeticion.SetError(comboBoxListValid, "Seleccione una opción.");
+                    comboBoxListValid.BackColor = Color.OldLace;
+                }
+                else
+                {
+                    errorProviderPeticion.SetError(comboBoxListValid, "");
+                    comboBoxListValid.BackColor = SystemColors.Window;
+                }
             }
+            if (txtTelefono.Text.Length != 8 || !txtTelefono.Text.All(char.IsDigit))
+            {
+                okError = false;
+                errorProviderPeticion.SetError(txtTelefono, "El teléfono debe tener 8 dígitos.");
+                txtTelefono.BackColor = Color.OldLace;
+            }
+            else
+            {
+                errorProviderPeticion.SetError(txtTelefono, "");
+                txtTelefono.BackColor = SystemColors.Window;
+            }
+
+            if (txtDireccion.Text.Length < 10)
+            {
+                okError = false;
+                errorProviderPeticion.SetError(txtDireccion, "La dirección debe ser más de 10 carácteres.");
+                txtDireccion.BackColor = Color.OldLace;
+            }
+            else
+            {
+                errorProviderPeticion.SetError(txtDireccion, "");
+                txtDireccion.BackColor = SystemColors.Window;
+            }
+
+            return okError;
+        }
+
+        public bool ValidarCamposDatosUsuarios()
+        {
+            bool okError = true;
+
+            List<TextBox> textBoxes = new List<TextBox> { txtUser, txtClave };
+
+            foreach (TextBox textBox in textBoxes)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    okError = false;
+                    errorProviderPeticion.SetError(textBox, $"Ingrese un valor en el campo.");
+                    textBox.BackColor = Color.OldLace;
+                }
+                else
+                {
+                    errorProviderPeticion.SetError(textBox, "");
+                    textBox.BackColor = SystemColors.Window;
+                }
+            }
+            string correoIngresado = txtEmail.Text;
+            if (!ValidarCorreo(correoIngresado))
+            {
+                okError = false;
+                errorProviderPeticion.SetError(txtEmail, "Ingrese un correo válido.");
+                txtEmail.BackColor = Color.OldLace;
+            }
+            else
+            {
+                errorProviderPeticion.SetError(txtEmail, "");
+                txtEmail.BackColor = SystemColors.Window;
+            }
+            return okError;
+        }
+
+
+        private void btnConfirmarPer_Click(object sender, EventArgs e)
+        {
+            if (ValidarCamposUsuarios() == false)
+            {
+                ValidarCamposUsuarios();
+            }
+            else
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(txtCodigoGenerado.Text))
+                    {
+                        MessageBox.Show("Código de usuario no válido.");
+                        return;
+                    }
+
+                    DetalleUsuario detalleUsuarioActualizado = new DetalleUsuario
+                    {
+                        primerNombre = txtPrimerNombre.Text,
+                        segundoNombre = txtSegNombre.Text,
+                        primerApellido = txtPrimApe.Text,
+                        segundoApellido = txtSegApe.Text,
+                        codigoCedula = txtCedula.Text,
+                        fechaNacimiento = dtpFechaNacimiento.Value,
+                        estadoCivil = cbxEstadoCivil.Text,
+                        telefono = txtTelefono.Text,
+                        direccion = txtDireccion.Text,
+                        codigoUsuario = txtCodigoGenerado.Text
+                    };
+
+                    bool resultadoDetalle = UsuarioDAO.AjusteDetalleUsuario(detalleUsuarioActualizado);
+
+                    if (resultadoDetalle)
+                    {
+
+                        DatosUsuario();
+                        btnConfirmarPer.Hide();
+                        btnCancelarPer.Hide();
+                        btnEditarDatosPersonales.Show();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo actualizar el usuario.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al actualizar el usuario: " + ex.Message);
+                    Console.WriteLine("Detalles de la excepción: " + ex.ToString());
+                }
+            }
+
         }
 
         private void btnEditarUsuario_Click_1(object sender, EventArgs e)
@@ -510,6 +657,7 @@ namespace zompyDogs
 
             txtUser.Enabled = true;
             txtClave.Enabled = true;
+            txtEmail.Enabled = true;
 
             btnConfirmarUs.Show();
             btnCancelarUs.Show();
@@ -534,52 +682,61 @@ namespace zompyDogs
         }
         private void btnConfirmarUs_Click(object sender, EventArgs e)
         {
-            
-            try
+            if (ValidarCamposDatosUsuarios() == false)
             {
-                if (string.IsNullOrWhiteSpace(txtCodigoGenerado.Text))
+                ValidarCamposDatosUsuarios();
+            }
+            else
+            {
+                try
                 {
-                    MessageBox.Show("Código de usuario no válido.");
-                    return;
+                    if (string.IsNullOrWhiteSpace(txtCodigoGenerado.Text))
+                    {
+                        MessageBox.Show("Código de usuario no válido.");
+                        return;
+                    }
+
+                    UsuarioCrear datosUsuarioUpdate = new UsuarioCrear
+                    {
+                        UserName = txtUser.Text,
+                        PassWord = txtClave.Text,
+                        Email = txtEmail.Text,
+                        IDUser = IdEmpleado
+                    };
+                    bool resultadoDetalle = UsuarioDAO.AjusteDatosDeUsuario(datosUsuarioUpdate);
+
+                    if (resultadoDetalle)
+                    {
+                        txtClave.PasswordChar = '*';
+
+                        btnConfirmarUs.Hide();
+                        btnCancelarUs.Hide();
+                        btnEditarUsuario.Show();
+
+                        txtUser.Enabled = false;
+                        txtClave.Enabled = false;
+                        txtEmail.Enabled = false;
+
+                        seeIcon.Enabled = false;
+
+                        seeCloseIcon.Hide();
+                        seeIcon.Show();
+
+                        DatosUsuario();
+                        DatosDelUsuario();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo actualizar el usuario.");
+                    }
                 }
-
-                UsuarioCrear datosUsuarioUpdate = new UsuarioCrear
+                catch (Exception ex)
                 {
-                    UserName = txtUser.Text,
-                    PassWord = txtClave.Text,
-                    IDUser = IdEmpleado
-                };
-                bool resultadoDetalle = UsuarioDAO.AjusteDatosDeUsuario(datosUsuarioUpdate);
-
-                if (resultadoDetalle)
-                {
-                    MessageBox.Show("Usuario actualizado con éxito.");
-                    txtClave.PasswordChar = '*';
-
-                    btnConfirmarUs.Hide();
-                    btnCancelarUs.Hide();
-                    btnEditarUsuario.Show();
-
-                    txtUser.Enabled = false;
-                    txtClave.Enabled = false;
-                    seeIcon.Enabled = false;
-                    
-                    seeCloseIcon.Hide();
-                    seeIcon.Show();
-
-                    DatosUsuario();
-                    DatosDelUsuario();
-                }
-                else
-                {
-                    MessageBox.Show("No se pudo actualizar el usuario.");
+                    MessageBox.Show("Error al actualizar el usuario: " + ex.Message);
+                    Console.WriteLine("Detalles de la excepción: " + ex.ToString());
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al actualizar el usuario: " + ex.Message);
-                Console.WriteLine("Detalles de la excepción: " + ex.ToString());
-            }
+
         }
 
         private void btnCancelarUs_Click(object sender, EventArgs e)
@@ -588,6 +745,7 @@ namespace zompyDogs
 
             txtUser.Enabled = false;
             txtClave.Enabled = false;
+            txtEmail.Enabled = false;
 
             btnConfirmarUs.Hide();
             btnCancelarUs.Hide();
@@ -598,6 +756,138 @@ namespace zompyDogs
             seeCloseIcon.Hide();
             seeIcon.Show();
 
+        }
+
+        private void btnCancelarPer_Click(object sender, EventArgs e)
+        {
+            DatosUsuario();
+            txtPrimerNombre.Enabled = false;
+            txtSegNombre.Enabled = false;
+            txtPrimApe.Enabled = false;
+            txtSegApe.Enabled = false;
+
+            txtDireccion.Enabled = false;
+            txtTelefono.Enabled = false;
+            cbxEstadoCivil.Enabled = false;
+            dtpFechaNacimiento.Enabled = false;
+
+            btnEditarDatosPersonales.Show();
+            btnConfirmarPer.Hide();
+            btnCancelarPer.Hide();
+        }
+
+        private void txtCedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrimerNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSegNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrimApe_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSegApe_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDireccion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDireccion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtUser_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void gbxDatosUsuarios_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTelefono_TextChanged(object sender, EventArgs e)
+        {
+            txtTelefono.BackColor = Color.White;
+
+            if (!string.IsNullOrWhiteSpace(txtTelefono.Text) && txtTelefono.Text.All(char.IsDigit))
+            {
+                if (txtTelefono.Text.Length == 8)
+                {
+                    errorProviderPeticion.SetError(txtTelefono, string.Empty);
+                }
+                else
+                {
+                    errorProviderPeticion.SetError(txtTelefono, "El teléfono debe contener exactamente 8 dígitos.");
+                    txtTelefono.BackColor = Color.LightYellow;
+                }
+            }
+            else
+            {
+                errorProviderPeticion.SetError(txtTelefono, "El teléfono debe contener solo números y no puede estar vacío.");
+                txtTelefono.BackColor = Color.LightPink;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (FormPrincipal != null)
+            {
+                FormPrincipal.AbrirFormsHija(new Peticiones(IdEmpleado, NombreUsuarioAjuste) { FormPrincipal = FormPrincipal });
+            }
+            else
+            {
+                MessageBox.Show("FormPrincipal es nulo");
+            }
         }
     }
 }

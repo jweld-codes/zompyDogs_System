@@ -24,6 +24,8 @@ namespace zompyDogs
         {
             InitializeComponent();
             CargarPlatillosdeMenu();
+            btnEliminarUsuario.Hide();
+            
         }
 
         private void CargarPlatillosdeMenu()
@@ -35,6 +37,10 @@ namespace zompyDogs
             dgvMenu.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
             dgvMenu.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dgvMenu.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);
+
+            dgvMenu.Columns["Codigo"].HeaderText = "Código";
+            dgvMenu.Columns["Descripcion"].HeaderText = "Descripción";
+            dgvMenu.Columns["Categoria"].HeaderText = "Categoría";
         }
 
         private void btnLibretaMenu_Click(object sender, EventArgs e)
@@ -114,6 +120,8 @@ namespace zompyDogs
                 }
 
                 fmMenuRegistro.cbxCategorias.Text = fila["Categoria"].ToString();
+                fmMenuRegistro.cbxEstado.Text = fila["Estado"].ToString();
+
             }
             fmMenuRegistro.Show();
         }
@@ -141,6 +149,8 @@ namespace zompyDogs
 
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("Código del platillo a eliminar: " + menuCodigoVal);
+
             if (string.IsNullOrEmpty(menuCodigoVal))
             {
                 MessageBox.Show("Por favor, selecciona un platillo para eliminar.");
@@ -190,6 +200,9 @@ namespace zompyDogs
                 menuView.txtNombrePlatillo.Text = fila["Platillo"].ToString();
                 menuView.txtDescripcion.Text = fila["Descripcion"].ToString();
                 menuView.txtSalario.Text = fila["Precio"].ToString();
+
+                menuView.cbxEstado.Enabled = false;
+                menuView.cbxEstado.Text = fila["Estado"].ToString();
 
                 menuView.txtImagenName.Text = fila["Imagen"].ToString();
                 menuView.txtImagenName.Enabled = false;

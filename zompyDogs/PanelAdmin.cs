@@ -153,13 +153,15 @@ namespace zompyDogs
         {
             DataTable pedidos = PedidosDAO.ObtenerPedidosRecientes();
             dgvPedidosPanel.DataSource = pedidos;
-            dgvPedidosPanel.Columns["Codigo_Pedido"].HeaderText = "Codigo del Pedido";
+            dgvPedidosPanel.Columns["Codigo_Pedido"].HeaderText = "Código del Pedido";
             dgvPedidosPanel.Columns["Total_a_Pagar"].HeaderText = "Total";
         }
 
         public void CargarPeticionesEnDataGrid()
         {
             dgvPeticionesPendientes.DataSource = PeticionesValidaciones.ObtenerPeticionesParaPanel();
+
+            dgvPeticionesPendientes.Columns["Peticion"].HeaderText = "Petición";
             dgvPeticionesPendientes.Columns["Fecha_De_Envio"].HeaderText = "Fecha de Envío";
 
         }

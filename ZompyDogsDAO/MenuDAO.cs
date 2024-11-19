@@ -30,7 +30,7 @@ namespace ZompyDogsDAO
         {
             using (SqlConnection conn = new SqlConnection(con_string))
             {
-                string query = "SELECT Codigo, Platillo, Descripcion, Precio, Categoria FROM v_DetallesMenu";
+                string query = "SELECT Codigo, Platillo, Descripcion, Precio, Categoria, Estado FROM v_DetallesMenu";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dtMenu = new DataTable();
                 da.Fill(dtMenu);
@@ -64,12 +64,13 @@ namespace ZompyDogsDAO
             public Decimal PrecioUnitario { get; set; }
             public int CodigoCategoria { get; set; }
             public string ImagenPlatillo { get; set; }
+            public string Estado { get; set; }
         }
 
         public static void GuardarMenu(RegistroMenuPlatillo menuAdd)
         {
-            string query = "INSERT INTO Menu(nombrePlatillo, Descripcion, Fk_Categoria, PrecioUnitario, imgPlatillo, codigoMenu) " +
-               "VALUES (@menuPlatillo, @menuDesc, @menuCateg, @menuPrecio, @menuImg, @menuCodigo)";
+            string query = "INSERT INTO Menu(nombrePlatillo, Descripcion, Fk_Categoria, PrecioUnitario, imgPlatillo, codigoMenu, estado) " +
+               "VALUES (@menuPlatillo, @menuDesc, @menuCateg, @menuPrecio, @menuImg, @menuCodigo, @menuEstado)";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
@@ -81,6 +82,7 @@ namespace ZompyDogsDAO
                     cmd.Parameters.AddWithValue("@menuPrecio", menuAdd.PrecioUnitario);
                     cmd.Parameters.AddWithValue("@menuImg", menuAdd.ImagenPlatillo);
                     cmd.Parameters.AddWithValue("@menuCodigo", menuAdd.CodigoMenu);
+                    cmd.Parameters.AddWithValue("@menuEstado", menuAdd.Estado);
 
                     try
                     {
@@ -125,7 +127,7 @@ namespace ZompyDogsDAO
         public static void ActualizarMenu(RegistroMenuPlatillo menuUpdate)
         {
             string query = "UPDATE Menu SET nombrePlatillo = @menuPlatillo, Descripcion = @menuDesc, " +
-                           "Fk_Categoria = @menuCateg, PrecioUnitario = @menuPrecio, imgPlatillo = @menuImg " +
+                           "Fk_Categoria = @menuCateg, PrecioUnitario = @menuPrecio, imgPlatillo = @menuImg, estado = @menuEstado " +
                            "WHERE codigoMenu = @menuCodigo";
 
             using (SqlConnection conn = new SqlConnection(con_string))
@@ -138,6 +140,7 @@ namespace ZompyDogsDAO
                     cmd.Parameters.AddWithValue("@menuPrecio", menuUpdate.PrecioUnitario);
                     cmd.Parameters.AddWithValue("@menuImg", menuUpdate.ImagenPlatillo);
                     cmd.Parameters.AddWithValue("@menuCodigo", menuUpdate.CodigoMenu);
+                    cmd.Parameters.AddWithValue("@menuEstado", menuUpdate.Estado);
 
                     try
                     {

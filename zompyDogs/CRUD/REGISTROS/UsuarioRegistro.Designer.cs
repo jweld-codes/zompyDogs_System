@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblTituloRegistro = new Label();
             txtCodigoGenerado = new TextBox();
             label3 = new Label();
@@ -50,13 +51,15 @@
             txtSegNombre = new TextBox();
             label2 = new Label();
             groupBox2 = new GroupBox();
+            txtEmail = new TextBox();
+            label13 = new Label();
             dtpFechaRegistro = new DateTimePicker();
             btnGeneradorPassword = new Button();
             btnGeneradorUsername = new Button();
             txtPassword = new TextBox();
-            label16 = new Label();
+            lblClave = new Label();
             txtUsername = new TextBox();
-            label15 = new Label();
+            lblUser = new Label();
             btnAddPuesto = new Button();
             cbPuesto = new ComboBox();
             label12 = new Label();
@@ -66,8 +69,10 @@
             btnCancelar = new Button();
             label1 = new Label();
             lblidDetalleUsuario = new Label();
+            errorProviderUsuario = new ErrorProvider(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProviderUsuario).BeginInit();
             SuspendLayout();
             // 
             // lblTituloRegistro
@@ -107,6 +112,8 @@
             txtPrimNombre.Name = "txtPrimNombre";
             txtPrimNombre.Size = new Size(180, 37);
             txtPrimNombre.TabIndex = 98;
+            txtPrimNombre.TextChanged += txtPrimNombre_TextChanged;
+            txtPrimNombre.KeyPress += txtPrimNombre_KeyPress;
             // 
             // groupBox1
             // 
@@ -148,9 +155,11 @@
             // 
             dtpFechaNacimiento.Format = DateTimePickerFormat.Short;
             dtpFechaNacimiento.Location = new Point(222, 60);
+            dtpFechaNacimiento.MaxDate = new DateTime(2005, 1, 1, 0, 0, 0, 0);
             dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             dtpFechaNacimiento.Size = new Size(180, 27);
             dtpFechaNacimiento.TabIndex = 113;
+            dtpFechaNacimiento.Value = new DateTime(2005, 1, 1, 0, 0, 0, 0);
             // 
             // cbxEsatdoCivil
             // 
@@ -161,6 +170,7 @@
             cbxEsatdoCivil.Name = "cbxEsatdoCivil";
             cbxEsatdoCivil.Size = new Size(180, 28);
             cbxEsatdoCivil.TabIndex = 112;
+            cbxEsatdoCivil.SelectedIndexChanged += cbxEsatdoCivil_SelectedIndexChanged;
             // 
             // label9
             // 
@@ -179,6 +189,8 @@
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(180, 37);
             txtTelefono.TabIndex = 110;
+            txtTelefono.TextChanged += txtTelefono_TextChanged;
+            txtTelefono.KeyPress += txtTelefono_KeyPress;
             // 
             // label8
             // 
@@ -197,6 +209,8 @@
             txtCedula.Name = "txtCedula";
             txtCedula.Size = new Size(180, 37);
             txtCedula.TabIndex = 108;
+            txtCedula.TextChanged += txtCedula_TextChanged;
+            txtCedula.KeyPress += txtCedulae_KeyPress;
             // 
             // label7
             // 
@@ -215,6 +229,7 @@
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(180, 109);
             txtDireccion.TabIndex = 106;
+            txtDireccion.TextChanged += txtDireccion_TextChanged;
             // 
             // label6
             // 
@@ -233,6 +248,8 @@
             txtSegApellido.Name = "txtSegApellido";
             txtSegApellido.Size = new Size(180, 37);
             txtSegApellido.TabIndex = 104;
+            txtSegApellido.TextChanged += txtSegApellido_TextChanged;
+            txtSegApellido.KeyPress += txtSegApellido_KeyPress;
             // 
             // label5
             // 
@@ -251,6 +268,8 @@
             txtPrimApellido.Name = "txtPrimApellido";
             txtPrimApellido.Size = new Size(180, 37);
             txtPrimApellido.TabIndex = 102;
+            txtPrimApellido.TextChanged += txtPrimApellido_TextChanged;
+            txtPrimApellido.KeyPress += txtPrimApellido_KeyPress;
             // 
             // label4
             // 
@@ -263,12 +282,15 @@
             // 
             // txtSegNombre
             // 
+            txtSegNombre.BackColor = Color.White;
             txtSegNombre.BorderStyle = BorderStyle.FixedSingle;
             txtSegNombre.Location = new Point(222, 148);
             txtSegNombre.Multiline = true;
             txtSegNombre.Name = "txtSegNombre";
             txtSegNombre.Size = new Size(180, 37);
             txtSegNombre.TabIndex = 100;
+            txtSegNombre.TextChanged += txtSegNombre_TextChanged;
+            txtSegNombre.KeyPress += txtSegNombre_KeyPress;
             // 
             // label2
             // 
@@ -281,13 +303,15 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(txtEmail);
+            groupBox2.Controls.Add(label13);
             groupBox2.Controls.Add(dtpFechaRegistro);
             groupBox2.Controls.Add(btnGeneradorPassword);
             groupBox2.Controls.Add(btnGeneradorUsername);
             groupBox2.Controls.Add(txtPassword);
-            groupBox2.Controls.Add(label16);
+            groupBox2.Controls.Add(lblClave);
             groupBox2.Controls.Add(txtUsername);
-            groupBox2.Controls.Add(label15);
+            groupBox2.Controls.Add(lblUser);
             groupBox2.Controls.Add(btnAddPuesto);
             groupBox2.Controls.Add(cbPuesto);
             groupBox2.Controls.Add(label12);
@@ -295,10 +319,29 @@
             groupBox2.Controls.Add(label11);
             groupBox2.Location = new Point(478, 77);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(448, 243);
+            groupBox2.Size = new Size(448, 297);
             groupBox2.TabIndex = 100;
             groupBox2.TabStop = false;
             groupBox2.Text = "Datos de Usuario";
+            // 
+            // txtEmail
+            // 
+            txtEmail.BorderStyle = BorderStyle.FixedSingle;
+            txtEmail.Location = new Point(15, 148);
+            txtEmail.Multiline = true;
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(410, 29);
+            txtEmail.TabIndex = 120;
+            txtEmail.TextChanged += txtEmail_TextChanged;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(15, 125);
+            label13.Name = "label13";
+            label13.Size = new Size(132, 20);
+            label13.TabIndex = 119;
+            label13.Text = "Correo Electrónico";
             // 
             // dtpFechaRegistro
             // 
@@ -310,7 +353,7 @@
             // 
             // btnGeneradorPassword
             // 
-            btnGeneradorPassword.Location = new Point(213, 189);
+            btnGeneradorPassword.Location = new Point(213, 250);
             btnGeneradorPassword.Name = "btnGeneradorPassword";
             btnGeneradorPassword.Size = new Size(111, 29);
             btnGeneradorPassword.TabIndex = 129;
@@ -320,7 +363,7 @@
             // 
             // btnGeneradorUsername
             // 
-            btnGeneradorUsername.Location = new Point(15, 189);
+            btnGeneradorUsername.Location = new Point(15, 250);
             btnGeneradorUsername.Name = "btnGeneradorUsername";
             btnGeneradorUsername.Size = new Size(124, 29);
             btnGeneradorUsername.TabIndex = 128;
@@ -331,39 +374,45 @@
             // txtPassword
             // 
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
-            txtPassword.Location = new Point(214, 156);
+            txtPassword.CharacterCasing = CharacterCasing.Lower;
+            txtPassword.Location = new Point(214, 217);
             txtPassword.Multiline = true;
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(180, 29);
             txtPassword.TabIndex = 126;
+            txtPassword.TextChanged += txtPassword_TextChanged;
+            txtPassword.KeyPress += txtPassword_KeyPress;
             // 
-            // label16
+            // lblClave
             // 
-            label16.AutoSize = true;
-            label16.Location = new Point(217, 133);
-            label16.Name = "label16";
-            label16.Size = new Size(45, 20);
-            label16.TabIndex = 127;
-            label16.Text = "Clave";
+            lblClave.AutoSize = true;
+            lblClave.Location = new Point(217, 194);
+            lblClave.Name = "lblClave";
+            lblClave.Size = new Size(45, 20);
+            lblClave.TabIndex = 127;
+            lblClave.Text = "Clave";
             // 
             // txtUsername
             // 
             txtUsername.BorderStyle = BorderStyle.FixedSingle;
-            txtUsername.Location = new Point(16, 156);
+            txtUsername.CharacterCasing = CharacterCasing.Lower;
+            txtUsername.Location = new Point(16, 217);
             txtUsername.Multiline = true;
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(180, 29);
             txtUsername.TabIndex = 124;
+            txtUsername.TextChanged += txtUsername_TextChanged;
+            txtUsername.KeyPress += txtUsername_KeyPress;
             // 
-            // label15
+            // lblUser
             // 
-            label15.AutoSize = true;
-            label15.Location = new Point(19, 133);
-            label15.Name = "label15";
-            label15.Size = new Size(59, 20);
-            label15.TabIndex = 125;
-            label15.Text = "Usuario";
+            lblUser.AutoSize = true;
+            lblUser.Location = new Point(19, 194);
+            lblUser.Name = "lblUser";
+            lblUser.Size = new Size(59, 20);
+            lblUser.TabIndex = 125;
+            lblUser.Text = "Usuario";
             // 
             // btnAddPuesto
             // 
@@ -418,18 +467,19 @@
             // 
             btnGuardarUser.BackColor = Color.FromArgb(251, 147, 32);
             btnGuardarUser.ForeColor = SystemColors.ControlLightLight;
-            btnGuardarUser.Location = new Point(524, 347);
+            btnGuardarUser.Location = new Point(526, 387);
             btnGuardarUser.Name = "btnGuardarUser";
             btnGuardarUser.Size = new Size(150, 42);
             btnGuardarUser.TabIndex = 101;
             btnGuardarUser.Text = "GUARDAR";
             btnGuardarUser.UseVisualStyleBackColor = false;
+            btnGuardarUser.Click += btnGuardarUser_Click_1;
             // 
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.FromArgb(255, 49, 54);
             btnCancelar.ForeColor = SystemColors.ControlLightLight;
-            btnCancelar.Location = new Point(690, 347);
+            btnCancelar.Location = new Point(692, 387);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(150, 42);
             btnCancelar.TabIndex = 102;
@@ -455,6 +505,10 @@
             lblidDetalleUsuario.TabIndex = 116;
             lblidDetalleUsuario.Text = "0";
             // 
+            // errorProviderUsuario
+            // 
+            errorProviderUsuario.ContainerControl = this;
+            // 
             // UsuarioRegistro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -475,6 +529,7 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProviderUsuario).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -507,9 +562,9 @@
         private Button btnAddPuesto;
         private Label label12;
         public TextBox txtPassword;
-        private Label label16;
+        private Label lblClave;
         public TextBox txtUsername;
-        private Label label15;
+        private Label lblUser;
         public Button btnGeneradorPassword;
         public Button btnGeneradorUsername;
         public Button btnGuardarUser;
@@ -519,5 +574,8 @@
         private Label label1;
         public Label lblidDetalleUsuario;
         public DateTimePicker dtpFechaRegistro;
+        private ErrorProvider errorProviderUsuario;
+        public TextBox txtEmail;
+        private Label label13;
     }
 }

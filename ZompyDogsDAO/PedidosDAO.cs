@@ -31,7 +31,7 @@ namespace ZompyDogsDAO
             //USO EN: PanelAdmin
             using (SqlConnection conn = new SqlConnection(con_string))
             {
-                string query = "SELECT Codigo_Pedido, Empleado, Total_a_Pagar FROM v_DetallesPedidos ORDER BY Fecha_Del_Pedido DESC";
+                string query = "SELECT TOP(5) Codigo_Pedido, Empleado, Total_a_Pagar FROM v_DetallesPedidos ORDER BY Fecha_Del_Pedido DESC";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dtProductos = new DataTable();
                 da.Fill(dtProductos);
@@ -64,15 +64,6 @@ namespace ZompyDogsDAO
             return dtpFacturaPedido;
         }
 
-        /******************** REFERENCIAS ************************ */
-        public class RegistroPedidos
-        {
-            public string CodigoPedido { get; set; }
-            public int CodigoEmpleado { get; set; }
-            public string EmpleadoNombre { get; set; }
-            public DateTime FechaDelPedido { get; set; }
-            public string Estado { get; set; }
-        }
         public static DataTable BuscarPeticionesPorID(int valorBusqueda)
         {
             string query = "SELECT  * FROM v_DetallesPedidosConPlatillo WHERE Num_Factura = @valorBusqueda;";
@@ -89,6 +80,17 @@ namespace ZompyDogsDAO
                 }
             }
         }
+
+        /******************** REFERENCIAS ************************ */
+        public class RegistroPedidos
+        {
+            public string CodigoPedido { get; set; }
+            public int CodigoEmpleado { get; set; }
+            public string EmpleadoNombre { get; set; }
+            public DateTime FechaDelPedido { get; set; }
+            public string Estado { get; set; }
+        }
+        
         public class DetalleDePedido
         {
             public int id_Menu { get; set; }
@@ -109,7 +111,7 @@ namespace ZompyDogsDAO
         public static DataTable ObtenerDetalllesPedidos_DGV()
         {
             DataTable dtpDetallesUsuarios = new DataTable();
-            string query = "SELECT Codigo_Pedido,Codigo_Empleado, Empleado, Total_De_Productos, Subtotal, ISV, Total_a_Pagar, Fecha_Del_Pedido FROM v_DetallesPedidosPorEmpleado";
+            string query = "SELECT Codigo_Pedido,Codigo_Empleado, Empleado, Subtotal, ISV, Total_a_Pagar, Fecha_Del_Pedido FROM v_DetallesPedidosPorEmpleado ORDER BY Fecha_Del_Pedido DESC";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
@@ -155,9 +157,35 @@ namespace ZompyDogsDAO
 
             return dtpFacturaPedido;
         }
+
+        public static DataTable ObtenerDetalllesDeFacturaFinalizadaPorPlatillo(string codigoPedido)
+        {
+            DataTable dtpFacturaPedido = new DataTable();
+            string query = "SELECT * FROM v_PlatillosPorPedido WHERE Codigo_Pedido = @codigoPedido";
+
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@codigoPedido", codigoPedido);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                try
+                {
+                    conn.Open();
+                    da.Fill(dtpFacturaPedido);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al obtener las descripciones de pedidos: " + ex.Message);
+                }
+            }
+
+            return dtpFacturaPedido;
+        }
         public static DataTable BuscadorDeFacturas(string valorBusqueda)
         {
-            string query = "SELECT Codigo_Pedido,Codigo_Empleado, Empleado, Total_De_Productos, Subtotal, ISV, Total_a_Pagar, Fecha_Del_Pedido FROM v_DetallesPedidosPorEmpleado WHERE Codigo_Pedido LIKE @valorBusqueda OR Codigo_Empleado LIKE @valorBusqueda OR Empleado LIKE @valorBusqueda";
+            string query = "SELECT Codigo_Pedido,Codigo_Empleado, Empleado, Subtotal, ISV, Total_a_Pagar, Fecha_Del_Pedido FROM v_DetallesPedidosPorEmpleado WHERE Codigo_Pedido LIKE @valorBusqueda OR Codigo_Empleado LIKE @valorBusqueda OR Empleado LIKE @valorBusqueda OR Fecha_Del_Pedido LIKE @valorBusqueda";
 
             using (SqlConnection connection = new SqlConnection(con_string))
             {
@@ -172,5 +200,21 @@ namespace ZompyDogsDAO
             }
         }
 
+        public static DataTable BuscadorDeFacturasPorFecha(DateTime fechaEncontrada)
+        {
+            string query = "SELECT Codigo_Pedido,Codigo_Empleado, Empleado, Subtotal, ISV, Total_a_Pagar, Fecha_Del_Pedido FROM v_DetallesPedidosPorEmpleado WHERE CONVERT(date, Fecha_Del_Pedido) = @FechaSeleccionada";
+
+            using (SqlConnection connection = new SqlConnection(con_string))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@FechaSeleccionada", fechaEncontrada);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable resultados = new DataTable();
+                    adapter.Fill(resultados);
+                    return resultados;
+                }
+            }
+        }
     }
 }

@@ -517,12 +517,18 @@
           "System.Data.SqlClient": "4.8.6"
         },
         "runtime": {
-          "ZompyDogsDAO.dll": {}
+          "ZompyDogsDAO.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ZompyDogsLib/1.0.0": {
         "runtime": {
-          "ZompyDogsLib.dll": {}
+          "ZompyDogsLib.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

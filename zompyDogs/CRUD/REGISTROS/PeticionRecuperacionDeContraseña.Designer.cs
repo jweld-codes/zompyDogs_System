@@ -54,12 +54,16 @@
             label5 = new Label();
             txtNuevaClave = new TextBox();
             label8 = new Label();
+            txtEmail = new TextBox();
+            label6 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtEmail);
+            groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(txtEstado);
             groupBox1.Controls.Add(txtAccionPeticion);
             groupBox1.Controls.Add(label10);
@@ -73,10 +77,11 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Location = new Point(12, 58);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(439, 313);
+            groupBox1.Size = new Size(439, 382);
             groupBox1.TabIndex = 112;
             groupBox1.TabStop = false;
             groupBox1.Text = "Datos de Petición";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // txtEstado
             // 
@@ -329,12 +334,30 @@
             label8.TabIndex = 97;
             label8.Text = "Nueva Contraseña";
             // 
+            // txtEmail
+            // 
+            txtEmail.BorderStyle = BorderStyle.FixedSingle;
+            txtEmail.Location = new Point(19, 322);
+            txtEmail.Multiline = true;
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(383, 29);
+            txtEmail.TabIndex = 118;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(19, 299);
+            label6.Name = "label6";
+            label6.Size = new Size(132, 20);
+            label6.TabIndex = 117;
+            label6.Text = "Correo Electrónico";
+            // 
             // PeticionRecuperacionDeContraseña
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(943, 398);
+            ClientSize = new Size(943, 460);
             Controls.Add(btnCancelar);
             Controls.Add(btnRecuperacion);
             Controls.Add(groupBox2);
@@ -377,5 +400,8 @@
         public TextBox txtAccionPeticion;
         public TextBox txtEstado;
         public Button btnGeneradorPassword;
+        public TextBox textBox1;
+        private Label label6;
+        public TextBox txtEmail;
     }
 }

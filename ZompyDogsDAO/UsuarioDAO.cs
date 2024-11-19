@@ -26,7 +26,7 @@ namespace ZompyDogsDAO
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
-                string query = "SELECT IDUsuario FROM v_DetallesUsuarios WHERE Usuario = @NombreUsuario";
+                string query = "SELECT IDUsuario, RolID FROM v_DetallesUsuarios WHERE Usuario = @NombreUsuario";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
 
@@ -39,6 +39,31 @@ namespace ZompyDogsDAO
                 }
             }
             return idUsuario;
+        }
+        public static int ObtenerRolIDPorNombreUsuario(string nombreUsuario)
+        {
+            if (string.IsNullOrWhiteSpace(nombreUsuario))
+            {
+                throw new ArgumentException("El nombre de usuario no puede ser nulo o estar vacío.", nombreUsuario);
+            }
+
+            int rolID = 0;
+
+            using (SqlConnection conn = new SqlConnection(con_string))
+            {
+                string query = "SELECT RolID FROM v_DetallesUsuarios WHERE Usuario = @NombreUsuario";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
+
+                conn.Open();
+                var result = cmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    rolID = Convert.ToInt32(result);
+                }
+            }
+            return rolID;
         }
         public static string ObtenerNombreUsuarioPorID(int idUsuario)
         {
@@ -63,9 +88,11 @@ namespace ZompyDogsDAO
 
             return nombreUsuario;
         }
-        public static bool ActualizarClaveUsuario(string nombreUsuario, string nuevaClave)
+        public static bool ActualizarClaveUsuario(string nombreUsuario, string nuevaClave, string correoUsuario)
         {
+            correoUsuario = null;
             string queryUsername = "SELECT id_usuario FROM Usuario WHERE username = @nombreUsuario";
+            string queryEmail = "SELECT email FROM Usuario WHERE username = @nombreUsuario";
             string queryUpdatePassword = "UPDATE Usuario SET password = @nuevaClave WHERE username = @nombreUsuario";
             string queryUpdateEstadoPeticion = "UPDATE Peticiones SET estado = 'Completado' WHERE codigoUsuario = @idUser";
 
@@ -82,6 +109,12 @@ namespace ZompyDogsDAO
                         cmdQU.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
 
                         int idUser = (int)cmdQU.ExecuteScalar();
+
+                        // Obtener el correo electrónico
+                        SqlCommand cmdEmail = new SqlCommand(queryEmail, conn, transaction);
+                        cmdEmail.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+
+                        correoUsuario = (string)cmdEmail.ExecuteScalar();
 
                         // Actualizar la contraseña
                         SqlCommand cmdUpdatePassword = new SqlCommand(queryUpdatePassword, conn, transaction);
@@ -124,7 +157,7 @@ namespace ZompyDogsDAO
         public static DataTable ObtenerDetalllesDeUsuarios()
         {
             DataTable dtpDetallesUsuarios = new DataTable();
-            string query = "SELECT Codigo, Nombre_Completo, Usuario, Telefono, Puesto, Salario, RolUsuario FROM v_DetallesUsuarios";
+            string query = "SELECT Codigo, Nombre_Completo, Telefono, Puesto, Salario, RolUsuario FROM v_DetallesUsuarios";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
@@ -470,6 +503,7 @@ namespace ZompyDogsDAO
             public int CodigoRol { get; set; }
             public int CodigoDetalleUsuario { get; set; } 
             public string Estado { get; set; }
+            public string Email { get; set; }
         }
 
         public class ProveedorCrear
@@ -569,7 +603,7 @@ namespace ZompyDogsDAO
        // GUARDA EL USUARIO CON SUS DETALLES (DetallesUsuario)
         public static void GuardarUsuario(UsuarioCrear userAdd)
         {
-            string query = "INSERT INTO Usuario(username, password, fechaRegistro, codigoRol, codigoDetalleUsuario) VALUES (@nameuser, @claveuser, @fechareg, @codiRol, @codiDetalle)";
+            string query = "INSERT INTO Usuario(username, password, fechaRegistro, codigoRol, codigoDetalleUsuario, email) VALUES (@nameuser, @claveuser, @fechareg, @codiRol, @codiDetalle, @email)";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
@@ -581,6 +615,7 @@ namespace ZompyDogsDAO
                     cmd.Parameters.AddWithValue("@fechareg", userAdd.FechaRegistro);
                     cmd.Parameters.AddWithValue("@codiRol", Convert.ToInt32(userAdd.CodigoRol));
                     cmd.Parameters.AddWithValue("@codiDetalle", Convert.ToInt32(userAdd.CodigoDetalleUsuario));
+                    cmd.Parameters.AddWithValue("@email", userAdd.Email);
                     try
                     {
                         conn.Open();
@@ -671,13 +706,14 @@ namespace ZompyDogsDAO
         }
         public static bool AjusteDatosDeUsuario(UsuarioCrear usuarioCrear)
         {
-            string query = "UPDATE Usuario SET username = @usuarioName, password = @usuarioPass WHERE id_usuario = @codigoUsuario";
+            string query = "UPDATE Usuario SET username = @usuarioName, password = @usuarioPass, email = @usuarioEmail WHERE id_usuario = @codigoUsuario";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@usuarioName", usuarioCrear.UserName);
                 cmd.Parameters.AddWithValue("@usuarioPass", usuarioCrear.PassWord);
+                cmd.Parameters.AddWithValue("@usuarioEmail", usuarioCrear.Email);
                 cmd.Parameters.AddWithValue("@codigoUsuario", usuarioCrear.IDUser);
 
                 try

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnGuardarProv = new Button();
             groupBox1 = new GroupBox();
             label10 = new Label();
@@ -47,7 +48,9 @@
             label3 = new Label();
             lblTituloRegistro = new Label();
             btnCancelar = new Button();
+            errorProviderProveedor = new ErrorProvider(components);
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProviderProveedor).BeginInit();
             SuspendLayout();
             // 
             // btnGuardarProv
@@ -60,6 +63,7 @@
             btnGuardarProv.TabIndex = 104;
             btnGuardarProv.Text = "GUARDAR";
             btnGuardarProv.UseVisualStyleBackColor = false;
+            btnGuardarProv.Click += btnGuardarProv_Click;
             // 
             // groupBox1
             // 
@@ -106,6 +110,7 @@
             // 
             // dtpFechaRegistro
             // 
+            dtpFechaRegistro.Enabled = false;
             dtpFechaRegistro.Format = DateTimePickerFormat.Short;
             dtpFechaRegistro.Location = new Point(222, 69);
             dtpFechaRegistro.Name = "dtpFechaRegistro";
@@ -114,7 +119,6 @@
             // 
             // cbxEstado
             // 
-            cbxEstado.Enabled = false;
             cbxEstado.FormattingEnabled = true;
             cbxEstado.ItemHeight = 20;
             cbxEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
@@ -141,6 +145,7 @@
             txtNombreProv.Name = "txtNombreProv";
             txtNombreProv.Size = new Size(180, 37);
             txtNombreProv.TabIndex = 108;
+            txtNombreProv.TextChanged += txtNombreProv_TextChanged;
             // 
             // label7
             // 
@@ -245,6 +250,10 @@
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // errorProviderProveedor
+            // 
+            errorProviderProveedor.ContainerControl = this;
+            // 
             // ProveedorRegistro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -260,6 +269,7 @@
             Text = "ProveedorRegistro";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProviderProveedor).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -285,5 +295,6 @@
         public Button btnCancelar;
         public ComboBox cbxEstado;
         public TextBox txtCodigoGenerado;
+        private ErrorProvider errorProviderProveedor;
     }
 }

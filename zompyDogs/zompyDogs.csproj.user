@@ -13,9 +13,6 @@
     <Compile Update="CRUD\REGISTROS\PeticionRecuperacionDeContraseña.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="CRUD\REGISTROS\ProductoRegistro.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="CRUD\REGISTROS\PuestosRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -32,6 +29,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="CRUD\REGISTROS\ProveedorRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REPORTES\ReporteGanancias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REPORTES\ReporteVentas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="EmpleadoBienvenida.cs">
@@ -59,6 +62,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PanelEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PanelReportes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Peticiones.cs">

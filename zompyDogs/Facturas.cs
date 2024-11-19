@@ -21,8 +21,13 @@ namespace zompyDogs
         private int rolIDActual;
 
         private string pedidoCodigoEmpleadoVal;
+        private string pedidoEmpleadoVal;
         private string pedidoCodigoPedidoVal;
         private int pedidoTotalDelPedido;
+
+        private string pedidoEstado = "Completado";
+        private DateTime pedidoFechaVal;
+
         private decimal pedidoTotal;
         private decimal pedidoSubtotal;
         private decimal pedidoISV;
@@ -34,12 +39,12 @@ namespace zompyDogs
             this.rolIDActual = rolIDActual;
             this.usuarioIDActual = usuarioIDActual;
             //MessageBox.Show("idEmpleado: " + usuarioIDActual + "RolIdActual: " + rolIDActual);
-            
+
             if (rolIDActual == 1)
             {
-                btnPuntoVenta.Enabled = false;
-                btnPuntoVenta.Visible = false;
-                btnPuntoVenta.Hide();
+                // btnPuntoVenta.Enabled = false;
+                // btnPuntoVenta.Visible = false;
+                // btnPuntoVenta.Hide();
             }
 
             _pedidosDAO = new PedidosDAO();
@@ -54,9 +59,11 @@ namespace zompyDogs
             dgvHistorialPedidos.Columns["Codigo_Pedido"].HeaderText = "Código del Pedido";
             dgvHistorialPedidos.Columns["Codigo_Empleado"].HeaderText = "Código de Empleado";
             dgvHistorialPedidos.Columns["Empleado"].HeaderText = "Nombre del Empleado";
-            dgvHistorialPedidos.Columns["Total_De_Productos"].HeaderText = "Total de Platillos en la Orden";
+
             dgvHistorialPedidos.Columns["Total_a_Pagar"].HeaderText = "Total a Pagar";
             dgvHistorialPedidos.Columns["Fecha_Del_Pedido"].HeaderText = "Fecha del Pédido";
+
+            // dgvHistorialPedidos.Columns["Total_De_Productos"].HeaderText = "Total de platillos en la orden";
 
             dgvHistorialPedidos.EnableHeadersVisualStyles = false;
             dgvHistorialPedidos.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
@@ -82,7 +89,7 @@ namespace zompyDogs
 
         private void btnPuntoVenta_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnVisualizarRegistro_Click(object sender, EventArgs e)
@@ -97,21 +104,23 @@ namespace zompyDogs
             facturaView.btnCancelar.Enabled = true;
             facturaView.Show();
 
-            DataTable facturaViewEmpleado = PedidosDAO.ObtenerDetalllesDeFacturaFinalizada(pedidoCodigoPedidoVal);
+            DataTable facturaViewEmpleado = PedidosDAO.ObtenerDetalllesDeFacturaFinalizadaPorPlatillo(pedidoCodigoPedidoVal);
 
             if (facturaViewEmpleado.Rows.Count > 0)
             {
                 DataRow fila = facturaViewEmpleado.Rows[0];
 
                 facturaView.txtCodigoGenerado.Text = fila["Codigo_Pedido"].ToString();
-                facturaView.lblCodigoEmpleado.Text = fila["Codigo_Empleado"].ToString();
-                facturaView.txtEmpleado.Text = fila["Empleado"].ToString();
-                facturaView.dtpFechaRegistro.Text = fila["Fecha_Del_Pedido"].ToString();
+                facturaView.lblCodigoEmpleado.Text = pedidoCodigoEmpleadoVal.ToString();
+                facturaView.txtEmpleado.Text = pedidoEmpleadoVal.ToString();
+                facturaView.dtpFechaRegistro.Text = pedidoFechaVal.ToString();
                 facturaView.lblTotal.Text = pedidoTotal.ToString();
                 facturaView.lblSubtotal.Text = pedidoSubtotal.ToString();
+
                 facturaView.lblISV.Text = fila["ISV"].ToString();
-                facturaView.txtEstado.Text = fila["Estado"].ToString();
-                facturaView.lblTotalProductos.Text = pedidoTotalDelPedido.ToString();
+
+                facturaView.txtEstado.Text = pedidoEstado.ToString();
+                // facturaView.lblTotalProductos.Text = pedidoTotalDelPedido.ToString();
 
                 DataTable detalleProductosTable = new DataTable();
                 detalleProductosTable.Columns.Add("Platillo", typeof(string));
@@ -120,14 +129,19 @@ namespace zompyDogs
 
                 foreach (DataRow platillo in facturaViewEmpleado.Rows)
                 {
-                    detalleProductosTable.Rows.Add(
-                        platillo["Platillo"].ToString(),
-                        Convert.ToInt32(platillo["Total_De_Productos"]),
-                        Convert.ToDecimal(platillo["Precio_Unitario"])
-                    );
+                    string nombrePlatillo = platillo["Nombre_Platillo"].ToString();
+                    int cantidad = Convert.ToInt32(platillo["Cantidad"]);
+                    decimal precioUnitario = Convert.ToDecimal(platillo["Precio_Unitario"]);
+
+                    Console.WriteLine($"Platillo: {nombrePlatillo}, Cantidad: {cantidad}, Precio: {precioUnitario}");
+
+                    detalleProductosTable.Rows.Add(nombrePlatillo, cantidad, precioUnitario);
                 }
 
+
                 facturaView.dgvTotalPedido.DataSource = detalleProductosTable;
+                facturaView.dgvTotalPedido.Refresh();
+
             }
             else
             {
@@ -143,7 +157,11 @@ namespace zompyDogs
                 DataGridViewRow filaSeleccionada = dgvHistorialPedidos.Rows[e.RowIndex];
                 pedidoCodigoEmpleadoVal = filaSeleccionada.Cells["Codigo_Empleado"].Value.ToString();
                 pedidoCodigoPedidoVal = filaSeleccionada.Cells["Codigo_Pedido"].Value.ToString();
-                pedidoTotalDelPedido = Convert.ToInt32(filaSeleccionada.Cells["Total_De_Productos"].Value.ToString());
+                pedidoEmpleadoVal = filaSeleccionada.Cells["Empleado"].Value.ToString();
+                pedidoFechaVal = Convert.ToDateTime(filaSeleccionada.Cells["Fecha_Del_Pedido"].Value.ToString());
+
+
+                // pedidoTotalDelPedido = Convert.ToInt32(filaSeleccionada.Cells["Total_De_Productos"].Value.ToString());
                 pedidoSubtotal = Convert.ToDecimal(filaSeleccionada.Cells["Subtotal"].Value.ToString());
                 pedidoTotal = Convert.ToDecimal(filaSeleccionada.Cells["Total_a_Pagar"].Value.ToString());
                 pedidoISV = Convert.ToDecimal(filaSeleccionada.Cells["ISV"].Value.ToString());
@@ -156,6 +174,29 @@ namespace zompyDogs
             DataTable resultados = PedidosDAO.BuscadorDeFacturas(valorBusqueda);
             dgvHistorialPedidos.DataSource = resultados;
         }
-        
+
+        private void dtpFechaPedido_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFechaPedido_Click(object sender, EventArgs e)
+        {
+            DateTime fechaSeleccionada = dtpFechaPedido.Value.Date;
+            DataTable resultadosFecha = PedidosDAO.BuscadorDeFacturasPorFecha(fechaSeleccionada);
+
+            dgvHistorialPedidos.DataSource = resultadosFecha;
+
+        }
+
+        private void btnRefreshDG_Click(object sender, EventArgs e)
+        {
+            CargarFacturas();
+        }
+
+        private void Facturas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

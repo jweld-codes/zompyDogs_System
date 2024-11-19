@@ -189,6 +189,7 @@
             dgvMenu.Name = "dgvMenu";
             dgvMenu.ReadOnly = true;
             dgvMenu.RowHeadersWidth = 51;
+            dgvMenu.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMenu.Size = new Size(800, 338);
             dgvMenu.TabIndex = 74;
             dgvMenu.CellClick += dgvMenu_CellClick;

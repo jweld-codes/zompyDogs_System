@@ -19,6 +19,7 @@ namespace zompyDogs.CRUD.REGISTROS
         private ControladorGeneradoresDeCodigo _controladorGeneradorCodigo;
         private string puestCodigoVal;
         private bool isEdition;
+        private bool okError;
         public PuestosRegistro()
         {
             InitializeComponent();
@@ -27,6 +28,8 @@ namespace zompyDogs.CRUD.REGISTROS
             _controladorGeneradorCodigo = new ControladorGeneradoresDeCodigo();
             GeneradordeCodigoPuestoFromForm();
             CargarRolesComboBox();
+
+            errorProviderPuesto.BlinkStyle = ErrorBlinkStyle.NeverBlink;
 
             cbxEstado.Text = "Elegir...";
             cbxRoles.Text = "Elegir...";
@@ -73,55 +76,165 @@ namespace zompyDogs.CRUD.REGISTROS
             if (chbxJueves.Checked) diasSeleccionados.Add("Jueves");
             if (chbxViernes.Checked) diasSeleccionados.Add("Viernes");
             if (chbxSabado.Checked) diasSeleccionados.Add("Sábado");
-            if (chbxDomingo.Checked) diasSeleccionados.Add("Domingo");
+           // if (chbxDomingo.Checked) diasSeleccionados.Add("Domingo");
 
             txtDiasLaborales.Text = string.Join(",", diasSeleccionados);
         }
+        public bool ValidarCampos()
+        {
+            okError = true;
+
+            List<TextBox> textBoxes = new List<TextBox> { txtNombrePuesto, txtSalario, txtDescripcion, txtDiasLaborales };
+            List<System.Windows.Forms.CheckBox> checkBoxes = new List<System.Windows.Forms.CheckBox> { chbxLunes, chbxMartes, chbxMiercoles, chbxJueves, chbxViernes, chbxSabado };
+
+            foreach (TextBox textBox in textBoxes)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    okError = false;
+                    errorProviderPuesto.SetError(textBox, $"Ingrese un valor en el campo.");
+                    textBox.BackColor = Color.OldLace;
+                }
+                else
+                {
+                    errorProviderPuesto.SetError(textBox, "");
+                    textBox.BackColor = SystemColors.Window;
+                }
+            }
+            foreach (System.Windows.Forms.CheckBox checkBox in checkBoxes)
+            {
+                if (!checkBox.Checked)
+                {
+                    okError = false;
+                    errorProviderPuesto.SetError(checkBox, "Debe marcar esta opción.");
+                }
+                else
+                {
+                    errorProviderPuesto.SetError(checkBox, "");
+                }
+            }
+            return okError;
+        }
+
         private void btnGuardarPuesto_Click(object sender, EventArgs e)
         {
-            
-            if(isEdition)
+
+            if (isEdition)
             {
-                btnGuardarPuesto.Text = "Editar";
-
-                if (string.IsNullOrWhiteSpace(txtNombrePuesto.Text) ||
-                    string.IsNullOrWhiteSpace(txtDescripcion.Text) ||
-                    string.IsNullOrWhiteSpace(txtSalario.Text) ||
-                    string.IsNullOrWhiteSpace(txtDiasLaborales.Text) ||
-                    string.IsNullOrWhiteSpace(txtCodigoGeneradoPuesto.Text) ||
-                    string.IsNullOrWhiteSpace(cbxEstado.Text) ||
-                    cbxRoles.SelectedIndex == -1)
+                if (okError == false)
                 {
-                    MessageBox.Show("Por favor, complete todos los campos requeridos.");
-                    return;
+                    ValidarCampos();
                 }
-
-                string diasLaboralesSeleccionadas = txtDiasLaborales.Text;
-
-                TimeSpan horaInicio = new TimeSpan(tmBegin.Value.Hour, tmBegin.Value.Minute, 0);
-                TimeSpan horaFin = new TimeSpan(tmEnd.Value.Hour, tmEnd.Value.Minute, 0);
-
-                PuestoREF puestoActualizar = new PuestoREF
+                else
                 {
-                    CodigoPuesto = txtCodigoGeneradoPuesto.Text,
-                    Puesto = txtNombrePuesto.Text,
-                    Descripcion = txtDescripcion.Text,
-                    Salario = Convert.ToDecimal(txtSalario.Text),
-                    DiasLaborales = diasLaboralesSeleccionadas,
-                    CodigoRol = Convert.ToInt32(cbxRoles.SelectedValue),
-                    Estado = cbxEstado.Text,
-                    HoralaboralInicio = horaInicio,
-                    HoraLaboralTermina = horaFin
-                };
+                    btnGuardarPuesto.Text = "Editar";
 
-                try
-                {
-                    bool puestoActualizado = UsuarioDAO.ActualizarPuesto(puestoActualizar);
-
-                    if (puestoActualizado)
+                    if (string.IsNullOrWhiteSpace(txtNombrePuesto.Text) ||
+                        string.IsNullOrWhiteSpace(txtDescripcion.Text) ||
+                        string.IsNullOrWhiteSpace(txtSalario.Text) ||
+                        string.IsNullOrWhiteSpace(txtDiasLaborales.Text) ||
+                        string.IsNullOrWhiteSpace(txtCodigoGeneradoPuesto.Text) ||
+                        string.IsNullOrWhiteSpace(cbxEstado.Text) ||
+                        cbxRoles.SelectedIndex == -1)
                     {
-                        MessageBox.Show("Puesto actualizado con éxito.");
+                        MessageBox.Show("Por favor, complete todos los campos requeridos.");
+                        return;
+                    }
+
+                    string diasLaboralesSeleccionadas = txtDiasLaborales.Text;
+
+                    TimeSpan horaInicio = new TimeSpan(tmBegin.Value.Hour, tmBegin.Value.Minute, 0);
+                    TimeSpan horaFin = new TimeSpan(tmEnd.Value.Hour, tmEnd.Value.Minute, 0);
+
+                    PuestoREF puestoActualizar = new PuestoREF
+                    {
+                        CodigoPuesto = txtCodigoGeneradoPuesto.Text,
+                        Puesto = txtNombrePuesto.Text,
+                        Descripcion = txtDescripcion.Text,
+                        Salario = Convert.ToDecimal(txtSalario.Text),
+                        DiasLaborales = diasLaboralesSeleccionadas,
+                        CodigoRol = Convert.ToInt32(cbxRoles.SelectedValue),
+                        Estado = cbxEstado.Text,
+                        HoralaboralInicio = horaInicio,
+                        HoraLaboralTermina = horaFin
+                    };
+
+                    try
+                    {
+                        bool puestoActualizado = UsuarioDAO.ActualizarPuesto(puestoActualizar);
+
+                        if (puestoActualizado)
+                        {
+                            MessageBox.Show("Puesto actualizado con éxito.");
+                            CargarPuestos();
+
+                            chbxLunes.Checked = false;
+                            chbxMartes.Checked = false;
+                            chbxMiercoles.Checked = false;
+                            chbxJueves.Checked = false;
+                            chbxViernes.Checked = false;
+                            chbxSabado.Checked = false;
+                            chbxDomingo.Checked = false;
+
+                            cbxRoles.Text = "Elegir...";
+                            cbxEstado.Text = "Elegir...";
+                            txtDescripcion.Text = string.Empty;
+                            txtSalario.Text = string.Empty;
+                            txtDiasLaborales.Text = string.Empty;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error al actualizar el puesto.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ocurrió un error al actualizar el puesto: " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                ValidarCampos();
+                if (okError == false)
+                {
+                    ValidarCampos();
+                }
+                else
+                {
+                    btnGuardarPuesto.Text = "Guardar";
+                    PuestoREF nuevoPuesto = new PuestoREF
+                    {
+                        Puesto = txtNombrePuesto.Text,
+                        Descripcion = txtDescripcion.Text,
+                        Salario = Convert.ToInt32(txtSalario.Text),
+                        DiasLaborales = txtDiasLaborales.Text,
+                        CodigoPuesto = txtCodigoGeneradoPuesto.Text,
+                        CodigoRol = cbxRoles.SelectedValue != null && int.TryParse(cbxRoles.SelectedValue.ToString(), out int codigoRol)
+                    ? codigoRol
+                    : 1,
+                        Estado = cbxEstado.Text,
+
+                        HoralaboralInicio = new TimeSpan(tmBegin.Value.Hour, tmBegin.Value.Minute, 0),
+                        HoraLaboralTermina = new TimeSpan(tmEnd.Value.Hour, tmEnd.Value.Minute, 0)
+                    };
+                    try
+                    {
+                        if (string.IsNullOrWhiteSpace(nuevoPuesto.Puesto) ||
+                            string.IsNullOrWhiteSpace(nuevoPuesto.Descripcion) ||
+                            string.IsNullOrWhiteSpace(nuevoPuesto.DiasLaborales) ||
+                            string.IsNullOrWhiteSpace(nuevoPuesto.CodigoPuesto) ||
+                            string.IsNullOrWhiteSpace(nuevoPuesto.Estado))
+                        {
+                            MessageBox.Show("Por favor, complete todos los campos requeridos.");
+                            return;
+                        }
+                        // Guardar DetalleUsuario
+                        UsuarioDAO.GuardarPuesto(nuevoPuesto);
+
+                        MessageBox.Show("Puesto Registrado con Éxito.");
                         CargarPuestos();
+                        GeneradordeCodigoPuestoFromForm();
 
                         chbxLunes.Checked = false;
                         chbxMartes.Checked = false;
@@ -131,79 +244,20 @@ namespace zompyDogs.CRUD.REGISTROS
                         chbxSabado.Checked = false;
                         chbxDomingo.Checked = false;
 
-                        cbxRoles.Text = "Elegir...";
-                        cbxEstado.Text = "Elegir...";
+                        txtNombrePuesto.Text = string.Empty;
                         txtDescripcion.Text = string.Empty;
                         txtSalario.Text = string.Empty;
                         txtDiasLaborales.Text = string.Empty;
                     }
-                    else
+                    catch
                     {
-                        MessageBox.Show("Error al actualizar el puesto.");
+                        MessageBox.Show("Error al registrar el Puesto.");
+
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ocurrió un error al actualizar el puesto: " + ex.Message);
-                }
+
             }
-            else
-            {
-                btnGuardarPuesto.Text = "Guardar";
-                PuestoREF nuevoPuesto = new PuestoREF
-                {
-                    Puesto = txtNombrePuesto.Text,
-                    Descripcion = txtDescripcion.Text,
-                    Salario = Convert.ToInt32(txtSalario.Text),
-                    DiasLaborales = txtDiasLaborales.Text,
-                    CodigoPuesto = txtCodigoGeneradoPuesto.Text,
-                    CodigoRol = cbxRoles.SelectedValue != null && int.TryParse(cbxRoles.SelectedValue.ToString(), out int codigoRol)
-                ? codigoRol
-                : 1,
-                    Estado = cbxEstado.Text,
 
-                    HoralaboralInicio = new TimeSpan(tmBegin.Value.Hour, tmBegin.Value.Minute, 0),
-                    HoraLaboralTermina = new TimeSpan(tmEnd.Value.Hour, tmEnd.Value.Minute, 0)
-                };
-                try
-                {
-                    if (string.IsNullOrWhiteSpace(nuevoPuesto.Puesto) ||
-                        string.IsNullOrWhiteSpace(nuevoPuesto.Descripcion) ||
-                        string.IsNullOrWhiteSpace(nuevoPuesto.DiasLaborales) ||
-                        string.IsNullOrWhiteSpace(nuevoPuesto.CodigoPuesto) ||
-                        string.IsNullOrWhiteSpace(nuevoPuesto.Estado))
-                    {
-                        MessageBox.Show("Por favor, complete todos los campos requeridos.");
-                        return;
-                    }
-                    // Guardar DetalleUsuario
-                    UsuarioDAO.GuardarPuesto(nuevoPuesto);
-
-
-                    MessageBox.Show("Puesto Registrado con Éxito.");
-                    CargarPuestos();
-                    GeneradordeCodigoPuestoFromForm();
-
-                    chbxLunes.Checked = false;
-                    chbxMartes.Checked = false;
-                    chbxMiercoles.Checked = false;
-                    chbxJueves.Checked = false;
-                    chbxViernes.Checked = false;
-                    chbxSabado.Checked = false;
-                    chbxDomingo.Checked = false;
-
-                    txtNombrePuesto.Text = string.Empty;
-                    txtDescripcion.Text = string.Empty;
-                    txtSalario.Text = string.Empty;
-                    txtDiasLaborales.Text = string.Empty;
-                }
-                catch
-                {
-                    MessageBox.Show("Error al registrar el Puesto.");
-
-                }
-            }
-            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -299,7 +353,7 @@ namespace zompyDogs.CRUD.REGISTROS
                 DataRow fila = puestosEditar.Rows[0];
 
                 txtCodigoGeneradoPuesto.Text = fila["Codigo"].ToString();
-                txtCodigoGeneradoPuesto.Enabled = false; 
+                txtCodigoGeneradoPuesto.Enabled = false;
 
                 txtNombrePuesto.Text = fila["Puesto"].ToString();
                 txtDescripcion.Text = fila["Descripcion"].ToString();
@@ -322,5 +376,34 @@ namespace zompyDogs.CRUD.REGISTROS
 
             }
         }
+
+        private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtSalario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtNombrePuesto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        
+
+
+
+
+
     }
 }

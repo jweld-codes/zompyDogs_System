@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             groupBox2 = new GroupBox();
             tmEnd = new DateTimePicker();
@@ -60,9 +61,11 @@
             btnEditarPuesto = new Button();
             btnEliminarUsuario = new Button();
             btnAgregarNuevoPuesto = new Button();
+            errorProviderPuesto = new ErrorProvider(components);
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPuestos).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderPuesto).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
@@ -180,6 +183,7 @@
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(180, 62);
             txtDescripcion.TabIndex = 132;
+            txtDescripcion.KeyPress += txtDescripcion_KeyPress;
             // 
             // label2
             // 
@@ -198,6 +202,7 @@
             txtNombrePuesto.Name = "txtNombrePuesto";
             txtNombrePuesto.Size = new Size(180, 37);
             txtNombrePuesto.TabIndex = 130;
+            txtNombrePuesto.KeyPress += txtNombrePuesto_KeyPress;
             // 
             // label1
             // 
@@ -311,6 +316,7 @@
             txtSalario.Name = "txtSalario";
             txtSalario.Size = new Size(180, 37);
             txtSalario.TabIndex = 115;
+            txtSalario.KeyPress += txtSalario_KeyPress;
             // 
             // label13
             // 
@@ -411,6 +417,10 @@
             btnAgregarNuevoPuesto.UseVisualStyleBackColor = true;
             btnAgregarNuevoPuesto.Click += btnAgregarNuevoPuesto_Click;
             // 
+            // errorProviderPuesto
+            // 
+            errorProviderPuesto.ContainerControl = this;
+            // 
             // PuestosRegistro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -432,6 +442,7 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPuestos).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderPuesto).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -469,5 +480,6 @@
         private Button btnEditarPuesto;
         private Button btnEliminarUsuario;
         private Button btnAgregarNuevoPuesto;
+        private ErrorProvider errorProviderPuesto;
     }
 }

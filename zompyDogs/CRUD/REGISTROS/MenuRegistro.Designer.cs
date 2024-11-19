@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnSeleccionarImagen = new Button();
             txtImagenName = new TextBox();
             pbxImagenSeleccionada = new PictureBox();
             ofdSeleccionarImagen = new OpenFileDialog();
             groupBox2 = new GroupBox();
+            cbxEstado = new ComboBox();
+            label5 = new Label();
             cbxCategorias = new ComboBox();
             label4 = new Label();
             txtDescripcion = new TextBox();
@@ -46,9 +49,11 @@
             txtCodigoGenerado = new TextBox();
             btnCancelar = new Button();
             btnGuardarMenu = new Button();
+            errorProviderMenu = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)pbxImagenSeleccionada).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderMenu).BeginInit();
             SuspendLayout();
             // 
             // btnSeleccionarImagen
@@ -85,6 +90,8 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(cbxEstado);
+            groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(cbxCategorias);
             groupBox2.Controls.Add(label4);
             groupBox2.Controls.Add(txtDescripcion);
@@ -100,12 +107,32 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Registro de Puesto";
             // 
+            // cbxEstado
+            // 
+            cbxEstado.FormattingEnabled = true;
+            cbxEstado.ItemHeight = 20;
+            cbxEstado.Items.AddRange(new object[] { "Activo", "Inactivo" });
+            cbxEstado.Location = new Point(216, 199);
+            cbxEstado.Name = "cbxEstado";
+            cbxEstado.Size = new Size(180, 28);
+            cbxEstado.TabIndex = 139;
+            cbxEstado.Text = "Activo";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(216, 174);
+            label5.Name = "label5";
+            label5.Size = new Size(54, 20);
+            label5.TabIndex = 138;
+            label5.Text = "Estado";
+            // 
             // cbxCategorias
             // 
             cbxCategorias.FormattingEnabled = true;
             cbxCategorias.ItemHeight = 20;
             cbxCategorias.Items.AddRange(new object[] { "7:00 AM - 5:00 PM", "5:00 PM - 11:00 PM", "8:00 AM - 3:00 PM", "6:00 AM - 12:00 PM" });
-            cbxCategorias.Location = new Point(216, 172);
+            cbxCategorias.Location = new Point(216, 138);
             cbxCategorias.Name = "cbxCategorias";
             cbxCategorias.Size = new Size(180, 28);
             cbxCategorias.TabIndex = 137;
@@ -113,7 +140,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(216, 147);
+            label4.Location = new Point(216, 113);
             label4.Name = "label4";
             label4.Size = new Size(74, 20);
             label4.TabIndex = 136;
@@ -125,8 +152,9 @@
             txtDescripcion.Location = new Point(18, 138);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(180, 62);
+            txtDescripcion.Size = new Size(180, 89);
             txtDescripcion.TabIndex = 132;
+            txtDescripcion.TextChanged += txtDescripcion_TextChanged;
             // 
             // label2
             // 
@@ -145,6 +173,7 @@
             txtNombrePlatillo.Name = "txtNombrePlatillo";
             txtNombrePlatillo.Size = new Size(180, 37);
             txtNombrePlatillo.TabIndex = 130;
+            txtNombrePlatillo.KeyPress += txtNombrePlatillo_KeyPress;
             // 
             // label1
             // 
@@ -163,6 +192,8 @@
             txtSalario.Name = "txtSalario";
             txtSalario.Size = new Size(180, 37);
             txtSalario.TabIndex = 115;
+            txtSalario.TextChanged += txtSalario_TextChanged;
+            txtSalario.KeyPress += txtSalario_KeyPress;
             // 
             // label13
             // 
@@ -229,6 +260,10 @@
             btnGuardarMenu.UseVisualStyleBackColor = false;
             btnGuardarMenu.Click += btnGuardarMenu_Click;
             // 
+            // errorProviderMenu
+            // 
+            errorProviderMenu.ContainerControl = this;
+            // 
             // MenuRegistro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -250,6 +285,7 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderMenu).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -275,5 +311,8 @@
         public TextBox txtImagenName;
         public PictureBox pbxImagenSeleccionada;
         public Label lblTitulo;
+        public ComboBox cbxEstado;
+        private Label label5;
+        private ErrorProvider errorProviderMenu;
     }
 }

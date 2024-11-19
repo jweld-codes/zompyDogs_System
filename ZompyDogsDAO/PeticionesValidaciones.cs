@@ -202,7 +202,7 @@ namespace ZompyDogsDAO
         {
             // USO EN: Peticiones
             DataTable dtPeticiones = new DataTable();
-            string query = "SELECT Codigo, Accion, Peticion, Usuario, Fecha_De_Envio, Estado FROM v_PeticionesxUsuarios WHERE Estado = 'Pendiente' ORDER BY Fecha_De_Envio DESC";
+            string query = "SELECT Codigo, Accion, Peticion, Usuario, Correo, Fecha_De_Envio, Estado FROM v_PeticionesxUsuarios WHERE Estado = 'Pendiente' ORDER BY Fecha_De_Envio DESC";
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {

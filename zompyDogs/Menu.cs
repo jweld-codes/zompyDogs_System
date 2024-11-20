@@ -24,7 +24,7 @@ namespace zompyDogs
         {
             InitializeComponent();
             CargarPlatillosdeMenu();
-            btnEliminarUsuario.Hide();
+            btnEliminarUsuario.Show();
             
         }
 

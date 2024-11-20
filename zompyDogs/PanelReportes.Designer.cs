@@ -30,20 +30,20 @@
         {
             label1 = new Label();
             repoVentas = new Button();
-            repoGanacias = new Button();
             pictureBox3 = new PictureBox();
             label4 = new Label();
-            pictureBox4 = new PictureBox();
-            label5 = new Label();
+            pictureBox1 = new PictureBox();
+            label2 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(361, 55);
+            label1.Location = new Point(368, 110);
             label1.Name = "label1";
             label1.Size = new Size(165, 41);
             label1.TabIndex = 0;
@@ -51,7 +51,7 @@
             // 
             // repoVentas
             // 
-            repoVentas.Location = new Point(294, 390);
+            repoVentas.Location = new Point(307, 413);
             repoVentas.Name = "repoVentas";
             repoVentas.Size = new Size(111, 29);
             repoVentas.TabIndex = 3;
@@ -59,20 +59,10 @@
             repoVentas.UseVisualStyleBackColor = true;
             repoVentas.Click += repoVentas_Click;
             // 
-            // repoGanacias
-            // 
-            repoGanacias.Location = new Point(488, 390);
-            repoGanacias.Name = "repoGanacias";
-            repoGanacias.Size = new Size(105, 29);
-            repoGanacias.TabIndex = 4;
-            repoGanacias.Text = "Ver Reporte";
-            repoGanacias.UseVisualStyleBackColor = true;
-            repoGanacias.Click += repoGanacias_Click;
-            // 
             // pictureBox3
             // 
             pictureBox3.Image = Properties.Resources.shopping_bag1;
-            pictureBox3.Location = new Point(283, 281);
+            pictureBox3.Location = new Point(296, 304);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(125, 103);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -83,31 +73,41 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(308, 247);
+            label4.Location = new Point(321, 270);
             label4.Name = "label4";
             label4.Size = new Size(82, 31);
             label4.TabIndex = 9;
             label4.Text = "Ventas";
             // 
-            // pictureBox4
+            // pictureBox1
             // 
-            pictureBox4.Image = Properties.Resources.staff_training1;
-            pictureBox4.Location = new Point(478, 281);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(125, 103);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 12;
-            pictureBox4.TabStop = false;
+            pictureBox1.Image = Properties.Resources.staff_training1;
+            pictureBox1.Location = new Point(492, 304);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(125, 103);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 15;
+            pictureBox1.TabStop = false;
             // 
-            // label5
+            // label2
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(484, 247);
-            label5.Name = "label5";
-            label5.Size = new Size(119, 31);
-            label5.TabIndex = 11;
-            label5.Text = "Ganancias";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(502, 270);
+            label2.Name = "label2";
+            label2.Size = new Size(98, 31);
+            label2.TabIndex = 14;
+            label2.Text = "Facturas";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(502, 413);
+            button1.Name = "button1";
+            button1.Size = new Size(105, 29);
+            button1.TabIndex = 13;
+            button1.Text = "Ver Reporte";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // PanelReportes
             // 
@@ -115,16 +115,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(901, 725);
-            Controls.Add(pictureBox4);
-            Controls.Add(label5);
+            Controls.Add(pictureBox1);
+            Controls.Add(label2);
+            Controls.Add(button1);
             Controls.Add(pictureBox3);
             Controls.Add(label4);
-            Controls.Add(repoGanacias);
             Controls.Add(repoVentas);
             Controls.Add(label1);
             Name = "PanelReportes";
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -133,10 +133,10 @@
 
         private Label label1;
         private Button repoVentas;
-        private Button repoGanacias;
         private PictureBox pictureBox3;
         private Label label4;
-        private PictureBox pictureBox4;
-        private Label label5;
+        private PictureBox pictureBox1;
+        private Label label2;
+        private Button button1;
     }
 }

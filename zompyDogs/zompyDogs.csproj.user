@@ -31,7 +31,10 @@
     <Compile Update="CRUD\REGISTROS\ProveedorRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="CRUD\REPORTES\ReporteGanancias.cs">
+    <Compile Update="CRUD\REPORTES\ImprimirFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CRUD\REPORTES\ReporteFacturas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="CRUD\REPORTES\ReporteVentas.cs">
@@ -76,5 +79,10 @@
     <Compile Update="Usuarios.cs">
       <SubType>Form</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="ZompyDogsDataSet.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
 </Project>

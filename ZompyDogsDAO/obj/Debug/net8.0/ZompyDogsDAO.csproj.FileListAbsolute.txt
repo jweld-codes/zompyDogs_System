@@ -63,3 +63,6 @@ C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDog
 C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\refint\ZompyDogsDAO.dll
 C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.pdb
 C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\obj\Debug\net8.0\ref\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\runtimes\win-x86\native\WebView2Loader.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\jenni\Documents\GitHub\zompyDogs\ZompyDogsDAO\bin\Debug\net8.0\runtimes\win-arm64\native\WebView2Loader.dll

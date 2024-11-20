@@ -25,10 +25,10 @@ namespace zompyDogs
             frmReporteVentas.Show();
         }
 
-        private void repoGanacias_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            ReporteGanancias frmReporteGanancias = new ReporteGanancias();
-            frmReporteGanancias.Show();
+            ReporteFacturas frmReporteFacturas = new ReporteFacturas();
+            frmReporteFacturas.Show();
         }
     }
 }

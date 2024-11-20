@@ -25,7 +25,7 @@ namespace zompyDogs
         private string pedidoCodigoPedidoVal;
         private int pedidoTotalDelPedido;
 
-        private string pedidoEstado = "Completado";
+        private string pedidoEstado = "Pagado";
         private DateTime pedidoFechaVal;
 
         private decimal pedidoTotal;
@@ -38,8 +38,6 @@ namespace zompyDogs
             InitializeComponent();
             this.rolIDActual = rolIDActual;
             this.usuarioIDActual = usuarioIDActual;
-            //MessageBox.Show("idEmpleado: " + usuarioIDActual + "RolIdActual: " + rolIDActual);
-
             if (rolIDActual == 1)
             {
                 // btnPuntoVenta.Enabled = false;

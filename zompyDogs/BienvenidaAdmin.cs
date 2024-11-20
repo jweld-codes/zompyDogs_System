@@ -21,7 +21,7 @@ namespace zompyDogs
         {
             InitializeComponent();
 
-            btnReportes.Hide();
+            btnReportes.Show();
             btnAjustesCuenta.Hide();
         }
 

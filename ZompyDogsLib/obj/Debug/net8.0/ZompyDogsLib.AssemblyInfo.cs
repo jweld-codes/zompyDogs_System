@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZompyDogsLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04bea5cb92ecf2a1e1ecba817be0293b08261171")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3741661a781469534aee137f7a3aa7e2035c82a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZompyDogsLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZompyDogsLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

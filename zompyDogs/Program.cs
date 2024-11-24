@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 
 namespace zompyDogs
 {
@@ -7,9 +8,17 @@ namespace zompyDogs
         [STAThread]
         public static void Main()
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-PE");
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            var configuration = builder.Build();
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            // Pasa la conexión a la librería
+            ZompyDogsLib.Conexion.SetConnectionString(connectionString);
+
+            ApplicationConfiguration.Initialize();
             Application.Run(new Login());
         }
     }

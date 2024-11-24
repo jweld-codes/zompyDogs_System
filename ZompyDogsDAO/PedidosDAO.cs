@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
+using ZompyDogsLib;
 namespace ZompyDogsDAO
 {
     public class PedidosDAO
     {
-        private static readonly string con_string = "Data Source=MACARENA\\SQLEXPRESS;Initial Catalog=DB_ZompyDogs;Integrated Security=True;Encrypt=False";
+        private static readonly string con_string = Conexion.cadena;
+        private static SqlConnection conn = new SqlConnection(con_string);
         public static DataTable ObtenerDetallesdePedido()
         {
             using (SqlConnection conn = new SqlConnection(con_string))
@@ -81,30 +83,8 @@ namespace ZompyDogsDAO
             }
         }
 
-        /******************** REFERENCIAS ************************ */
-        public class RegistroPedidos
-        {
-            public string CodigoPedido { get; set; }
-            public int CodigoEmpleado { get; set; }
-            public string EmpleadoNombre { get; set; }
-            public DateTime FechaDelPedido { get; set; }
-            public string Estado { get; set; }
-        }
-        
-        public class DetalleDePedido
-        {
-            public int id_Menu { get; set; }
-            public int Cantidad { get; set; }
-            public decimal Precio_Unitario { get; set; }
-            public int id_Pedido { get; set; }
-            public string PlatilloNombre { get; set; }
-            public string Descripcion { get; set; }
-            public int Categoria { get; set; }
-            public string ImagenPlatillo { get; set; }
-            public decimal SubTotal { get; set; }
-        }
-
-        public BindingList<DetalleDePedido> platillosLista = new BindingList<DetalleDePedido>();
+       
+        public BindingList<ZompyDogsLib.Pedidos.DetalleDePedido> platillosLista = new BindingList<ZompyDogsLib.Pedidos.DetalleDePedido>();
 
         /************************ FACTURAS ******************* */
 

@@ -117,7 +117,7 @@ namespace zompyDogs
                 }
                 else
                 {
-                    CapaEntidad.Peticiones.PeticionRegistro nuevaPeticion = new CapaEntidad.Peticiones.PeticionRegistro
+                    ZompyDogsLib.Peticiones.PeticionRegistro nuevaPeticion = new ZompyDogsLib.Peticiones.PeticionRegistro
                     {
                         CodigPeticion = peticionesRegistro.txtCodigoGenerado.Text,
                         AccionPeticion = peticionesRegistro.cbxPeticion.SelectedItem?.ToString() ?? string.Empty,

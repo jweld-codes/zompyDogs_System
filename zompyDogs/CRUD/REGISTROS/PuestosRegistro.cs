@@ -146,7 +146,7 @@ namespace zompyDogs.CRUD.REGISTROS
                     TimeSpan horaInicio = new TimeSpan(tmBegin.Value.Hour, tmBegin.Value.Minute, 0);
                     TimeSpan horaFin = new TimeSpan(tmEnd.Value.Hour, tmEnd.Value.Minute, 0);
 
-                    CapaEntidad.Usuarios.PuestoREF puestoActualizar = new CapaEntidad.Usuarios.PuestoREF
+                    ZompyDogsLib.Usuarios.PuestoREF puestoActualizar = new ZompyDogsLib.Usuarios.PuestoREF
                     {
                         CodigoPuesto = txtCodigoGeneradoPuesto.Text,
                         Puesto = txtNombrePuesto.Text,
@@ -203,7 +203,7 @@ namespace zompyDogs.CRUD.REGISTROS
                 else
                 {
                     btnGuardarPuesto.Text = "Guardar";
-                    CapaEntidad.Usuarios.PuestoREF nuevoPuesto = new CapaEntidad.Usuarios.PuestoREF
+                    ZompyDogsLib.Usuarios.PuestoREF nuevoPuesto = new ZompyDogsLib.Usuarios.PuestoREF
                     {
                         Puesto = txtNombrePuesto.Text,
                         Descripcion = txtDescripcion.Text,

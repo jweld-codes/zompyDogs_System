@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zompyDogs", "zompyDogs\zomp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZompyDogsDAO", "ZompyDogsDAO\ZompyDogsDAO.csproj", "{B810D24A-95D4-4ADD-BFE2-CC53185D2745}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CapaEntidad", "ZompyDogsLib\CapaEntidad.csproj", "{AB10D7BD-300B-4C05-AE19-9A4ACB2D6ADC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZompyDogsLib", "ZompyDogsLib\ZompyDogsLib.csproj", "{AB10D7BD-300B-4C05-AE19-9A4ACB2D6ADC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

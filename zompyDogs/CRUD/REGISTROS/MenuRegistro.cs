@@ -151,7 +151,7 @@ namespace zompyDogs.CRUD.REGISTROS
                         return;
                     }
 
-                    RegistroMenuPlatillo menuToUpdate = new RegistroMenuPlatillo
+                    ZompyDogsLib.Menu.RegistroMenuPlatillo menuToUpdate = new ZompyDogsLib.Menu.RegistroMenuPlatillo
                     {
                         CodigoMenu = txtCodigoGenerado.Text,
                         PlatilloName = txtNombrePlatillo.Text,
@@ -189,7 +189,7 @@ namespace zompyDogs.CRUD.REGISTROS
                 else
                 {
                     btnGuardarMenu.Text = "Guardar";
-                    RegistroMenuPlatillo nuevoMenu = new RegistroMenuPlatillo
+                    ZompyDogsLib.Menu.RegistroMenuPlatillo nuevoMenu = new ZompyDogsLib.Menu.RegistroMenuPlatillo
                     {
                         CodigoMenu = txtCodigoGenerado.Text,
                         PlatilloName = txtNombrePlatillo.Text,

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using ZompyDogsDAO;
 using ZompyDogsLib.Controladores;
 using static ZompyDogsDAO.PeticionesValidaciones;
-using CapaEntidad;
+using ZompyDogsLib;
 
 namespace zompyDogs
 {
@@ -74,7 +74,7 @@ namespace zompyDogs
             else
             {
                 // Crear la petición
-               CapaEntidad.Peticiones.PeticionRegistro nuevaPeticion = new CapaEntidad.Peticiones.PeticionRegistro
+               ZompyDogsLib.Peticiones.PeticionRegistro nuevaPeticion = new ZompyDogsLib.Peticiones.PeticionRegistro
                 {
                     CodigPeticion = userForgetCodigo,
                     AccionPeticion = "Recuperación de contraseña",

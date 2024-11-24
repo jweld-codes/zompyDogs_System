@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("zompyDogs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f6a9b751c0c7162616d312274a5218e129ad564b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c00f873b33d7c6f027af5eadd7db135daf95eeb")]
 [assembly: System.Reflection.AssemblyProductAttribute("zompyDogs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("zompyDogs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

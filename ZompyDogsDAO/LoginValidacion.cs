@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using CapaEntidad;
+using ZompyDogsLib;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration.Json;
 
 namespace ZompyDogsDAO
 {
-    public class UsuarioValidaciones
+    public class LoginValidacion
     {
         // Usamos la cadena de conexión de la clase Conexion
         private static readonly string con_string = Conexion.cadena;
@@ -43,10 +43,10 @@ namespace ZompyDogsDAO
 
                 // Consulta para validar el usuario y la clave
                 string query = @"
-            SELECT Nombre_Usuario, Apellido_Usuario, Usuario, IDUsuario, RolId 
-            FROM v_DetallesUsuarios
-            WHERE Usuario = @user AND Clave = @password
-        ";
+                SELECT Nombre_Usuario, Apellido_Usuario, Usuario, IDUsuario, RolId 
+                FROM v_DetallesUsuarios
+                WHERE Usuario = @user AND Clave = @password
+            ";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@user", user);

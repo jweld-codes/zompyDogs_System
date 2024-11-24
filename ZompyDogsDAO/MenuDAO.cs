@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using static ZompyDogsDAO.UsuarioDAO;
+using ZompyDogsLib;
 
 namespace ZompyDogsDAO
 {
     public class MenuDAO
     {
-        public static readonly string con_string = "Data Source=MACARENA\\SQLEXPRESS;Initial Catalog=DB_ZompyDogs;Integrated Security=True;Encrypt=False";
-        public static SqlConnection conn = new SqlConnection(con_string);
+        private static readonly string con_string = Conexion.cadena;
+        private static SqlConnection conn = new SqlConnection(con_string);
 
         public static DataTable ObtenerPlatilloParaPanel()
         {
@@ -54,20 +55,7 @@ namespace ZompyDogsDAO
             return dtCategoria;
         }
 
-        /* ********************* REFERENCIAS ***************************** */
-
-        public class RegistroMenuPlatillo
-        {
-            public string CodigoMenu { get; set; }
-            public string PlatilloName { get; set; }
-            public string Descripcion { get; set; }
-            public Decimal PrecioUnitario { get; set; }
-            public int CodigoCategoria { get; set; }
-            public string ImagenPlatillo { get; set; }
-            public string Estado { get; set; }
-        }
-
-        public static void GuardarMenu(RegistroMenuPlatillo menuAdd)
+        public static void GuardarMenu(ZompyDogsLib.Menu.RegistroMenuPlatillo menuAdd)
         {
             string query = "INSERT INTO Menu(nombrePlatillo, Descripcion, Fk_Categoria, PrecioUnitario, imgPlatillo, codigoMenu, estado) " +
                "VALUES (@menuPlatillo, @menuDesc, @menuCateg, @menuPrecio, @menuImg, @menuCodigo, @menuEstado)";
@@ -124,7 +112,7 @@ namespace ZompyDogsDAO
             return dtpPuestos;
         }
 
-        public static void ActualizarMenu(RegistroMenuPlatillo menuUpdate)
+        public static void ActualizarMenu(ZompyDogsLib.Menu.RegistroMenuPlatillo menuUpdate)
         {
             string query = "UPDATE Menu SET nombrePlatillo = @menuPlatillo, Descripcion = @menuDesc, " +
                            "Fk_Categoria = @menuCateg, PrecioUnitario = @menuPrecio, imgPlatillo = @menuImg, estado = @menuEstado " +

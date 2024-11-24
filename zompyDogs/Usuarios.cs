@@ -179,7 +179,7 @@ namespace zompyDogs
                         string segundoApellido = CapitalizarPrimeraLetra(usuarioGuardar.txtSegApellido.Text);
 
 
-                        CapaEntidad.Usuarios.DetalleUsuario nuevoDetalleUsuario = new CapaEntidad.Usuarios.DetalleUsuario
+                        ZompyDogsLib.Usuarios.DetalleUsuario nuevoDetalleUsuario = new ZompyDogsLib.Usuarios.DetalleUsuario
                         {
                             primerNombre = primerNombre,
                             segundoNombre = segundoNombre,
@@ -199,7 +199,7 @@ namespace zompyDogs
                             // Guardar DetalleUsuario
                             UsuarioDAO.GuardarDetalleUsuario(nuevoDetalleUsuario);
 
-                            CapaEntidad.Usuarios.UsuarioCrear nuevoUsuarioRegistro = new CapaEntidad.Usuarios.UsuarioCrear
+                            ZompyDogsLib.Usuarios.UsuarioCrear nuevoUsuarioRegistro = new ZompyDogsLib.Usuarios.UsuarioCrear
                             {
                                 UserName = usuarioGuardar.txtUsername.Text,
                                 PassWord = usuarioGuardar.txtPassword.Text,
@@ -294,7 +294,7 @@ namespace zompyDogs
                     }
                     else
                     {
-                        CapaEntidad.Usuarios.ProveedorCrear nuevoProveedor = new CapaEntidad.Usuarios.ProveedorCrear
+                        ZompyDogsLib.Usuarios.ProveedorCrear nuevoProveedor = new ZompyDogsLib.Usuarios.ProveedorCrear
                         {
                             CodigoProv = proveedorGuardar.txtCodigoGenerado.Text,
                             NombreProv = proveedorGuardar.txtNombreProv.Text,
@@ -414,7 +414,7 @@ namespace zompyDogs
                                     return;
                                 }
 
-                                CapaEntidad.Usuarios.DetalleUsuario detalleUsuarioActualizado = new CapaEntidad.Usuarios.DetalleUsuario
+                                ZompyDogsLib.Usuarios.DetalleUsuario detalleUsuarioActualizado = new ZompyDogsLib.Usuarios.DetalleUsuario
                                 {
                                     primerNombre = usuarioEditar.txtPrimNombre.Text,
                                     segundoNombre = usuarioEditar.txtSegNombre.Text,
@@ -502,7 +502,7 @@ namespace zompyDogs
                                 return;
                             }
 
-                            CapaEntidad.Usuarios.ProveedorCrear proveedorActualizador = new CapaEntidad.Usuarios.ProveedorCrear
+                            ZompyDogsLib.Usuarios.ProveedorCrear proveedorActualizador = new ZompyDogsLib.Usuarios.ProveedorCrear
                             {
                                 NombreProv = frmProveedorRegistro.txtNombreProv.Text,
                                 ContactoProv = frmProveedorRegistro.txtPrimNombre.Text,

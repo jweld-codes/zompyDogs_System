@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using static ZompyDogsDAO.PeticionesValidaciones;
 using System.Collections;
-using CapaEntidad;
+using ZompyDogsLib;
 
 namespace ZompyDogsDAO
 {
@@ -16,7 +16,7 @@ namespace ZompyDogsDAO
         private static readonly string con_string = Conexion.cadena;
         private static SqlConnection conn = new SqlConnection(con_string);
         
-        public static void GuardarPeticion(CapaEntidad.Peticiones.PeticionRegistro peticion)
+        public static void GuardarPeticion(ZompyDogsLib.Peticiones.PeticionRegistro peticion)
         {
             string query = "INSERT INTO Peticiones (codigoPeticion, accionPeticion, descripcionPeticion, fechaEnviada, fechaRealizada, codigousuario, estado) VALUES (@codigopeticion, @accionpeticion, @descripcion, @fechaenviada, @fecharealizada, @codigousuario, @estado)";
 
@@ -49,7 +49,7 @@ namespace ZompyDogsDAO
                 }
             }
         }
-        public static bool ActualizarPeticion(CapaEntidad.Peticiones.PeticionRegistro peticion)
+        public static bool ActualizarPeticion(ZompyDogsLib.Peticiones.PeticionRegistro peticion)
         {
             string query = "UPDATE Peticiones SET accionPeticion = @nuevaAccionPeticion, " +
                            "descripcionPeticion = @nuevaDescripcionPeticion, fechaRealizada = @nuevaFechaRealizada, " +

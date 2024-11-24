@@ -30,7 +30,7 @@ namespace zompyDogs
 
         private void btnIniciarSession_Click(object sender, EventArgs e)
         {
-            var (isValid, isAdmin, nombreUser, apeUser, username, idEmpleado, idRol) = UsuarioValidaciones.IsValidUser(txtUser.Text, txtPassword.Text);
+            var (isValid, isAdmin, nombreUser, apeUser, username, idEmpleado, idRol) = LoginValidacion.IsValidUser(txtUser.Text, txtPassword.Text);
 
             string validUser = txtUser.Text;
             string validpassword = txtPassword.Text;

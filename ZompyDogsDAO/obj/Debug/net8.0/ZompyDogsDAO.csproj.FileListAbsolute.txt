@@ -72,8 +72,6 @@ C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDo
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.deps.json
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.dll
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsDAO.pdb
-C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\bin\Debug\net8.0\CapaEntidad.dll
-C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\bin\Debug\net8.0\CapaEntidad.pdb
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.csproj.AssemblyReference.cache
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.AssemblyInfoInputs.cache
@@ -85,3 +83,5 @@ C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDo
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\obj\Debug\net8.0\refint\ZompyDogsDAO.dll
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\obj\Debug\net8.0\ZompyDogsDAO.pdb
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\obj\Debug\net8.0\ref\ZompyDogsDAO.dll
+C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsLib.dll
+C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\ZompyDogsDAO\bin\Debug\net8.0\ZompyDogsLib.pdb

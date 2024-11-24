@@ -8,20 +8,18 @@ using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace CapaEntidad
+namespace ZompyDogsLib
 {
     public class Conexion
     {
-        public static string cadena;
+        public static string cadena { get; private set; }
 
-        static Conexion()
+        public static void SetConnectionString(string connectionString)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            if (string.IsNullOrEmpty(connectionString))
+                throw new ArgumentException("La cadena de conexión no puede ser nula o vacía.");
 
-            var configuration = builder.Build();
-            cadena = configuration.GetConnectionString("cadena_conexion");
+            cadena = connectionString;
         }
     }
 }

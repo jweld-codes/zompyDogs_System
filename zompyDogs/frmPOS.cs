@@ -256,7 +256,7 @@ namespace zompyDogs
 
                     btnAgregarPlatillo.Click += (sender, e) =>
                     {
-                        ZompyDogsDAO.PedidosDAO.DetalleDePedido nuevoPlatillo = new ZompyDogsDAO.PedidosDAO.DetalleDePedido
+                        ZompyDogsLib.Pedidos.DetalleDePedido nuevoPlatillo = new ZompyDogsLib.Pedidos.DetalleDePedido
                         {
                             PlatilloNombre = lblPlatillo.Text,
                             Precio_Unitario = decimal.Parse(lblPrecio.Text.Replace("L.", "").Trim()),

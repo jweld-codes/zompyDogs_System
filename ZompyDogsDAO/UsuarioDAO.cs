@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using static ZompyDogsDAO.UsuarioDAO;
-using CapaEntidad;
+using ZompyDogsLib;
 
 namespace ZompyDogsDAO
 {
@@ -513,7 +513,7 @@ namespace ZompyDogsDAO
         /* --------------  CRUD PARA USUARIOS (GENERAL) ------------------- */
         
         //GUARDA DETALLES DEL USUARIO
-        public static void GuardarDetalleUsuario(CapaEntidad.Usuarios.DetalleUsuario detalleusuario)
+        public static void GuardarDetalleUsuario(ZompyDogsLib.Usuarios.DetalleUsuario detalleusuario)
         {
             string query = "INSERT INTO DetalleUsuario(primNombreUsuario, segNombreUsuario, primApellidoUsuario, segApellido, codigoCedula, fechaNacimiento, estadoCivil, telefono, direccion, codigoPuesto, codigoUsuario) VALUES (@primern, @segundon, @primera, @segundoa, @codice, @fechanac, @civil, @tele, @direcc, @codpu, @codius)";
 
@@ -553,7 +553,7 @@ namespace ZompyDogsDAO
         }
 
        // GUARDA EL USUARIO CON SUS DETALLES (DetallesUsuario)
-        public static void GuardarUsuario(CapaEntidad.Usuarios.UsuarioCrear userAdd)
+        public static void GuardarUsuario(ZompyDogsLib.Usuarios.UsuarioCrear userAdd)
         {
             string query = "INSERT INTO Usuario(username, password, fechaRegistro, codigoRol, codigoDetalleUsuario, email) VALUES (@nameuser, @claveuser, @fechareg, @codiRol, @codiDetalle, @email)";
 
@@ -587,7 +587,7 @@ namespace ZompyDogsDAO
         }
 
         //ACTUALIZA LOS DATOS DEL USUARIO
-        public static bool ActualizarDetalleUsuario(CapaEntidad.Usuarios.DetalleUsuario detalleUsuario)
+        public static bool ActualizarDetalleUsuario(ZompyDogsLib.Usuarios.DetalleUsuario detalleUsuario)
         {
             string query = "UPDATE DetalleUsuario SET primNombreUsuario = @primNombreUsuario, segNombreUsuario = @segNombreUsuario, primApellidoUsuario = @primApellidoUsuario, segApellido = @segApellido, " +
                "codigoCedula = @codigoCedula, fechaNacimiento = @fechaNacimiento, estadoCivil = @estadoCivil, telefono = @telefono, direccion = @direccion, " +
@@ -622,7 +622,7 @@ namespace ZompyDogsDAO
                 }
             }
         }
-        public static bool AjusteDetalleUsuario(CapaEntidad.Usuarios.DetalleUsuario detalleUsuario)
+        public static bool AjusteDetalleUsuario(ZompyDogsLib.Usuarios.DetalleUsuario detalleUsuario)
         {
             string query = "UPDATE DetalleUsuario SET primNombreUsuario = @primNombreUsuario, segNombreUsuario = @segNombreUsuario, primApellidoUsuario = @primApellidoUsuario, segApellido = @segApellido, " +
                             "codigoCedula = @codigoCedula, fechaNacimiento = @fechaNacimiento, estadoCivil = @estadoCivil, telefono = @telefono, direccion = @direccion " +
@@ -656,7 +656,7 @@ namespace ZompyDogsDAO
                 }
             }
         }
-        public static bool AjusteDatosDeUsuario(CapaEntidad.Usuarios.UsuarioCrear usuarioCrear)
+        public static bool AjusteDatosDeUsuario(ZompyDogsLib.Usuarios.UsuarioCrear usuarioCrear)
         {
             string query = "UPDATE Usuario SET username = @usuarioName, password = @usuarioPass, email = @usuarioEmail WHERE id_usuario = @codigoUsuario";
 
@@ -733,7 +733,7 @@ namespace ZompyDogsDAO
         
         /* --------------  CRUD PARA PROVEEDORES ------------------- */
         //GUARDA LOS DATOS DE LOS PROVEEDORES
-        public static void GuardarProveedor(CapaEntidad.Usuarios.ProveedorCrear proveedorAdd)
+        public static void GuardarProveedor(ZompyDogsLib.Usuarios.ProveedorCrear proveedorAdd)
         {
             string query = "INSERT INTO Proveedor(Nombre, Contacto, Telefono, Email, fechaRegistro, estado, codigoProveedor, apellidoContacto) " +
                 "VALUES (@nombreP, @contactoP, @telefonoP, @emailProv, @fecharegistroP, @estadoP, @codiProveedor, @apellidoContactoP)";
@@ -770,7 +770,7 @@ namespace ZompyDogsDAO
         }
 
         //ACTUALIZA LOS DATOS DE LOS PROVEEDORES
-        public static bool ActualizarProveedotes(CapaEntidad.Usuarios.ProveedorCrear proveedorUpdate)
+        public static bool ActualizarProveedotes(ZompyDogsLib.Usuarios.ProveedorCrear proveedorUpdate)
         {
             string query = "UPDATE Proveedor SET Nombre = @provNombre, Contacto = @provContacto, Telefono = @provTelefono, Email = @provEmail, " +
                "estado = @provEstado, apellidoContacto = @provApellido WHERE codigoProveedor = @provCodigo";
@@ -826,7 +826,7 @@ namespace ZompyDogsDAO
         }
 
         /* --------------  CRUD PARA PUESTO ------------------- */
-        public static void GuardarPuesto(CapaEntidad.Usuarios.PuestoREF puestoAdd)
+        public static void GuardarPuesto(ZompyDogsLib.Usuarios.PuestoREF puestoAdd)
         {
             string query = "INSERT INTO Puestos (puesto, descripcion, salario, horalaboralInicio, diasLaborales, codigoPuesto, codigoRol, estado, horaLaboralTermina) " +
                            "VALUES (@puestoName, @puestoDesc, @puestoSalario, @horalaboralInicio, @puestoDias, @codiPuesto, @codiRol, @puestoEstado, @horaLaboralTermina)";
@@ -883,7 +883,7 @@ namespace ZompyDogsDAO
             }
         }
 
-        public static bool ActualizarPuesto(CapaEntidad.Usuarios.PuestoREF puestoUpdate)
+        public static bool ActualizarPuesto(ZompyDogsLib.Usuarios.PuestoREF puestoUpdate)
         {
             try
             {

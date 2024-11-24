@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ZompyDogsLib\CapaEntidad.csproj" />
     <ProjectReference Include="..\ZompyDogsLib\CapaEntidad.csproj" />
+    <ProjectReference Include="..\ZompyDogsLib\ZompyDogsLib.csproj" />
   </ItemGroup>
 
 </Project>

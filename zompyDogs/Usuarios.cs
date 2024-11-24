@@ -51,8 +51,6 @@ namespace zompyDogs
             btnEliminarUsuario.Hide();
             btnEditarUsuario.Hide();
 
-            //cbxFiltro.Hide();
-
             _controladorGeneradorCodigo = new ControladorGeneradoresDeCodigo();
             _usuarioRegistroForm = new UsuarioRegistro();
         }
@@ -846,28 +844,5 @@ namespace zompyDogs
             dgvAdminis.DataSource = resultados;
         }
 
-        private void cbxFiltro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbxFiltro.SelectedItem != null)
-            {
-                string estadoSeleccionado = cbxFiltro.SelectedItem.ToString();
-
-                if (estadoSeleccionado == "Activo" || estadoSeleccionado == "ACTIVO")
-                {
-                    DataTable proveedorFiltro = UsuarioDAO.FiltroDeProveedores("ACTIVO");
-                    dgvProveedor.DataSource = proveedorFiltro;
-                }
-                else if (estadoSeleccionado == "Inactivo" || estadoSeleccionado == "INACTIVO")
-                {
-                    DataTable proveedorFiltro = UsuarioDAO.FiltroDeProveedores("INACTIVO");
-                    dgvProveedor.DataSource = proveedorFiltro;
-                }
-                else if (estadoSeleccionado == "Todos")
-                {
-                    CargarProveedores();
-                }
-            }
-        }
-       
     }
 }

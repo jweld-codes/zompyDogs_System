@@ -15,6 +15,9 @@ using ZompyDogsLib.Controladores;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using System.Text.RegularExpressions;
+using System.Windows.Forms.VisualStyles;
+using ClosedXML.Report.Utils;
 
 namespace zompyDogs
 {
@@ -50,6 +53,19 @@ namespace zompyDogs
             txtPassword.Enabled = false;
             cbxRol.SelectedIndexChanged += cbxRol_SelectedIndexChanged;
 
+            LimitesTextboxes();
+
+        }
+
+        private void LimitesTextboxes()
+        {
+            txtPrimNombre.MaxLength = 20;
+            txtPrimApellido.MaxLength = 20;
+
+            txtSegNombre.MaxLength = 20;
+            txtSegApellido.MaxLength = 20;
+
+            txtDireccion.MaxLength = 200;
         }
         private void txtCedulae_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -65,43 +81,63 @@ namespace zompyDogs
                 e.Handled = true;
             }
         }
+        /// <summary>
+        /// Método encargado de validar los campos del formulario de registro de usuario.
+        /// Verifica que los campos de texto no estén vacíos, que los campos de selección tengan una opción válida,
+        /// que los valores ingresados en los campos de correo, cédula y teléfono sean correctos y que no contengan errores comunes como espacios consecutivos o al inicio/final.
+        /// </summary>
+        /// <returns>Devuelve true si no hay errores en los campos, false si hay algún error.</returns>
         public bool ValidarCampos()
         {
+            // Variable para indicar si existen errores en los campos.
             okError = true;
 
+            // Lista de los campos de texto a validar (excluyendo los nombres y apellidos)
             List<System.Windows.Forms.TextBox> textBoxes = new List<System.Windows.Forms.TextBox> { txtPrimNombre, txtPrimApellido, txtPassword, txtUsername, txtDireccion, txtTelefono, txtCedula };
 
+            // Lista de campos de texto que corresponden a nombres y apellidos
+            List<System.Windows.Forms.TextBox> textBoxesNames = new List<System.Windows.Forms.TextBox> { txtPrimNombre, txtPrimApellido, txtSegNombre, txtSegApellido };
+
+            // Lista de campos ComboBox para validar
             List<System.Windows.Forms.ComboBox> comboBoxList = new List<System.Windows.Forms.ComboBox> { cbxEsatdoCivil, cbxRol };
 
+            // Validación de los campos de texto generales
             foreach (System.Windows.Forms.TextBox textBox in textBoxes)
             {
+                // Verifica si el campo está vacío o solo contiene espacios
                 if (string.IsNullOrWhiteSpace(textBox.Text))
                 {
                     okError = false;
                     errorProviderUsuario.SetError(textBox, $"Ingrese un valor en el campo.");
-                    textBox.BackColor = Color.OldLace;
+                    textBox.BackColor = Color.OldLace;  // Cambia el fondo a color amarillo para indicar error
                 }
                 else
                 {
+                    // Elimina cualquier error previo y restablece el fondo a blanco
                     errorProviderUsuario.SetError(textBox, "");
                     textBox.BackColor = SystemColors.Window;
                 }
             }
 
+            // Validación de los campos ComboBox
             foreach (System.Windows.Forms.ComboBox comboBoxListValid in comboBoxList)
             {
+                // Verifica si no se ha seleccionado una opción válida
                 if (comboBoxListValid.SelectedIndex == -1)
                 {
                     okError = false;
                     errorProviderUsuario.SetError(comboBoxListValid, "Seleccione una opción.");
-                    comboBoxListValid.BackColor = Color.OldLace;
+                    comboBoxListValid.BackColor = Color.OldLace;  // Cambia el fondo a color amarillo para indicar error
                 }
                 else
                 {
+                    // Elimina el error y restablece el fondo a blanco
                     errorProviderUsuario.SetError(comboBoxListValid, "");
                     comboBoxListValid.BackColor = SystemColors.Window;
                 }
             }
+
+            // Validación de correo electrónico utilizando una función externa
             string correoIngresado = txtEmail.Text;
             if (!ValidarCorreo(correoIngresado))
             {
@@ -115,6 +151,7 @@ namespace zompyDogs
                 txtEmail.BackColor = SystemColors.Window;
             }
 
+            // Validación de cédula (debe tener exactamente 13 dígitos numéricos)
             if (txtCedula.Text.Length != 13 || !txtCedula.Text.All(char.IsDigit))
             {
                 okError = false;
@@ -127,6 +164,7 @@ namespace zompyDogs
                 txtCedula.BackColor = SystemColors.Window;
             }
 
+            // Validación de teléfono (debe tener exactamente 8 dígitos numéricos)
             if (txtTelefono.Text.Length != 8 || !txtTelefono.Text.All(char.IsDigit))
             {
                 okError = false;
@@ -139,22 +177,79 @@ namespace zompyDogs
                 txtTelefono.BackColor = SystemColors.Window;
             }
 
-            if ( txtPrimNombre.Text.Length < 3)
+            // Validación de longitud mínima para el primer nombre y apellido
+            if (txtPrimNombre.Text.Length < 3)
             {
                 okError = false;
-                errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe tener al menos 3 caracteres.");
+                errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe tener no más de 20 caracteres.");
+                txtPrimNombre.BackColor = Color.OldLace;
+            }
+            if (txtPrimNombre.Text.Length > 20)
+            {
+                okError = false;
+                errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe tener no más de 20 caracteres.");
                 txtPrimNombre.BackColor = Color.OldLace;
             }
 
-            if (txtPrimApellido.Text.Length < 3)
+            if (txtSegApellido.Text.Length > 20)
             {
                 okError = false;
-                errorProviderUsuario.SetError(txtPrimApellido, "El primer apellido debe tener al menos 3 caracteres.");
+                errorProviderUsuario.SetError(txtPrimApellido, "El primer apellido debe tener no más de 20 caracteres.");
                 txtPrimApellido.BackColor = Color.OldLace;
             }
+            if (txtSegNombre.Text.Length > 20)
+            {
+                okError = false;
+                errorProviderUsuario.SetError(txtPrimNombre, "El primer apellido debe tener no más de 20 caracteres.");
+                txtPrimNombre.BackColor = Color.OldLace;
+            }
 
+
+            // Validación de espacios en blanco
+            foreach (System.Windows.Forms.TextBox textBoxSpace in textBoxes)
+            {
+                // Verifica si el texto contiene múltiples espacios consecutivos
+                if (Regex.IsMatch(textBoxSpace.Text, @"\s{2,}"))
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(textBoxSpace, "El texto no puede contener múltiples espacios consecutivos.");
+                    textBoxSpace.BackColor = Color.LightPink;
+                }
+
+                // Verifica si el texto comienza o termina con espacios
+                if (textBoxSpace.Text.StartsWith(" ") || textBoxSpace.Text.EndsWith(" "))
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(textBoxSpace, "El texto no puede comenzar ni terminar con espacios.");
+                    textBoxSpace.BackColor = Color.LightPink;
+                }
+            }
+
+            // Validación de espacios en los campos de nombres y apellidos
+            foreach (System.Windows.Forms.TextBox textBoxSpaceName in textBoxesNames)
+            {
+                // Verifica que los campos de nombres y apellidos no contengan espacios adicionales entre palabras
+                if (textBoxSpaceName.Name == "txtPrimNombre" || textBoxSpaceName.Name == "txtPrimApellido")
+                {
+                    if (Regex.IsMatch(textBoxSpaceName.Text, @"\s{2,}"))
+                    {
+                        okError = false;
+                        errorProviderUsuario.SetError(textBoxSpaceName, "El texto no puede contener espacios adicionales entre las palabras.");
+                        textBoxSpaceName.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        // Si no hay espacios consecutivos, elimina el error
+                        errorProviderUsuario.SetError(textBoxSpaceName, string.Empty);
+                        textBoxSpaceName.BackColor = Color.White;
+                    }
+                }
+            }
+
+            // Devuelve 'true' si no hubo errores, 'false' si hubo algún error
             return okError;
         }
+
         public bool ValidarCorreo(string correo)
         {
             string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
@@ -376,25 +471,12 @@ namespace zompyDogs
 
         private void txtSegNombre_TextChanged(object sender, EventArgs e)
         {
-          /*  txtSegNombre.BackColor = Color.White;
+          txtSegNombre.BackColor = Color.White;
 
             if (!string.IsNullOrWhiteSpace(txtSegNombre.Text) && txtSegNombre.Text.All(char.IsLetter))
             {
-                if (txtSegNombre.Text.Length >= 15)
-                {
-                    errorProviderUsuario.SetError(txtSegNombre, string.Empty);
-                }
-                else
-                {
-                    errorProviderUsuario.SetError(txtSegNombre, "El segundo nombre debe tener al menos 15 caracteres.");
-                    txtSegNombre.BackColor = Color.LightYellow;
-                }
+
             }
-            else
-            {
-                errorProviderUsuario.SetError(txtSegNombre, "El segundo nombre debe contener solo letras y no puede estar vacío.");
-                txtSegNombre.BackColor = Color.LightPink;
-            }*/
         }
 
         private void txtPrimApellido_TextChanged(object sender, EventArgs e)

@@ -977,7 +977,7 @@ namespace ZompyDogsDAO
             using (SqlConnection conn = new SqlConnection(con_string))
             {
                 conn.Open();
-                string query = "SELECT Id_Rol, Rol FROM Rol WHERE Id_Rol = 1 OR Id_Rol = 2 OR Id_Rol = 4;";
+                string query = "SELECT Id_Rol, Rol FROM Rol WHERE Id_Rol = 1 OR Id_Rol = 2;";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);

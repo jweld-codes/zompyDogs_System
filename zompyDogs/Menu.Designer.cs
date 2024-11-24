@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnEditarUsuario = new Button();
-            btnEliminarUsuario = new Button();
+            btnEditarMenu = new Button();
+            btnEliminarMenu = new Button();
             topBarMenu = new Panel();
             btnLibretaMenu = new Button();
             pictureBox2 = new PictureBox();
@@ -51,7 +51,7 @@
             colNombre = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
             label1 = new Label();
-            btnAgregarNuevoUsuario = new Button();
+            btnAgregarNuevoRegistro = new Button();
             lblTituloRegistroPanel = new Label();
             btnVisualizarRegistro = new Button();
             btnRefreshDG = new Button();
@@ -66,27 +66,27 @@
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             SuspendLayout();
             // 
-            // btnEditarUsuario
+            // btnEditarMenu
             // 
-            btnEditarUsuario.FlatAppearance.BorderSize = 0;
-            btnEditarUsuario.Image = Properties.Resources.pen__1_;
-            btnEditarUsuario.Location = new Point(187, 214);
-            btnEditarUsuario.Name = "btnEditarUsuario";
-            btnEditarUsuario.Size = new Size(72, 72);
-            btnEditarUsuario.TabIndex = 120;
-            btnEditarUsuario.UseVisualStyleBackColor = true;
-            btnEditarUsuario.Click += btnEditarUsuario_Click;
+            btnEditarMenu.FlatAppearance.BorderSize = 0;
+            btnEditarMenu.Image = Properties.Resources.pen__1_;
+            btnEditarMenu.Location = new Point(187, 214);
+            btnEditarMenu.Name = "btnEditarMenu";
+            btnEditarMenu.Size = new Size(72, 72);
+            btnEditarMenu.TabIndex = 120;
+            btnEditarMenu.UseVisualStyleBackColor = true;
+            btnEditarMenu.Click += btnEditarUsuario_Click;
             // 
-            // btnEliminarUsuario
+            // btnEliminarMenu
             // 
-            btnEliminarUsuario.FlatAppearance.BorderSize = 0;
-            btnEliminarUsuario.Image = Properties.Resources.bin;
-            btnEliminarUsuario.Location = new Point(265, 214);
-            btnEliminarUsuario.Name = "btnEliminarUsuario";
-            btnEliminarUsuario.Size = new Size(72, 72);
-            btnEliminarUsuario.TabIndex = 119;
-            btnEliminarUsuario.UseVisualStyleBackColor = true;
-            btnEliminarUsuario.Click += btnEliminarUsuario_Click;
+            btnEliminarMenu.FlatAppearance.BorderSize = 0;
+            btnEliminarMenu.Image = Properties.Resources.bin;
+            btnEliminarMenu.Location = new Point(265, 214);
+            btnEliminarMenu.Name = "btnEliminarMenu";
+            btnEliminarMenu.Size = new Size(72, 72);
+            btnEliminarMenu.TabIndex = 119;
+            btnEliminarMenu.UseVisualStyleBackColor = true;
+            btnEliminarMenu.Click += btnEliminarUsuario_Click;
             // 
             // topBarMenu
             // 
@@ -326,16 +326,16 @@
             label1.TabIndex = 117;
             label1.Text = "MENÚ /";
             // 
-            // btnAgregarNuevoUsuario
+            // btnAgregarNuevoRegistro
             // 
-            btnAgregarNuevoUsuario.FlatAppearance.BorderSize = 0;
-            btnAgregarNuevoUsuario.Image = Properties.Resources.plus;
-            btnAgregarNuevoUsuario.Location = new Point(36, 214);
-            btnAgregarNuevoUsuario.Name = "btnAgregarNuevoUsuario";
-            btnAgregarNuevoUsuario.Size = new Size(72, 72);
-            btnAgregarNuevoUsuario.TabIndex = 114;
-            btnAgregarNuevoUsuario.UseVisualStyleBackColor = true;
-            btnAgregarNuevoUsuario.Click += btnAgregarNuevoUsuario_Click;
+            btnAgregarNuevoRegistro.FlatAppearance.BorderSize = 0;
+            btnAgregarNuevoRegistro.Image = Properties.Resources.plus;
+            btnAgregarNuevoRegistro.Location = new Point(36, 214);
+            btnAgregarNuevoRegistro.Name = "btnAgregarNuevoRegistro";
+            btnAgregarNuevoRegistro.Size = new Size(72, 72);
+            btnAgregarNuevoRegistro.TabIndex = 114;
+            btnAgregarNuevoRegistro.UseVisualStyleBackColor = true;
+            btnAgregarNuevoRegistro.Click += btnAgregarNuevoUsuario_Click;
             // 
             // lblTituloRegistroPanel
             // 
@@ -399,13 +399,13 @@
             Controls.Add(txtBuscarUsuario);
             Controls.Add(btnRefreshDG);
             Controls.Add(btnVisualizarRegistro);
-            Controls.Add(btnEditarUsuario);
-            Controls.Add(btnEliminarUsuario);
+            Controls.Add(btnEditarMenu);
+            Controls.Add(btnEliminarMenu);
             Controls.Add(topBarMenu);
             Controls.Add(lblBreadCrumbUser);
             Controls.Add(groupBox1);
             Controls.Add(label1);
-            Controls.Add(btnAgregarNuevoUsuario);
+            Controls.Add(btnAgregarNuevoRegistro);
             Controls.Add(lblTituloRegistroPanel);
             Name = "Menu";
             Text = "Menu";
@@ -423,8 +423,8 @@
 
         #endregion
 
-        private Button btnEditarUsuario;
-        private Button btnEliminarUsuario;
+        private Button btnEditarMenu;
+        private Button btnEliminarMenu;
         private Panel topBarMenu;
         public Button btnLibretaMenu;
         private PictureBox pictureBox2;
@@ -445,7 +445,7 @@
         private DataGridViewTextBoxColumn colNombre;
         private DataGridViewTextBoxColumn Column1;
         private Label label1;
-        private Button btnAgregarNuevoUsuario;
+        private Button btnAgregarNuevoRegistro;
         private Label lblTituloRegistroPanel;
         private Button btnVisualizarRegistro;
         public DataGridView dgvMenu;

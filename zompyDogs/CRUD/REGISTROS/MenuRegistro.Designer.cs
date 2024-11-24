@@ -42,7 +42,7 @@
             label2 = new Label();
             txtNombrePlatillo = new TextBox();
             label1 = new Label();
-            txtSalario = new TextBox();
+            txtPrecioUnitario = new TextBox();
             label13 = new Label();
             lblTitulo = new Label();
             pictureBox1 = new PictureBox();
@@ -98,7 +98,7 @@
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(txtNombrePlatillo);
             groupBox2.Controls.Add(label1);
-            groupBox2.Controls.Add(txtSalario);
+            groupBox2.Controls.Add(txtPrecioUnitario);
             groupBox2.Controls.Add(label13);
             groupBox2.Location = new Point(12, 113);
             groupBox2.Name = "groupBox2";
@@ -109,6 +109,7 @@
             // 
             // cbxEstado
             // 
+            cbxEstado.Enabled = false;
             cbxEstado.FormattingEnabled = true;
             cbxEstado.ItemHeight = 20;
             cbxEstado.Items.AddRange(new object[] { "Activo", "Inactivo" });
@@ -154,7 +155,6 @@
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(180, 89);
             txtDescripcion.TabIndex = 132;
-            txtDescripcion.TextChanged += txtDescripcion_TextChanged;
             // 
             // label2
             // 
@@ -169,10 +169,12 @@
             // 
             txtNombrePlatillo.BorderStyle = BorderStyle.FixedSingle;
             txtNombrePlatillo.Location = new Point(18, 60);
+            txtNombrePlatillo.MaxLength = 50;
             txtNombrePlatillo.Multiline = true;
             txtNombrePlatillo.Name = "txtNombrePlatillo";
             txtNombrePlatillo.Size = new Size(180, 37);
             txtNombrePlatillo.TabIndex = 130;
+            txtNombrePlatillo.TextChanged += txtNombrePlatillo_TextChanged;
             txtNombrePlatillo.KeyPress += txtNombrePlatillo_KeyPress;
             // 
             // label1
@@ -184,16 +186,16 @@
             label1.TabIndex = 131;
             label1.Text = "Nombre del Platillo";
             // 
-            // txtSalario
+            // txtPrecioUnitario
             // 
-            txtSalario.BorderStyle = BorderStyle.FixedSingle;
-            txtSalario.Location = new Point(216, 60);
-            txtSalario.Multiline = true;
-            txtSalario.Name = "txtSalario";
-            txtSalario.Size = new Size(180, 37);
-            txtSalario.TabIndex = 115;
-            txtSalario.TextChanged += txtSalario_TextChanged;
-            txtSalario.KeyPress += txtSalario_KeyPress;
+            txtPrecioUnitario.BorderStyle = BorderStyle.FixedSingle;
+            txtPrecioUnitario.Location = new Point(216, 60);
+            txtPrecioUnitario.Multiline = true;
+            txtPrecioUnitario.Name = "txtPrecioUnitario";
+            txtPrecioUnitario.Size = new Size(180, 37);
+            txtPrecioUnitario.TabIndex = 115;
+            txtPrecioUnitario.TextChanged += txtPrecioUnitario_TextChanged;
+            txtPrecioUnitario.KeyPress += txtPrecioUnitario_KeyPress;
             // 
             // label13
             // 
@@ -301,7 +303,7 @@
         private Label label2;
         public TextBox txtNombrePlatillo;
         private Label label1;
-        public TextBox txtSalario;
+        public TextBox txtPrecioUnitario;
         private Label label13;
         private Label label3;
         private PictureBox pictureBox1;

@@ -63,12 +63,6 @@ namespace zompyDogs
             lblCerrarSession.ForeColor = Color.White;
         }
 
-        private void btnAjustesCuenta_Click(object sender, EventArgs e)
-        {
-            AbrirFormsHija(new AjustesCuenta(IdEmpleado, UsuarioNombreAdmin));
-            CambiarColorBoton((Button)sender);
-        }
-
         private void btnPeticiones_Click(object sender, EventArgs e)
         {
             CambiarColorBoton((Button)sender);
@@ -81,16 +75,6 @@ namespace zompyDogs
 
         }
 
-        private void btnProductos_Click(object sender, EventArgs e)
-        {
-            CambiarColorBoton((Button)sender);
-            Inventario fmInventario = new Inventario
-            {
-                FormPrincipal = this
-            };
-            AbrirFormsHija(fmInventario);
-
-        }
         private void btnStaff_Click(object sender, EventArgs e)
         {
             CambiarColorBoton((Button)sender);

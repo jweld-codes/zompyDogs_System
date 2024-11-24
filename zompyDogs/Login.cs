@@ -38,10 +38,6 @@ namespace zompyDogs
             RolIdActual = idRol;
             UsuarioName = $"{nombreUser} {apeUser}";
 
-           // MessageBox.Show("RolIdActual: " + RolIdActual);
-           // MessageBox.Show("UsuarioIdActual: " + UsuarioIdActual);
-           // MessageBox.Show("UsuarioName: " + UsuarioName);
-
             if (!isValid)
             {
                 MessageBox.Show("Usuario o Clave Incorrecto. Intentar Nuevamente");
@@ -58,9 +54,6 @@ namespace zompyDogs
             }
             else
             {
-                
-                //MessageBox.Show("idEmpleado: "+ UsuarioIdActual + "RolIdActual: "+ RolIdActual);
-
                 if (isAdmin)
                 {
                     BienvenidaAdmin frmBienvenidaAdmin = new BienvenidaAdmin();
@@ -77,9 +70,6 @@ namespace zompyDogs
 
                     Peticiones frmPeticiones = new Peticiones(idEmpleado, UsuarioName);
                     frmPeticiones.IdEmpleado = idEmpleado;
-
-                    AjustesCuenta frmAjustesCuenta = new AjustesCuenta(idEmpleado, UsuarioName);
-                    frmAjustesCuenta.IdEmpleado = idEmpleado;
 
                     frmBienvenidaAdmin.AbrirFormsHija(frmPanelAdmin);
                     frmBienvenidaAdmin.Show();

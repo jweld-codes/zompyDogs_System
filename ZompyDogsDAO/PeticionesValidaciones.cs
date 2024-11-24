@@ -7,86 +7,16 @@ using System.Data;
 using System.Data.SqlClient;
 using static ZompyDogsDAO.PeticionesValidaciones;
 using System.Collections;
+using CapaEntidad;
 
 namespace ZompyDogsDAO
 {
     public class PeticionesValidaciones
     {
-        public static readonly string con_string = "Data Source=MACARENA\\SQLEXPRESS;Initial Catalog=DB_ZompyDogs;Integrated Security=True;Encrypt=False";
-        public static SqlConnection conn = new SqlConnection(con_string);
-        //Metodo para obtener datos de la peticiones
-
-      /*  public static string ObtenerUsuarioPeticion(string nombreCompleto)
-        {
-            string usuario = string.Empty;
-            string query = "SELECT Usuario FROM v_PeticionesxUsuarios WHERE Nombre_Completo = @nombreCompleto";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
-
-            try
-            {
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    usuario = reader["Usuario"].ToString();
-                }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al obtener el usuario: " + ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return usuario;
-        }*/
-
-       /* public static List<string> ObtenerPeticionesActivas()
-        {
-            List<string> peticiones = new List<string>();
-            string query = "SELECT descripcionPeticion FROM Peticiones WHERE estado = 'Complteado'"; 
-
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                try
-                {
-                    conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        peticiones.Add(reader["descripcionPeticion"].ToString());
-                    }
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al obtener las peticiones activas: " + ex.Message);
-                }
-            }
-            return peticiones;
-        }*/
-
-        public class PeticionRegistro
-        {
-            public int Id { get; set; }
-            public string CodigPeticion { get; set; }
-            public string AccionPeticion { get; set; }
-            public string Descripcion { get; set; }
-            public DateTime FechaEnviada { get; set; }
-            public DateTime? FechaRealizada { get; set; }
-            public int CodigoUsuario { get; set; }
-            public string Estado { get; set; }
-            public string UserNombre { get; set; }
-        }
+        private static readonly string con_string = Conexion.cadena;
+        private static SqlConnection conn = new SqlConnection(con_string);
         
-        public static void GuardarPeticion(PeticionRegistro peticion)
+        public static void GuardarPeticion(CapaEntidad.Peticiones.PeticionRegistro peticion)
         {
             string query = "INSERT INTO Peticiones (codigoPeticion, accionPeticion, descripcionPeticion, fechaEnviada, fechaRealizada, codigousuario, estado) VALUES (@codigopeticion, @accionpeticion, @descripcion, @fechaenviada, @fecharealizada, @codigousuario, @estado)";
 
@@ -119,7 +49,7 @@ namespace ZompyDogsDAO
                 }
             }
         }
-        public static bool ActualizarPeticion(PeticionRegistro peticion)
+        public static bool ActualizarPeticion(CapaEntidad.Peticiones.PeticionRegistro peticion)
         {
             string query = "UPDATE Peticiones SET accionPeticion = @nuevaAccionPeticion, " +
                            "descripcionPeticion = @nuevaDescripcionPeticion, fechaRealizada = @nuevaFechaRealizada, " +

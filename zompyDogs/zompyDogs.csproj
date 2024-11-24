@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZompyDogsDAO\ZompyDogsDAO.csproj" />
-    <ProjectReference Include="..\ZompyDogsLib\ZompyDogsLib.csproj" />
+    <ProjectReference Include="..\ZompyDogsLib\CapaEntidad.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +54,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ZompyDogsDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ZompyDogsDataSet.Designer.cs</LastGenOutput>

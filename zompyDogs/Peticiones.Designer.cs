@@ -91,7 +91,6 @@
             btnUsuarioPanel.TabIndex = 98;
             btnUsuarioPanel.Text = "Mis Peticiones";
             btnUsuarioPanel.UseVisualStyleBackColor = false;
-            btnUsuarioPanel.Click += btnUsuarioPanel_Click;
             // 
             // lblTITULO
             // 

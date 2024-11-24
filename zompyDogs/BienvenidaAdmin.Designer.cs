@@ -78,7 +78,6 @@
             btnAjustesCuenta.TabIndex = 16;
             btnAjustesCuenta.Text = "Ajustes";
             btnAjustesCuenta.UseVisualStyleBackColor = false;
-            btnAjustesCuenta.Click += btnAjustesCuenta_Click;
             // 
             // lblCerrarSession
             // 

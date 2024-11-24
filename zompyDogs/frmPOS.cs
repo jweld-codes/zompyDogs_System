@@ -49,21 +49,25 @@ namespace zompyDogs
             InitializeComponent();
             this.usuarioIDActual = usuarioIDActual;
             this.rolIDActual = rolIDActual;
-           // MessageBox.Show("idEmpleado: " + usuarioIDActual + "RolIdActual: " + rolIDActual);
             
-            if (rolIDActual > 1)
+           /* if (rolIDActual > 1)
             {
                 btnHistorial.Enabled = false;
                 btnHistorial.Visible = false;
                 btnHistorial.Hide();
-            }
+            }*/
+            _controladorGeneradorCodigoPedido = new ControladorGeneradoresDeCodigo();
 
             CargarMenu("Almuerzos");
-            AddCategoria();
+            AddCategoriaPOS();
 
-            _controladorGeneradorCodigoPedido = new ControladorGeneradoresDeCodigo();
             GeneradordeCodigoPedidoFromForm();
+            InicializarDataGridViewPlatillos();
 
+            itsInvoice = false;
+        }
+        private void InicializarDataGridViewPlatillos()
+        {
             _pedidosDAO = new PedidosDAO();
 
             _bndsrcPedido = new BindingSource();
@@ -89,7 +93,6 @@ namespace zompyDogs
             dgvPedido.Columns["Descripcion"].Visible = false;
             dgvPedido.Columns["ImagenPlatillo"].Visible = false;
 
-            itsInvoice = false;
         }
         private void GeneradordeCodigoPedidoFromForm()
         {
@@ -112,25 +115,19 @@ namespace zompyDogs
             botonActivo.ForeColor = Color.Black;
         }
 
-        private void AddCategoria()
+        private void AddCategoriaPOS()
         {
-            string qry = "SELECT * FROM Categoria";
-            SqlCommand cmd = new SqlCommand(qry, conn);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dataTable = new DataTable();
+            PuntoDeVentaDAO puntoDeVentaDAO = new PuntoDeVentaDAO();
+            DataTable dataTable;
 
             try
             {
-                conn.Open();
-                da.Fill(dataTable);
+                dataTable = puntoDeVentaDAO.ObtenerCategorias();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al obtener las categorías: " + ex.Message);
-            }
-            finally
-            {
-                conn.Close();
+                return;
             }
 
             categoryPanel.Controls.Clear();

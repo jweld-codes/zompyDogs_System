@@ -117,7 +117,7 @@ namespace zompyDogs
                 }
                 else
                 {
-                    PeticionRegistro nuevaPeticion = new PeticionRegistro
+                    CapaEntidad.Peticiones.PeticionRegistro nuevaPeticion = new CapaEntidad.Peticiones.PeticionRegistro
                     {
                         CodigPeticion = peticionesRegistro.txtCodigoGenerado.Text,
                         AccionPeticion = peticionesRegistro.cbxPeticion.SelectedItem?.ToString() ?? string.Empty,
@@ -411,16 +411,5 @@ namespace zompyDogs
             }
         }
 
-        private void btnUsuarioPanel_Click(object sender, EventArgs e)
-        {
-            if (FormPrincipal != null)
-            {
-                FormPrincipal.AbrirFormsHija(new AjustesCuenta(IdEmpleado, NombreUsuarioAjuste) { FormPrincipal = FormPrincipal });
-            }
-            else
-            {
-                MessageBox.Show("FormPrincipal es nulo");
-            }
-        }
     }
 }

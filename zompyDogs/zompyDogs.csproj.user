@@ -19,9 +19,6 @@
     <Compile Update="CRUD\REGISTROS\UsuarioRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="AjustesCuenta.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="BienvenidaAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -47,9 +44,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmPOS.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Inventario.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="LibretaMenu.cs">

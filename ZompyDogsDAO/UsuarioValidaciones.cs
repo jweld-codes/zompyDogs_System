@@ -1,13 +1,18 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using CapaEntidad;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+
+
+
 namespace ZompyDogsDAO
 {
     public class UsuarioValidaciones
     {
-        public static readonly string con_string = "Data Source=MACARENA\\SQLEXPRESS;Initial Catalog=DB_ZompyDogs;Integrated Security=True;Encrypt=False";
-        public static SqlConnection conn = new SqlConnection(con_string);
+        // Usamos la cadena de conexión de la clase Conexion
+        private static readonly string con_string = Conexion.cadena;
+        private static SqlConnection conn = new SqlConnection(con_string);
 
         // Metodo para validar el usuario y obtener sus datos
         public static (

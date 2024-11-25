@@ -10,13 +10,21 @@ using ZompyDogsLib;
 
 namespace ZompyDogsDAO
 {
+    /// <summary>
+    /// Clase de acceso a datos para operaciones relacionadas con usuarios.
+    /// Esta clase proporciona métodos para obtener información de usuarios y realizar operaciones como actualización de contraseñas.
+    /// </summary>
     public class UsuarioDAO
     {
+        /// Cadena de conexión utilizada para interactuar con la base de datos.
         private static readonly string con_string = Conexion.cadena;
+        /// Conexión SQL utilizada para ejecutar consultas.
         private static SqlConnection conn = new SqlConnection(con_string);
 
-
-        public static int ObtenerIDPorNombreUsuario(string nombreUsuario)
+        /// Obtiene el ID de un usuario dado su nombre de usuario.
+        /// <param name="nombreUsuario">Nombre del usuario para buscar.</param>
+        /// <returns>El ID del usuario como un entero.</returns>
+        public static int ObtenerIDPorNombreUsuario(string nombreUsuario) // ClaveOlvidada
         {
             if (string.IsNullOrWhiteSpace(nombreUsuario))
             {
@@ -41,54 +49,44 @@ namespace ZompyDogsDAO
             }
             return idUsuario;
         }
-        public static int ObtenerRolIDPorNombreUsuario(string nombreUsuario)
-        {
-            if (string.IsNullOrWhiteSpace(nombreUsuario))
-            {
-                throw new ArgumentException("El nombre de usuario no puede ser nulo o estar vacío.", nombreUsuario);
-            }
 
-            int rolID = 0;
-
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                string query = "SELECT RolID FROM v_DetallesUsuarios WHERE Usuario = @NombreUsuario";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
-
-                conn.Open();
-                var result = cmd.ExecuteScalar();
-
-                if (result != null)
-                {
-                    rolID = Convert.ToInt32(result);
-                }
-            }
-            return rolID;
-        }
-        public static string ObtenerNombreUsuarioPorID(int idUsuario)
+        public static (string nombreUsuario, string codigoEmpleado) ObtenerNombreUsuarioPorID(int idUsuario)
         {
             string nombreUsuario = null;
+            string codigoEmpleado = null;
 
             using (SqlConnection conn = new SqlConnection(con_string))
             {
-                string query = "SELECT Usuario FROM v_PeticionesxUsuarios WHERE IDUsuario = @IDUsuario";
+                string query = "SELECT Nombre_Completo, Codigo FROM v_DetallesUsuarios WHERE IDUsuario = @IDUsuario";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@IDUsuario", idUsuario);
 
                 conn.Open();
-                var result = cmd.ExecuteScalar();
 
-                if (result != null)
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    nombreUsuario = result.ToString();
+                    if (reader.Read())
+                    {
+                        nombreUsuario = reader["Nombre_Completo"].ToString();
+                        codigoEmpleado = reader["Codigo"].ToString();
+                    }
                 }
-                
             }
 
-            return nombreUsuario;
+            return (nombreUsuario, codigoEmpleado);
         }
+
+        /// <summary>
+        /// Actualiza la clave de un usuario en la base de datos y marca su petición como completada.
+        /// </summary>
+        /// <param name="nombreUsuario">Nombre del usuario cuya clave será actualizada.</param>
+        /// <param name="nuevaClave">Nueva clave que será asignada al usuario.</param>
+        /// <param name="correoUsuario">Correo del usuario asociado (se obtiene dentro del método).</param>
+        /// <returns>
+        /// <c>true</c> si la clave y el estado de la petición fueron actualizados exitosamente; 
+        /// de lo contrario, <c>false</c>.
+        /// </returns>
         public static bool ActualizarClaveUsuario(string nombreUsuario, string nuevaClave, string correoUsuario)
         {
             correoUsuario = null;
@@ -153,7 +151,6 @@ namespace ZompyDogsDAO
             }
         }
 
-
         /* --------------  OBTENER DATOS PARA DATAGRIDS ------------------- */
         public static DataTable ObtenerDetalllesDeUsuarios()
         {
@@ -179,7 +176,6 @@ namespace ZompyDogsDAO
             return dtpDetallesUsuarios;
         }
 
-        // Obtiene todos los datos de los usuario segun la vista DetallesUsuarios
         public static DataTable ObtenerDetalllesDeUsuariosParaEditar(string codigoUsuario)
         {
             DataTable dtpDetallesUsuarios = new DataTable();
@@ -205,6 +201,7 @@ namespace ZompyDogsDAO
 
             return dtpDetallesUsuarios;
         }
+        
         public static DataTable ObtenerDetalllesDeProveedoresParaEditar(string codigoUsuario)
         {
             DataTable dtpDetalleProveedor = new DataTable();
@@ -381,6 +378,7 @@ namespace ZompyDogsDAO
 
             return dtpDetallesUsuarios;
         }
+        
         /* --------------  BUSCADORES ------------------- */
         public static DataTable BuscadorDeUsuarios(string valorBusqueda)
         {
@@ -454,36 +452,20 @@ namespace ZompyDogsDAO
                 }
             }
         }
-        public static DataTable FiltroDeProveedores(string estadoDT)
-        {
-            DataTable dtFiltro = new DataTable();
-            string query = "SELECT * FROM v_DetallesProveedotes WHERE estado = @estadoDT";
-
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@estadoDT", estadoDT);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-                try
-                {
-                    conn.Open();
-                    da.Fill(dtFiltro);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al obtener las descripciones de usuarios: " + ex.Message);
-                }
-            }
-
-            return dtFiltro;
-        }
-
-        /* --------------  REFERENCIAS ------------------- */
-        
-
 
         /* --------------  OBTENER ID DEL PROXIMO DETALLE DE USUARIOS ------------------- */
+
+        /// <summary>
+        /// Obtiene el siguiente ID disponible para la tabla `DetalleUsuario`
+        /// calculando el valor máximo actual en la columna `Id_DetalleUsuario` y sumándole 1.
+        /// </summary>
+        /// <returns>
+        /// Un entero que representa el siguiente ID disponible.
+        /// Si la tabla está vacía, el valor retornado será 1.
+        /// </returns>
+        /// <remarks>
+        /// En caso de error, se captura la excepción y se imprime un mensaje en la consola.
+        /// </remarks>
         public static int ObtenerSiguienteID()
         {
             int siguienteID = 1;
@@ -622,67 +604,7 @@ namespace ZompyDogsDAO
                 }
             }
         }
-        public static bool AjusteDetalleUsuario(ZompyDogsLib.Usuarios.DetalleUsuario detalleUsuario)
-        {
-            string query = "UPDATE DetalleUsuario SET primNombreUsuario = @primNombreUsuario, segNombreUsuario = @segNombreUsuario, primApellidoUsuario = @primApellidoUsuario, segApellido = @segApellido, " +
-                            "codigoCedula = @codigoCedula, fechaNacimiento = @fechaNacimiento, estadoCivil = @estadoCivil, telefono = @telefono, direccion = @direccion " +
-                             "WHERE codigoUsuario = @codigoUsuario";
-
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@primNombreUsuario", detalleUsuario.primerNombre);
-                cmd.Parameters.AddWithValue("@segNombreUsuario", detalleUsuario.segundoNombre);
-                cmd.Parameters.AddWithValue("@primApellidoUsuario", detalleUsuario.primerApellido);
-                cmd.Parameters.AddWithValue("@segApellido", detalleUsuario.segundoApellido);
-                cmd.Parameters.AddWithValue("@codigoCedula", detalleUsuario.codigoCedula);
-                cmd.Parameters.AddWithValue("@fechaNacimiento", detalleUsuario.fechaNacimiento);
-                cmd.Parameters.AddWithValue("@estadoCivil", detalleUsuario.estadoCivil);
-                cmd.Parameters.AddWithValue("@telefono", detalleUsuario.telefono);
-                cmd.Parameters.AddWithValue("@direccion", detalleUsuario.direccion);
-                cmd.Parameters.AddWithValue("@codigoUsuario", detalleUsuario.codigoUsuario);
-
-                try
-                {
-                    conn.Open();
-                    int filasAfectadas = cmd.ExecuteNonQuery();
-                    return filasAfectadas > 0;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al actualizar el usuario: " + ex.Message);
-                    Console.WriteLine("Detalles de la excepción: " + ex.ToString());
-                    return false;
-                }
-            }
-        }
-        public static bool AjusteDatosDeUsuario(ZompyDogsLib.Usuarios.UsuarioCrear usuarioCrear)
-        {
-            string query = "UPDATE Usuario SET username = @usuarioName, password = @usuarioPass, email = @usuarioEmail WHERE id_usuario = @codigoUsuario";
-
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@usuarioName", usuarioCrear.UserName);
-                cmd.Parameters.AddWithValue("@usuarioPass", usuarioCrear.PassWord);
-                cmd.Parameters.AddWithValue("@usuarioEmail", usuarioCrear.Email);
-                cmd.Parameters.AddWithValue("@codigoUsuario", usuarioCrear.IDUser);
-
-                try
-                {
-                    conn.Open();
-                    int filasAfectadas = cmd.ExecuteNonQuery();
-                    return filasAfectadas > 0;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al actualizar el usuario: " + ex.Message);
-                    Console.WriteLine("Detalles de la excepción: " + ex.ToString());
-                    return false;
-                }
-            }
-        }
-
+        
         // Eliminar Usuario Seleccionado
         public static bool EliminarUsuario(int idDetalleUsuario)
         {
@@ -948,21 +870,6 @@ namespace ZompyDogsDAO
             {
                 conn.Open();
                 string query = "SELECT IdPuesto, puesto FROM Puestos Where codigoRol = 1 AND estado = 'ACTIVO'";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dtPuestos);
-                }
-            }
-            return dtPuestos;
-        }
-        public static DataTable ObtenerPuestosDeUsuariosParaComboBox()
-        {
-            DataTable dtPuestos = new DataTable();
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                conn.Open();
-                string query = "SELECT IdPuesto, puesto FROM Puestos Where codigoRol = 4 AND estado = 'ACTIVO'";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);

@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImprimirFactura));
-            label1 = new Label();
             label3 = new Label();
             label5 = new Label();
             lblTotal = new Label();
@@ -54,8 +53,8 @@
             dgvPlatillos = new DataGridView();
             panel3 = new Panel();
             panel4 = new Panel();
-            btnImprimir = new Button();
             btnAceptar = new Button();
+            btnImprimir = new Button();
             panel5 = new Panel();
             label7 = new Label();
             panel6 = new Panel();
@@ -70,16 +69,6 @@
             panel5.SuspendLayout();
             panel6.SuspendLayout();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(389, 20);
-            label1.Name = "label1";
-            label1.Size = new Size(27, 28);
-            label1.TabIndex = 126;
-            label1.Text = "L.";
             // 
             // label3
             // 
@@ -294,14 +283,14 @@
             dgvPlatillos.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvPlatillos.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             dgvPlatillos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvPlatillos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvPlatillos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvPlatillos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPlatillos.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvPlatillos.Enabled = false;
@@ -328,7 +317,6 @@
             // 
             panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(label13);
-            panel3.Controls.Add(label1);
             panel3.Controls.Add(lblSubtotal);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(label3);
@@ -355,6 +343,20 @@
             panel4.Size = new Size(492, 125);
             panel4.TabIndex = 131;
             // 
+            // btnAceptar
+            // 
+            btnAceptar.BackColor = Color.Transparent;
+            btnAceptar.FlatAppearance.BorderSize = 0;
+            btnAceptar.FlatStyle = FlatStyle.Flat;
+            btnAceptar.ForeColor = Color.Black;
+            btnAceptar.Image = Properties.Resources.multiply;
+            btnAceptar.Location = new Point(441, 3);
+            btnAceptar.Name = "btnAceptar";
+            btnAceptar.Size = new Size(38, 38);
+            btnAceptar.TabIndex = 0;
+            btnAceptar.UseVisualStyleBackColor = false;
+            btnAceptar.Click += btnAceptar_Click;
+            // 
             // btnImprimir
             // 
             btnImprimir.BackColor = Color.Yellow;
@@ -368,18 +370,6 @@
             btnImprimir.Text = "Imprimir";
             btnImprimir.UseVisualStyleBackColor = false;
             btnImprimir.Click += btnImprimir_Click;
-            // 
-            // btnAceptar
-            // 
-            btnAceptar.BackColor = Color.LawnGreen;
-            btnAceptar.ForeColor = Color.Black;
-            btnAceptar.Location = new Point(374, 78);
-            btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(113, 38);
-            btnAceptar.TabIndex = 0;
-            btnAceptar.Text = "Aceptar";
-            btnAceptar.UseVisualStyleBackColor = false;
-            btnAceptar.Click += btnAceptar_Click;
             // 
             // panel5
             // 
@@ -489,8 +479,8 @@
         public DataGridView dgvPlatillos;
         private System.Drawing.Printing.PrintDocument printFactura;
         private PrintPreviewDialog printPreviewFactura;
-        private Button btnAceptar;
         private Label label7;
         private Button btnImprimir;
+        public Button btnAceptar;
     }
 }

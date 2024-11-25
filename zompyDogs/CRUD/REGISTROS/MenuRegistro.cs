@@ -76,21 +76,45 @@ namespace zompyDogs.CRUD.REGISTROS
         {
             bool okError = true;
 
-            List<TextBox> textBoxes = new List<TextBox> { txtNombrePlatillo, txtPrecioUnitario, txtImagenName }; // crea una lista de los textbox existentes en el formulario.
+            List<TextBox> NoMore2Spaces = new List<TextBox> { txtNombrePlatillo, txtDescripcion }; // crea una lista de los textbox existentes en el formulario.
 
-            // Valida si los campos no están vacíos.
-            foreach (TextBox textBox in textBoxes)
+            List<TextBox> NotNullsNeverNulls = new List<TextBox> { txtNombrePlatillo, txtPrecioUnitario, txtImagenName };
+
+            foreach(TextBox noNulos in NotNullsNeverNulls)
             {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
+                if (string.IsNullOrWhiteSpace(noNulos.Text))
                 {
                     okError = false;
-                    errorProviderMenu.SetError(textBox, $"Ingrese un valor en el campo.");
-                    textBox.BackColor = Color.OldLace;
+                    errorProviderMenu.SetError(noNulos, $"Ingrese un valor en el campo.");
+                    noNulos.BackColor = Color.OldLace;
                 }
                 else
                 {
-                    errorProviderMenu.SetError(textBox, "");
-                    textBox.BackColor = SystemColors.Window;
+                    // Si pasa todas las validaciones, elimina los errores y restablece el fondo
+                    errorProviderMenu.SetError(noNulos, string.Empty);
+                    noNulos.BackColor = Color.White;
+                }
+            }
+            // Valida si los campos no están vacíos.
+            foreach (TextBox soloUnoEspacio in NoMore2Spaces)
+            {
+                if (Regex.IsMatch(soloUnoEspacio.Text, @"\s{2,}"))
+                {
+                    okError = false;
+                    errorProviderMenu.SetError(soloUnoEspacio, "El texto no puede contener múltiples espacios consecutivos.");
+                    soloUnoEspacio.BackColor = Color.LightPink;
+                }
+                else if (soloUnoEspacio.Text.StartsWith(" ") || soloUnoEspacio.Text.EndsWith(" "))
+                {
+                    okError = false;
+                    errorProviderMenu.SetError(soloUnoEspacio, "El texto no puede comenzar ni terminar con espacios.");
+                    soloUnoEspacio.BackColor = Color.LightPink;
+                }
+                else
+                {
+                    // Si pasa todas las validaciones, elimina los errores y restablece el fondo
+                    errorProviderMenu.SetError(soloUnoEspacio, string.Empty);
+                    soloUnoEspacio.BackColor = Color.White;
                 }
             }
 
@@ -102,11 +126,6 @@ namespace zompyDogs.CRUD.REGISTROS
                 okError = false;
                 errorProviderMenu.SetError(txtPrecioUnitario, "El precio debe ser un número mayor a cero.");
                 txtPrecioUnitario.BackColor = Color.OldLace;
-            }
-            else
-            {
-                errorProviderMenu.SetError(txtPrecioUnitario, string.Empty);
-                txtPrecioUnitario.BackColor = SystemColors.Window;
             }
 
             // Valida el nombre del platillo (debe tener entre 3 y 50 caracteres).
@@ -124,34 +143,6 @@ namespace zompyDogs.CRUD.REGISTROS
                 txtNombrePlatillo.BackColor = Color.OldLace;
             }
 
-            // Valida que no haya espacios consecutivos o al principio o final del nombre del platillo.
-            if (Regex.IsMatch(txtNombrePlatillo.Text, @"\s{2,}"))
-            {
-                okError = false;
-                errorProviderMenu.SetError(txtNombrePlatillo, "El texto no puede contener múltiples espacios consecutivos.");
-                txtNombrePlatillo.BackColor = Color.LightPink;
-            }
-
-            if (txtNombrePlatillo.Text.StartsWith(" ") || txtNombrePlatillo.Text.EndsWith(" "))
-            {
-                okError = false;
-                errorProviderMenu.SetError(txtNombrePlatillo, "El texto no puede comenzar ni terminar con espacios.");
-                txtNombrePlatillo.BackColor = Color.LightPink;
-            }
-
-            if (Regex.IsMatch(txtDescripcion.Text, @"\s{2,}"))
-            {
-                okError = false;
-                errorProviderMenu.SetError(txtDescripcion, "El texto no puede contener múltiples espacios consecutivos.");
-                txtDescripcion.BackColor = Color.LightPink;
-            }
-
-            if (txtDescripcion.Text.StartsWith(" ") || txtDescripcion.Text.EndsWith(" "))
-            {
-                okError = false;
-                errorProviderMenu.SetError(txtDescripcion, "El texto no puede comenzar ni terminar con espacios.");
-                txtDescripcion.BackColor = Color.LightPink;
-            }
 
             return okError;
         }
@@ -182,11 +173,12 @@ namespace zompyDogs.CRUD.REGISTROS
         /// </summary>
         private void btnSeleccionarImagen_Click(object sender, EventArgs e)
         {
-            string projectPath = Directory.GetParent(Application.StartupPath).Parent.Parent.Parent.FullName;
+            string basePath = AppDomain.CurrentDomain.BaseDirectory; // Obtiene el directorio base de la aplicación
+            string imagePath = Path.Combine(basePath, "Imagenes", "Platillos");
 
             OpenFileDialog ofdSeleccionarImagen = new OpenFileDialog();
             ofdSeleccionarImagen.Filter = "Imagenes|*.jpg; *.png; *.jpeg";
-            ofdSeleccionarImagen.InitialDirectory = "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\Imagenes\\Platillos";
+            ofdSeleccionarImagen.InitialDirectory = $"{imagePath}";
             ofdSeleccionarImagen.Title = "Seleccionar Imagen";
 
             if (ofdSeleccionarImagen.ShowDialog() == DialogResult.OK)
@@ -371,12 +363,30 @@ namespace zompyDogs.CRUD.REGISTROS
             // Establece el color de fondo del TextBox a blanco por defecto.
             txtNombrePlatillo.BackColor = Color.White;
 
-            // Valida que el texto contenga solo letras y tenga al menos 3 caracteres.
-            if (!string.IsNullOrWhiteSpace(txtNombrePlatillo.Text) && txtNombrePlatillo.Text.All(char.IsLetter))
+            // Valida que el texto no contenga múltiples espacios consecutivos.
+            if (Regex.IsMatch(txtNombrePlatillo.Text, @"\s{2,}"))
             {
-                if (txtNombrePlatillo.Text.Length > 2)
+                errorProviderMenu.SetError(txtNombrePlatillo, "El texto no puede contener múltiples espacios consecutivos.");
+                txtNombrePlatillo.BackColor = Color.LightPink;
+                return;
+            }
+
+            // Valida que no comience ni termine con espacio.
+            if (txtNombrePlatillo.Text.StartsWith(" ") || txtNombrePlatillo.Text.EndsWith(" "))
+            {
+                errorProviderMenu.SetError(txtNombrePlatillo, "El texto no puede comenzar ni terminar con espacios.");
+                txtNombrePlatillo.BackColor = Color.LightPink;
+                return;
+            }
+
+            // Valida que el texto solo contenga letras y espacios (para permitir palabras separadas por espacios).
+            if (!string.IsNullOrWhiteSpace(txtNombrePlatillo.Text) && Regex.IsMatch(txtNombrePlatillo.Text, @"^[a-zA-Z\s]+$"))
+            {
+                // Valida que tenga al menos 3 caracteres
+                if (txtNombrePlatillo.Text.Length >= 3)
                 {
                     errorProviderMenu.SetError(txtNombrePlatillo, string.Empty);
+                    txtNombrePlatillo.BackColor = Color.White;
                 }
                 else
                 {
@@ -386,7 +396,7 @@ namespace zompyDogs.CRUD.REGISTROS
             }
             else
             {
-                errorProviderMenu.SetError(txtNombrePlatillo, "El nombre del platillo debe contener solo letras y no puede estar vacío.");
+                errorProviderMenu.SetError(txtNombrePlatillo, "El nombre del platillo debe contener solo letras y espacios.");
                 txtNombrePlatillo.BackColor = Color.LightPink;
             }
 
@@ -410,31 +420,25 @@ namespace zompyDogs.CRUD.REGISTROS
             // Establece el color de fondo del TextBox a blanco por defecto.
             txtPrecioUnitario.BackColor = Color.White;
 
-            // Valida que el precio no esté vacío y que contenga solo números.
-            if (!string.IsNullOrWhiteSpace(txtPrecioUnitario.Text) && txtPrecioUnitario.Text.All(char.IsDigit))
+            // Intenta parsear el texto a un número decimal.
+            if (decimal.TryParse(txtPrecioUnitario.Text, out decimal precio))
             {
-                errorProviderMenu.SetError(txtPrecioUnitario, "El precio no puede quedar vacío.");
-
                 // Verifica que el precio no sea cero.
-                if (txtPrecioUnitario.Text.Length > 0)
+                if (precio == 0)
                 {
-                    errorProviderMenu.SetError(txtPrecioUnitario, string.Empty);
-
-                    if (txtPrecioUnitario.Text == "0")
-                    {
-                        errorProviderMenu.SetError(txtPrecioUnitario, "El precio no puede ser cero.");
-                        txtPrecioUnitario.BackColor = Color.LightYellow;
-                    }
+                    errorProviderMenu.SetError(txtPrecioUnitario, "El precio no puede ser cero.");
+                    txtPrecioUnitario.BackColor = Color.LightYellow;
                 }
                 else
                 {
-                    errorProviderMenu.SetError(txtPrecioUnitario, "El precio no puede quedar en cero.");
-                    txtPrecioUnitario.BackColor = Color.LightYellow;
+                    // El precio es válido, borra cualquier error previo.
+                    errorProviderMenu.SetError(txtPrecioUnitario, string.Empty);
                 }
             }
             else
             {
-                errorProviderMenu.SetError(txtPrecioUnitario, "El precio debe contener solo números.");
+                // Si no se puede parsear, muestra un error.
+                errorProviderMenu.SetError(txtPrecioUnitario, "El precio debe contener un número válido (puede incluir un punto decimal).");
                 txtPrecioUnitario.BackColor = Color.LightPink;
             }
         }

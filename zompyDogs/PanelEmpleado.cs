@@ -28,8 +28,11 @@ namespace zompyDogs
             CargarPedidosRecientes();
             CargarPedidosSemanal();
             CargarPedidosTotales();
+
+            lblTotalPedidosSem.Text = "00";
         }
 
+        //Carga en datagrid los pedidos recientes realizados por el empleado
         private void CargarPedidosRecientes()
         {
             DataTable pedidos = PedidosDAO.ObtenerDetallesdePedidoPorEmpleado(IDEmpleado);
@@ -44,6 +47,8 @@ namespace zompyDogs
             dtgHistorialPedidos.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dtgHistorialPedidos.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
         }
+
+        //Muestra el total de pedidos realizados de la semana por el empleado 
         private void CargarPedidosSemanal()
         {
             using (SqlConnection conn = new SqlConnection(con_string))
@@ -74,6 +79,8 @@ namespace zompyDogs
                 }
             }
         }
+
+        //Muestra el total de pedidos realizados por el empleado 
         private void CargarPedidosTotales()
         {
             using (SqlConnection conn = new SqlConnection(con_string))
@@ -106,6 +113,7 @@ namespace zompyDogs
             }
         }
 
+        //Permite al empleado cerrar sessión
         private void btnLogOutPanel_Click(object sender, EventArgs e)
         {
             DialogResult check = MessageBox.Show("¿Está seguro de cerrar sessión?",
@@ -120,47 +128,6 @@ namespace zompyDogs
                 frmEmpleado.Close();
             }
         }
-
-        private void PanelEmpleado_Load(object sender, EventArgs e)
-        {
-            string fechaActual = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
-            lblFechaActual.Text = fechaActual;
-        }
-
-       /* private void CargarPedidosPorEmpleado(int idEmpleado)
-        {
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                string query = @"
-                SELECT Cantidad_Pedidos
-                FROM v_PedidosxEmpleado
-                WHERE IDEmpleado = @idEmpleado";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@idEmpleado", idEmpleado);
-
-                try
-                {
-                    conn.Open();
-                    object resultado = cmd.ExecuteScalar();
-
-                    if (resultado != DBNull.Value && resultado != null)
-                    {
-                        lblPedidosEmp.Text = $"{resultado}";
-                    }
-                    else
-                    {
-                        lblPedidosEmp.Text = "00";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al cargar los pedidos por empleado: {ex.Message}");
-                }
-            }
-        } */
-
-
 
 
 

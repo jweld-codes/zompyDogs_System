@@ -71,7 +71,6 @@
             btnGuardarUser.TabIndex = 109;
             btnGuardarUser.Text = "GUARDAR";
             btnGuardarUser.UseVisualStyleBackColor = false;
-            btnGuardarUser.Click += btnGuardarUser_Click;
             // 
             // groupBox1
             // 
@@ -182,6 +181,7 @@
             // 
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Location = new Point(19, 128);
+            txtDescripcion.MaxLength = 200;
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(383, 86);

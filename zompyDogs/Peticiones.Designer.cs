@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             topBarMenu = new Panel();
+            button1 = new Button();
             pictureBox2 = new PictureBox();
             btnUsuarioPanel = new Button();
             lblTITULO = new Label();
@@ -46,7 +47,6 @@
             dgvPeticionesPendientes = new DataGridView();
             btnEliminarUsuario = new Button();
             errorProviderEmptyStrings = new ErrorProvider(components);
-            button1 = new Button();
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             groupBox1.SuspendLayout();
@@ -68,6 +68,19 @@
             topBarMenu.Name = "topBarMenu";
             topBarMenu.Size = new Size(901, 81);
             topBarMenu.TabIndex = 106;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.White;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = SystemColors.ActiveCaptionText;
+            button1.Location = new Point(570, 45);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 36);
+            button1.TabIndex = 99;
+            button1.Text = "Peticiones";
+            button1.UseVisualStyleBackColor = false;
             // 
             // pictureBox2
             // 
@@ -91,6 +104,7 @@
             btnUsuarioPanel.TabIndex = 98;
             btnUsuarioPanel.Text = "Mis Peticiones";
             btnUsuarioPanel.UseVisualStyleBackColor = false;
+            btnUsuarioPanel.Click += btnUsuarioPanel_Click;
             // 
             // lblTITULO
             // 
@@ -247,19 +261,6 @@
             // errorProviderEmptyStrings
             // 
             errorProviderEmptyStrings.ContainerControl = this;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.White;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = SystemColors.ActiveCaptionText;
-            button1.Location = new Point(570, 45);
-            button1.Name = "button1";
-            button1.Size = new Size(152, 36);
-            button1.TabIndex = 99;
-            button1.Text = "Peticiones";
-            button1.UseVisualStyleBackColor = false;
             // 
             // Peticiones
             // 

@@ -75,7 +75,6 @@
             btnAdminPanel.TabIndex = 99;
             btnAdminPanel.Text = "Libreta";
             btnAdminPanel.UseVisualStyleBackColor = false;
-            btnAdminPanel.Click += btnAdminPanel_Click;
             // 
             // pictureBox2
             // 

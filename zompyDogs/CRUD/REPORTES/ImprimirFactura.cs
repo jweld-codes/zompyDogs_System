@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using zompyDogs.CRUD.REGISTROS;
 using ZompyDogsDAO;
+using static ZompyDogsLib.Pedidos;
+
 
 namespace zompyDogs.CRUD.REPORTES
 {
     public partial class ImprimirFactura : Form
     {
         private string PedidoCodigoValor { get; set; }
+
         public ImprimirFactura(string pedidoCodigo, DataTable detallesPlatillos)
         {
             InitializeComponent();
@@ -23,8 +26,7 @@ namespace zompyDogs.CRUD.REPORTES
 
             CargarFactura(pedidoCodigo, detallesPlatillos);
             DeactivateCell();
-            btnAceptar.Hide();
-            //printFactura.EndPrint += printFactura_EndPrint;
+            btnAceptar.Show();
         }
 
         private void DeactivateCell()
@@ -38,6 +40,7 @@ namespace zompyDogs.CRUD.REPORTES
             lblNumFac.Text = pedidoCodigo;
             dgvPlatillos.DataSource = detallesPlatillos;
             dgvPlatillos.Refresh();
+
         }
 
         private void printFactura_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -57,10 +60,12 @@ namespace zompyDogs.CRUD.REPORTES
 
             e.Graphics.DrawImage(bitmap, offsetX, offsetY, scaledWidth, scaledHeight);
         }
+
         Bitmap bitmap;
         private void ImprimirFac()
         {
             btnImprimir.Hide();
+            btnAceptar.Hide();
             Graphics graphics = CreateGraphics();
             Size size = this.ClientSize;
 
@@ -74,13 +79,7 @@ namespace zompyDogs.CRUD.REPORTES
         private bool esImpresionReal = false;
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            btnAceptar.Hide();
-            ImprimirFac();
-
-            esImpresionReal = false;
-            printPreviewFactura.Document = printFactura;
-            printPreviewFactura.ShowDialog(); 
-            btnAceptar.Show();
+            this.Close();
         }
         private void btnImprimir_Click(object sender, EventArgs e)
         {
@@ -98,5 +97,8 @@ namespace zompyDogs.CRUD.REPORTES
             MessageBox.Show("El documento se guardó exitosamente como PDF.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
+
+        
+
     }
 }

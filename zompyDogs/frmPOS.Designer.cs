@@ -61,6 +61,7 @@
             panelContenedrPOS = new Panel();
             flpPOSPanel = new FlowLayoutPanel();
             bnSrcPedidos = new BindingSource(components);
+            lblEmpleadoNombre = new Label();
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
@@ -98,7 +99,6 @@
             btnHistorial.TabIndex = 99;
             btnHistorial.Text = "HISTORIAL";
             btnHistorial.UseVisualStyleBackColor = false;
-            btnHistorial.Click += btnHistorial_Click;
             // 
             // pictureBox2
             // 
@@ -139,6 +139,7 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(lblEmpleadoNombre);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(lblSubtotal);
             panel1.Controls.Add(btnCancelar);
@@ -157,7 +158,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(12, 502);
+            label6.Location = new Point(12, 524);
             label6.Name = "label6";
             label6.Size = new Size(57, 17);
             label6.TabIndex = 98;
@@ -167,7 +168,7 @@
             // 
             lblSubtotal.AutoSize = true;
             lblSubtotal.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSubtotal.Location = new Point(115, 474);
+            lblSubtotal.Location = new Point(115, 496);
             lblSubtotal.Name = "lblSubtotal";
             lblSubtotal.Size = new Size(57, 25);
             lblSubtotal.TabIndex = 4;
@@ -189,7 +190,7 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(94, 474);
+            label13.Location = new Point(94, 496);
             label13.Name = "label13";
             label13.Size = new Size(26, 25);
             label13.TabIndex = 3;
@@ -199,7 +200,7 @@
             // 
             txtCodigoGenerado.BorderStyle = BorderStyle.FixedSingle;
             txtCodigoGenerado.Enabled = false;
-            txtCodigoGenerado.Location = new Point(83, 22);
+            txtCodigoGenerado.Location = new Point(86, 47);
             txtCodigoGenerado.Name = "txtCodigoGenerado";
             txtCodigoGenerado.ReadOnly = true;
             txtCodigoGenerado.Size = new Size(223, 27);
@@ -208,7 +209,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(9, 479);
+            label12.Location = new Point(9, 501);
             label12.Name = "label12";
             label12.Size = new Size(79, 20);
             label12.TabIndex = 2;
@@ -219,7 +220,7 @@
             groupBox1.Controls.Add(label15);
             groupBox1.Controls.Add(btnEliminarOrden);
             groupBox1.Controls.Add(txtPlatilloOrden);
-            groupBox1.Location = new Point(5, 348);
+            groupBox1.Location = new Point(5, 370);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(304, 115);
             groupBox1.TabIndex = 7;
@@ -274,7 +275,7 @@
             dgvPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvPedido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPedido.GridColor = SystemColors.ScrollBar;
-            dgvPedido.Location = new Point(5, 58);
+            dgvPedido.Location = new Point(5, 80);
             dgvPedido.Name = "dgvPedido";
             dgvPedido.RowHeadersVisible = false;
             dgvPedido.RowHeadersWidth = 51;
@@ -407,6 +408,15 @@
             flpPOSPanel.Size = new Size(426, 581);
             flpPOSPanel.TabIndex = 4;
             // 
+            // lblEmpleadoNombre
+            // 
+            lblEmpleadoNombre.AutoSize = true;
+            lblEmpleadoNombre.Location = new Point(86, 25);
+            lblEmpleadoNombre.Name = "lblEmpleadoNombre";
+            lblEmpleadoNombre.Size = new Size(77, 20);
+            lblEmpleadoNombre.TabIndex = 99;
+            lblEmpleadoNombre.Text = "Empleado";
+            // 
             // frmPOS
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -465,5 +475,6 @@
         private Label lblTotalAPagar;
         private Label label4;
         private Label label5;
+        private Label lblEmpleadoNombre;
     }
 }

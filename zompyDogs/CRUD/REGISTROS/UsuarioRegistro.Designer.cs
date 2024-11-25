@@ -108,6 +108,7 @@
             // 
             txtPrimNombre.BorderStyle = BorderStyle.FixedSingle;
             txtPrimNombre.Location = new Point(19, 148);
+            txtPrimNombre.MaxLength = 20;
             txtPrimNombre.Multiline = true;
             txtPrimNombre.Name = "txtPrimNombre";
             txtPrimNombre.Size = new Size(180, 37);
@@ -170,6 +171,7 @@
             cbxEsatdoCivil.Name = "cbxEsatdoCivil";
             cbxEsatdoCivil.Size = new Size(180, 28);
             cbxEsatdoCivil.TabIndex = 112;
+            cbxEsatdoCivil.Text = "SOLTERO";
             cbxEsatdoCivil.SelectedIndexChanged += cbxEsatdoCivil_SelectedIndexChanged;
             // 
             // label9
@@ -225,6 +227,7 @@
             // 
             txtDireccion.BorderStyle = BorderStyle.FixedSingle;
             txtDireccion.Location = new Point(19, 315);
+            txtDireccion.MaxLength = 200;
             txtDireccion.Multiline = true;
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(180, 109);
@@ -244,11 +247,11 @@
             // 
             txtSegApellido.BorderStyle = BorderStyle.FixedSingle;
             txtSegApellido.Location = new Point(222, 231);
+            txtSegApellido.MaxLength = 20;
             txtSegApellido.Multiline = true;
             txtSegApellido.Name = "txtSegApellido";
             txtSegApellido.Size = new Size(180, 37);
             txtSegApellido.TabIndex = 104;
-            txtSegApellido.TextChanged += txtSegApellido_TextChanged;
             txtSegApellido.KeyPress += txtSegApellido_KeyPress;
             // 
             // label5
@@ -264,6 +267,7 @@
             // 
             txtPrimApellido.BorderStyle = BorderStyle.FixedSingle;
             txtPrimApellido.Location = new Point(19, 231);
+            txtPrimApellido.MaxLength = 20;
             txtPrimApellido.Multiline = true;
             txtPrimApellido.Name = "txtPrimApellido";
             txtPrimApellido.Size = new Size(180, 37);
@@ -285,11 +289,11 @@
             txtSegNombre.BackColor = Color.White;
             txtSegNombre.BorderStyle = BorderStyle.FixedSingle;
             txtSegNombre.Location = new Point(222, 148);
+            txtSegNombre.MaxLength = 20;
             txtSegNombre.Multiline = true;
             txtSegNombre.Name = "txtSegNombre";
             txtSegNombre.Size = new Size(180, 37);
             txtSegNombre.TabIndex = 100;
-            txtSegNombre.TextChanged += txtSegNombre_TextChanged;
             txtSegNombre.KeyPress += txtSegNombre_KeyPress;
             // 
             // label2
@@ -473,7 +477,6 @@
             btnGuardarUser.TabIndex = 101;
             btnGuardarUser.Text = "GUARDAR";
             btnGuardarUser.UseVisualStyleBackColor = false;
-            btnGuardarUser.Click += btnGuardarUser_Click_1;
             // 
             // btnCancelar
             // 

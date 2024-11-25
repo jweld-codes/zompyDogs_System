@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZompyDogsDAO;
 using ZompyDogsLib.Controladores;
-using static ZompyDogsDAO.PeticionesValidaciones;
+using static ZompyDogsDAO.PeticionesDAO;
 using ZompyDogsLib;
 
 namespace zompyDogs
@@ -50,15 +50,15 @@ namespace zompyDogs
             nuevoCodigoPeticion = _controladorGeneradorCodigo.GeneradordeCodigoPeticion();
             userForgetCodigo = nuevoCodigoPeticion;
         }
-            private void btnEnviarSolicitud_Click(object sender, EventArgs e)
-            {
-                string nombreUsuario = txtUserForget.Text;
-                int? idUsuario = UsuarioDAO.ObtenerIDPorNombreUsuario(nombreUsuario);
-                int? rolID = UsuarioDAO.ObtenerRolIDPorNombreUsuario(nombreUsuario);                                                                        
+        private void btnEnviarSolicitud_Click(object sender, EventArgs e)
+        {
+            string nombreUsuario = txtUserForget.Text;
+            int? idUsuario = UsuarioDAO.ObtenerIDPorNombreUsuario(nombreUsuario);
+            //int? rolID = UsuarioDAO.ObtenerRolIDPorNombreUsuario(nombreUsuario);                                                                        
 
             if (string.IsNullOrWhiteSpace(nombreUsuario))
                 {
-                    MessageBox.Show("Por favor, ingrese su nombre de usuario o correo electrónico.");
+                    MessageBox.Show("Por favor, ingrese su nombre de usuario.");
                     return;
                 }
             else if (idUsuario == null)
@@ -66,15 +66,10 @@ namespace zompyDogs
                 MessageBox.Show("El usuario ingresado no existe.");
                 return;
             }
-            else if (rolID == 4)
-            {
-                MessageBox.Show("Usuario básico no puede generar solicitud de recuperación de contraseña.");
-                return;
-            }
             else
             {
                 // Crear la petición
-               ZompyDogsLib.Peticiones.PeticionRegistro nuevaPeticion = new ZompyDogsLib.Peticiones.PeticionRegistro
+                ZompyDogsLib.Peticiones.PeticionRegistro nuevaPeticion = new ZompyDogsLib.Peticiones.PeticionRegistro
                 {
                     CodigPeticion = userForgetCodigo,
                     AccionPeticion = "Recuperación de contraseña",
@@ -87,7 +82,7 @@ namespace zompyDogs
 
                 try
                 {
-                    PeticionesValidaciones.GuardarPeticion(nuevaPeticion);
+                    PeticionesDAO.GuardarPeticion(nuevaPeticion);
                     MessageBox.Show($"Solicitud enviada correctamente.\n Porfavor, esperar a que un administrador acepte su petición.\n\n Código de solicitud: {userForgetCodigo}", "Solicitud de Recuperación de contraseña.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Login frmLogin = new Login();
                     this.Hide();

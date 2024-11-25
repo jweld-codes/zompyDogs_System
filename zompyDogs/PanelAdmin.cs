@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using ZompyDogsDAO;
-using static ZompyDogsDAO.PeticionesValidaciones;
+using static ZompyDogsDAO.PeticionesDAO;
 using System.Windows.Forms.VisualStyles;
 
 namespace zompyDogs
@@ -36,13 +36,14 @@ namespace zompyDogs
             CargarPedidosRecientes();
             CargarPeticionesEnDataGrid();
 
-            // CargarGastoSemanal();
         }
         public void InicializarAdmin()
         {
             BienvenidaAdmin frmBienvenidaForm = new BienvenidaAdmin();
             string userLabel = frmBienvenidaForm.lblNombreSideBar.Text;
         }
+
+        //Permite al usuario cerrar sessión
         private void btnLogOutPanel_Click(object sender, EventArgs e)
         {
             DialogResult check = MessageBox.Show("¿Está seguro de cerrar sessión?",
@@ -53,6 +54,8 @@ namespace zompyDogs
                 frmLogin.Show();
             }
         }
+        
+        // Muestra las ganancias semanal
         private void CargarGananciaSemanal()
         {
             using (SqlConnection conn = new SqlConnection(con_string))
@@ -86,37 +89,8 @@ namespace zompyDogs
 
 
         }
-        /*  private void CargarGastoSemanal()
-          {
-              using (SqlConnection conn = new SqlConnection(con_string))
-              {
-                  string query = @"
-                  SELECT SUM(TotalGastoSemanal) AS GastoSemanal
-                  FROM v_gastossemanales
-                  WHERE Año = YEAR(GETDATE()) AND Semana = DATEPART(WEEK, GETDATE());";
-
-                  SqlCommand cmd = new SqlCommand(query, conn);
-
-                  try
-                  {
-                      conn.Open();
-                      object resultado = cmd.ExecuteScalar();
-
-                      if (resultado != DBNull.Value)
-                      {
-                          lblPerdidas.Text = $"{Convert.ToDecimal(resultado):C}"; 
-                      }
-                      else
-                      {
-                          lblPerdidas.Text = "L. 0.00";
-                      }
-                  }
-                  catch (Exception ex)
-                  {
-                      MessageBox.Show($"Error al cargar el gasto semanal: {ex.Message}");
-                  }
-              }
-          }*/
+        
+        // Carga los datos del total de los pedidos semanal
         private void CargarPedidosSemanal()
         {
             using (SqlConnection conn = new SqlConnection(con_string))
@@ -149,6 +123,7 @@ namespace zompyDogs
             }
         }
 
+        // Muuestra los pedidos recientes.
         private void CargarPedidosRecientes()
         {
             DataTable pedidos = PedidosDAO.ObtenerPedidosRecientes();
@@ -157,9 +132,10 @@ namespace zompyDogs
             dgvPedidosPanel.Columns["Total_a_Pagar"].HeaderText = "Total";
         }
 
+        //Muestra las Peticiones Recientes
         public void CargarPeticionesEnDataGrid()
         {
-            dgvPeticionesPendientes.DataSource = PeticionesValidaciones.ObtenerPeticionesParaPanel();
+            dgvPeticionesPendientes.DataSource = PeticionesDAO.ObtenerPeticionesParaPanel();
 
             dgvPeticionesPendientes.Columns["Peticion"].HeaderText = "Petición";
             dgvPeticionesPendientes.Columns["Fecha_De_Envio"].HeaderText = "Fecha de Envío";

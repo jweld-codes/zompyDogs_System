@@ -5,17 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using static ZompyDogsDAO.PeticionesValidaciones;
+using static ZompyDogsDAO.PeticionesDAO;
 using System.Collections;
 using ZompyDogsLib;
 
 namespace ZompyDogsDAO
 {
-    public class PeticionesValidaciones
+    /// <summary>
+    /// Clase que maneja las operaciones relacionadas con las peticiones en la base de datos.
+    /// Realiza operaciones como insertar, actualizar, eliminar y obtener peticiones.
+    /// </summary>
+    public class PeticionesDAO
     {
         private static readonly string con_string = Conexion.cadena;
         private static SqlConnection conn = new SqlConnection(con_string);
-        
+
+        /// <summary>
+        /// Inserta una nueva petición en la base de datos.
+        /// </summary>
+        /// <param name="peticion">Objeto que contiene la información de la petición a guardar.</param>
         public static void GuardarPeticion(ZompyDogsLib.Peticiones.PeticionRegistro peticion)
         {
             string query = "INSERT INTO Peticiones (codigoPeticion, accionPeticion, descripcionPeticion, fechaEnviada, fechaRealizada, codigousuario, estado) VALUES (@codigopeticion, @accionpeticion, @descripcion, @fechaenviada, @fecharealizada, @codigousuario, @estado)";
@@ -49,6 +57,12 @@ namespace ZompyDogsDAO
                 }
             }
         }
+
+        /// <summary>
+        /// Actualiza una petición en la base de datos.
+        /// </summary>
+        /// <param name="peticion">Objeto que contiene la nueva información de la petición.</param>
+        /// <returns>Devuelve un valor booleano indicando si la actualización fue exitosa.</returns>
         public static bool ActualizarPeticion(ZompyDogsLib.Peticiones.PeticionRegistro peticion)
         {
             string query = "UPDATE Peticiones SET accionPeticion = @nuevaAccionPeticion, " +
@@ -77,6 +91,12 @@ namespace ZompyDogsDAO
                 }
             }
         }
+
+        /// <summary>
+        /// Elimina una petición de la base de datos.
+        /// </summary>
+        /// <param name="codigoPeticion">Código de la petición a eliminar.</param>
+        /// <returns>Devuelve un valor booleano indicando si la eliminación fue exitosa.</returns>
         public static bool EliminarPeticion(string codigoPeticion)
         {
             string query = "DELETE FROM Peticiones WHERE codigoPeticion = @codigoPeticion";
@@ -100,9 +120,12 @@ namespace ZompyDogsDAO
                 }
             }
         }
-        
-        
-        
+
+        /// <summary>
+        /// Obtiene las 10 peticiones más recientes con estado 'Pendiente' para mostrar en el PanelAdmin.
+        /// </summary>
+        /// <returns>Devuelve un DataTable con las 10 primeras peticiones pendientes ordenadas por la fecha de envío en orden descendente.</returns>
+        /// <remarks>Este método está diseñado para ser utilizado en el PanelAdmin, y obtiene una lista de las peticiones pendientes más recientes.</remarks>
         public static DataTable ObtenerPeticionesParaPanel()
         {
             // USO EN: PanelAdmin
@@ -128,6 +151,11 @@ namespace ZompyDogsDAO
 
             return dtPeticiones;
         }
+
+        /// <summary>
+        /// Obtiene todas las peticiones con estado "Pendiente" de la base de datos.
+        /// </summary>
+        /// <returns>Devuelve un DataTable con las peticiones pendientes.</returns>
         public static DataTable ObtenerPeticionesPendientes()
         {
             // USO EN: Peticiones
@@ -152,6 +180,11 @@ namespace ZompyDogsDAO
 
             return dtPeticiones;
         }
+
+        /// <summary>
+        /// Obtiene todas las peticiones con estado "Completado" de la base de datos.
+        /// </summary>
+        /// <returns>Devuelve un DataTable con las peticiones completadas.</returns>
         public static DataTable ObtenerPeticionesCompletadas()
         {
             // USO EN: Peticiones
@@ -176,30 +209,11 @@ namespace ZompyDogsDAO
 
             return dtPeticiones;
         }
-        public static DataTable ObtenerPeticionesCompletasAdmin()
-        {
-            //EN USO: Peticiones
-            DataTable dtPeticionesCompletas = new DataTable();
-            string query = "SELECT Codigo, Accion, Peticion, Nombre_Completo, IDUsuario, Usuario,Fecha_De_Envio,Estado FROM v_PeticionesxUsuarios ORDER BY Fecha_De_Envio DESC";
 
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-                try
-                {
-                    conn.Open();
-                    da.Fill(dtPeticionesCompletas);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al obtener las descripciones de peticiones: " + ex.Message);
-                }
-            }
-
-            return dtPeticionesCompletas;
-        }
+        /// <summary>
+        /// Obtiene las peticiones completadas de un empleado específico.
+        /// </summary>
+        /// <param name="idUsuario">ID del usuario para filtrar las peticiones.</param>
         public static DataTable ObtenerPeticionesCompletasAjustes(int idUsuario)
         {
             //EN USO: AjustesCuenta
@@ -225,6 +239,12 @@ namespace ZompyDogsDAO
             }
             return dtPeticionesCompletasEmp;
         }
+
+        /// <summary>
+        /// Obtiene los detalles de una petición específica para su edición.
+        /// </summary>
+        /// <param name="codigoPeticion">Código de la petición a obtener.</param>
+        /// <returns>Devuelve un DataTable con la información de la petición.</returns>
         public static DataTable ObtenerPeticionesUsuarioParaEditar(string codigoPeticion)
         {
             //EN USO: AjustesCuenta, Peticiones
@@ -250,6 +270,9 @@ namespace ZompyDogsDAO
             }
             return dtPeticionesCompletasEmp;
         }
+        
+        
+        /* ************ BUSCADORES ****************** */
         public static DataTable BuscarPeticionesPorUsuario(string valorBusqueda)
         {
             //EN USO: Peticiones
@@ -293,35 +316,6 @@ namespace ZompyDogsDAO
             return dtPeticionesCompletasEmp;
         }
         
-        
-        
-        
-        public static DataTable FiltroPendienteCompletado(string estadoDT)
-        {
-            //EN USO: N/A
-            DataTable dtEstados = new DataTable();
-            string query = "SELECT Codigo, Accion, Peticion, Nombre_Completo, Usuario, Fecha_De_Envio, Estado FROM v_PeticionesxUsuarios WHERE estado = @estadoDT";
-
-            using (SqlConnection conn = new SqlConnection(con_string))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@estadoDT", estadoDT);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-                try
-                {
-                    conn.Open();
-                    da.Fill(dtEstados);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al obtener las descripciones de peticiones: " + ex.Message);
-                }
-            }
-
-            return dtEstados;
-        }
-
     }
     
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZompyDogsDAO;
 using ZompyDogsLib.Controladores;
-using static ZompyDogsDAO.PeticionesValidaciones;
+using static ZompyDogsDAO.PeticionesDAO;
 
 namespace zompyDogs.CRUD.REGISTROS
 {

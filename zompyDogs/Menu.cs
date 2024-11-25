@@ -35,8 +35,9 @@ namespace zompyDogs
         public Menu()
         {
             InitializeComponent();
+
             CargarPlatillosdeMenu();
-            btnEliminarMenu.Show();
+            btnEliminarMenu.Hide();
         }
 
         /// <summary>
@@ -54,7 +55,6 @@ namespace zompyDogs
             dgvMenu.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);
 
             dgvMenu.Columns["Codigo"].HeaderText = "Código";
-            dgvMenu.Columns["Descripcion"].HeaderText = "Descripción";
             dgvMenu.Columns["Categoria"].HeaderText = "Categoría";
         }
 

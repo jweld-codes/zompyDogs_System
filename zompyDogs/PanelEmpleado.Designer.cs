@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             panel2 = new Panel();
-            lblFechaActual = new Label();
             lblNombreUser = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
@@ -56,7 +55,6 @@
             // panel2
             // 
             panel2.BackColor = Color.Transparent;
-            panel2.Controls.Add(lblFechaActual);
             panel2.Controls.Add(lblNombreUser);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(pictureBox1);
@@ -64,16 +62,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(622, 208);
             panel2.TabIndex = 31;
-            // 
-            // lblFechaActual
-            // 
-            lblFechaActual.AutoSize = true;
-            lblFechaActual.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFechaActual.Location = new Point(186, 12);
-            lblFechaActual.Name = "lblFechaActual";
-            lblFechaActual.Size = new Size(119, 20);
-            lblFechaActual.TabIndex = 19;
-            lblFechaActual.Text = "FECHA ACTUAL";
             // 
             // lblNombreUser
             // 
@@ -239,7 +227,6 @@
             ForeColor = Color.Black;
             Name = "PanelEmpleado";
             Text = "PanelEmpleado";
-            Load += PanelEmpleado_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -257,7 +244,6 @@
 
         #endregion
         private Panel panel2;
-        private Label lblFechaActual;
         public Label lblNombreUser;
         private Label label1;
         private PictureBox pictureBox1;

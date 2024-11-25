@@ -21,44 +21,67 @@ using ClosedXML.Report.Utils;
 
 namespace zompyDogs
 {
+    /// <summary>
+    /// Clase que representa el formulario de registro de usuarios.
+    /// Permite gestionar el registro de nuevos usuarios, validando entradas,
+    /// generando códigos de usuario, y configurando roles mediante un ComboBox.
+    /// </summary>
     public partial class UsuarioRegistro : Form
     {
-        private ControladorGeneradoresDeCodigo _controladorGeneradorCodigo;
+        private ControladorGeneradoresDeCodigo _controladorGeneradorCodigo; // Generador de códigos para los usuarios.
+        private string nuevoCodigoUsuario; // Código de usuario generado.
+        private bool isTheUsername = false; // Indicador del nombre del usuario para el generador del usuario y la clave.
+        private int contUser; // Contador auxiliar para gestionar usuarios.
+        public bool okError = true; // Indicador del estado del formulario (error o éxito).
 
-        private string nuevoCodigoUsuario;
-        private bool isTheUsername = false;
-        private int contUser;
-        public bool okError = true;
-
+        /// <summary>
+        /// Constructor del formulario UsuarioRegistro.
+        /// Inicializa los componentes del formulario y configura eventos, validaciones,
+        /// y comportamientos predeterminados.
+        /// </summary>
         public UsuarioRegistro()
         {
             InitializeComponent();
-
+            // Inicialización del controlador para generar códigos.
             _controladorGeneradorCodigo = new ControladorGeneradoresDeCodigo();
 
+            // Genera un código de usuario basado en los datos del formulario.
             GeneradordeCodigoUsuarioFromForm();
+
+            // Carga los roles en el ComboBox correspondiente.
             CargarRolesComboBox();
 
+            // Configura el ErrorProvider para que no parpadee.
             errorProviderUsuario.BlinkStyle = ErrorBlinkStyle.NeverBlink;
 
-            txtCedula.MaxLength = 13;
-            txtTelefono.MaxLength = 8;
+            // Establece límites de longitud máxima en los campos de texto.
+            LimitesTextboxes();
 
+            // Configura los eventos KeyPress para campos específicos.
             txtCedula.KeyPress += new KeyPressEventHandler(txtCedulae_KeyPress);
             txtTelefono.KeyPress += new KeyPressEventHandler(txtTelefono_KeyPress);
 
+            // Obtiene y muestra el siguiente ID disponible para un nuevo usuario.
             int siguienteID = UsuarioDAO.ObtenerSiguienteID();
             lblidDetalleUsuario.Text = siguienteID.ToString();
+
+            // Desactiva los campos de texto de nombre de usuario y contraseña por defecto.
             txtUsername.Enabled = false;
             txtPassword.Enabled = false;
+
+            // Configura un evento para detectar cambios en la selección del ComboBox de roles.
             cbxRol.SelectedIndexChanged += cbxRol_SelectedIndexChanged;
-
-            LimitesTextboxes();
-
         }
 
+        /// <summary>
+        /// Establece límites de longitud máxima para los campos de texto del formulario.
+        /// Evita que el usuario exceda el número de caracteres permitidos.
+        /// </summary>
         private void LimitesTextboxes()
         {
+            txtCedula.MaxLength = 13;
+            txtTelefono.MaxLength = 8;
+
             txtPrimNombre.MaxLength = 20;
             txtPrimApellido.MaxLength = 20;
 
@@ -67,13 +90,7 @@ namespace zompyDogs
 
             txtDireccion.MaxLength = 200;
         }
-        private void txtCedulae_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+       
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -81,6 +98,7 @@ namespace zompyDogs
                 e.Handled = true;
             }
         }
+        
         /// <summary>
         /// Método encargado de validar los campos del formulario de registro de usuario.
         /// Verifica que los campos de texto no estén vacíos, que los campos de selección tengan una opción válida,
@@ -89,33 +107,118 @@ namespace zompyDogs
         /// <returns>Devuelve true si no hay errores en los campos, false si hay algún error.</returns>
         public bool ValidarCampos()
         {
-            // Variable para indicar si existen errores en los campos.
             okError = true;
 
-            // Lista de los campos de texto a validar (excluyendo los nombres y apellidos)
-            List<System.Windows.Forms.TextBox> textBoxes = new List<System.Windows.Forms.TextBox> { txtPrimNombre, txtPrimApellido, txtPassword, txtUsername, txtDireccion, txtTelefono, txtCedula };
+            // Lista de los campos obligatorios (que no aceptan nulos ni vacíos, pero no tienen validaciones especiales)
+            List<System.Windows.Forms.TextBox> generalMandatoryFields = new List<System.Windows.Forms.TextBox>
+            {
+                txtPassword, txtUsername, txtDireccion, txtTelefono, txtCedula
+            };
 
-            // Lista de campos de texto que corresponden a nombres y apellidos
-            List<System.Windows.Forms.TextBox> textBoxesNames = new List<System.Windows.Forms.TextBox> { txtPrimNombre, txtPrimApellido, txtSegNombre, txtSegApellido };
+            // Lista de los campos obligatorios con validaciones adicionales (no aceptan espacios ni vacíos)
+            List<System.Windows.Forms.TextBox> nameMandatoryFields = new List<System.Windows.Forms.TextBox>
+            {
+                txtPrimNombre, txtPrimApellido
+            };
+
+            // Lista de los campos opcionales (permiten nulos o vacíos, pero verifican espacios si tienen texto)
+            List<System.Windows.Forms.TextBox> optionalFields = new List<System.Windows.Forms.TextBox>
+            {
+                txtSegNombre, txtSegApellido
+            };
 
             // Lista de campos ComboBox para validar
             List<System.Windows.Forms.ComboBox> comboBoxList = new List<System.Windows.Forms.ComboBox> { cbxEsatdoCivil, cbxRol };
 
-            // Validación de los campos de texto generales
-            foreach (System.Windows.Forms.TextBox textBox in textBoxes)
+            // Validación para los campos obligatorios
+            // Validación para los campos obligatorios generales
+            foreach (System.Windows.Forms.TextBox textBox in generalMandatoryFields)
             {
-                // Verifica si el campo está vacío o solo contiene espacios
-                if (string.IsNullOrWhiteSpace(textBox.Text))
+                if (string.IsNullOrWhiteSpace(textBox.Text)) // Campo vacío
                 {
                     okError = false;
-                    errorProviderUsuario.SetError(textBox, $"Ingrese un valor en el campo.");
-                    textBox.BackColor = Color.OldLace;  // Cambia el fondo a color amarillo para indicar error
+                    errorProviderUsuario.SetError(textBox, "El campo no puede estar vacío.");
+                    textBox.BackColor = Color.LightPink;
+                }
+                else if (Regex.IsMatch(textBox.Text, @"\s{2,}")) // Espacios consecutivos
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(textBox, "El texto no puede contener espacios consecutivos.");
+                    textBox.BackColor = Color.LightPink;
+                }
+                else if (textBox.Text.StartsWith(" ") || textBox.Text.EndsWith(" ")) // Espacios al inicio o final
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(textBox, "El texto no puede comenzar ni terminar con espacios.");
+                    textBox.BackColor = Color.LightPink;
                 }
                 else
                 {
-                    // Elimina cualquier error previo y restablece el fondo a blanco
-                    errorProviderUsuario.SetError(textBox, "");
-                    textBox.BackColor = SystemColors.Window;
+                    // Si pasa la validación, elimina los errores y restablece el fondo
+                    errorProviderUsuario.SetError(textBox, string.Empty);
+                    textBox.BackColor = Color.White;
+                }
+            }
+
+
+            // Validación para los nombres obligatorios (sin espacios)
+            foreach (System.Windows.Forms.TextBox textBox in nameMandatoryFields)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text)) // Campo vacío
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(textBox, "El campo no puede estar vacío.");
+                    textBox.BackColor = Color.LightPink;
+                }
+                else if (Regex.IsMatch(textBox.Text, @"\s{1,}")) // Verifica espacios consecutivos
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(textBox, "El texto no puede contener espacios.");
+                    textBox.BackColor = Color.LightPink;
+                }
+                else if (textBox.Text.StartsWith(" ") || textBox.Text.EndsWith(" ")) // Espacios al inicio o final
+                {
+                    okError = false;
+                    errorProviderUsuario.SetError(textBox, "El texto no puede comenzar ni terminar con espacios.");
+                    textBox.BackColor = Color.LightPink;
+                }
+                else
+                {
+                    // Si pasa la validación, elimina los errores y restablece el fondo
+                    errorProviderUsuario.SetError(textBox, string.Empty);
+                    textBox.BackColor = Color.White;
+                }
+            }
+
+            // Validación para los campos opcionales
+            foreach (System.Windows.Forms.TextBox textBox in optionalFields)
+            {
+                if (!string.IsNullOrWhiteSpace(textBox.Text)) // Solo valida si tiene texto
+                {
+                    if (Regex.IsMatch(textBox.Text, @"\s{1,}")) // Espacios consecutivos
+                    {
+                        okError = false;
+                        errorProviderUsuario.SetError(textBox, "El texto no puede contener espacios consecutivos.");
+                        textBox.BackColor = Color.LightPink;
+                    }
+                    else if (textBox.Text.StartsWith(" ") || textBox.Text.EndsWith(" ")) // Espacios al inicio o final
+                    {
+                        okError = false;
+                        errorProviderUsuario.SetError(textBox, "El texto no puede comenzar ni terminar con espacios.");
+                        textBox.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        // Si pasa todas las validaciones, elimina los errores y restablece el fondo
+                        errorProviderUsuario.SetError(textBox, string.Empty);
+                        textBox.BackColor = Color.White;
+                    }
+                }
+                else
+                {
+                    // Si el campo está vacío, elimina cualquier error y deja el fondo blanco
+                    errorProviderUsuario.SetError(textBox, string.Empty);
+                    textBox.BackColor = Color.White;
                 }
             }
 
@@ -127,7 +230,7 @@ namespace zompyDogs
                 {
                     okError = false;
                     errorProviderUsuario.SetError(comboBoxListValid, "Seleccione una opción.");
-                    comboBoxListValid.BackColor = Color.OldLace;  // Cambia el fondo a color amarillo para indicar error
+                    comboBoxListValid.BackColor = Color.OldLace;
                 }
                 else
                 {
@@ -181,81 +284,45 @@ namespace zompyDogs
             if (txtPrimNombre.Text.Length < 3)
             {
                 okError = false;
-                errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe tener no más de 20 caracteres.");
-                txtPrimNombre.BackColor = Color.OldLace;
-            }
-            if (txtPrimNombre.Text.Length > 20)
-            {
-                okError = false;
-                errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe tener no más de 20 caracteres.");
+                errorProviderUsuario.SetError(txtPrimNombre, "El primer nombre debe tener más de 3 caracteres.");
                 txtPrimNombre.BackColor = Color.OldLace;
             }
 
-            if (txtSegApellido.Text.Length > 20)
+            if (txtPrimApellido.Text.Length < 3)
             {
                 okError = false;
-                errorProviderUsuario.SetError(txtPrimApellido, "El primer apellido debe tener no más de 20 caracteres.");
+                errorProviderUsuario.SetError(txtPrimApellido, "El primer apellido debe tener más de 3 caracteres.");
                 txtPrimApellido.BackColor = Color.OldLace;
             }
-            if (txtSegNombre.Text.Length > 20)
-            {
-                okError = false;
-                errorProviderUsuario.SetError(txtPrimNombre, "El primer apellido debe tener no más de 20 caracteres.");
-                txtPrimNombre.BackColor = Color.OldLace;
-            }
 
-
-            // Validación de espacios en blanco
-            foreach (System.Windows.Forms.TextBox textBoxSpace in textBoxes)
-            {
-                // Verifica si el texto contiene múltiples espacios consecutivos
-                if (Regex.IsMatch(textBoxSpace.Text, @"\s{2,}"))
-                {
-                    okError = false;
-                    errorProviderUsuario.SetError(textBoxSpace, "El texto no puede contener múltiples espacios consecutivos.");
-                    textBoxSpace.BackColor = Color.LightPink;
-                }
-
-                // Verifica si el texto comienza o termina con espacios
-                if (textBoxSpace.Text.StartsWith(" ") || textBoxSpace.Text.EndsWith(" "))
-                {
-                    okError = false;
-                    errorProviderUsuario.SetError(textBoxSpace, "El texto no puede comenzar ni terminar con espacios.");
-                    textBoxSpace.BackColor = Color.LightPink;
-                }
-            }
-
-            // Validación de espacios en los campos de nombres y apellidos
-            foreach (System.Windows.Forms.TextBox textBoxSpaceName in textBoxesNames)
-            {
-                // Verifica que los campos de nombres y apellidos no contengan espacios adicionales entre palabras
-                if (textBoxSpaceName.Name == "txtPrimNombre" || textBoxSpaceName.Name == "txtPrimApellido")
-                {
-                    if (Regex.IsMatch(textBoxSpaceName.Text, @"\s{2,}"))
-                    {
-                        okError = false;
-                        errorProviderUsuario.SetError(textBoxSpaceName, "El texto no puede contener espacios adicionales entre las palabras.");
-                        textBoxSpaceName.BackColor = Color.LightPink;
-                    }
-                    else
-                    {
-                        // Si no hay espacios consecutivos, elimina el error
-                        errorProviderUsuario.SetError(textBoxSpaceName, string.Empty);
-                        textBoxSpaceName.BackColor = Color.White;
-                    }
-                }
-            }
-
-            // Devuelve 'true' si no hubo errores, 'false' si hubo algún error
             return okError;
         }
 
+        /// <summary>
+        /// Valida si un correo electrónico cumple con un formato correcto.
+        /// Utiliza una expresión regular para verificar que el correo sea válido.
+        /// </summary>
+        /// <param name="correo">El correo electrónico que se desea validar.</param>
+        /// <returns>
+        /// <c>true</c> si el correo tiene un formato válido; 
+        /// <c>false</c> en caso contrario.
+        /// </returns>
         public bool ValidarCorreo(string correo)
         {
+            // Expresión regular para validar el formato de un correo electrónico.
             string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            // Retorna true si el correo coincide con el patrón, false en caso contrario.
             return Regex.IsMatch(correo, patronCorreo);
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de selección en el ComboBox de roles.
+        /// Carga los puestos correspondientes dependiendo del rol seleccionado
+        /// (Administrador o Empleado).
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private void cbxRol_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxRol.SelectedValue is DataRowView dataRowView)
@@ -270,12 +337,6 @@ namespace zompyDogs
                 {
                     CargarPuestosEmpleadosComboBox();
                 }
-                else if (codigoRolSeleccionado == 4) // 4 para Usuario
-                {
-                    CargarPuestosUsuariosComboBox();
-
-
-                }
             }
             else if (cbxRol.SelectedValue != null)
             {
@@ -289,13 +350,14 @@ namespace zompyDogs
                 {
                     CargarPuestosEmpleadosComboBox();
                 }
-                else if (codigoRolSeleccionado == 4)
-                {
-                    CargarPuestosUsuariosComboBox();
-                }
+                
             }
         }
 
+        /// <summary>
+        /// Carga los puestos disponibles para administradores en el ComboBox de puestos.
+        /// También habilita y muestra los controles necesarios para ingresar usuario y clave.
+        /// </summary>
         public void CargarPuestosEmpleadosComboBox()
         {
             DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeEmpleadosParaComboBox();
@@ -315,6 +377,11 @@ namespace zompyDogs
             cbPuesto.DisplayMember = "puesto";
             cbPuesto.ValueMember = "IdPuesto";
         }
+
+        /// <summary>
+        /// Carga los puestos disponibles para empleados en el ComboBox de puestos.
+        /// También habilita y muestra los controles necesarios para ingresar usuario y clave.
+        /// </summary>
         public void CargarPuestosAdminsComboBox()
         {
             DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeAdminsParaComboBox();
@@ -333,27 +400,10 @@ namespace zompyDogs
             cbPuesto.DisplayMember = "puesto";
             cbPuesto.ValueMember = "IdPuesto";
         }
-        public void CargarPuestosUsuariosComboBox()
-        {
-            txtUsername.Text = "------";
-            txtPassword.Text = "---" + contUser + "---";
 
-            lblUser.Hide();
-            lblClave.Hide();
-
-            txtUsername.Hide();
-            txtPassword.Hide();
-            btnGeneradorUsername.Hide();
-            btnGeneradorPassword.Hide();
-
-            btnGeneradorPassword.Enabled = false;
-            btnGeneradorUsername.Enabled = false;
-            DataTable dtPuestos = UsuarioDAO.ObtenerPuestosDeUsuariosParaComboBox();
-
-            cbPuesto.DataSource = dtPuestos;
-            cbPuesto.DisplayMember = "puesto";
-            cbPuesto.ValueMember = "IdPuesto";
-        }
+        /// <summary>
+        /// Carga los roles disponibles en el ComboBox de roles desde la base de datos.
+        /// </summary>
         private void CargarRolesComboBox()
         {
             DataTable dtRoles = UsuarioDAO.ObtenerRolesParaComboBox();
@@ -362,28 +412,37 @@ namespace zompyDogs
             cbxRol.DisplayMember = "Rol";
             cbxRol.ValueMember = "Id_Rol";
         }
+
+        /// <summary>
+        /// Genera un nuevo código de usuario utilizando el controlador de generación de códigos.
+        /// Actualiza el campo de texto correspondiente con el código generado.
+        /// </summary>
         private void GeneradordeCodigoUsuarioFromForm()
         {
             nuevoCodigoUsuario = _controladorGeneradorCodigo.GeneradordeCodigoUsuario();
             txtCodigoGenerado.Text = nuevoCodigoUsuario;
         }
 
-        private void btnGeneradorUsername_Click(object sender, EventArgs e)
-        {
-            isTheUsername = true;
-            GeneradordeNombreDeUsuarioYClave();
-        }
-
+        /// <summary>
+        /// Genera un nombre de usuario o contraseña basados en el primer nombre,
+        /// primer apellido y un número aleatorio.
+        /// </summary>
+        /// <returns>
+        /// El código generado (nombre de usuario o contraseña, dependiendo de la opción seleccionada).
+        /// </returns>
         public string GeneradordeNombreDeUsuarioYClave()
         {
+            // Obtener datos base para generar el nombre de usuario o contraseña.
             string nombreUser = txtPrimNombre.Text;
             string apellUser = txtPrimApellido.Text;
             string username = nombreUser + "." + apellUser;
 
+            // Generar un número aleatorio para agregar al nombre.
             string numeroAleatorio = new Random().Next(1000, 9999).ToString();
             string codigoGeneradoUsername = $"{username}-{numeroAleatorio}";
             string codigoGeneradoPassword = $"{nombreUser}-{numeroAleatorio}";
 
+            // Determinar si se genera un usuario o una contraseña.
             if (isTheUsername == true)
             {
                 txtUsername.Text = codigoGeneradoUsername;
@@ -396,17 +455,43 @@ namespace zompyDogs
             }
         }
 
+        /// <summary>
+        /// Genera un nombre de usuario basado en el nombre y apellido ingresados.
+        /// Actualiza el campo de texto de usuario con el valor generado.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
+        private void btnGeneradorUsername_Click(object sender, EventArgs e)
+        {
+            isTheUsername = true;
+            GeneradordeNombreDeUsuarioYClave();
+        }
+
+        /// <summary>
+        /// Genera una contraseña basada en el nombre ingresado y un número aleatorio.
+        /// Actualiza el campo de texto de contraseña con el valor generado.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private void btnGeneradorPassword_Click(object sender, EventArgs e)
         {
             isTheUsername = false;
             GeneradordeNombreDeUsuarioYClave();
         }
 
+        /// <summary>
+        /// Maneja el evento del botón "Cancelar".
+        /// Cierra el formulario actual.
+        /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
+        /// <summary>
+        /// Maneja el evento del botón "Agregar Puesto".
+        /// Abre el formulario de registro de puestos y cierra el formulario actual.
+        /// </summary>
         private void btnAddPuesto_Click(object sender, EventArgs e)
         {
             PuestosRegistro frmPuestoRegistro = new PuestosRegistro();
@@ -414,15 +499,11 @@ namespace zompyDogs
             this.Close();
         }
 
-        private void btnGuardarUser_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnGuardarUser_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Maneja el evento TextChanged del campo de cédula.
+        /// Valida que la cédula tenga exactamente 13 dígitos y muestra un error si no se cumple.
+        /// Cambia el color de fondo del campo según la validez de la entrada.
+        /// </summary>
         private void txtCedula_TextChanged(object sender, EventArgs e)
         {
             txtCedula.BackColor = Color.White;
@@ -446,15 +527,19 @@ namespace zompyDogs
             }
         }
 
+        /// <summary>
+        /// Maneja el evento TextChanged del campo de primer nombre.
+        /// Valida que el campo contenga al menos 3 caracteres, solo letras, y no esté vacío.
+        /// Cambia el color de fondo del campo según la validez de la entrada.
+        /// </summary>
         private void txtPrimNombre_TextChanged(object sender, EventArgs e)
         {
-            txtPrimNombre.BackColor = Color.White;
-
             if (!string.IsNullOrWhiteSpace(txtPrimNombre.Text) && txtPrimNombre.Text.All(char.IsLetter))
             {
                 if (txtPrimNombre.Text.Length > 2)
                 {
                     errorProviderUsuario.SetError(txtPrimNombre, string.Empty);
+                    txtPrimNombre.BackColor = Color.White;
                 }
                 else
                 {
@@ -469,16 +554,11 @@ namespace zompyDogs
             }
         }
 
-        private void txtSegNombre_TextChanged(object sender, EventArgs e)
-        {
-          txtSegNombre.BackColor = Color.White;
-
-            if (!string.IsNullOrWhiteSpace(txtSegNombre.Text) && txtSegNombre.Text.All(char.IsLetter))
-            {
-
-            }
-        }
-
+        /// <summary>
+        /// Maneja el evento TextChanged del campo de primer apellido.
+        /// Valida que el campo contenga al menos 3 caracteres, solo letras, y no esté vacío.
+        /// Cambia el color de fondo del campo según la validez de la entrada.
+        /// </summary>
         private void txtPrimApellido_TextChanged(object sender, EventArgs e)
         {
             txtPrimApellido.BackColor = Color.White;
@@ -502,29 +582,11 @@ namespace zompyDogs
             }
         }
 
-        private void txtSegApellido_TextChanged(object sender, EventArgs e)
-        {
-          /*  txtSegApellido.BackColor = Color.White;
-
-            if (!string.IsNullOrWhiteSpace(txtSegApellido.Text) && txtSegApellido.Text.All(char.IsLetter))
-            {
-                if (txtSegApellido.Text.Length >= 15)
-                {
-                    errorProviderUsuario.SetError(txtSegApellido, string.Empty);
-                }
-                else
-                {
-                    errorProviderUsuario.SetError(txtSegApellido, "El segundo apellido debe tener al menos 15 caracteres.");
-                    txtSegApellido.BackColor = Color.LightYellow;
-                }
-            }
-            else
-            {
-                errorProviderUsuario.SetError(txtSegApellido, "El segundo apellido debe contener solo letras y no puede estar vacío.");
-                txtSegApellido.BackColor = Color.LightPink;
-            } */
-        }
-
+        /// <summary>
+        /// Maneja el evento TextChanged del campo de dirección.
+        /// Valida que el campo no esté vacío y muestra un error en caso contrario.
+        /// Cambia el color de fondo del campo según la validez de la entrada.
+        /// </summary>
         private void txtDireccion_TextChanged(object sender, EventArgs e)
         {
             txtDireccion.BackColor = Color.White;
@@ -539,6 +601,11 @@ namespace zompyDogs
             }
         }
 
+        /// <summary>
+        /// Maneja el evento TextChanged del campo de teléfono.
+        /// Valida que el campo contenga exactamente 8 dígitos numéricos y no esté vacío.
+        /// Cambia el color de fondo del campo según la validez de la entrada.
+        /// </summary>
         private void txtTelefono_TextChanged(object sender, EventArgs e)
         {
             txtTelefono.BackColor = Color.White;
@@ -562,6 +629,11 @@ namespace zompyDogs
             }
         }
 
+        /// <summary>
+        /// Maneja el evento SelectedIndexChanged del combo box de estado civil.
+        /// Valida que se haya seleccionado un estado civil y muestra un error si no.
+        /// Cambia el color de fondo del campo según la validez de la entrada.
+        /// </summary>
         private void cbxEsatdoCivil_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbxEsatdoCivil.BackColor = Color.White;
@@ -575,43 +647,23 @@ namespace zompyDogs
                 cbxEsatdoCivil.BackColor = Color.LightPink;
             }
         }
+
+        /// <summary>
+        /// Maneja el evento TextChanged del campo de correo electrónico.
+        /// Implementar validación para asegurar que el correo sea válido.
+        /// Cambia el color de fondo del campo según la validez de la entrada.
+        /// </summary>
         private void txtEmail_TextChanged(object sender, EventArgs e)
         {
             txtEmail.BackColor = Color.White;
             
         }
 
-        private void txtPrimNombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
-            {
-                e.Handled = true;
-            }
-        }
-        private void txtSegNombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtPrimApellido_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
-            {
-                e.Handled = true;
-            }
-
-        }
-        private void txtSegApellido_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
-            {
-                e.Handled = true;
-            }
-        }
-
+        /// <summary>
+        /// Maneja el evento TextChanged del campo de nombre de usuario.
+        /// Valida que el nombre de usuario no esté vacío, y que contenga solo letras, dígitos o el carácter '.'.
+        /// Limpia el error si la entrada es válida, de lo contrario muestra el mensaje de error.
+        /// </summary>
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
             txtUsername.BackColor = Color.White;
@@ -621,24 +673,11 @@ namespace zompyDogs
             }
         }
 
-        private void txtUsername_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '.' && e.KeyChar != '-')
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '-' && e.KeyChar != '_')
-            {
-                e.Handled = true;
-            }
-
-        }
-
+        /// <summary>
+        /// Maneja el evento TextChanged del campo de contraseña.
+        /// Valida que la contraseña tenga al menos 8 caracteres.
+        /// Si la contraseña es válida, limpia el mensaje de error, de lo contrario muestra un mensaje de error.
+        /// </summary>
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
             txtPassword.BackColor = Color.White;
@@ -652,5 +691,73 @@ namespace zompyDogs
             }
 
         }
+        // Método para validar el primer nombre (solo letras y espacios)
+        private void txtPrimNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Si el carácter no es una letra, espacio o tecla de control, se bloquea
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true; // Bloquea el carácter
+            }
+        }
+
+        // Método para validar el segundo nombre (solo letras y espacios)
+        private void txtSegNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Bloquea cualquier carácter que no sea una letra, espacio o tecla de control
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true; // Bloquea el carácter
+            }
+        }
+        // Método para validar el primer apellido (solo letras y espacios)
+        private void txtPrimApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Bloquea cualquier carácter que no sea una letra, espacio o tecla de control
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true; // Bloquea el carácter
+            }
+        }
+
+        // Método para validar el segundo apellido (solo letras y espacios)
+        private void txtSegApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Bloquea cualquier carácter que no sea una letra, espacio o tecla de control
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true; // Bloquea el carácter
+            }
+        }
+        // Método para validar la cédula (solo números)
+        private void txtCedulae_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Si el carácter no es un número o tecla de control, se bloquea
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea el carácter
+            }
+        }
+
+        // Método para validar el nombre de usuario (solo letras, números, espacios, puntos y guiones)
+        private void txtUsername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Bloquea cualquier carácter que no sea letra, número, espacio, punto o guion
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '.' && e.KeyChar != '-')
+            {
+                e.Handled = true; // Bloquea el carácter
+            }
+        }
+        // Método para validar la contraseña (letras, números, guiones y guion bajo)
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Bloquea cualquier carácter que no sea letra, número, tecla de control, guion o guion bajo
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '-' && e.KeyChar != '_')
+            {
+                e.Handled = true; // Bloquea el carácter
+            }
+        }
+
+
     }
 }

@@ -9626,9 +9626,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogsMain\\zompydogs\\zompyDogs_System\\ZompyDogsLib\\ZompyDogsLib.csproj",
-      "projectName": "ZompyDogsLib",
-      "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogsMain\\zompydogs\\zompyDogs_System\\ZompyDogsLib\\ZompyDogsLib.csproj",
+      "projectUniqueName": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogsMain\\zompydogs\\zompyDogs_System\\ZompyDogsLib\\CapaEntidad.csproj",
+      "projectName": "CapaEntidad",
+      "projectPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogsMain\\zompydogs\\zompyDogs_System\\ZompyDogsLib\\CapaEntidad.csproj",
       "packagesPath": "C:\\Users\\jenni\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogsMain\\zompydogs\\zompyDogs_System\\ZompyDogsLib\\obj\\",
       "projectStyle": "PackageReference",

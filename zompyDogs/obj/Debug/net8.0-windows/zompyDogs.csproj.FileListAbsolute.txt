@@ -361,7 +361,6 @@ C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDo
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PanelEmpleado.resources
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PanelReportes.resources
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Peticiones.resources
-C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PeticionUsuario.resources
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Properties.Resources.resources
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.Usuarios.resources
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.csproj.GenerateResource.cache
@@ -677,3 +676,5 @@ C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDo
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsDAO.pdb
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsLib.dll
 C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\bin\Debug\net8.0-windows\ZompyDogsLib.pdb
+C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.PeticionesUser.resources
+C:\Users\jenni\Documents\GitHub\zompyDogsMain\zompydogs\zompyDogs_System\zompyDogs\obj\Debug\net8.0-windows\zompyDogs.CRUD.REPORTES.ImprimirFactura_Pedidos.resources

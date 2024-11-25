@@ -109,7 +109,6 @@
             btnIniciarSession.Text = "Iniciar Sessión";
             btnIniciarSession.UseVisualStyleBackColor = true;
             btnIniciarSession.Click += btnIniciarSession_Click;
-            btnIniciarSession.KeyPress += btnIniciarSession_KeyPress;
             // 
             // pictureBox1
             // 
@@ -177,7 +176,6 @@
             Name = "Login";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Load += Login_Load;
             KeyDown += Login_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);

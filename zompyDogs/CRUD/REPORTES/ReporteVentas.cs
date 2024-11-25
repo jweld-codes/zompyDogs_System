@@ -68,7 +68,7 @@ namespace zompyDogs.CRUD.REPORTES
             using (SqlConnection conn = new SqlConnection(con_string))
             {
                 string query = @"
-                SELECT TotalPedidos, CantidadPedidos
+                SELECT TotalPedidosMensual, CantidadPedidos
                 FROM v_TotalPedidosMensuales
                 WHERE Anio = YEAR(GETDATE()) AND Mes = MONTH(GETDATE()); ";
 
@@ -82,7 +82,7 @@ namespace zompyDogs.CRUD.REPORTES
                     if (reader.Read())
                     {
                         lblVentaM.Text = $"{Convert.ToInt32(reader["CantidadPedidos"]):N0}";
-                        lblVentaMensual.Text = $"{Convert.ToDecimal(reader["TotalPedidos"]):C}";
+                        lblVentaMensual.Text = $"{Convert.ToDecimal(reader["TotalPedidosMensual"]):C}";
                     }
                     else
                     {
@@ -102,7 +102,7 @@ namespace zompyDogs.CRUD.REPORTES
             using (SqlConnection conn = new SqlConnection(con_string))
             {
                 string query = @"
-                SELECT TotalPedidos, CantidadPedidos
+                SELECT TotalPedidosAnual, CantidadPedidos
                 FROM v_TotalPedidosAnuales
                 WHERE Anio = YEAR(GETDATE());";
 
@@ -116,7 +116,7 @@ namespace zompyDogs.CRUD.REPORTES
                     if (reader.Read())
                     {
                         lblVentaA.Text = $"{Convert.ToInt32(reader["CantidadPedidos"]):N0}";
-                        lblVentaAnual.Text = $"{Convert.ToDecimal(reader["TotalPedidos"]):C}";
+                        lblVentaAnual.Text = $"{Convert.ToDecimal(reader["TotalPedidosAnual"]):C}";
                     }
                     else
                     {

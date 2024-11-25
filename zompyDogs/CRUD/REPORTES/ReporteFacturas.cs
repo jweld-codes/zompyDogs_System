@@ -148,8 +148,6 @@ namespace zompyDogs.CRUD.REPORTES
 
             ImprimirFactura frmImprimirFactura = new ImprimirFactura(pedidoCodigoPedidoVal, facturaPedidoTrans);
 
-            
-
             frmImprimirFactura.lblEmpleadoNombre.Text = txtEmpleado.Text;
             frmImprimirFactura.lblNumFac.Text = txtCodigoGenerado.Text;
             frmImprimirFactura.lblFechaPedido.Text = dtpFechaRegistro.Text;
@@ -157,7 +155,6 @@ namespace zompyDogs.CRUD.REPORTES
             frmImprimirFactura.lblSubtotal.Text = lblSubtotal.Text;
             frmImprimirFactura.lblISV.Text = lblISV.Text;
             frmImprimirFactura.lblCodigoEmpleado.Text = lblCodigoEmpleado.Text;
-
 
             frmImprimirFactura.Show();
         }

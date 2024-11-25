@@ -17,19 +17,25 @@ namespace zompyDogs
         public static readonly string con_string = "Data Source=MACARENA\\SQLEXPRESS;Initial Catalog=DB_ZompyDogs;Integrated Security=True;Encrypt=False";
         public static SqlConnection conn = new SqlConnection(con_string);
 
+        // Referencia al formulario principal (BienvenidaAdmin)
         public BienvenidaAdmin FormPrincipal { get; set; }
+        // Referencia al formulario principal para empleados (EmpleadoBienvenida)
         public EmpleadoBienvenida EmpleadoFormPrincipal { get; set; }
         public LibretaMenu()
         {
             InitializeComponent();
+            // Carga inicial de la categoría "Almuerzos"
             CargarMenu("Almuerzos");
+            // Carga las categorías disponibles
             AddCategoria();
         }
 
+        // Método para cargar el menú según la categoría seleccionada
         private void CargarMenu(string categoria)
         {
             using (SqlConnection conn = new SqlConnection(con_string))
             {
+                // Consulta SQL para obtener los platillos de la categoría seleccionada
                 string query = "SELECT Codigo, Platillo, Descripcion, Precio, Imagen FROM v_DetallesMenu WHERE Categoria = @Categoria AND Estado = 'Activo'";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -38,9 +44,11 @@ namespace zompyDogs
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
+                // Limpiar el FlowLayoutPanel antes de agregar nuevos controles
                 flpLibreta.Controls.Clear();
                 bool hasResults = false;
 
+                // Leer los datos de la consulta y generar los controles dinámicamente
                 while (reader.Read())
                 {
                     hasResults = true;
@@ -50,14 +58,17 @@ namespace zompyDogs
                     panelPlatillo.Size = new Size(339, 343);
                     panelPlatillo.BorderStyle = BorderStyle.FixedSingle;
 
+                    // Subpanel para el nombre del platillo
                     Panel panelNombrePlatillo = new Panel();
                     panelNombrePlatillo.Size = new Size(339, 52);
                     panelNombrePlatillo.Dock = DockStyle.Top;
 
+                    // Subpanel para el precio y descripcion del platillo
                     Panel panelPrecio = new Panel();
                     panelPrecio.Size = new Size(339, 115);
                     panelPrecio.Dock = DockStyle.Bottom;
 
+                    // PictureBox para mostrar la imagen del platillo
                     PictureBox pbxPlatillo = new PictureBox();
                     pbxPlatillo.Size = new Size(255, 224);
                     pbxPlatillo.Location = new Point(50, 20);
@@ -65,8 +76,8 @@ namespace zompyDogs
                     if (reader["Imagen"] != DBNull.Value)
                     {
                         string imageFileName = reader["Imagen"].ToString();
-                        string projectPath = "C:\\Users\\jenni\\Documents\\GitHub\\zompyDogs\\zompyDogs\\Imagenes";
-                        string imagePath = Path.Combine(projectPath, "Platillos", imageFileName);
+                        string basePath = AppDomain.CurrentDomain.BaseDirectory; // Obtiene el directorio base de la aplicación
+                        string imagePath = Path.Combine(basePath, "Imagenes", "Platillos", imageFileName);
 
                         if (File.Exists(imagePath))
                         {
@@ -78,18 +89,21 @@ namespace zompyDogs
                         }
                     }
 
+                    // Etiqueta para el nombre del platillo
                     Label lblPlatillo = new Label();
                     lblPlatillo.Text = reader["Platillo"].ToString();
                     lblPlatillo.Location = new Point(20, 5);
                     lblPlatillo.AutoSize = true;
                     lblPlatillo.Font = new Font("Arial", 14, FontStyle.Bold);
 
+                    // Etiqueta para el precio del platillo
                     Label lblPrecio = new Label();
                     lblPrecio.Text = $"L.{reader["Precio"].ToString()}";
                     lblPrecio.Location = new Point(41, 5);
                     lblPrecio.AutoSize = true;
                     lblPrecio.Font = new Font("Arial", 10, FontStyle.Bold);
 
+                    // TextBox para la descripción (solo lectura)
                     TextBox txtDescripcion = new TextBox();
                     if (reader["Descripcion"] != DBNull.Value)
                     {
@@ -120,6 +134,7 @@ namespace zompyDogs
                     // Agregar el panel al FlowLayoutPanel
                     flpLibreta.Controls.Add(panelPlatillo);
                 }
+                // Mostrar mensaje si no hay resultados
                 if (!hasResults)
                 {
                     Label lblFLP = new Label();
@@ -134,6 +149,7 @@ namespace zompyDogs
             }
         }
 
+        // Método para cargar las categorías en un panel dinámico
         private void AddCategoria()
         {
             string qry = "SELECT * FROM Categoria";
@@ -159,6 +175,7 @@ namespace zompyDogs
             categoryPanelIN.Controls.Clear();
             categoryPanelIN.AutoScroll = true;
 
+            // Configuración de botones dinámicos
             int buttonHeight = 80;
             int buttonWidth = 150;
             int yOffset = -2;
@@ -172,10 +189,10 @@ namespace zompyDogs
                 btnCategory.Size = new Size(buttonWidth, buttonHeight);
                 btnCategory.Text = row["Categoria"].ToString();
 
-                // Asignar la ubicación
+                // Asignar la posición de los botones
                 btnCategory.Location = new Point(-2, categoryPanelIN.Controls.Count * (buttonHeight + yOffset));
 
-                // Agregar evento de clic
+                // Evento de clic para cargar platillos según la categoría seleccionada
                 btnCategory.Click += (sender, e) =>
                 {
                     // Llama al método para cargar platillos según la categoría seleccionada
@@ -186,6 +203,7 @@ namespace zompyDogs
             }
         }
 
+        //Cambia al panel de Menu 
         private void btnUsuarioPanel_Click(object sender, EventArgs e)
         {
             if (FormPrincipal != null )
@@ -201,12 +219,6 @@ namespace zompyDogs
                 MessageBox.Show("FormPrincipal es nulo");
             }
         }
-
-        private void btnAdminPanel_Click(object sender, EventArgs e)
-        {
-           
-        }
-
         
     }
 }

@@ -65,6 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CRUD\REPORTES\Facturas\" />
     <Folder Include="CRUD\REPORTES\ReportesExcel\" />
   </ItemGroup>
 

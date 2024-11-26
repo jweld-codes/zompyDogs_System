@@ -13,16 +13,19 @@ namespace zompyDogs
 {
     public partial class PanelReportes : Form
     {
+        public string AdminID { get; set; }
         public BienvenidaAdmin FormPrincipal { get; set; }
-        public PanelReportes()
+        public PanelReportes(string adminName)
         {
             InitializeComponent();
+
+            AdminID = adminName;
         }
 
         // Abre el formulario de reportes de Ventas
         private void repoVentas_Click(object sender, EventArgs e)
         {
-            ReporteVentas frmReporteVentas = new ReporteVentas();
+            ReporteVentas frmReporteVentas = new ReporteVentas(AdminID);
             frmReporteVentas.Show();
         }
 

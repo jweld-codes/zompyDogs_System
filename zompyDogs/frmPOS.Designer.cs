@@ -30,13 +30,13 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPOS));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             topBarMenu = new Panel();
-            btnHistorial = new Button();
             pictureBox2 = new PictureBox();
             btnPuntoVenta = new Button();
             lblTITULO = new Label();
             panel1 = new Panel();
+            lblEmpleadoNombre = new Label();
             label6 = new Label();
             lblSubtotal = new Label();
             btnCancelar = new Button();
@@ -61,7 +61,7 @@
             panelContenedrPOS = new Panel();
             flpPOSPanel = new FlowLayoutPanel();
             bnSrcPedidos = new BindingSource(components);
-            lblEmpleadoNombre = new Label();
+            btnHistorial = new Button();
             topBarMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
@@ -86,19 +86,6 @@
             topBarMenu.Name = "topBarMenu";
             topBarMenu.Size = new Size(901, 81);
             topBarMenu.TabIndex = 106;
-            // 
-            // btnHistorial
-            // 
-            btnHistorial.BackColor = Color.Transparent;
-            btnHistorial.FlatAppearance.BorderSize = 0;
-            btnHistorial.FlatStyle = FlatStyle.Flat;
-            btnHistorial.ForeColor = SystemColors.ButtonHighlight;
-            btnHistorial.Location = new Point(718, 45);
-            btnHistorial.Name = "btnHistorial";
-            btnHistorial.Size = new Size(152, 36);
-            btnHistorial.TabIndex = 99;
-            btnHistorial.Text = "HISTORIAL";
-            btnHistorial.UseVisualStyleBackColor = false;
             // 
             // pictureBox2
             // 
@@ -153,6 +140,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(322, 644);
             panel1.TabIndex = 0;
+            // 
+            // lblEmpleadoNombre
+            // 
+            lblEmpleadoNombre.AutoSize = true;
+            lblEmpleadoNombre.Location = new Point(86, 25);
+            lblEmpleadoNombre.Name = "lblEmpleadoNombre";
+            lblEmpleadoNombre.Size = new Size(77, 20);
+            lblEmpleadoNombre.TabIndex = 99;
+            lblEmpleadoNombre.Text = "Empleado";
             // 
             // label6
             // 
@@ -265,14 +261,14 @@
             dgvPedido.BorderStyle = BorderStyle.None;
             dgvPedido.CellBorderStyle = DataGridViewCellBorderStyle.SunkenHorizontal;
             dgvPedido.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvPedido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPedido.GridColor = SystemColors.ScrollBar;
             dgvPedido.Location = new Point(5, 80);
@@ -408,14 +404,18 @@
             flpPOSPanel.Size = new Size(426, 581);
             flpPOSPanel.TabIndex = 4;
             // 
-            // lblEmpleadoNombre
+            // btnHistorial
             // 
-            lblEmpleadoNombre.AutoSize = true;
-            lblEmpleadoNombre.Location = new Point(86, 25);
-            lblEmpleadoNombre.Name = "lblEmpleadoNombre";
-            lblEmpleadoNombre.Size = new Size(77, 20);
-            lblEmpleadoNombre.TabIndex = 99;
-            lblEmpleadoNombre.Text = "Empleado";
+            btnHistorial.BackColor = Color.Transparent;
+            btnHistorial.FlatAppearance.BorderSize = 0;
+            btnHistorial.FlatStyle = FlatStyle.Flat;
+            btnHistorial.ForeColor = SystemColors.ButtonHighlight;
+            btnHistorial.Location = new Point(718, 45);
+            btnHistorial.Name = "btnHistorial";
+            btnHistorial.Size = new Size(152, 36);
+            btnHistorial.TabIndex = 99;
+            btnHistorial.Text = "HISTORIAL";
+            btnHistorial.UseVisualStyleBackColor = false;
             // 
             // frmPOS
             // 
@@ -469,12 +469,12 @@
         public TextBox txtCodigoGenerado;
         private Button btnCancelar;
         private Label label2;
-        public Button btnHistorial;
         public DataGridView dgvPedido;
         private Label label6;
         private Label lblTotalAPagar;
         private Label label4;
         private Label label5;
         private Label lblEmpleadoNombre;
+        public Button btnHistorial;
     }
 }

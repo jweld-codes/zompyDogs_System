@@ -194,9 +194,9 @@
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label8.Location = new Point(22, 62);
             label8.Name = "label8";
-            label8.Size = new Size(60, 20);
+            label8.Size = new Size(56, 20);
             label8.TabIndex = 127;
-            label8.Text = "FECHA:";
+            label8.Text = "FECHA";
             // 
             // lblCodigoEmpleado
             // 
@@ -230,6 +230,7 @@
             btnImprimir.TabIndex = 128;
             btnImprimir.Text = "Imprimir";
             btnImprimir.UseVisualStyleBackColor = false;
+            btnImprimir.Click += btnImprimir_Click;
             // 
             // label7
             // 
@@ -258,6 +259,7 @@
             dgvPlatillos.AllowUserToResizeColumns = false;
             dgvPlatillos.AllowUserToResizeRows = false;
             dgvPlatillos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPlatillos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvPlatillos.BackgroundColor = Color.Snow;
             dgvPlatillos.BorderStyle = BorderStyle.None;
             dgvPlatillos.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -283,7 +285,7 @@
             dgvPlatillos.ReadOnly = true;
             dgvPlatillos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
             dgvPlatillos.RowHeadersVisible = false;
-            dgvPlatillos.RowHeadersWidth = 11;
+            dgvPlatillos.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dgvPlatillos.ScrollBars = ScrollBars.None;
             dgvPlatillos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPlatillos.ShowCellErrors = false;
@@ -401,6 +403,8 @@
             // printFactura
             // 
             printFactura.DocumentName = "printFactura";
+            printFactura.EndPrint += printFactura_EndPrint;
+            printFactura.PrintPage += printFactura_PrintPage;
             // 
             // ImprimirFactura_Pedidos
             // 
@@ -416,6 +420,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "ImprimirFactura_Pedidos";
             StartPosition = FormStartPosition.CenterScreen;
+            Load += ImprimirFactura_Pedidos_Load;
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

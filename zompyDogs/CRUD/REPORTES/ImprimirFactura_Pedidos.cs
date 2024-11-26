@@ -21,31 +21,24 @@ namespace zompyDogs.CRUD.REPORTES
         private PedidosDAO _pedidosDAO;
         /// Fuente de enlace para la lista de platillos en el DataGridView.
         public BindingSource _bndsrcPedido;
-        public ImprimirFactura_Pedidos(List<DetalleDePedido> platillos)
+
+        private DataTable datosFactura;
+        public ImprimirFactura_Pedidos(DataTable datosplatillos)
         {
             InitializeComponent();
 
-            // Asignar la lista al BindingSource para enlazarla al DataGridView
-            _bndsrcPedido = new BindingSource();
-            _bndsrcPedido.DataSource = platillos;
+            // Ajustar todas las columnas automáticamente
+            dgvPlatillos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Asignar el BindingSource al DataGridView
             dgvPlatillos.DataSource = _bndsrcPedido;
 
+            this.datosFactura = datosplatillos;
+
             // También puedes agregar la columna Total si no la tienes
-            MostrarDatosFactura(platillos);
 
             DeactivateCell();
             btnAceptar.Show();
-        }
-
-        private void MostrarDatosFactura(List<DetalleDePedido> platillos)
-        {
-            // Agregar los datos al DataGridView
-            foreach (var pedido in platillos)
-            {
-                dgvPlatillos.Rows.Add(pedido.PlatilloNombre, pedido.Cantidad, pedido.Precio_Unitario);
-            }
         }
 
         private void DeactivateCell()
@@ -109,5 +102,21 @@ namespace zompyDogs.CRUD.REPORTES
             this.Close();
         }
 
+        private void ImprimirFactura_Pedidos_Load(object sender, EventArgs e)
+        {
+            dgvPlatillos.DataSource = datosFactura;
+
+            // Ocultar las columnas no deseadas (por ejemplo, si quieres mostrar solo 'cantidad', 'platillo' y 'precio unitario')
+            foreach (DataGridViewColumn column in dgvPlatillos.Columns)
+            {
+                // Suponiendo que las columnas se llaman "Cantidad", "Platillo" y "PrecioUnitario"
+                if (column.HeaderText != "Cantidad" && column.HeaderText != "Platillo" && column.HeaderText != "Precio")
+                {
+                    column.Visible = false;
+                }
+            }
+
+
+        }
     }
 }

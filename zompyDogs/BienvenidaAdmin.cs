@@ -145,7 +145,7 @@ namespace zompyDogs
         private void btnReportes_Click(object sender, EventArgs e)
         {
             CambiarColorBoton((Button)sender);
-            PanelReportes frmReporte = new PanelReportes
+            PanelReportes frmReporte = new PanelReportes(UsuarioNombreAdmin)
             {
                 FormPrincipal = this
             };

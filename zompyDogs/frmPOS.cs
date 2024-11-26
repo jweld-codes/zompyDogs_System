@@ -445,8 +445,6 @@ namespace zompyDogs
         private void btnConfirmarPedido_Click(object sender, EventArgs e)
         {
             GuardarPedido();
-
-            ImprimirFacturaPedido();
         }
 
         /// <summary>
@@ -501,6 +499,9 @@ namespace zompyDogs
 
 
                     CargarMenu("Almuerzos");
+
+                    ImprimirFacturaPedido();
+
                     _pedidosDAO.platillosLista.Clear();
                     _bndsrcPedido.ResetBindings(false);
                     GeneradordeCodigoPedidoFromForm();
@@ -516,7 +517,7 @@ namespace zompyDogs
             }
         }
 
-        public void VerFacturaFinalizada()
+       /* public void VerFacturaFinalizada()
         {
             if (itsInvoice == false)
             {
@@ -610,37 +611,46 @@ namespace zompyDogs
                 }
             }
             
-        }
+        } */
 
         private void ImprimirFacturaPedido()
         {
-            // Obtiene los detalles de la factura desde el DAO.
-            DataTable facturaViewPedido = PedidosDAO.ObtenerDetalllesDeFacturaFinalizadaPorPlatillo(codigoPedido);
-
-            // Crea una tabla temporal para la factura que se pasará al formulario de impresión.
-            DataTable facturaPedidoTrans = new DataTable();
-            facturaPedidoTrans.Columns.Add("Platillo", typeof(string));
-            facturaPedidoTrans.Columns.Add("Cantidad", typeof(int));
-            facturaPedidoTrans.Columns.Add("Precio Unitario", typeof(decimal));
-
-            List<DetalleDePedido> listaPlatillos = _pedidosDAO.platillosLista.ToList();
-
-            // Crea una nueva instancia del formulario ImprimirFactura, pasándole los datos necesarios.
-            ImprimirFactura_Pedidos frmImprimirFactura = new ImprimirFactura_Pedidos(listaPlatillos);
+            // Crear un DataTable para almacenar los datos del DataGridView
+            DataTable dt = new DataTable();
 
 
-            // Asignar los valores correspondientes a los controles en el formulario 'ImprimirFactura'
-            frmImprimirFactura.lblEmpleadoNombre.Text = pedidoEmpleado; 
-            frmImprimirFactura.lblNumFac.Text = codigoPedido;  
-            frmImprimirFactura.lblFechaPedido.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");  // Fecha y hora del pedido
-            frmImprimirFactura.lblTotal.Text = totalaPago.ToString("C2");  // Total a pagar, con formato de moneda
-            frmImprimirFactura.lblSubtotal.Text = subtotalPago.ToString("C2");  // Subtotal, con formato de moneda
-            frmImprimirFactura.lblISV.Text = pedidoISV.ToString("C2");  // ISV, con formato de moneda
-            frmImprimirFactura.lblCodigoEmpleado.Text = pedidoCodigoEmpleado;  // Código del empleado
 
-            
-            // Muestra el formulario de impresión
-            frmImprimirFactura.Show();
+            // Agregar las columnas al DataTable basadas en las columnas del DataGridView
+            foreach (DataGridViewColumn column in dgvPedido.Columns)
+            {
+                dt.Columns.Add(column.HeaderText);
+            }
+
+            // Agregar las filas al DataTable desde las filas del DataGridView
+            foreach (DataGridViewRow row in dgvPedido.Rows)
+            {
+                if (!row.IsNewRow) // Para evitar agregar la fila nueva
+                {
+                    DataRow dr = dt.NewRow();
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        dr[cell.ColumnIndex] = cell.Value;
+                    }
+                    dt.Rows.Add(dr);
+                }
+            }
+
+            // Crear el formulario de impresión y pasar los datos
+            ImprimirFactura_Pedidos frmFactura = new ImprimirFactura_Pedidos(dt);
+            frmFactura.lblEmpleadoNombre.Text = pedidoEmpleado;
+            frmFactura.lblNumFac.Text = codigoPedido;
+            frmFactura.lblFechaPedido.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");  // Fecha y hora del pedido
+            frmFactura.lblTotal.Text = totalaPago.ToString("C2");  // Total a pagar, con formato de moneda
+            frmFactura.lblSubtotal.Text = subtotalPago.ToString("C2");  // Subtotal, con formato de moneda
+            frmFactura.lblISV.Text = pedidoISV.ToString("C2");  // ISV, con formato de moneda
+            frmFactura.lblCodigoEmpleado.Text = pedidoCodigoEmpleado;  // Código del empleado
+
+            frmFactura.Show();
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {

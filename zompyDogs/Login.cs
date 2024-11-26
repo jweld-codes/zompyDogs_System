@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using ZompyDogsDAO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using zompyDogs.CRUD.REGISTROS;
+using zompyDogs.CRUD.REPORTES;
 
 namespace zompyDogs
 {
@@ -75,6 +76,12 @@ namespace zompyDogs
 
                     Peticiones frmPeticiones = new Peticiones(idEmpleado, UsuarioName);
                     frmPeticiones.IdEmpleado = idEmpleado; // Asigna el ID del empleado al formulario de peticiones.
+
+                    PanelReportes frmPanelReportes = new PanelReportes(UsuarioName);
+                    frmPanelReportes.AdminID = UsuarioName;
+
+                    ReporteVentas frmReporteVentas = new ReporteVentas(UsuarioName);
+                    frmReporteVentas.AdminId = UsuarioName;
 
                     // Abre el panel de administración dentro del formulario de bienvenida.
                     frmBienvenidaAdmin.AbrirFormsHija(frmPanelAdmin);

@@ -43,6 +43,7 @@
             lblNombreUser = new Label();
             groupBox8 = new GroupBox();
             groupBox7 = new GroupBox();
+            dtpFechaReporte = new DateTimePicker();
             button1 = new Button();
             groupBox4 = new GroupBox();
             groupBox9 = new GroupBox();
@@ -51,6 +52,8 @@
             lblVentaM = new Label();
             groupBox11 = new GroupBox();
             lblVentaA = new Label();
+            saveFileExcel = new SaveFileDialog();
+            lblNombreAdmin = new Label();
             groupBox1.SuspendLayout();
             flpPlatillos.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -206,6 +209,8 @@
             // 
             // groupBox7
             // 
+            groupBox7.Controls.Add(lblNombreAdmin);
+            groupBox7.Controls.Add(dtpFechaReporte);
             groupBox7.Controls.Add(button1);
             groupBox7.Location = new Point(249, 360);
             groupBox7.Name = "groupBox7";
@@ -213,11 +218,20 @@
             groupBox7.TabIndex = 125;
             groupBox7.TabStop = false;
             // 
+            // dtpFechaReporte
+            // 
+            dtpFechaReporte.Enabled = false;
+            dtpFechaReporte.Format = DateTimePickerFormat.Short;
+            dtpFechaReporte.Location = new Point(200, 92);
+            dtpFechaReporte.Name = "dtpFechaReporte";
+            dtpFechaReporte.Size = new Size(98, 27);
+            dtpFechaReporte.TabIndex = 128;
+            // 
             // button1
             // 
             button1.Image = Properties.Resources.excel;
             button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(59, 57);
+            button1.Location = new Point(61, 47);
             button1.Name = "button1";
             button1.Size = new Size(164, 29);
             button1.TabIndex = 74;
@@ -297,6 +311,20 @@
             lblVentaA.TabIndex = 0;
             lblVentaA.Text = "label3";
             // 
+            // saveFileExcel
+            // 
+            saveFileExcel.FileName = "ReporteExcel";
+            // 
+            // lblNombreAdmin
+            // 
+            lblNombreAdmin.AutoSize = true;
+            lblNombreAdmin.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNombreAdmin.Location = new Point(3, 102);
+            lblNombreAdmin.Name = "lblNombreAdmin";
+            lblNombreAdmin.Size = new Size(51, 20);
+            lblNombreAdmin.TabIndex = 1;
+            lblNombreAdmin.Text = "label1";
+            // 
             // ReporteVentas
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -323,6 +351,7 @@
             groupBox6.PerformLayout();
             groupBox8.ResumeLayout(false);
             groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
             groupBox4.ResumeLayout(false);
             groupBox9.ResumeLayout(false);
             groupBox9.PerformLayout();
@@ -358,5 +387,8 @@
         private Label lblVentaA;
         private Label label1;
         private Panel panel1;
+        private SaveFileDialog saveFileExcel;
+        private DateTimePicker dtpFechaReporte;
+        private Label lblNombreAdmin;
     }
 }

@@ -210,7 +210,6 @@
             Controls.Add(txtBuscarUsuario);
             Controls.Add(groupBox1);
             Name = "Facturas";
-            Text = "Facturas";
             Load += Facturas_Load;
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvHistorialPedidos).EndInit();
